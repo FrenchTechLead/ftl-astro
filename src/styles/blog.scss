@@ -1,0 +1,21 @@
+table,
+th,
+td {
+	border: 1px solid var(--color-txt-white);
+	border-collapse: collapse;
+}
+
+th,
+td {
+	padding: 5px;
+}
+
+img {
+	margin: 10px auto 20px;
+	max-width: 100%;
+	display: block;
+}
+
+.separator {
+	text-align: center;
+}

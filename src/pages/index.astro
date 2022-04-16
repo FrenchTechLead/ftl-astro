@@ -1,86 +1,40 @@
 ---
-// Component Imports
-import BaseHead from '../components/BaseHead.astro';
-import BlogHeader from '../components/BlogHeader.astro';
-import BlogPostPreview from '../components/BlogPostPreview.astro';
+import BaseHead from '@comps/BaseHead.astro';
+import BlogHeader from '@comps/BlogHeader.astro';
+import BlogPostPreview from '@comps/BlogPostPreview.astro';
+import "@styles/global.scss";
+import "@styles/index.scss";
 
-interface MarkdownFrontmatter {
-	publishDate: number;
-}
 
-// Component Script:
-// You can write any JavaScript/TypeScript that you'd like here.
-// It will run during the build, but never in the browser.
-// All variables are available to use in the HTML template below.
 let title = 'Hi there! Glad to see you here.';
-let description1 = 'My Name  is Akram and I am a Technical Leader living in Paris' 
-let description2 = 'In this blog I\'ll try to share some technical knowledge that I have accumulated during my many years of creating software.';
-
+let description = 'My Name  is Akram and I am a Technical Leader living in Paris' 
 let permalink = 'https://frenchtechlead.com/';
 
-// Data Fetching: List all Markdown posts in the repo.
 
-let techPosts = await Astro.fetchContent('./posts/tech/*.md');
-techPosts = techPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf());
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+const techPosts = await Astro.glob('./posts/tech/*.md');
 ---
 
 <html lang="en">
+	
 	<head>
-		<BaseHead {title} {description1} {permalink} />
-		<link rel="stylesheet" href={Astro.resolve('../styles/blog.css')} />
-
-		<style>
-			header {
-				width: 100%;
-				height: 100%;
-				background-color: var(--theme-bg-offset);
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-
-			.content {
-				margin-top: 4rem;
-				margin-bottom: 8rem;
-			}
-
-			.content :global(main > * + *) {
-				margin-top: 1rem;
-			}
-
-			.intro {
-				padding-bottom: 4rem;
-				margin-bottom: 2rem;
-				border-bottom: 4px solid var(--theme-divider);
-			}
-
-			.intro > * {
-				margin: 0;
-			}
-
-			.latest {
-				font-size: 2.5rem;
-				font-weight: 700;
-			}
-		</style>
+		<BaseHead title={title} description={description} permalink={permalink} />
 	</head>
+	<BlogHeader/>
+	
 
 	<body>
-		<BlogHeader />
-		<div class="wrapper">
-			<main class="content">
-				<section class="intro">
-					<h1 class="latest">{title}</h1>
-					<p>{description1}</p>
-					<p>{description2}</p>
+			<main>
+				<section style="text-align: center;">
+					<img id="akram-pic" src="/assets/blog/akram.jpg" alt="Akram's picture" title="Akram's picture"/>
+					<h2 style="color: var(--color-txt-white);">{title}</h2>
+					<p>{description}</p>
+					<p>In this blog I'll try to share some technical knowledge that I have accumulated during my many years of creating software.</p>
 				</section>
+
+				<h2 style="color: var(--color-green);">Latest posts</h2>
 				<section aria-label="Blog post list">
-					{techPosts.map((p) => <BlogPostPreview post={p} />)}
+					{techPosts.map((p) => <BlogPostPreview post={p.frontmatter as any} url={p.url} />)}
 				</section>
 			</main>
-		</div>
 	</body>
 </html>

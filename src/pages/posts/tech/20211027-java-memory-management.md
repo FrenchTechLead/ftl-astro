@@ -1,16 +1,15 @@
 ---
 setup: |
-  import Layout from '../../../layouts/BlogPost.astro'
-  import Cool from '../../../components/Author.astro'
-  import Separator from '../../../components/Separator.astro'
+  import Layout from '@layouts/BlogPost.astro'
+  import Separator from '@comps/Separator.astro'
 title: Java Memory Management
-publishDate: Oct 27 2021
+publishDate: October 27, 2021
 name: FrenchTechLead
 value: 128
 description: "In this short article, I’ll try to briefly explain how Java manages Random Access Memory (RAM), explaining the basics of garbage collecting, the two main Memory types in Java, Memory Leaks: how to diagnose them and how to ensure that your application handles the memory the right way."
 ---
 
-![Java Memory Management](/public/assets/blog/tech/20211027-java-memory-management/1.png "Java Memory Management")
+![Java Memory Management](/assets/blog/tech/20211027-java-memory-management/1.png "Java Memory Management")
 
 In this short article, I’ll try to briefly explain how Java manages Random Access Memory (RAM), explaining the basics of garbage collecting, the two main Memory types in Java, Memory Leaks: how to diagnose them and how to ensure that your application handles the memory the right way.
 
@@ -31,5 +30,5 @@ We find in a computer three main types of memories, **Read-Only Memory (ROM)** i
 <Separator />
 
 ## How does the JVM use RAM?
-![Java Memory Management](/public/assets/blog/tech/20211027-java-memory-management/2.png "Java Memory Management")
+![Java Memory Management](/assets/blog/tech/20211027-java-memory-management/2.png "Java Memory Management")
 The Java Virtual Machine (JVM) uses RAM memory in two main ways, the first one is the **Stack**, it’s an ordered data structure that can be compared to books that are put one on top of each other, the second one is **Heap** which has no particular order.
