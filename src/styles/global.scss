@@ -1,13 +1,13 @@
 :root{
-    --color-white: rgb(255, 255, 255);
-    --color-grey: rgb(208, 208, 208);
-    --color-green: rgb(107, 217, 104);
-    --color-light-blue: rgb(61, 239, 233);
-    --color-blue: rgb(57, 146, 255);
-    --color-yellow: rgb(254, 204, 27);
-    --color-red: rgb(244, 66, 80);
-    --color-purple: rgb(216, 59, 210);
-    --color-black: rgb(18, 18, 18);
+    --color-white: #ffffff;
+    --color-grey: #d0d0d0;
+    --color-green: #6bd968;
+    --color-light-blue: #3defe9;
+    --color-blue: #3992ff;
+    --color-yellow: #fecc1b;
+    --color-red: #f44250;
+    --color-purple: #d83bd2;
+    --color-black: #121212;
 }
 
 html {
@@ -48,4 +48,14 @@ a{
 ::selection {
     color: var(--color-black);
     background: var(--color-yellow);
+}
+
+footer{
+    width: 100%;
+    height: 2.5rem;
+    border-top: 2px solid var(--color-green);
+    box-shadow: 0 0 5px var(--color-green);
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

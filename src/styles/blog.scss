@@ -15,6 +15,7 @@ img {
 
 .separator {
 	text-align: center;
+	color: var(--color-red);
 }
 
 .article {
@@ -28,4 +29,12 @@ img {
 				font-size: small;
 			}
 	}
+	strong{
+		color: var(--color-light-blue);
+	}
+}
+
+.astro-code {
+	padding: 10px;
+	box-shadow: 0 0 5px var(--color-green);
 }

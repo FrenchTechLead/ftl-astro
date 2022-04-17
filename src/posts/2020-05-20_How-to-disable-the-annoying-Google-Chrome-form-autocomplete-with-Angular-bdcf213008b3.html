@@ -1,0 +1,72 @@
+<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>How to disable the annoying Google Chrome form autocomplete with Angular</title><style>
+      * {
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        font-size: 50px;
+        margin-bottom: 17px;
+        color: #333;
+      }
+      h2 {
+        font-size: 24px;
+        line-height: 1.6;
+        margin: 30px 0 0 0;
+        margin-bottom: 18px;
+        margin-top: 33px;
+        color: #333;
+      }
+      h3 {
+        font-size: 30px;
+        margin: 10px 0 20px 0;
+        color: #333;
+      }
+      header {
+        width: 640px;
+        margin: auto;
+      }
+      section {
+        width: 640px;
+        margin: auto;
+      }
+      section p {
+        margin-bottom: 27px;
+        font-size: 20px;
+        line-height: 1.6;
+        color: #333;
+      }
+      section img {
+        max-width: 640px;
+      }
+      footer {
+        padding: 0 20px;
+        margin: 50px 0;
+        text-align: center;
+        font-size: 12px;
+      }
+      .aspectRatioPlaceholder {
+        max-width: auto !important;
+        max-height: auto !important;
+      }
+      .aspectRatioPlaceholder-fill {
+        padding-bottom: 0 !important;
+      }
+      header,
+      section[data-field=subtitle],
+      section[data-field=description] {
+        display: none;
+      }
+      </style></head><body><article class="h-entry">
+<header>
+<h1 class="p-name">How to disable the annoying Google Chrome form autocomplete with Angular</h1>
+</header>
+<section data-field="subtitle" class="p-summary">
+Did you ever felt the frustration of Chrome’s form autocomplete suggesting values to your inputs that are not suitable to their context ?
+</section>
+<section data-field="body" class="e-content">
+<section name="4d64" class="section section--body section--first"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><h3 name="43c6" id="43c6" class="graf graf--h3 graf--leading graf--title">How to disable the annoying Google Chrome form autocomplete with Angular</h3><p name="6c1d" id="6c1d" class="graf graf--p graf-after--h3">Did you ever felt the frustration of Chrome’s form autocomplete suggesting values to your inputs that are not suitable to their context ?</p><figure name="74eb" id="74eb" class="graf graf--figure graf-after--p"><img class="graf-image" data-image-id="1*eWAjFl8SOMHk-Pz2RxpBKA.jpeg" data-width="584" data-height="222" data-is-featured="true" src="https://cdn-images-1.medium.com/max/800/1*eWAjFl8SOMHk-Pz2RxpBKA.jpeg"><figcaption class="imageCaption">Chrome’s autocomplete suggestions.</figcaption></figure><p name="c07f" id="c07f" class="graf graf--p graf-after--figure">And even worst, when you select a value from the suggestions, you get this ugly effect on your inputs :</p><figure name="7b9c" id="7b9c" class="graf graf--figure graf-after--p graf--trailing"><img class="graf-image" data-image-id="1*2_4PLFUZJRXcuJ72KeGVbQ.png" data-width="535" data-height="92" src="https://cdn-images-1.medium.com/max/800/1*2_4PLFUZJRXcuJ72KeGVbQ.png"><figcaption class="imageCaption">The ugly blue effect that you get after selecting a value from the suggestions.</figcaption></figure></div></div></section><section name="69b9" class="section section--body"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><p name="a76d" id="a76d" class="graf graf--p graf--leading">If like me, you want your forms to be clean and coherent, here is how to disable Chrome’s autocomplete on your forms :</p><p name="d7ef" id="d7ef" class="graf graf--p graf-after--p">The idea is to have the following HTML attributes on your inputs :</p><figure name="0741" id="0741" class="graf graf--figure graf--iframe graf-after--p graf--trailing"><script src="https://gist.github.com/FrenchTechLead/b1c6c0f7a14acbdfd74b3e2a6665f935.js"></script><figcaption class="imageCaption">The 4 attributes to put on HTML inputs in order to disable autocomplete.</figcaption></figure></div></div></section><section name="fffc" class="section section--body"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><p name="53ca" id="53ca" class="graf graf--p graf--leading">Now let’s see how to do it the Angular way :</p><blockquote name="316e" id="316e" class="graf graf--blockquote graf-after--p">It would be a boring and repeating task to put these 4 HTML attributes on all your HTML inputs, we can do better thanks to Angular Directives.</blockquote><p name="fb80" id="fb80" class="graf graf--p graf-after--blockquote">Start by generating a directive called <em class="markup--em markup--p-em">autocomplete-off</em> :</p><pre name="7faa" id="7faa" class="graf graf--pre graf-after--p">ng g d autocomplete-off</pre><p name="a59a" id="a59a" class="graf graf--p graf-after--pre">Then, paste the following code in <em class="markup--em markup--p-em">autocomplete-off.directive.ts</em></p><figure name="0ef5" id="0ef5" class="graf graf--figure graf--iframe graf-after--p"><script src="https://gist.github.com/FrenchTechLead/773b63e4c786608c0ce9618936b99380.js"></script><figcaption class="imageCaption"><em class="markup--em markup--figure-em">autocomplete-off.directive.ts</em></figcaption></figure><p name="3a30" id="3a30" class="graf graf--p graf-after--figure">Finally, you can use the directive directly on your inputs by specifying the directive’s selector :</p><figure name="ae18" id="ae18" class="graf graf--figure graf--iframe graf-after--p graf--trailing"><script src="https://gist.github.com/FrenchTechLead/e80afd799e6f7b406362c187c594386a.js"></script><figcaption class="imageCaption">Using the Angular autocompleteOff directive</figcaption></figure></div></div></section><section name="a04a" class="section section--body"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><p name="af0e" id="af0e" class="graf graf--p graf--leading">This directive will put the 4 attributes on your inputs regardless of the browser being used, if you want to, you can edit the directive in order to add the attributes only if the browser is Google Chrome.</p><p name="cf94" id="cf94" class="graf graf--p graf-after--p">In order to turn off the autofill only for Google Chrome user agent, we start by detecting it, Google Chrome adds the attribute <code class="markup--code markup--p-code">chrome</code> to the global <code class="markup--code markup--p-code">window</code> object, we can check for this attribute in order to detect Google Chrome.</p><h4 name="aa16" id="aa16" class="graf graf--h4 graf-after--p">The final code :</h4><figure name="510f" id="510f" class="graf graf--figure graf--iframe graf-after--h4"><script src="https://gist.github.com/FrenchTechLead/4298fd5330dc70d182e02275012d8272.js"></script><figcaption class="imageCaption">The final code</figcaption></figure><h3 name="33bb" id="33bb" class="graf graf--h3 graf-after--figure">That’s it</h3><p name="0147" id="0147" class="graf graf--p graf-after--h3 graf--trailing">If this article helped you get rid of the annoying Google Chrome form auto-fill, feel free to let a comment below, and/or hit the 👏 button.</p></div></div></section><section name="f4e6" class="section section--body section--last"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><h4 name="565e" id="565e" class="graf graf--h4 graf--leading"><strong class="markup--strong markup--h4-strong">Stories from the same author:</strong></h4><div name="d740" id="d740" class="graf graf--mixtapeEmbed graf-after--h4"><a href="https://mecheri-akram.medium.com/the-weirdest-java-interview-questions-that-you-ever-heard-of-2ec8b24be8ff" data-href="https://mecheri-akram.medium.com/the-weirdest-java-interview-questions-that-you-ever-heard-of-2ec8b24be8ff" class="markup--anchor markup--mixtapeEmbed-anchor" title="https://mecheri-akram.medium.com/the-weirdest-java-interview-questions-that-you-ever-heard-of-2ec8b24be8ff"><strong class="markup--strong markup--mixtapeEmbed-strong">The Weirdest Java Interview Questions That You Ever Heard Of</strong><br><em class="markup--em markup--mixtapeEmbed-em">This is a post that gathers the weirdest Java interview questions that I personally faced during job interviews or…</em>mecheri-akram.medium.com</a><a href="https://mecheri-akram.medium.com/the-weirdest-java-interview-questions-that-you-ever-heard-of-2ec8b24be8ff" class="js-mixtapeImage mixtapeImage u-ignoreBlock" data-media-id="59ea9742607621eab2a3ddc1f0100f87" data-thumbnail-img-id="1*_ylEDFO3_rtwlcjkdg6Qvg.png" style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*_ylEDFO3_rtwlcjkdg6Qvg.png);"></a></div><div name="6c25" id="6c25" class="graf graf--mixtapeEmbed graf-after--mixtapeEmbed"><a href="https://mecheri-akram.medium.com/build-a-web-bot-in-2-minutes-ab278bd63e6c" data-href="https://mecheri-akram.medium.com/build-a-web-bot-in-2-minutes-ab278bd63e6c" class="markup--anchor markup--mixtapeEmbed-anchor" title="https://mecheri-akram.medium.com/build-a-web-bot-in-2-minutes-ab278bd63e6c"><strong class="markup--strong markup--mixtapeEmbed-strong">Build a web bot in 2 minutes 🤖</strong><br><em class="markup--em markup--mixtapeEmbed-em">There is a ton of repetitive tasks that we can automate thanks to bots, in this article i’ll show you the easiest and…</em>mecheri-akram.medium.com</a><a href="https://mecheri-akram.medium.com/build-a-web-bot-in-2-minutes-ab278bd63e6c" class="js-mixtapeImage mixtapeImage u-ignoreBlock" data-media-id="aa5ca6f0b1d24507bb519c42239c3d46" data-thumbnail-img-id="1*3I-UB2MvzAJoc9Mi5QFlTA.png" style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*3I-UB2MvzAJoc9Mi5QFlTA.png);"></a></div><div name="20da" id="20da" class="graf graf--mixtapeEmbed graf-after--mixtapeEmbed graf--trailing"><a href="https://mecheri-akram.medium.com/before-learning-rest-soap-graphql-you-need-to-understand-http-9eb80de6cfbf" data-href="https://mecheri-akram.medium.com/before-learning-rest-soap-graphql-you-need-to-understand-http-9eb80de6cfbf" class="markup--anchor markup--mixtapeEmbed-anchor" title="https://mecheri-akram.medium.com/before-learning-rest-soap-graphql-you-need-to-understand-http-9eb80de6cfbf"><strong class="markup--strong markup--mixtapeEmbed-strong">Before learning Rest / Soap /GraphQL / you need to understand HTTP !</strong><br><em class="markup--em markup--mixtapeEmbed-em">HTTP stands for Hypertext Transfer Protocol, initially created for web browser/server communication, it has many more…</em>mecheri-akram.medium.com</a><a href="https://mecheri-akram.medium.com/before-learning-rest-soap-graphql-you-need-to-understand-http-9eb80de6cfbf" class="js-mixtapeImage mixtapeImage u-ignoreBlock" data-media-id="c7cf00f58c13c8dcba31a591cd6820a5" data-thumbnail-img-id="0*x6RlFfWpFDEEDYaR.png" style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*x6RlFfWpFDEEDYaR.png);"></a></div></div></div></section>
+</section>
+<footer><p>By <a href="https://medium.com/@french-tech-lead" class="p-author h-card">MECHERI Akram</a> on <a href="https://medium.com/p/bdcf213008b3"><time class="dt-published" datetime="2020-05-20T12:11:28.202Z">May 20, 2020</time></a>.</p><p><a href="https://medium.com/@french-tech-lead/how-to-disable-the-annoying-google-chrome-form-autocomplete-with-angular-bdcf213008b3" class="p-canonical">Canonical link</a></p><p>Exported from <a href="https://medium.com">Medium</a> on April 17, 2022.</p></footer></article></body></html>

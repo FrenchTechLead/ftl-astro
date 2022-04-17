@@ -1,6 +1,7 @@
 ---
-import BaseHead from '@comps/BaseHead.astro';
+import MetaHead from '@comps/MetaHead.astro';
 import BlogHeader from '@comps/BlogHeader.astro';
+import BlogFooter from '@comps/BlogFooter.astro';
 import BlogPostPreview from '@comps/BlogPostPreview.astro';
 import "@styles/global.scss";
 import "@styles/index.scss";
@@ -20,24 +21,24 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 <html lang="en">
 	
 	<head>
-		<BaseHead {title} description={description + ' ' + description2} {permalink} {postImageUrl} />
+		<MetaHead {title} description={description + ' ' + description2} {permalink} {postImageUrl} />
 	</head>
 	<BlogHeader/>
 	
 
 	<body>
-			<main>
-				<section style="text-align: center;">
-					<img id="akram-pic" width="300px" height="300px" src="/assets/blog/akram.jpg" alt="Akram's picture" title="Akram's picture"/>
-					<h2 style="color: var(--color-white);">{title}</h2>
-					<p>{description} <br/> {description2}</p>
-				</section>
+		<main>
+			<section style="text-align: center;">
+				<img id="akram-pic" width="300px" height="300px" src="/assets/blog/akram.jpg" alt="Akram's picture" title="Akram's picture"/>
+				<h2 style="color: var(--color-white);">{title}</h2>
+				<p>{description} <br/> {description2}</p>
+			</section>
 
-				
-				<section id="latest-posts" aria-label="Blog post list">
-				    <h2 style="color: var(--color-green);">Latest posts 🔥</h2>
-					{techPosts.map((p) => <BlogPostPreview post={p.frontmatter as any} url={p.url} />)}
-				</section>
-			</main>
+			
+			<section id="latest-posts" aria-label="Blog post list">
+			    <h2 style="color: var(--color-green);">Latest posts 🔥</h2>
+				{techPosts.map((p) => <BlogPostPreview post={p.frontmatter as any} url={p.url} />)}
+			</section>
+		</main>
 	</body>
 </html>

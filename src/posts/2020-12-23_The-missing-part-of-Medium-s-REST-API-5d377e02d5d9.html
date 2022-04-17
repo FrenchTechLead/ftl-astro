@@ -1,0 +1,72 @@
+<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>The missing part of Medium’s REST API</title><style>
+      * {
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        font-size: 50px;
+        margin-bottom: 17px;
+        color: #333;
+      }
+      h2 {
+        font-size: 24px;
+        line-height: 1.6;
+        margin: 30px 0 0 0;
+        margin-bottom: 18px;
+        margin-top: 33px;
+        color: #333;
+      }
+      h3 {
+        font-size: 30px;
+        margin: 10px 0 20px 0;
+        color: #333;
+      }
+      header {
+        width: 640px;
+        margin: auto;
+      }
+      section {
+        width: 640px;
+        margin: auto;
+      }
+      section p {
+        margin-bottom: 27px;
+        font-size: 20px;
+        line-height: 1.6;
+        color: #333;
+      }
+      section img {
+        max-width: 640px;
+      }
+      footer {
+        padding: 0 20px;
+        margin: 50px 0;
+        text-align: center;
+        font-size: 12px;
+      }
+      .aspectRatioPlaceholder {
+        max-width: auto !important;
+        max-height: auto !important;
+      }
+      .aspectRatioPlaceholder-fill {
+        padding-bottom: 0 !important;
+      }
+      header,
+      section[data-field=subtitle],
+      section[data-field=description] {
+        display: none;
+      }
+      </style></head><body><article class="h-entry">
+<header>
+<h1 class="p-name">The missing part of Medium’s REST API</h1>
+</header>
+<section data-field="subtitle" class="p-summary">
+In this article I will explain how to pragmatically retrieve the stats (number of claps and comments)  of any Medium post using a custom…
+</section>
+<section data-field="body" class="e-content">
+<section name="3dc6" class="section section--body section--first"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><figure name="7ea6" id="7ea6" class="graf graf--figure graf--leading"><img class="graf-image" data-image-id="1*brGnhu_m-W9-sQ-Yk7N8SQ.png" data-width="1500" data-height="750" data-is-featured="true" src="https://cdn-images-1.medium.com/max/800/1*brGnhu_m-W9-sQ-Yk7N8SQ.png"></figure><h3 name="f10d" id="f10d" class="graf graf--h3 graf-after--figure graf--title">The missing part of Medium’s REST API</h3><p name="44aa" id="44aa" class="graf graf--p graf-after--h3 graf--trailing">In this article I will explain how to programmatically retrieve the stats (number of claps and comments) of any Medium post using a custom REST API, the lack of this feature in the official Medium REST API is what motivated me to create this custom REST API.</p></div></div></section><section name="7049" class="section section--body"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><p name="d9bf" id="d9bf" class="graf graf--p graf--leading">First, let’s see the documentation of the official public <a href="https://github.com/Medium/medium-api-docs" data-href="https://github.com/Medium/medium-api-docs" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">REST API</a> by Medium.</p><p name="caaf" id="caaf" class="graf graf--p graf-after--p graf--trailing">When it comes to articles (posts), The official Medium API only provides an HTTP POST method to create a Medium article (cf<a href="https://github.com/Medium/medium-api-docs#33-posts" data-href="https://github.com/Medium/medium-api-docs#33-posts" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank"> section 3.3</a>), <strong class="markup--strong markup--p-strong">you can not edit or retrieve an article using the official REST API</strong> 😥, I don’t really know why Medium staff has decided not to implement such a useful feature, but it’s certainly a regretting design choice.</p></div></div></section><section name="3f7f" class="section section--body"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><blockquote name="5f70" id="5f70" class="graf graf--blockquote graf--leading">While working on a personal project, I needed to retrieve the stats (number of claps and comments) of my Medium posts within a reasonable response time, I looked everywhere to find a solution to my needs but I couldn’t find it, so I had no choice but coding it by my self.</blockquote><p name="6c36" id="6c36" class="graf graf--p graf-after--blockquote">My first intuition was to look at the official REST API but no such feature is provided, then I looked at <a href="https://help.medium.com/hc/en-us/articles/214874118-Using-RSS-feeds-of-profiles-and-publications" data-href="https://help.medium.com/hc/en-us/articles/214874118-Using-RSS-feeds-of-profiles-and-publications" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">the RSS feed</a> by Medium and nothing was there neither, after that I started inspecting Medium using Chrome’s DevTools in order to understand how the stats are retrieved then displayed under a Medium story.</p><figure name="79da" id="79da" class="graf graf--figure graf-after--p"><img class="graf-image" data-image-id="1*VV84EGcrF6iCqPvAyNQ1lQ.jpeg" data-width="1800" data-height="986" src="https://cdn-images-1.medium.com/max/800/1*VV84EGcrF6iCqPvAyNQ1lQ.jpeg"><figcaption class="imageCaption">Inspecting a Medium post page.</figcaption></figure><p name="f393" id="f393" class="graf graf--p graf-after--figure">Surprisingly, among all the XHR requests there was no request to retrieve the stats 😮, which led me to look at the HTML response of the article page.</p><pre name="2bfc" id="2bfc" class="graf graf--pre graf-after--p">curl <a href="https://medium.com/p/POST_ID" data-href="https://medium.com/p/POST_ID" class="markup--anchor markup--pre-anchor" target="_blank">https://medium.com/p/POST_ID</a> &gt;&gt; post.html</pre><figure name="f633" id="f633" class="graf graf--figure graf-after--pre"><img class="graf-image" data-image-id="1*TtlQ9HTLD4-4Nkcn7zKBbw.png" data-width="1902" data-height="784" src="https://cdn-images-1.medium.com/max/800/1*TtlQ9HTLD4-4Nkcn7zKBbw.png"><figcaption class="imageCaption">A simplified Medium post page</figcaption></figure><p name="f323" id="f323" class="graf graf--p graf-after--figure">🎉 🎉 🎉</p><p name="c83f" id="c83f" class="graf graf--p graf-after--p">We notice that the number of claps and comments are directly injected in the HTML response as a javascript variable, we can verify that by taping <code class="markup--code markup--p-code">console.log(window.__APOLLO_STATE__); </code>in the Javascript console of the Post page.</p><figure name="39d8" id="39d8" class="graf graf--figure graf-after--p"><img class="graf-image" data-image-id="1*bAsw-19WqltUUV5HbYUEEw.jpeg" data-width="1800" data-height="895" src="https://cdn-images-1.medium.com/max/800/1*bAsw-19WqltUUV5HbYUEEw.jpeg"><figcaption class="imageCaption">The content of the <code class="markup--code markup--figure-code">window.__APOLLO_STATE__ object</code></figcaption></figure><p name="6140" id="6140" class="graf graf--p graf-after--figure">Now that we found where the stats are available at, we only need to parse the HTML page and look for the two tokens containing the number of claps and comments which are <code class="markup--code markup--p-code">clapCount</code> and <code class="markup--code markup--p-code">responsesCount</code> .</p><h3 name="d1ae" id="d1ae" class="graf graf--h3 graf-after--p"><strong class="markup--strong markup--h3-strong">How to use the custom API :</strong></h3><p name="1060" id="1060" class="graf graf--p graf-after--h3">You can use the <a href="https://github.com/FrenchTechLead/medium-stats-api" data-href="https://github.com/FrenchTechLead/medium-stats-api" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">custom API</a> that I built right now as follows:</p><p name="cb35" id="cb35" class="graf graf--p graf-after--p"><strong class="markup--strong markup--p-strong">Request </strong>💻 ➡ 🌎<strong class="markup--strong markup--p-strong"> :</strong></p><pre name="3a19" id="3a19" class="graf graf--pre graf-after--p">curl https://medium-stats-api.herokuapp.com/api/stats?story_url=THE_URL_OF_THE_MEDIUM_STORY</pre><p name="7858" id="7858" class="graf graf--p graf-after--pre"><strong class="markup--strong markup--p-strong">Response </strong>💻 ⬅🌎 :</p><pre name="5fae" id="5fae" class="graf graf--pre graf-after--p">{<br>   &quot;claps&quot;: 78,<br>   &quot;comments&quot;: 1<br>}</pre><p name="8568" id="8568" class="graf graf--p graf-after--pre graf--trailing">The API responds within [500, 1500] ms which is pretty reasonable knowing that the API starts by sending an HTTP request to Medium then it parses the response before returning the stats to the requester.</p></div></div></section><section name="48f5" class="section section--body section--last"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><p name="b114" id="b114" class="graf graf--p graf--leading">The <a href="https://github.com/FrenchTechLead/medium-stats-api" data-href="https://github.com/FrenchTechLead/medium-stats-api" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">API is Open Source</a> we welcome any kind of contribution, if you find this post interesting let a comment and hit the 👏 button below.</p><p name="d793" id="d793" class="graf graf--p graf-after--p"><strong class="markup--strong markup--p-strong">References :</strong></p><div name="41aa" id="41aa" class="graf graf--mixtapeEmbed graf-after--p"><a href="https://github.com/Medium/medium-api-docs" data-href="https://github.com/Medium/medium-api-docs" class="markup--anchor markup--mixtapeEmbed-anchor" title="https://github.com/Medium/medium-api-docs"><strong class="markup--strong markup--mixtapeEmbed-strong">Medium/medium-api-docs</strong><br><em class="markup--em markup--mixtapeEmbed-em">This repository contains the documentation for Medium &#39;s API. Medium&#39;s API is a JSON-based OAuth2 API. All requests are…</em>github.com</a><a href="https://github.com/Medium/medium-api-docs" class="js-mixtapeImage mixtapeImage u-ignoreBlock" data-media-id="7bd61dc646039867300d5f80ac717169" data-thumbnail-img-id="0*y3otP8kIBf3oRMpP" style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*y3otP8kIBf3oRMpP);"></a></div><div name="59eb" id="59eb" class="graf graf--mixtapeEmbed graf-after--mixtapeEmbed graf--trailing"><a href="https://github.com/FrenchTechLead/medium-stats-api" data-href="https://github.com/FrenchTechLead/medium-stats-api" class="markup--anchor markup--mixtapeEmbed-anchor" title="https://github.com/FrenchTechLead/medium-stats-api"><strong class="markup--strong markup--mixtapeEmbed-strong">GitHub - FrenchTechLead/medium-stats-api: A simple Rest API to retrieve medium stats of a given…</strong><br><em class="markup--em markup--mixtapeEmbed-em">A simple Rest API to retrieve medium stats of a given story. - GitHub - FrenchTechLead/medium-stats-api: A simple Rest…</em>github.com</a><a href="https://github.com/FrenchTechLead/medium-stats-api" class="js-mixtapeImage mixtapeImage u-ignoreBlock" data-media-id="b48fe469b1d6fd5ed41389dd3e23f822" data-thumbnail-img-id="0*1hKKFzmICW6LZAkF" style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*1hKKFzmICW6LZAkF);"></a></div></div></div></section>
+</section>
+<footer><p>By <a href="https://medium.com/@french-tech-lead" class="p-author h-card">MECHERI Akram</a> on <a href="https://medium.com/p/5d377e02d5d9"><time class="dt-published" datetime="2020-12-23T14:02:09.221Z">December 23, 2020</time></a>.</p><p><a href="https://medium.com/@french-tech-lead/the-missing-part-of-mediums-rest-api-5d377e02d5d9" class="p-canonical">Canonical link</a></p><p>Exported from <a href="https://medium.com">Medium</a> on April 17, 2022.</p></footer></article></body></html>
