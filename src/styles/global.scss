@@ -1,19 +1,18 @@
 :root{
-    --color-txt-white: rgb(255, 255, 255);
-    --color-txt-grey: rgb(208, 208, 208);
+    --color-white: rgb(255, 255, 255);
+    --color-grey: rgb(208, 208, 208);
     --color-green: rgb(107, 217, 104);
     --color-light-blue: rgb(61, 239, 233);
     --color-blue: rgb(57, 146, 255);
     --color-yellow: rgb(254, 204, 27);
     --color-red: rgb(244, 66, 80);
     --color-purple: rgb(216, 59, 210);
-    
-    --color-bg-black: rgb(18, 18, 18);
+    --color-black: rgb(18, 18, 18);
 }
 
 html {
-    background: var(--color-bg-black);
-    color: var(--color-txt-grey);
+    background: var(--color-black);
+    color: var(--color-grey);
     font-family: 'Roboto', sans-serif;
     font-style:normal;
     font-weight: 400;
@@ -38,4 +37,15 @@ h2 {
 a{
     text-decoration: none;
     color: var(--color-red);
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: var(--color-black);
+    background: var(--color-yellow);
+}
+
+::selection {
+    color: var(--color-black);
+    background: var(--color-yellow);
 }

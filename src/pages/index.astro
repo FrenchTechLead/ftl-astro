@@ -6,8 +6,9 @@ import "@styles/global.scss";
 import "@styles/index.scss";
 
 
-let title = 'Hi there! Glad to see you here.';
-let description = 'My Name  is Akram and I am a Technical Leader living in Paris' 
+let title = 'Hi there 👋 Glad to see you here.';
+let description = 'My Name  is Akram and I am a Technical Leader living in Paris.'
+let description2 = 'In this blog I\'ll try to share some technical knowledge that I have accumulated during my many years of creating large scale apps 🚀'
 let permalink = 'https://frenchtechlead.com/';
 
 
@@ -26,13 +27,13 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 			<main>
 				<section style="text-align: center;">
 					<img id="akram-pic" width="300px" height="300px" src="/assets/blog/akram.jpg" alt="Akram's picture" title="Akram's picture"/>
-					<h2 style="color: var(--color-txt-white);">{title}</h2>
-					<p>{description}</p>
-					<p>In this blog I'll try to share some technical knowledge that I have accumulated during my many years of creating software.</p>
+					<h2 style="color: var(--color-white);">{title}</h2>
+					<p>{description} <br/> {description2}</p>
 				</section>
 
-				<h2 style="color: var(--color-green);">Latest posts</h2>
-				<section aria-label="Blog post list">
+				
+				<section id="latest-posts" aria-label="Blog post list">
+				    <h2 style="color: var(--color-green);">Latest posts 🔥</h2>
 					{techPosts.map((p) => <BlogPostPreview post={p.frontmatter as any} url={p.url} />)}
 				</section>
 			</main>
