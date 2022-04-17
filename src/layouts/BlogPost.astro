@@ -6,7 +6,7 @@ import BlogPost from '@comps/BlogPost.astro';
 import "@styles/global.scss";
 import "@styles/blog.scss";
 
-const { title, description, publishDate, authorName, authorSocial, permalink, lang, postImageUrl } = Astro.props.content;
+const { title, description, publishDate, authorName, authorSocial, permalink, lang, postImageUrl, postImageLocal, postImageAlt } = Astro.props.content;
 
 ---
 <html lang={lang || 'en'}>
@@ -16,6 +16,7 @@ const { title, description, publishDate, authorName, authorSocial, permalink, la
 	<BlogHeader />
 	<body>
 		<BlogPost {title} {authorName} {publishDate} {authorSocial} >
+			<img width="800px"  src={postImageLocal} alt={postImageAlt} title={postImageAlt}/>
 			<slot />
 		</BlogPost>
 	</body>

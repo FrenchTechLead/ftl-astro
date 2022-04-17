@@ -3,6 +3,7 @@
     --color-grey: #d0d0d0;
     --color-green: #6bd968;
     --color-light-blue: #3defe9;
+    --color-heavy-blue: #003678;
     --color-blue: #3992ff;
     --color-yellow: #fecc1b;
     --color-red: #f44250;
@@ -23,9 +24,16 @@ header {
     article{
         text-align: center;
         a {
-            color: var(--color-blue);
+            color: var(--color-heavy-blue);
             text-decoration: none;
             font-size: 3rem;
+            text-shadow: 0 0 7px #fff,
+            0 0 10px #fff,
+            0 0 42px var(--color-blue),
+            0 0 82px var(--color-blue),
+            0 0 92px var(--color-blue),
+            0 0 102px var(--color-blue),
+            0 0 151px var(--color-blue);
         }
         
     }

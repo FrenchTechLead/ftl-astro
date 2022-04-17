@@ -7,11 +7,11 @@ publishDate: October 27, 2021
 authorName: '@FrenchTechLead'
 authorSocial: 'https://twitter.com/FrenchTechLead'
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20211027-java-memory-management/1.png
+postImageLocal: /assets/blog/tech/20211027-java-memory-management/1.png
+postImageAlt: 'Java Memory Management'
 permalink: https://frenchtechlead.com/posts/tech/20211027-java-memory-management/
 description: "In this short article, I’ll try to briefly explain how Java manages Random Access Memory (RAM), explaining the basics of garbage collecting, the two main Memory types in Java, Memory Leaks: how to diagnose them and how to ensure that your application handles the memory the right way."
 ---
-
-![Java Memory Management](/assets/blog/tech/20211027-java-memory-management/1.png "Java Memory Management")
 
 In this short article, I’ll try to briefly explain how Java manages Random Access Memory (RAM), explaining the basics of garbage collecting, the two main Memory types in Java, Memory Leaks: how to diagnose them and how to ensure that your application handles the memory the right way.
 
@@ -40,7 +40,10 @@ Actually, there are N number of stacks per Java process, where N is equal to the
 
 On the other hand, there is only **one Java Heap per Java process.**
 
+<Separator/>
+
 ## Stack
+Let's take a look at the following program :
 ```java
 public class Stack {
     public static void main(String[] args) {
@@ -53,21 +56,56 @@ public class Stack {
 }
 ```
 ![Stack](/assets/blog/tech/20211027-java-memory-management/4.svg "Stack")
-Stack memory is always referenced in LIFO (Last-In-First-Out) order. **Whenever a method is invoked, a new block is created on top of the stack memory** for the method to hold local primitive values and reference to other objects in the method, As soon as the method ends, the block is popped from the top of the stack, Stack memory size is very less compared to Heap memory.
+Stack memory is always referenced in **LIFO (Last-In-First-Out)** order. **Whenever a method is invoked, a new block is created on top of the stack memory** for the method to hold local primitive values and reference to other objects in the method, As soon as the method ends, the block is popped from the top of the stack, Stack memory size is very less compared to Heap memory.
 
+<Separator/>
 
-![Heap](/assets/blog/tech/20211027-java-memory-management/5.png "Heap")
+## Heap
+Let's take a look at the following program :
+```java
+public static void main(String[] args) {
+    int x = 1;
+    int y = 2;
+    String name = "FrenchTechLead";
+}
+
+```
+![Heap](/assets/blog/tech/20211027-java-memory-management/5.svg "Heap")
 The above example represents the state of the Stack and the heap on the execution of the last line of code of the main method, we notice that the first instructions are on the bottom of the Stack and the last one on the top of it, we also notice that the Stack holds primitive values and references to non-primitive types that are stored on the Heap memory.
 
 <Separator/>
 
 ## StackOverFlowError
-![StackOverFlowError](/assets/blog/tech/20211027-java-memory-management/6.png "StackOverFlowError")
-**StackOverflowError** is a very common error in Java and in programming in general, it happens when the stack memory is overflowed with content.
+Let's take a look at the following program :
+```java
+public static void main(String[] args) {
+    toto();
+}
+public static void toto() {
+    toto();
+}
+```
+The above program will cause a **StackOverFlowError** because **toto()** method is called recursively without a stop condition.
 
-Like we said before every method invocation creates a block on the top of the stack memory, and since the program of the example above recursively invokes the “toto” method with no stop condition, it causes a StackOverFlow error.
+![StackOverFlowError](/assets/blog/tech/20211027-java-memory-management/6.svg "StackOverFlowError")
+**StackOverflowError** is a very common error in Java and in programming in general, it happens when the **Stack** memory is overflowed with content.
+
+Like we said before every method invocation creates a block on the top of the stack memory, and since the program of the example above recursively invokes the **toto()** method with no stop condition, it causes a **StackOverFlow** error.
+
+<Separator/>
+
 ## OutOfMemoryError
-![OutOfMemoryError](/assets/blog/tech/20211027-java-memory-management/7.png "OutOfMemoryError")
+Let's take a look at the following program :
+```java
+public static void main(String[] args) {
+    List<String> list = new ArrayList<>();
+    while(true) {
+        list.add(new String("FrenchTechLead"));
+    }
+}
+```
+The above program will cause an **OutOfMemoryError** it keeps adding new **String** instances until there is no more **Heap** memory available.
+![OutOfMemoryError](/assets/blog/tech/20211027-java-memory-management/7.svg "OutOfMemoryError")
 **OutOfMemoryError** is another common error in the Java world, it concerns the heap memory and happens when there is no more heap space to allocate for new objects, the above program creates new entries in a List of Strings until there is no more heap space for it.
 
 <Separator/>
@@ -102,9 +140,9 @@ Let’s run this simple program in Intellij’s IDE, and perform a Heap Dump usi
 
 When capturing a memory snapshot of the running process, intellij will create a .hprof file and parse it in the following tab :
 ![intellij's Profiler result](/assets/blog/tech/20211027-java-memory-management/10.png "intellij's Profiler result")
-We observe that the largest object of our program is of type Main (the class we created), and that’s because it contains large static field str.
+We observe that the largest object of our program is of type **Main** (the class we created), and that’s because it contains large static field **str**.
 
-This view shows the state of the heap memory when the heap dump was performed, this helps a lot for analysing memory leaks in large apps, we observe that there are a lot of objects loaded on the heap by JDK for our simple Java program, we must then pay attention when including libraries to our Java apps because they can overload the heap memory.
+This view shows the state of the heap memory when the heap dump was performed, this helps a lot for analyzing memory leaks in large apps, we observe that there are a lot of objects loaded on the heap by **JDK** for our simple Java program, we must then pay attention when including libraries to our Java apps because they can overload the heap memory.
 
 <Separator/>
 
@@ -171,7 +209,7 @@ This will make sure that the dependency is added to the classpath at the conveni
 </dependency>
 
 <dependency>
-  <groupId>org. fluentlenium</groupId>
+  <groupId>org.fluentlenium</groupId>
   <artifactId>fluentlenium-festassert</artifactId>
   <version>0.13.2</version>
   <scope>test</scope>
