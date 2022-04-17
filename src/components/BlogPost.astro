@@ -1,15 +1,12 @@
 ---
 const { title, publishDate, authorName, authorSocial } = Astro.props;
 ---
-<article>
-	<div>
+<article class="article">
 		<header>
 			<h1>{title}</h1>
 			<p>By : <a href={authorSocial}>{authorName}</a><br/>{publishDate}</p>
-			
 		</header>
 		<main>
 			<slot />
 		</main>
-	</div>
 </article>

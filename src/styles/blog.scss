@@ -1,12 +1,9 @@
-table,
-th,
-td {
+table, th, td {
 	border: 1px solid var(--color-white);
 	border-collapse: collapse;
 }
 
-th,
-td {
+th, td {
 	padding: 5px;
 }
 
@@ -18,4 +15,17 @@ img {
 
 .separator {
 	text-align: center;
+}
+
+.article {
+	header{
+		text-align: center;
+			h1 {
+				color: var(--color-white);
+			}
+			
+			p {
+				font-size: small;
+			}
+	}
 }
