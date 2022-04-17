@@ -5,18 +5,19 @@ import BlogPost from '@comps/BlogPost.astro';
 import "@styles/global.scss";
 import "@styles/blog.scss";
 
-const { title, description, publishDate, author, heroImage, permalink, alt, lang } = Astro.props;
+const { title, description, publishDate, authorName, authorSocial, permalink, lang, postImageUrl } = Astro.props.content;
+
 ---
 
 <html lang={lang || 'en'}>
 	<head>
-		<BaseHead {title} {description} {permalink} />
+		<BaseHead {title} {description} {permalink} {postImageUrl} />
 	</head>
 	<BlogHeader />
 	<body>
 		
 		<div class="wrapper">
-			<BlogPost {title} {author} {heroImage} {publishDate} {alt}>
+			<BlogPost {title} {authorName} {publishDate} {authorSocial} >
 				<slot />
 			</BlogPost>
 		</div>

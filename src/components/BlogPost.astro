@@ -1,20 +1,15 @@
 ---
-import Author from '@comps/Author.astro';
-
-const { title, publishDate, alt } = Astro.props;
+const { title, publishDate, authorName, authorSocial } = Astro.props;
 ---
-
-<div class="layout">
-	<article class="content">
-		<div>
-			<header>
-				<p>{publishDate}</p>
-				<h1>{title}</h1>
-				<Author name="@FrenchTechLead" href="https://twitter.com/FrenchTechLead" />
-			</header>
-			<main>
-				<slot />
-			</main>
-		</div>
-	</article>
-</div>
+<article>
+	<div>
+		<header>
+			<h1>{title}</h1>
+			<p>By : <a href={authorSocial}>{authorName}</a><br/>{publishDate}</p>
+			
+		</header>
+		<main>
+			<slot />
+		</main>
+	</div>
+</article>

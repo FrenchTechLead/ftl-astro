@@ -6,10 +6,12 @@ import "@styles/global.scss";
 import "@styles/index.scss";
 
 
-let title = 'Hi there 👋 Glad to see you here.';
-let description = 'My Name  is Akram and I am a Technical Leader living in Paris.'
-let description2 = 'In this blog I\'ll try to share some technical knowledge that I have accumulated during my many years of creating large scale apps 🚀'
-let permalink = 'https://frenchtechlead.com/';
+const title = 'Hi there 👋 Glad to see you here.';
+const description = 'My Name  is Akram and I am a Technical Leader living in Paris.'
+const description2 = 'In this blog I\'ll try to share some technical knowledge that I have accumulated during my many years of creating large scale apps 🚀'
+const permalink = 'https://frenchtechlead.com/';
+const postImageUrl = 'https://frenchtechlead.com/assets/blog/blog-cover.jpg';
+
 
 
 const techPosts = await Astro.glob('./posts/tech/*.md');
@@ -18,7 +20,7 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 <html lang="en">
 	
 	<head>
-		<BaseHead title={title} description={description} permalink={permalink} />
+		<BaseHead {title} description={description + ' ' + description2} {permalink} {postImageUrl} />
 	</head>
 	<BlogHeader/>
 	
