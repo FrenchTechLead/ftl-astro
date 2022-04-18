@@ -1,8 +1,8 @@
 ---
 
 const {width, height, src, title} = Astro.props;
-const srcJPG = src.replace('avif', '.jpg');
-const srcWebp = src.replace('avif', '.webp');
+const srcJPG = src.replace('.avif', '.jpg');
+const srcWebp = src.replace('.avif', '.webp');
 ---
 <picture>
   <source type="image/avif" srcset={src} />
