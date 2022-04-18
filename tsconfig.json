@@ -6,17 +6,14 @@
         "src/components/*"
       ],
       "@assets/*": [
-        "src/assets/*"
+        "/assets/*"
       ],
       "@layouts/*": [
         "src/layouts/*"
       ],
       "@styles/*": [
         "src/styles/*"
-      ],
-      "@svg/*": [
-        "src/components/svg/*"
-      ],
+      ]
     }
   }
 }
