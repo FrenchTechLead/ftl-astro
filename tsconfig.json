@@ -14,6 +14,9 @@
       "@styles/*": [
         "src/styles/*"
       ],
+      "@svg/*": [
+        "src/components/svg/*"
+      ],
     }
   }
 }

@@ -2,6 +2,13 @@
 setup: |
   import Layout from '@layouts/BlogPost.astro'
   import Separator from '@comps/Separator.astro'
+  import SVG2 from '@svg/20211027-java-memory-management/SVG2.astro'
+  import SVG3 from '@svg/20211027-java-memory-management/SVG3.astro'
+  import SVG4 from '@svg/20211027-java-memory-management/SVG4.astro'
+  import SVG5 from '@svg/20211027-java-memory-management/SVG5.astro'
+  import SVG6 from '@svg/20211027-java-memory-management/SVG6.astro'
+  import SVG7 from '@svg/20211027-java-memory-management/SVG7.astro'
+  import SVG8 from '@svg/20211027-java-memory-management/SVG8.astro'
 title: Java Memory Management
 publishDate: October 27, 2021
 authorName: '@FrenchTechLead'
@@ -32,10 +39,10 @@ We find in a computer three main types of memories, **Read-Only Memory (ROM)** i
 <Separator />
 
 ## How does the JVM use RAM?
-![JVM and RAM](/assets/blog/tech/20211027-java-memory-management/2.svg "JVM and RAM")
+<SVG2/>
 The Java Virtual Machine (JVM) uses RAM memory in two main ways, the first one is the **Stack**, it’s an ordered data structure that can be compared to books that are put one on top of each other, the second one is **Heap** which has no particular order.
 
-![Stack Vs Heap](/assets/blog/tech/20211027-java-memory-management/3.svg "Stack Vs Heap")
+<SVG3/>
 Actually, there are N number of stacks per Java process, where N is equal to the number of Java threads being executed, **1 Thread = 1 Stack.**
 
 On the other hand, there is only **one Java Heap per Java process.**
@@ -55,7 +62,7 @@ public class Stack {
     }
 }
 ```
-![Stack](/assets/blog/tech/20211027-java-memory-management/4.svg "Stack")
+<SVG4/>
 Stack memory is always referenced in **LIFO (Last-In-First-Out)** order. **Whenever a method is invoked, a new block is created on top of the stack memory** for the method to hold local primitive values and reference to other objects in the method, As soon as the method ends, the block is popped from the top of the stack, Stack memory size is very less compared to Heap memory.
 
 <Separator/>
@@ -70,7 +77,7 @@ public static void main(String[] args) {
 }
 
 ```
-![Heap](/assets/blog/tech/20211027-java-memory-management/5.svg "Heap")
+<SVG5/>
 The above example represents the state of the Stack and the heap on the execution of the last line of code of the main method, we notice that the first instructions are on the bottom of the Stack and the last one on the top of it, we also notice that the Stack holds primitive values and references to non-primitive types that are stored on the Heap memory.
 
 <Separator/>
@@ -87,7 +94,7 @@ public static void toto() {
 ```
 The above program will cause a **StackOverFlowError** because **toto()** method is called recursively without a stop condition.
 
-![StackOverFlowError](/assets/blog/tech/20211027-java-memory-management/6.svg "StackOverFlowError")
+<SVG6/>
 **StackOverflowError** is a very common error in Java and in programming in general, it happens when the **Stack** memory is overflowed with content.
 
 Like we said before every method invocation creates a block on the top of the stack memory, and since the program of the example above recursively invokes the **toto()** method with no stop condition, it causes a **StackOverFlow** error.
@@ -105,13 +112,13 @@ public static void main(String[] args) {
 }
 ```
 The above program will cause an **OutOfMemoryError** it keeps adding new **String** instances until there is no more **Heap** memory available.
-![OutOfMemoryError](/assets/blog/tech/20211027-java-memory-management/7.svg "OutOfMemoryError")
+<SVG7/>
 **OutOfMemoryError** is another common error in the Java world, it concerns the heap memory and happens when there is no more heap space to allocate for new objects, the above program creates new entries in a List of Strings until there is no more heap space for it.
 
 <Separator/>
 
 ## Memory Leaks
-![MemoryLeaks](/assets/blog/tech/20211027-java-memory-management/8.svg "MemoryLeaks")
+<SVG8/>
 **Java memory leak** happens when an application unintentionally (due to logical errors in code) holds on to object references that are no longer required. These unintentional object references prevent the built-in Java garbage collection mechanism from freeing up the memory consumed by these objects.
 
 <Separator/>
