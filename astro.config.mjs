@@ -1,9 +1,8 @@
-  import preact from '@astrojs/preact';
-  import sitemap from '@astrojs/sitemap';
+import preact from '@astrojs/preact';
+import sitemap from '@astrojs/sitemap';
+import { defineConfig } from 'astro/config'
 
-// @ts-check
-export default /** @type {import('astro').AstroUserConfig} */ ({
-	// Enable the Preact renderer to support Preact JSX components.
-	site: 'https://frenchtechlead.com',
-	ibtegrations: [sitemap(), preact()],
+export default defineConfig({
+  site: 'https://frenchtechlead.com',
+  integrations: [sitemap(), preact()]
 });
