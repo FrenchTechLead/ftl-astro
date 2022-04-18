@@ -4,6 +4,7 @@ import BlogHeader from '@comps/BlogHeader.astro';
 import Styles from '@comps/Styles.astro';
 import BlogFooter from '@comps/BlogFooter.astro';
 import BlogPost from '@comps/BlogPost.astro';
+import Image from '@comps/Image.astro';
 
 
 const { title, description, publishDate, 
@@ -22,7 +23,7 @@ postImageWidth, postImageHeight
 	<body>
 		<main>
 			<BlogPost {title} {authorName} {publishDate} {authorSocial} >
-				<img width={postImageWidth} height={postImageHeight}  src={postImageLocal} alt={postImageAlt} title={postImageAlt}/>
+				<Image w={postImageWidth} h={postImageHeight}  src={postImageLocal} t={postImageAlt} />
 				<slot />
 			</BlogPost>
 		</main>

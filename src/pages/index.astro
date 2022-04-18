@@ -3,7 +3,9 @@ import MetaHead from '@comps/MetaHead.astro';
 import BlogHeader from '@comps/BlogHeader.astro';
 import BlogFooter from '@comps/BlogFooter.astro';
 import Styles from '@comps/Styles.astro';
+import Image from '@comps/Image.astro';
 import BlogPostPreview from '@comps/BlogPostPreview.astro';
+import akramPic from '@assets/blog/akram.avif';
 
 
 const title = 'Hi there 👋 Glad to see you here.';
@@ -25,11 +27,10 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 	</head>
 	<BlogHeader/>
 	
-
 	<body>
 		<main>
-			<section style="text-align: center;">
-				<img id="akram-pic" width="300px" height="300px" src="/assets/blog/akram.avif" alt="Akram's picture" title="Akram's picture"/>
+			<section id="landing">
+				<Image w={300} h={300} src={akramPic} t="Akram's picture" />
 				<h2 style="color: var(--color-white);">{title}</h2>
 				<p>{description} <br/> {description2}</p>
 			</section>
