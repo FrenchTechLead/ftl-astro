@@ -12,20 +12,21 @@ setup: |
   import img8 from '@assets/blog/tech/20211027-java-memory-management/8.avif'
   import img9 from '@assets/blog/tech/20211027-java-memory-management/9.avif'
   import img10 from '@assets/blog/tech/20211027-java-memory-management/10.avif'
-title: Java Memory Management
-publishDate: October 27, 2021
+title: The Hardest Production Bug That I Faced During My Software Engineering Career.
+publishDate: June 15, 2021
 authorName: '@FrenchTechLead'
 authorSocial: 'https://twitter.com/FrenchTechLead'
-postImageUrl: https://frenchtechlead.com/assets/blog/tech/20211027-java-memory-management/1.avif
+postImageUrl: https://frenchtechlead.com/assets/blog/tech/20210615-the-hardest-production-bug/1.avif
 postImageLocal: /assets/blog/tech/20211027-java-memory-management/1.avif
-postImageAlt: 'Java Memory Management'
+postImageAlt: The Hardest Production Bug That I Faced During My Software Engineering Career.
 postImageWidth: 800
 postImageHeight: 403
-permalink: https://frenchtechlead.com/posts/tech/20211027-java-memory-management/
-description: "In this short article, I’ll try to briefly explain how Java manages Random Access Memory (RAM), explaining the basics of garbage collecting, the two main Memory types in Java, Memory Leaks: how to diagnose them and how to ensure that your application handles the memory the right way."
+permalink: https://frenchtechlead.com/posts/tech/20210615-the-hardest-production-bug-that-i-faced-in-my-software-engineering-career/
+description: "In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we diagnosed it, and the way we managed to correct it in my company."
+draft: true
 ---
 
-In this short article, I’ll try to briefly explain how Java manages Random Access Memory (RAM), explaining the basics of garbage collecting, the two main Memory types in Java, Memory Leaks: how to diagnose them and how to ensure that your application handles the memory the right way.
+In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we diagnosed it, and the way we managed to correct it in my company.
 
 <Separator />
 
@@ -44,11 +45,11 @@ We find in a computer three main types of memories, **Read-Only Memory (ROM)** i
 <Separator />
 
 ## How does the JVM use RAM?
-<Image w="853" h="348" src={img2} t="Stack Vs Heap" />
+<Image width="853" height="348" src={img2} title="Stack Vs Heap" />
 
 The Java Virtual Machine (JVM) uses RAM memory in two main ways, the first one is the **Stack**, it’s an ordered data structure that can be compared to books that are put one on top of each other, the second one is **Heap** which has no particular order.
 
-<Image w="669" h="347" src={img3} t="Stack Vs Heap 2" />
+<Image width="669" height="347" src={img3} title="Stack Vs Heap 2" />
 
 Actually, there are N number of Stacks per Java process, where N is equal to the number of Java threads being executed, **1 Thread = 1 Stack.**
 
@@ -69,7 +70,7 @@ public class Stack {
     }
 }
 ```
-<Image w="1316" h="283" src={img4} t="Stack Timeline" />
+<Image width="1316" height="283" src={img4} title="Stack Timeline" />
 
 **Stack** memory is always referenced in **LIFO (Last-In-First-Out)** order. **Whenever a method is invoked, a new block is created on top of the **Stack** memory** for the method to hold local **primitive values** and **reference** to other objects in the method, As soon as the method ends, the block is popped from the top of the Stack, **Stack** memory size is very less compared to **Heap** memory.
 
@@ -85,7 +86,7 @@ public static void main(String[] args) {
 }
 
 ```
-<Image w="669" h="347" src={img5} t="Stack and Heap interaction" />
+<Image width="669" height="347" src={img5} title="Stack and Heap interaction" />
 
 The above example represents the state of the **Stack** and the **Heap** on the execution of the last line of code of the main method, we notice that the first instructions are on the bottom of the **Stack** and the last one on the top of it, we also notice that the **Stack** holds **primitive** values and **references** to non-primitive types that are stored on the **Heap** memory.
 
@@ -103,7 +104,7 @@ public static void toto() {
 ```
 The above program will cause a **StackOverFlowError** because **toto()** method is called recursively without a stop condition.
 
-<Image w="640" h="314" src={img6} t="StackOverflowError" />
+<Image width="640" height="314" src={img6} title="StackOverflowError" />
 
 **StackOverflowError** is a very common error in Java and in programming in general, it happens when the **Stack** memory is overflowed with content.
 
@@ -123,14 +124,14 @@ public static void main(String[] args) {
 ```
 The above program will cause an **OutOfMemoryError** it keeps adding new **String** instances until there is no more **Heap** memory available.
 
-<Image w="740" h="268" src={img7} t="OutOfMemoryError" />
+<Image width="740" height="268" src={img7} title="OutOfMemoryError" />
 
 **OutOfMemoryError** is another common error in the Java world, it concerns the **Heap** memory and happens when there is no more **Heap** space to allocate for new objects, the above program creates new entries in a List of Strings until there is no more **Heap** space for it.
 
 <Separator/>
 
 ## Memory Leaks
-<Image w="858" h="494" src={img8} t="intellij's Profiler" />
+<Image width="858" height="494" src={img8} title="intellij's Profiler" />
 
 **Java memory leak** happens when an application unintentionally (due to logical errors in code) holds on to object references that are no longer required. These unintentional object references prevent the built-in Java garbage collection mechanism from freeing up the memory consumed by these objects.
 
@@ -157,11 +158,11 @@ public class Main {
 ```
 Let’s run this simple program in Intellij’s IDE, and perform a **Heap Dump** using the default profiler of Intellij:
 
-<Image w="1264" h="494" src={img9} t="intellij's Profiler" />
+<Image width="1264" height="494" src={img9} title="intellij's Profiler" />
 
 When capturing a memory snapshot of the running process, intellij will creates an **.hprof** file and parse it in the following tab :
 
-<Image w="1266" h="477" src={img10} t="intellij's Profiler result" />
+<Image width="1266" height="477" src={img10} title="intellij's Profiler result" />
 
 We observe that the largest object of our program is of type **Main** (the class we created), and that’s because it contains large static field **str**.
 

@@ -38,7 +38,7 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 			
 			<section id="latest-posts" aria-label="Blog post list">
 			    <h2>Latest posts 🔥</h2>
-				{techPosts.map((p) => <BlogPostPreview post={p.frontmatter as any} url={p.url} />)}
+				{techPosts.reverse().map((p) => <BlogPostPreview post={p.frontmatter as any} url={p.url} />)}
 			</section>
 		</main>
 		<BlogFooter/>
