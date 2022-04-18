@@ -18,7 +18,7 @@ const { title, description, publishDate, authorName, authorSocial, permalink, la
 	<body>
 		<main>
 			<BlogPost {title} {authorName} {publishDate} {authorSocial} >
-				<img width="800px"  src={postImageLocal} alt={postImageAlt} title={postImageAlt}/>
+				<img width="800px" height="403px"  src={postImageLocal} alt={postImageAlt} title={postImageAlt}/>
 				<slot />
 			</BlogPost>
 		</main>

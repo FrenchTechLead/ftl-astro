@@ -40,12 +40,14 @@ We find in a computer three main types of memories, **Read-Only Memory (ROM)** i
 
 ## How does the JVM use RAM?
 <SVG2/>
+
 The Java Virtual Machine (JVM) uses RAM memory in two main ways, the first one is the **Stack**, it’s an ordered data structure that can be compared to books that are put one on top of each other, the second one is **Heap** which has no particular order.
 
 <SVG3/>
-Actually, there are N number of stacks per Java process, where N is equal to the number of Java threads being executed, **1 Thread = 1 Stack.**
 
-On the other hand, there is only **one Java Heap per Java process.**
+Actually, there are N number of Stacks per Java process, where N is equal to the number of Java threads being executed, **1 Thread = 1 Stack.**
+
+On the other hand, there is only **one Java **Heap** per Java process.**
 
 <Separator/>
 
@@ -63,7 +65,8 @@ public class Stack {
 }
 ```
 <SVG4/>
-Stack memory is always referenced in **LIFO (Last-In-First-Out)** order. **Whenever a method is invoked, a new block is created on top of the stack memory** for the method to hold local primitive values and reference to other objects in the method, As soon as the method ends, the block is popped from the top of the stack, Stack memory size is very less compared to Heap memory.
+
+**Stack** memory is always referenced in **LIFO (Last-In-First-Out)** order. **Whenever a method is invoked, a new block is created on top of the **Stack** memory** for the method to hold local **primitive values** and **reference** to other objects in the method, As soon as the method ends, the block is popped from the top of the Stack, **Stack** memory size is very less compared to **Heap** memory.
 
 <Separator/>
 
@@ -78,7 +81,8 @@ public static void main(String[] args) {
 
 ```
 <SVG5/>
-The above example represents the state of the Stack and the heap on the execution of the last line of code of the main method, we notice that the first instructions are on the bottom of the Stack and the last one on the top of it, we also notice that the Stack holds primitive values and references to non-primitive types that are stored on the Heap memory.
+
+The above example represents the state of the **Stack** and the **Heap** on the execution of the last line of code of the main method, we notice that the first instructions are on the bottom of the **Stack** and the last one on the top of it, we also notice that the **Stack** holds **primitive** values and **references** to non-primitive types that are stored on the **Heap** memory.
 
 <Separator/>
 
@@ -95,9 +99,10 @@ public static void toto() {
 The above program will cause a **StackOverFlowError** because **toto()** method is called recursively without a stop condition.
 
 <SVG6/>
+
 **StackOverflowError** is a very common error in Java and in programming in general, it happens when the **Stack** memory is overflowed with content.
 
-Like we said before every method invocation creates a block on the top of the stack memory, and since the program of the example above recursively invokes the **toto()** method with no stop condition, it causes a **StackOverFlow** error.
+Like we said before every method invocation creates a block on the top of the **Stack** memory, and since the program of the example above recursively invokes the **toto()** method with no stop condition, it causes a **StackOverFlow** error.
 
 <Separator/>
 
@@ -113,20 +118,22 @@ public static void main(String[] args) {
 ```
 The above program will cause an **OutOfMemoryError** it keeps adding new **String** instances until there is no more **Heap** memory available.
 <SVG7/>
-**OutOfMemoryError** is another common error in the Java world, it concerns the heap memory and happens when there is no more heap space to allocate for new objects, the above program creates new entries in a List of Strings until there is no more heap space for it.
+
+**OutOfMemoryError** is another common error in the Java world, it concerns the **Heap** memory and happens when there is no more **Heap** space to allocate for new objects, the above program creates new entries in a List of Strings until there is no more **Heap** space for it.
 
 <Separator/>
 
 ## Memory Leaks
 <SVG8/>
+
 **Java memory leak** happens when an application unintentionally (due to logical errors in code) holds on to object references that are no longer required. These unintentional object references prevent the built-in Java garbage collection mechanism from freeing up the memory consumed by these objects.
 
 <Separator/>
 
-## Performing a Heap Dump with Intellij
-There are several ways to perfom a JVM Heap Dump using one of the many tools of the Java eco-system, most of the tools are prety similars, so what’s we’re going to see here with Intellij can be done with any other tool such as VisualVM or JDK Mission control …
+## Performing a **Heap** Dump with Intellij
+There are several ways to perfom a JVM **Heap Dump** using one of the many tools of the Java eco-system, most of the tools are prety similars, so what’s we’re going to see here with Intellij can be done with any other tool such as VisualVM or JDK Mission control …
 
-> The infinit loop of the following program will allow the java process to be running while we perform the Heap Dump.
+> The infinit loop of the following program will allow the java process to be running while we perform the **Heap Dump**.
 
 ```java
 public class Main {
@@ -142,14 +149,14 @@ public class Main {
   }
 }
 ```
-Let’s run this simple program in Intellij’s IDE, and perform a Heap Dump using the default profiler of Intellij:
+Let’s run this simple program in Intellij’s IDE, and perform a **Heap Dump** using the default profiler of Intellij:
 ![intellij's Profiler](/assets/blog/tech/20211027-java-memory-management/9.png "intellij's Profiler")
 
-When capturing a memory snapshot of the running process, intellij will create a .hprof file and parse it in the following tab :
+When capturing a memory snapshot of the running process, intellij will creates an **.hprof** file and parse it in the following tab :
 ![intellij's Profiler result](/assets/blog/tech/20211027-java-memory-management/10.png "intellij's Profiler result")
 We observe that the largest object of our program is of type **Main** (the class we created), and that’s because it contains large static field **str**.
 
-This view shows the state of the heap memory when the heap dump was performed, this helps a lot for analyzing memory leaks in large apps, we observe that there are a lot of objects loaded on the heap by **JDK** for our simple Java program, we must then pay attention when including libraries to our Java apps because they can overload the heap memory.
+This view shows the state of the **Heap** memory when the **Heap Dump** was performed, this helps a lot for analyzing memory leaks in large apps, we observe that there are a lot of objects loaded on the **Heap** by **JDK** for our simple Java program, we must then pay attention when including libraries to our Java apps because they can overload the **Heap** memory.
 
 <Separator/>
 
