@@ -1,10 +1,10 @@
 ---
 import MetaHead from '@comps/MetaHead.astro';
 import BlogHeader from '@comps/BlogHeader.astro';
+import Styles from '@comps/Styles.astro';
 import BlogFooter from '@comps/BlogFooter.astro';
 import BlogPost from '@comps/BlogPost.astro';
-import "@styles/global.scss";
-import "@styles/blog.scss";
+
 
 const { title, description, publishDate, authorName, authorSocial, permalink, lang, postImageUrl, postImageLocal, postImageAlt } = Astro.props.content;
 
@@ -12,12 +12,16 @@ const { title, description, publishDate, authorName, authorSocial, permalink, la
 <html lang={lang || 'en'}>
 	<head>
 		<MetaHead {title} {description} {permalink} {postImageUrl} />
+		<Styles/>
 	</head>
 	<BlogHeader />
 	<body>
-		<BlogPost {title} {authorName} {publishDate} {authorSocial} >
-			<img width="800px"  src={postImageLocal} alt={postImageAlt} title={postImageAlt}/>
-			<slot />
-		</BlogPost>
+		<main>
+			<BlogPost {title} {authorName} {publishDate} {authorSocial} >
+				<img width="800px"  src={postImageLocal} alt={postImageAlt} title={postImageAlt}/>
+				<slot />
+			</BlogPost>
+		</main>
+		<BlogFooter/>
 	</body>
 </html>

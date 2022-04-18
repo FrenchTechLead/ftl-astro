@@ -2,9 +2,8 @@
 import MetaHead from '@comps/MetaHead.astro';
 import BlogHeader from '@comps/BlogHeader.astro';
 import BlogFooter from '@comps/BlogFooter.astro';
+import Styles from '@comps/Styles.astro';
 import BlogPostPreview from '@comps/BlogPostPreview.astro';
-import "@styles/global.scss";
-import "@styles/index.scss";
 
 
 const title = 'Hi there 👋 Glad to see you here.';
@@ -22,6 +21,7 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 	
 	<head>
 		<MetaHead {title} description={description + ' ' + description2} {permalink} {postImageUrl} />
+		<Styles />
 	</head>
 	<BlogHeader/>
 	
@@ -40,5 +40,6 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 				{techPosts.map((p) => <BlogPostPreview post={p.frontmatter as any} url={p.url} />)}
 			</section>
 		</main>
+		<BlogFooter/>
 	</body>
 </html>

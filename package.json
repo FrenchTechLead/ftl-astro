@@ -12,6 +12,6 @@
     "@astrojs/preact": "^0.1.1",
     "@astrojs/sitemap": "^0.1.0",
     "astro": "^1.0.0-beta.12",
-    "sass": "^1.50.0"
+    "scss": "^0.2.4"
   }
 }
