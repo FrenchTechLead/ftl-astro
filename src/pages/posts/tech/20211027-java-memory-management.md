@@ -44,11 +44,11 @@ We find in a computer three main types of memories, **Read-Only Memory (ROM)** i
 <Separator />
 
 ## How does the JVM use RAM?
-<Image width="1264" height="494" src={img2} title="intellij's Profiler" />
+<Image width="853" height="348" src={img2} title="Stack Vs Heap" />
 
 The Java Virtual Machine (JVM) uses RAM memory in two main ways, the first one is the **Stack**, it’s an ordered data structure that can be compared to books that are put one on top of each other, the second one is **Heap** which has no particular order.
 
-<Image width="1264" height="494" src={img3} title="intellij's Profiler" />
+<Image width="669" height="347" src={img3} title="Stack Vs Heap 2" />
 
 Actually, there are N number of Stacks per Java process, where N is equal to the number of Java threads being executed, **1 Thread = 1 Stack.**
 
@@ -69,7 +69,7 @@ public class Stack {
     }
 }
 ```
-<Image width="1264" height="494" src={img4} title="intellij's Profiler" />
+<Image width="1316" height="283" src={img4} title="Stack Timeline" />
 
 **Stack** memory is always referenced in **LIFO (Last-In-First-Out)** order. **Whenever a method is invoked, a new block is created on top of the **Stack** memory** for the method to hold local **primitive values** and **reference** to other objects in the method, As soon as the method ends, the block is popped from the top of the Stack, **Stack** memory size is very less compared to **Heap** memory.
 
@@ -85,7 +85,7 @@ public static void main(String[] args) {
 }
 
 ```
-<Image width="1264" height="494" src={img5} title="intellij's Profiler" />
+<Image width="669" height="347" src={img5} title="Stack and Heap interaction" />
 
 The above example represents the state of the **Stack** and the **Heap** on the execution of the last line of code of the main method, we notice that the first instructions are on the bottom of the **Stack** and the last one on the top of it, we also notice that the **Stack** holds **primitive** values and **references** to non-primitive types that are stored on the **Heap** memory.
 
@@ -103,7 +103,7 @@ public static void toto() {
 ```
 The above program will cause a **StackOverFlowError** because **toto()** method is called recursively without a stop condition.
 
-<Image width="1264" height="494" src={img6} title="intellij's Profiler" />
+<Image width="640" height="314" src={img6} title="StackOverflowError" />
 
 **StackOverflowError** is a very common error in Java and in programming in general, it happens when the **Stack** memory is overflowed with content.
 
@@ -123,14 +123,14 @@ public static void main(String[] args) {
 ```
 The above program will cause an **OutOfMemoryError** it keeps adding new **String** instances until there is no more **Heap** memory available.
 
-<Image width="1264" height="494" src={img7} title="intellij's Profiler" />
+<Image width="740" height="268" src={img7} title="OutOfMemoryError" />
 
 **OutOfMemoryError** is another common error in the Java world, it concerns the **Heap** memory and happens when there is no more **Heap** space to allocate for new objects, the above program creates new entries in a List of Strings until there is no more **Heap** space for it.
 
 <Separator/>
 
 ## Memory Leaks
-<Image width="1264" height="494" src={img8} title="intellij's Profiler" />
+<Image width="858" height="494" src={img8} title="intellij's Profiler" />
 
 **Java memory leak** happens when an application unintentionally (due to logical errors in code) holds on to object references that are no longer required. These unintentional object references prevent the built-in Java garbage collection mechanism from freeing up the memory consumed by these objects.
 
