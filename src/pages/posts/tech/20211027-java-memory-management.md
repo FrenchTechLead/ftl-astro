@@ -2,6 +2,7 @@
 setup: |
   import Layout from '@layouts/BlogPost.astro'
   import Separator from '@comps/Separator.astro'
+  import Image from '@comps/Image.astro'
   import SVG2 from '@svg/20211027-java-memory-management/SVG2.astro'
   import SVG3 from '@svg/20211027-java-memory-management/SVG3.astro'
   import SVG4 from '@svg/20211027-java-memory-management/SVG4.astro'
@@ -16,6 +17,8 @@ authorSocial: 'https://twitter.com/FrenchTechLead'
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20211027-java-memory-management/1.png
 postImageLocal: /assets/blog/tech/20211027-java-memory-management/1.png
 postImageAlt: 'Java Memory Management'
+postImageWidth: 800
+postImageHeight: 403
 permalink: https://frenchtechlead.com/posts/tech/20211027-java-memory-management/
 description: "In this short article, I’ll try to briefly explain how Java manages Random Access Memory (RAM), explaining the basics of garbage collecting, the two main Memory types in Java, Memory Leaks: how to diagnose them and how to ensure that your application handles the memory the right way."
 ---
@@ -150,10 +153,13 @@ public class Main {
 }
 ```
 Let’s run this simple program in Intellij’s IDE, and perform a **Heap Dump** using the default profiler of Intellij:
-![intellij's Profiler](/assets/blog/tech/20211027-java-memory-management/9.png "intellij's Profiler")
+
+<Image width="1264" height="494" src="/assets/blog/tech/20211027-java-memory-management/9.png" title="intellij's Profiler" />
 
 When capturing a memory snapshot of the running process, intellij will creates an **.hprof** file and parse it in the following tab :
-![intellij's Profiler result](/assets/blog/tech/20211027-java-memory-management/10.png "intellij's Profiler result")
+
+<Image width="1266" height="477" src="/assets/blog/tech/20211027-java-memory-management/10.png" title="intellij's Profiler result" />
+
 We observe that the largest object of our program is of type **Main** (the class we created), and that’s because it contains large static field **str**.
 
 This view shows the state of the **Heap** memory when the **Heap Dump** was performed, this helps a lot for analyzing memory leaks in large apps, we observe that there are a lot of objects loaded on the **Heap** by **JDK** for our simple Java program, we must then pay attention when including libraries to our Java apps because they can overload the **Heap** memory.
