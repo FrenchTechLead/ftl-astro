@@ -133,7 +133,7 @@ The above program will cause an **OutOfMemoryError** it keeps adding new **Strin
 
 <Separator/>
 
-## Performing a **Heap** Dump with Intellij
+## Performing a Heap Dump with Intellij
 There are several ways to perfom a JVM **Heap Dump** using one of the many tools of the Java eco-system, most of the tools are prety similars, so what’s we’re going to see here with Intellij can be done with any other tool such as VisualVM or JDK Mission control …
 
 > The infinit loop of the following program will allow the java process to be running while we perform the **Heap Dump**.
