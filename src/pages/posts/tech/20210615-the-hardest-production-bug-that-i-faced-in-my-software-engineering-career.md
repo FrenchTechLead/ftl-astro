@@ -39,16 +39,20 @@ By the time you’re reading this article, IE might not exist anymore since Micr
 
 I used to work on a B2B project in an insurance company, one of our clients deploys IE as the default browser in all of its IT infrastructure, so we need to make sure that our websites run on IE as perfectly as it does on other browsers, **recently our client has reported us a serious bug affecting one of our websites, this bug was so exotic that I’ve decided to write a blog post about it.**
 
-**Basically, the bug affects the display of our website by adding multiple lines of the “Not Modified” string followed by some HTTP headers at the beginning of the DOM of our website.**
+Basically, the bug affects the display of our website by adding multiple lines of the **Not Modified** string followed by some HTTP headers at the beginning of the DOM of our website.
 
-## What makes the bug so exotic** 👽
+What makes the bug so exotic 👽
+-----------------------------
 
 *   The bug occurs randomly.
 *   We couldn’t reproduce the bug more than a few times after thousands of tries.
 *   It only happens on IE and on the production environment.
 *   No major changes were pushed to prod before the bug report.
 
+<Separator/>
+
 ## Reproducing the Bug 🐛
+
 This was a hard task because of the randomness of the bug, even after thousands of refreshes on an identical ecosystem of our client, we didn’t manage to reproduce the bug on our machines, what we end-up doing was creating a Selenium program that refreshes the page for us and checks for the **Not Modified** string in the DOM of our page.
 
 ```python
@@ -56,7 +60,7 @@ from selenium import webdriver
 import time
 
 siteUrl="https://example.com/"
-webDriverLocation="C:\\Users\\mecheril\Downloads\\IEDriverServer.exe"
+webDriverLocation="C:\\Users\\FrenchTechLead\\Downloads\\IEDriverServer.exe"
 
 driver=webdriver.Ie(executablepath=webDriverLocation)
 driver.maximize window()
@@ -65,19 +69,20 @@ driver.get(siteUrl)
 shouldContinue=True
 
 while shouldContinue:
-  html = driver.page_source
+  html=driver.page_source
   if "Not Modified" in html:
     print(html, file=open( 'ModifiedNot.html', 'w'))
     driver.close()
-    shouldContinue = False
+    shouldContinue=False
   else:
     driver.refresh()
     time.sleep(2)
 ```
 
-After running this program for some time, we managed to reproduce the bug and export the HTML containing the **“Not Modified”** string.
+After running this program for some time, we managed to reproduce the bug and export the HTML containing the **Not Modified** string.
 
-![](https://miro.medium.com/max/1400/1*DoBX7LLi0KKOvKHUOseUsQ.png)The unexpected “Not Modified” screen.
+![](https://miro.medium.com/max/1400/1*DoBX7LLi0KKOvKHUOseUsQ.png)
+
 
 > Now that we managed to reproduce the bug we need to understand how the heck we end up having this unexpected content at the top of our page.
 
@@ -133,7 +138,7 @@ mecheri-akram.medium.com
 
 **So we know now that our servers are returning some exotic HTTP responses for cached resources, and unlike Chrome and Firefox, IE does not tolerate this protocol violation and acts weirdly by printing the Body of these responses directly onto the DOM.**
 
-So where did the 304 HTTP response got the Body from?
+So where did the 304 HTTP response got her Body from? 🍑
 -----------------------------------------------------
 
 When we GET a resource directly from the Mashup Server we receive a 304 response with no Body content (L.1), but when going through the RP we receive a 304 response that has a Body content(L.2).
