@@ -1,79 +1,32 @@
----
-setup: |
-  import Layout from '@layouts/BlogPost.astro'
-  import Separator from '@comps/Separator.astro'
-  import Image from '@comps/Image.astro'
-  import img2 from '@assets/blog/tech/20211027-java-memory-management/2.avif'
-  import img3 from '@assets/blog/tech/20211027-java-memory-management/3.avif'
-  import img4 from '@assets/blog/tech/20211027-java-memory-management/4.avif'
-  import img5 from '@assets/blog/tech/20211027-java-memory-management/5.avif'
-  import img6 from '@assets/blog/tech/20211027-java-memory-management/6.avif'
-  import img7 from '@assets/blog/tech/20211027-java-memory-management/7.avif'
-  import img8 from '@assets/blog/tech/20211027-java-memory-management/8.avif'
-  import img9 from '@assets/blog/tech/20211027-java-memory-management/9.avif'
-  import img10 from '@assets/blog/tech/20211027-java-memory-management/10.avif'
-title: The Hardest Production Bug That I Faced During My Software Engineering Career.
-publishDate: June 15, 2021
-authorName: '@FrenchTechLead'
-authorSocial: 'https://twitter.com/FrenchTechLead'
-postImageUrl: https://frenchtechlead.com/assets/blog/tech/20210615-the-hardest-production-bug/1.jpg
-postImageLocal: /assets/blog/tech/20211027-java-memory-management/1.avif
-postImageAlt: The Hardest Production Bug That I Faced During My Software Engineering Career.
-postImageWidth: 800
-postImageHeight: 403
-permalink: https://frenchtechlead.com/posts/tech/20210615-the-hardest-production-bug-that-i-faced-in-my-software-engineering-career/
-description: "In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we diagnosed it, and the way we managed to correct it in my company."
-draft: true
----
+The Hardest Production Bug That I Faced During My Software Engineering Career.
+==============================================================================
 
-In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we **diagnosed it**, and the way we managed to **correct it** in my company.
+![](https://miro.medium.com/max/1400/1*DoBX7LLi0KKOvKHUOseUsQ.png)The unexpected “Not Modified” screen.
 
-<Separator/>
+In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we **diagnosed it,** and the way we managed **to correct it** in my company.
 
 By the time you’re reading this article, IE might not exist anymore since Microsoft has announced its abandonment by [June 15, 2022](https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/), so most companies and individuals should work on moving to another browser in order to stay safe, this is good news for web developers because they know that Internet Explorer has always been a pain-in-the-neck when it comes to web development, mostly because of its various CSS and JavaScript incompatibilities, often we can find some polyfills for these kinds of issues; **The issue I’m going to describe in this article isn’t related to JS or CSS, it’s a very weird behavior from IE when it receives an exotic HTTP response, so for once we can’t really say that its IE’s fault.**
 
-<Separator/>
+The context 📃
+--------------
 
-## The context 📃
-
-
-I used to work on a B2B project in an insurance company, one of our clients deploys IE as the default browser in all of its IT infrastructure, so we need to make sure that our websites run on IE as perfectly as it does on other browsers, **recently our client has reported us a serious bug affecting one of our websites, this bug was so exotic that I’ve decided to write a blog post about it.**
+I work on a B2B project in an insurance company, one of our clients deploys IE as the default browser in all of its IT infrastructure, so we need to make sure that our websites run on IE as perfectly as it does on other browsers, **recently our client has reported us a serious bug affecting one of our websites, this bug was so exotic that I’ve decided to write a blog post about it.**
 
 **Basically, the bug affects the display of our website by adding multiple lines of the “Not Modified” string followed by some HTTP headers at the beginning of the DOM of our website.**
 
-## What makes the bug so exotic** 👽
+**What makes the bug so exotic** 👽
 
 *   The bug occurs randomly.
 *   We couldn’t reproduce the bug more than a few times after thousands of tries.
 *   It only happens on IE and on the production environment.
 *   No major changes were pushed to prod before the bug report.
 
-## Reproducing the Bug 🐛
-This was a hard task because of the randomness of the bug, even after thousands of refreshes on an identical ecosystem of our client, we didn’t manage to reproduce the bug on our machines, what we end-up doing was creating a Selenium program that refreshes the page for us and checks for the **Not Modified** string in the DOM of our page.
+Reproducing the Bug 🐛
+----------------------
 
-```python
-from selenium import webdriver
-import time
+This was a hard task because of the randomness of the bug, even after thousands of refreshes on an identical ecosystem of our client, we didn’t manage to reproduce the bug on our machines, what we end-up doing was creating a Selenium program that refreshes the page for us and checks for the **“Not Modified”** string in the DOM of our page.
 
-siteUrl="https://example.com/"
-webDriverLocation="C:\\Users\\mecheril\Downloads\\IEDriverServer.exe"
-
-driver=webdriver.Ie(executablepath=webDriverLocation)
-driver.maximize window()
-driver.get(siteUrl)
-
-shouldContinue=True
-
-while shouldContinue:
-  html = driver.page_source
-  if "Not Modified" in html:
-    print(html, file=open( 'ModifiedNot.html', 'w'))
-    driver.close()
-    shouldContinue = False
-  else:
-    driver.refresh()
-    time.sleep(2)
-```
+![](https://miro.medium.com/max/1400/1*RXCYgmWzgxG4Z_3cK7z4xw.png)Python Script for reproducing the bug
 
 After running this program for some time, we managed to reproduce the bug and export the HTML containing the **“Not Modified”** string.
 
@@ -150,3 +103,35 @@ Final thoughts:
 I took the time to write about this particular experience for many reasons, Firstly, I hope that people facing similar Bugs would find help here, Then for my fellow web developers, I want to point out the importance of knowing your apps on all of its layers, don’t be an exclusive front-end or back-end developer, otherwise, you won’t be able to diagnose some serious bugs like the one described on this article, Finally, to product managers out there, please stop using/supporting IE :)
 
 **That’s it**, if you find this article interesting don’t hesitate to let me a comment and/or hit the 👏 button below.
+
+References:
+-----------
+
+[
+
+304 Not Modified
+----------------
+
+### A conditional GET or HEAD request has been received and would have resulted in a 200 OK response if it were not for the…
+
+httpstatuses.com
+
+](https://httpstatuses.com/304)[
+
+55453 - AJP send Body with Status 304
+-------------------------------------
+
+### Edit description
+
+bz.apache.org
+
+](https://bz.apache.org/bugzilla/show_bug.cgi?id=55453)[
+
+The future of Internet Explorer on Windows 10 is in Microsoft Edge
+------------------------------------------------------------------
+
+### Over the last year, you may have noticed our movement away from Internet Explorer ("IE") support, such as an…
+
+blogs.windows.com
+
+](https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/)
