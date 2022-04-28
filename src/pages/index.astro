@@ -6,7 +6,7 @@ import Styles from '@comps/Styles.astro';
 import Image from '@comps/Image.astro';
 import BlogPostPreview from '@comps/BlogPostPreview.astro';
 import akramPic from '@assets/blog/akram.avif';
-
+const DEV = await import.meta.env.DEV;
 
 const title = 'Hi there 👋 Glad to see you here.';
 const description = 'My Name  is Akram and I am a Technical Leader living in Paris.'
@@ -38,7 +38,7 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 			
 			<section id="latest-posts" aria-label="Blog post list">
 			    <h2>Latest posts 🔥</h2>
-				{techPosts./*filter(p=> !p.frontmatter.draft).reverse().*/map((p) => <BlogPostPreview post={p.frontmatter as any} url={p.url} />)}
+				{techPosts.filter(p=> DEV || !p.frontmatter.draft ).reverse().map((p) => <BlogPostPreview post={p.frontmatter as any} url={p.url} />)}
 			</section>
 		</main>
 		<BlogFooter/>

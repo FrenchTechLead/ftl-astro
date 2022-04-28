@@ -3,28 +3,24 @@ setup: |
   import Layout from '@layouts/BlogPost.astro'
   import Separator from '@comps/Separator.astro'
   import Image from '@comps/Image.astro'
-  import img2 from '@assets/blog/tech/20211027-java-memory-management/2.avif'
-  import img3 from '@assets/blog/tech/20211027-java-memory-management/3.avif'
-  import img4 from '@assets/blog/tech/20211027-java-memory-management/4.avif'
-  import img5 from '@assets/blog/tech/20211027-java-memory-management/5.avif'
-  import img6 from '@assets/blog/tech/20211027-java-memory-management/6.avif'
-  import img7 from '@assets/blog/tech/20211027-java-memory-management/7.avif'
-  import img8 from '@assets/blog/tech/20211027-java-memory-management/8.avif'
-  import img9 from '@assets/blog/tech/20211027-java-memory-management/9.avif'
-  import img10 from '@assets/blog/tech/20211027-java-memory-management/10.avif'
+  import img1 from '@assets/blog/tech/20210615-the-hardest-production-bug/1.avif'
+  import img2 from '@assets/blog/tech/20210615-the-hardest-production-bug/2.avif'
+  import img3 from '@assets/blog/tech/20210615-the-hardest-production-bug/3.avif'
+  import img4 from '@assets/blog/tech/20210615-the-hardest-production-bug/4.avif'
 title: The Hardest Production Bug That I Faced During My Software Engineering Career.
 publishDate: June 15, 2021
 authorName: '@FrenchTechLead'
 authorSocial: 'https://twitter.com/FrenchTechLead'
-postImageUrl: https://frenchtechlead.com/assets/blog/tech/20210615-the-hardest-production-bug/1.jpg
-postImageLocal: /assets/blog/tech/20211027-java-memory-management/1.avif
+postImageUrl: https://frenchtechlead.com/assets/blog/tech/20210615-the-hardest-production-bug/0.jpg
 postImageAlt: The Hardest Production Bug That I Faced During My Software Engineering Career.
 postImageWidth: 800
 postImageHeight: 403
 permalink: https://frenchtechlead.com/posts/tech/20210615-the-hardest-production-bug-that-i-faced-in-my-software-engineering-career/
-description: "In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we diagnosed it, and the way we managed to correct it in my company."
-draft: true
+description: "In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we diagnosed it, and the way we managed to correct it in my company, the bug is about Not Modified printed on the screen of IE."
+draft: false
 ---
+
+<div style="font-size:200px; text-align:center;">🤯</div>
 
 In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we **diagnosed it**, and the way we managed to **correct it** in my company.
 
@@ -41,7 +37,7 @@ I used to work on a B2B project in an insurance company, one of our clients depl
 
 Basically, the bug affects the display of our website by adding multiple lines of the **Not Modified** string followed by some HTTP headers at the beginning of the DOM of our website.
 
-What makes the bug so exotic 👽
+What makes the bug so exotic 🥝
 -----------------------------
 
 *   The bug occurs randomly.
@@ -81,21 +77,21 @@ while shouldContinue:
 
 After running this program for some time, we managed to reproduce the bug and export the HTML containing the **Not Modified** string.
 
-![](https://miro.medium.com/max/1400/1*DoBX7LLi0KKOvKHUOseUsQ.png)
+<Image w="883" h="661" src={img1} t="Not Modified" />
 
 
 > Now that we managed to reproduce the bug we need to understand how the heck we end up having this unexpected content at the top of our page.
 
 For this purpose, we had to look at the architecture of the app from an infrastructure perspective:
 
-![](https://miro.medium.com/max/1400/1*D9iJvc3_8KQm3OpBCuJP6A.png)The Infrastructure Architecture of the app.
+<Image w="883" h="661" src={img2} t="Not Modified" />
 
-From the following architecture, we identified some potential guilty components and had some assumptions.
+> From the following architecture, we identified some potential guilty components and had some assumptions.
 
 **_What components can edit the HTML rendered pages?_**
 
 1.  The Mashup server is responsible for Server-Side integration, it acts directly on the HTML rendering, it might have a bug when retrieving cached assets from the CMS, so we tried to disable cache on the CMS server but the bug was still there.
-2.  Javascript can edit the HTML on the client-side after sending some XHR requests, we analyzed the XHR requests one by one, but none of them had a 304 response code, but **we observed that the “Not Modified” string was not part of the first paint content**, so we had a strong belief that Javascript was responsible for the bug at this point (later we knew that we were wrong ).
+2.  Javascript can edit the HTML on the client-side after sending some XHR requests, we analyzed the XHR requests one by one, but none of them had a 304 response code, but we observed that the **Not Modified** string was not part of the **first paint content**, so we had a strong belief that Javascript was responsible for the bug at this point (later we knew that we were wrong ).
 
 Getting Deeper into debugging 🧿
 --------------------------------
@@ -108,42 +104,43 @@ We had a strong belief that some JS was responsible for printing these weird hea
 
 Unlike recent web browsers like Chrome and Firefox, IE doesn’t have some decent debugging capabilities, and the network tab on IE misled us in our investigations, let me explain how :
 
-![](https://miro.medium.com/max/1400/1*lz8kAdNssyDorLGBOXg4xw.png)IE — Network tab
+<Image w="1400" h="392" src={img3} t="Chrome's Network Tab" />
 
-The misleading thing about the network tab here is the fact that an HTTP 304 response is associated with a Body content, there is no indication that the Body is retrieved from the local cache and not from the actual response(that should have no Body content associated to it), so if you don’t really pay attention, you get easily into thinking that the Body has been returned from the server with the 304 response.
+The misleading thing about the network tab here is the fact that an **HTTP 304** response is associated with a Body content, there is no indication that the Body is retrieved from the local cache and not from the actual response(that should have no Body content associated to it), so if you don’t really pay attention, you get easily into thinking that the Body has been returned from the server with the **304** response.
 
-We decided to view how a single 304 resource is received from our backend, for that, we used a very interesting program called Fiddler which is a debugging proxy server tool used to log, inspect, and alter HTTP and even HTTPS traffic between a web client and a web server.
+We decided to view how a single **304** resource is received from our backend, for that, we used a very interesting program called **Fiddler** which is a **debugging proxy server** tool used to log, inspect, and alter **HTTP** and even **HTTPS** traffic between a web client and a web server.
 
-![](https://miro.medium.com/max/1400/1*4XuTHDlzXJ4v9i5UemnbhA.png)HTTP 304 response with a Body!
+<Image w="1400" h="392" src={img4} t="HTTP response in Fiddler" />
 
-Bingo!
-------
+Bingo  🎉
+-------
 
-We have found a serious lead by using Fiddler, we noticed that our 304 response has a Body content (12 bytes) which is a violation of the HTTP protocol.
+We have found a serious lead by using **Fiddler**, we noticed that our **304** response has a Body content **(12 bytes)** which is a violation of the **HTTP protocol**.
 
 > A 304 response [cannot contain a message-body](https://httpstatuses.com/304); it is always terminated by the first empty line after the header fields.
 
-Check out the following article to learn HTTP the right way :)
+<Separator/>
 
-[
+> Check out the following article to learn HTTP the right way ✅
+> [Before Learning Rest / Soap / GraphQL / You Need To Understand HTTP !](https://mecheri-akram.medium.com/before-learning-rest-soap-graphql-you-need-to-understand-http-9eb80de6cfbf)
 
-Before Learning Rest / Soap / GraphQL / You Need To Understand HTTP !
----------------------------------------------------------------------
+<Separator/>
 
-### HTTP stands for Hypertext Transfer Protocol, initially created for web browser/server communication, it has many more…
 
-mecheri-akram.medium.com
 
-](https://mecheri-akram.medium.com/before-learning-rest-soap-graphql-you-need-to-understand-http-9eb80de6cfbf)
 
-**So we know now that our servers are returning some exotic HTTP responses for cached resources, and unlike Chrome and Firefox, IE does not tolerate this protocol violation and acts weirdly by printing the Body of these responses directly onto the DOM.**
+> So we know now that our servers are returning some exotic HTTP responses for cached resources, and unlike Chrome and Firefox, IE does not tolerate this protocol violation and acts weirdly by printing the Body of these responses directly onto the DOM.
 
 So where did the 304 HTTP response got her Body from? 🍑
 -----------------------------------------------------
 
-When we GET a resource directly from the Mashup Server we receive a 304 response with no Body content (L.1), but when going through the RP we receive a 304 response that has a Body content(L.2).
+When we **GET** a resource directly from the Mashup Server we receive a **304** response with no Body content **(L.1)**, but when going through the **RP** we receive a **304** response that has a **12 bytes** Body content **(L.2)**.
+``` sh
+~ tail -F /usr/tomcat/logs/localhost access. log
+  [05/03/21:12:23:39] "GET /files/live/modules/eep-templates/1.0/templates/files/themes/eep-theme/images/trame.png HTTP/1.1" 304 -
+  [05/03/21:12:23:53] "GET /files/live/modules/eep-templates/1.0/templates/files/themes/eep-theme/images/trame.png HTTP/1.1" 304 12
+```
 
-![](https://miro.medium.com/max/1400/1*hkZWk43fnCKtdWNQz25Pdw.png)Tomcat access log
 
 The RP connects to the Mashup Server through [AJP](https://en.wikipedia.org/wiki/Apache_JServ_Protocol) Protocol, we did some research about the AJP connector of our Tomcat server and it turned out that there is indeed a [problem with this connector](https://bz.apache.org/bugzilla/show_bug.cgi?id=55453).
 

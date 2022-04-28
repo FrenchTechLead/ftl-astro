@@ -23,7 +23,7 @@ postImageWidth, postImageHeight
 	<body>
 		<main>
 			<BlogPost {title} {authorName} {publishDate} {authorSocial} >
-				<Image w={postImageWidth} h={postImageHeight}  src={postImageLocal} t={postImageAlt} />
+				{ postImageLocal && <Image w={postImageWidth} h={postImageHeight}  src={postImageLocal} t={postImageAlt} /> }
 				<slot />
 			</BlogPost>
 		</main>

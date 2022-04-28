@@ -10,6 +10,7 @@
 	 --color-red: #f44250;
 	 --color-purple: #d83bd2;
 	 --color-black: #121212;
+	 --color-black-foreground: #1e1e1e;
 }
  html {
 	 background: var(--color-black);
@@ -154,9 +155,18 @@ body {
 
 blockquote{
 	border-left: var(--color-purple) 3px solid;
-    padding-left: 6px;
+    padding:15px;
 	font-style: italic;
 	margin: 0px;
+	background-color: var(--color-black-foreground);
+}
+
+li{
+	margin-bottom: 15px;
+}
+li::marker{
+	color: var(--color-purple);
+	font-weight: 600;
 }
  .separator {
 	 text-align: center;
