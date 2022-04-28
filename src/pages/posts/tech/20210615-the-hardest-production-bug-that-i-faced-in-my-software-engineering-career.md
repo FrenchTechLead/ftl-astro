@@ -8,6 +8,7 @@ setup: |
   import img3 from '@assets/blog/tech/20210615-the-hardest-production-bug/3.avif'
   import img4 from '@assets/blog/tech/20210615-the-hardest-production-bug/4.avif'
 title: The Hardest Production Bug That I Faced During My Software Engineering Career.
+metaTitle: The Hardest Production Bug That I Faced During My SE Career
 publishDate: June 15, 2021
 authorName: '@FrenchTechLead'
 authorSocial: 'https://twitter.com/FrenchTechLead'
@@ -16,8 +17,7 @@ postImageAlt: The Hardest Production Bug That I Faced During My Software Enginee
 postImageWidth: 800
 postImageHeight: 403
 permalink: https://frenchtechlead.com/posts/tech/20210615-the-hardest-production-bug-that-i-faced-in-my-software-engineering-career/
-description: "In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we diagnosed it, and the way we managed to correct it in my company, the bug is about Not Modified printed on the screen of IE."
-draft: false
+description: "In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we diagnosed it, and correct it in my company."
 ---
 
 <div style="font-size:200px; text-align:center;">🤯</div>

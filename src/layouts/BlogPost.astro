@@ -7,7 +7,7 @@ import BlogPost from '@comps/BlogPost.astro';
 import Image from '@comps/Image.astro';
 
 
-const { title, description, publishDate, 
+const { title, metaTitle, description, publishDate, 
 authorName, authorSocial, permalink, lang, 
 postImageUrl, postImageLocal, postImageAlt,
 postImageWidth, postImageHeight
@@ -16,7 +16,7 @@ postImageWidth, postImageHeight
 ---
 <html lang={lang || 'en'}>
 	<head>
-		<MetaHead {title} {description} {permalink} {postImageUrl} />
+		<MetaHead {title} {metaTitle} {description} {permalink} {postImageUrl} />
 		<Styles/>
 	</head>
 	<BlogHeader />
