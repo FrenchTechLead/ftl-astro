@@ -1,32 +1,35 @@
 ---
-const { title, metaTitle, description, permalink, postImageUrl } = Astro.props;
+export interface Props {
+  title: string;
+  metaTitle: string;
+  description: string;
+  permalink: string;
+  postImageUrl: string;
+  keywords: string[];
+  lang: string;
+  author: string;
+}
+const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, author } = Astro.props as Props;
 ---
-
-<!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="width=device-width" />
-
+<meta name="language" content={lang}>
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-
-<!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={metaTitle || title} />
 <meta name="description" content={description} />
-
-<!-- Open Graph / Facebook -->
+<meta name="keywords" content={keywords.join(', ')}>
+<meta name="robots" content="index, follow">
+<meta name="revisit-after" content="2 days">
+<meta name="author" content={author}>
 <meta property="og:type" content="website" />
 <meta property="og:url" content={permalink} />
 <meta property="og:title" content={metaTitle || title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={postImageUrl} />
-
-<!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={permalink} />
 <meta property="twitter:title" content={metaTitle || title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={postImageUrl}  />
-
-<!-- Fonts -->
-

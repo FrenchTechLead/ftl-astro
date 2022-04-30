@@ -16,6 +16,13 @@ postImageUrl: https://frenchtechlead.com/assets/blog/tech/20210615-the-hardest-p
 postImageAlt: The Hardest Production Bug That I Faced During My Software Engineering Career.
 postImageWidth: 800
 postImageHeight: 403
+keywords:
+  - Debugging
+  - Web Developmenet
+  - IE
+  - Internet Explorer
+  - Not Modified
+  - HTTP 304
 permalink: https://frenchtechlead.com/posts/tech/20210615-the-hardest-production-bug-that-i-faced-in-my-software-engineering-career/
 description: "In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we diagnosed it, and correct it in my company."
 ---

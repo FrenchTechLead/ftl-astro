@@ -10,13 +10,13 @@ import Image from '@comps/Image.astro';
 const { title, metaTitle, description, publishDate, 
 authorName, authorSocial, permalink, lang, 
 postImageUrl, postImageLocal, postImageAlt,
-postImageWidth, postImageHeight
+postImageWidth, postImageHeight, keywords, author
 } = Astro.props.content;
 
 ---
 <html lang={lang || 'en'}>
 	<head>
-		<MetaHead {title} {metaTitle} {description} {permalink} {postImageUrl} />
+		<MetaHead {title} {metaTitle} {description} {permalink} {postImageUrl} {keywords} {author} />
 		<Styles/>
 	</head>
 	<BlogHeader />

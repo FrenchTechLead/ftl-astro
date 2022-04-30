@@ -16,5 +16,8 @@
     "astro": "^1.0.0-beta.12",
     "medium-to-markdown": "^0.0.3",
     "scss": "^0.2.4"
+  },
+  "dependencies": {
+    "html-minifier": "^4.0.0"
   }
 }

@@ -21,6 +21,10 @@ postImageLocal: /assets/blog/tech/20211027-java-memory-management/1.avif
 postImageAlt: 'Java Memory Management'
 postImageWidth: 800
 postImageHeight: 403
+keywords:
+  - java
+  - jvm
+  - java memory management
 permalink: https://frenchtechlead.com/posts/tech/20211027-java-memory-management/
 description: "In this short article, I’ll try to briefly explain how Java manages Random Access Memory (RAM), explaining the basics of garbage collecting, the two main Memory types in Java, Memory Leaks: how to diagnose them and how to ensure that your application handles the memory the right way."
 ---
