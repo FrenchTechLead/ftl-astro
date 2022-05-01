@@ -46,6 +46,12 @@
   main{
     padding: 0% 6% 0% 6%;
   }
+  #landing-2 > h2:nth-child(2){
+	margin-left: 20%;
+  }
+    #landing-2 > h2:nth-child(3){
+	margin-left: 40%;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -115,12 +121,18 @@ body {
 }
 /* index css */
 
-
+#landing-2{
+	margin-top: 50px;
+}
+#landing-2 h2{
+	color: var(--color-white);
+	margin-top: 80px;
+}
 #latest-posts {
    margin-top: 50px;
 }
  #latest-posts h2{
-	 color: var(--color-white);
+	color: var(--color-white);
    	text-shadow: 0 0 30px var(--color-blue);
 } 
  #latest-posts article {
@@ -187,6 +199,27 @@ li::marker{
  .astro-code {
 	 padding: 10px;
 	 box-shadow: 0 0 5px var(--color-green);
+}
+
+#mce-EMAIL{
+    width: 100%;
+    max-width: 500px;
+    height: 35px;
+}
+
+#mc_embed_signup{
+	background-color: var(--color-black-foreground);
+	padding:25px;
+	margin-top:25px;
+}
+#mc-embedded-subscribe{
+	color: var(--color-white);
+	background-color: var(--color-blue);
+	padding:15px 32px 15px 32px;
+	margin-top:25px;
+	font-weight: 800;
+	border: none;
+	cursor: pointer;
 }
  
 </style>

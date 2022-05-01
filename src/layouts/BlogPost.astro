@@ -5,7 +5,8 @@ import Styles from '@comps/Styles.astro';
 import BlogFooter from '@comps/BlogFooter.astro';
 import BlogPost from '@comps/BlogPost.astro';
 import Image from '@comps/Image.astro';
-
+import Separator from '@comps/Separator.astro'
+import NewsLetter from '@comps/NewsLetter.astro'
 
 const { title, metaTitle, description, publishDate, 
 authorName, authorSocial, permalink, lang, 
@@ -26,6 +27,10 @@ postImageWidth, postImageHeight, keywords, author
 				{ postImageLocal && <Image w={postImageWidth} h={postImageHeight}  src={postImageLocal} t={postImageAlt} /> }
 				<slot />
 			</BlogPost>
+
+		<Separator/>
+
+		<NewsLetter/>
 		</main>
 		<BlogFooter/>
 	</body>

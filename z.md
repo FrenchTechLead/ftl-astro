@@ -97,7 +97,7 @@ The RP connects to the Mashup Server through [AJP](https://en.wikipedia.org/wiki
 
 The bug was fixed on Tomcat version 7.0.43 onwards, so we just had to upgrade the version of our Tomcat server to correct this issue.
 
-Final thoughts:
+Final thoughts,
 ---------------
 
 I took the time to write about this particular experience for many reasons, Firstly, I hope that people facing similar Bugs would find help here, Then for my fellow web developers, I want to point out the importance of knowing your apps on all of its layers, don’t be an exclusive front-end or back-end developer, otherwise, you won’t be able to diagnose some serious bugs like the one described on this article, Finally, to product managers out there, please stop using/supporting IE :)

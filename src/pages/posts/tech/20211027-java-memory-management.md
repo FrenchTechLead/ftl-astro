@@ -249,5 +249,7 @@ This will make sure that the dependency is added to the classpath at the conveni
 
 <Separator/>
 
+Final thoughts,
+----
 **That’s it**, if you find this article interesting don’t hesitate to let me a comment and/or hit the 👏 button below.
 
