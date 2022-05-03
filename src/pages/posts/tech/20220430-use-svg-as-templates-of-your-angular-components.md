@@ -45,7 +45,7 @@ Actually, before **SVG** there was no way to create vercotirial elements directl
 So **SVG** was born, and it was the first vectorial format to be supported by the Web, and we can say that thanks to SVG, a tremendous amount of the Web has changed, many websites are are based on dvg manippulation.
 One great example is **draw.io**, that it is a free and open-source online drawing tool that allows you to create diagrams and share them with others, if you try to inspect the source code of **draw.io**, you will notice that it is heavily based on **SVG**.
 
-<Image w="1696" h="890" src={img2} t="draw.io is SVG based" />
+<Image w="1696" h="890" src={img2} t="draw.io is SVG based" solo="true" />
 
 Why using SVG as Angular template?
 ----------------

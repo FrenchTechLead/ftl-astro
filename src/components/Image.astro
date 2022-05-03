@@ -6,7 +6,7 @@ const srcWebp = src.replace('.avif', '.webp');
 ---
   {
     solo ?
-      <img {id} width={w} height={h} src={srcJPG} alt={t} title={t} loading="lazy" />
+      <img {id} width={w} height={h} src={src} alt={t} title={t} loading="lazy" />
       :
       <picture >
         <source type="image/avif" srcset={src} />
