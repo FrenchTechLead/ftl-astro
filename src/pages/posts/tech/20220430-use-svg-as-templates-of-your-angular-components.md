@@ -5,6 +5,7 @@ setup: |
   import Image from '@comps/Image.astro'
   import NewsLetter from '@comps/NewsLetter.astro'
   import img1 from '@assets/blog/tech/20220430-svg-as-angular-template/1.avif'
+  import img2 from '@assets/blog/tech/20220430-svg-as-angular-template/2.gif'
 title: Use SVG as Angular Template
 publishDate: April 30, 2022
 authorName: '@FrenchTechLead'
@@ -20,7 +21,7 @@ keywords:
   - SVG
   - Figma
 permalink: https://frenchtechlead.com/posts/tech/20220430-use-svg-as-templates-of-your-angular-components/
-description: 'This article we explain how to use Angular SVG Components to create a dynamic diagrams, we discuss the pros and cons of this approach and we also give some tips to help you to get started whith Angular SVG Components.'
+description: 'This article we explain how to use Angular SVG Components to create a dynamic diagrams, we discuss the pros and cons of this approache and we also give some tips to help you to get started whith Angular SVG Components.'
 draft: false
 ---
 
@@ -37,10 +38,19 @@ Using **SVG** based templates in **Angular** supercharges the **SVG** images by 
 
 <Separator/>
 
+The Secret Origin of SVG 
+----------------
+In the early days of the Web, there was an explosion of different formats and extensions to **HTML**. From early on, it was clear that a vector graphic format for the Web would be useful, but it was not until the advent of **SVG** in the early 2000s that the Web was finally able to support it.
+Actually, before **SVG** there was no way to create vercotirial elements directly on the DOM tree, we had to use some plugins such as **Flash** to support them.
+So **SVG** was born, and it was the first vectorial format to be supported by the Web, and we can say that thanks to SVG, a tremendous amount of the Web has changed, many websites are are based on dvg manippulation.
+One great example is **draw.io**, that it is a free and open-source online drawing tool that allows you to create diagrams and share them with others, if you try to inspect the source code of **draw.io**, you will notice that it is heavily based on **SVG**.
+
+<Image w="1696" h="890" src={img2} t="draw.io is SVG based" />
+
 Why using SVG as Angular template?
 ----------------
-In my squad, we didn't think of using **SVG** to represent the **network diagram** at first because we didn't know it was possible to dynamically change the **network diagram** based on the **network state**, so we tried at first to represent the **network diagram** using some javascript libraries but the result wasn't satisfying for our stakehoders as it wasn't complitly the same as represented on the **Figma** Mockup, the problem  was that most libraries automatically calculate the positions of the elements of the network and it's not possible to have the same positions as on the **Figma** Mockup.  
-One of the stakehoders asked us a simple question :
+In my squad, we didn't think of using **SVG** to represent the **network diagram** at first because we didn't know it was possible to dynamically change the **network diagram** based on the **network state**, so we tried at first to represent the **network diagram** using some javascript libraries but the result wasn't satisfying for our stakeholders as it wasn't complitly the same as represented on the **Figma** Mockup, the problem  was that most libraries automatically calculate the positions of the elements of the network and it's not possible to have the same positions as on the **Figma** Mockup.  
+One of the stakeholders asked us a simple question :
 > Can't you just take an image of the network diagram and overlay the data on top of it?  
 
 Well i thought it was a brilliant idea 💡  
@@ -51,7 +61,7 @@ The actual **network diagram** is a property of my previous company, so I'll use
 
 Example of an Angular SVG Template
 ----------------
-To illustrate the idea i'll start by creating a simple **SVG** image on **Figma** and export it as **.svg** file. 
+To illustrate the idea I'll start by creating a simple **SVG** image on **Figma** and export it as **.svg** file. 
 <Image w="800" h="660" t="Figma mockup export to SVG" src={img1}/>
 The corresponding Dom tree is as follows:
 ```xml
@@ -198,7 +208,7 @@ You can have many advantages when using Angular SVG Components instead of a diag
 Cons of using Angular SVG Components
 ----
 On the other hand, you can have some disadvantages when using Angular SVG Components.
-1. The maintance of the template is more difficult.
+1. The maintenance of the template is more difficult.
 2. Little changes on the mockup might cause big ones on the template (No automatic calculations are done on the rendering phase to position the elements).
 3. You create a dependency on the UI team that provides the mockup.
 4. You need to mannually handle zoom events. (this is covred by JS diagram libraries out of the box).
@@ -209,5 +219,5 @@ On the other hand, you can have some disadvantages when using Angular SVG Compon
 
 Final thoughts,
 ----
-In this article we explained how to use Angular SVG Components to create a dynamic diagram, we discussed the pros and cons of this approach and we also gave some tips to help you to get started.  We hope that you will find this article useful and that you will be able to create your own diagrams with Angular SVG Components.  
+In this article we explained how to use Angular SVG Components to create a dynamic diagram, we discussed the pros and cons of this approach, and we also gave some tips to help you to get started.  We hope that you will find this article useful and that you will be able to create your own diagrams with Angular SVG Components.  
 **That’s it**, if you find this article interesting don’t hesitate to let me a comment and/or hit the 👏 button below.
