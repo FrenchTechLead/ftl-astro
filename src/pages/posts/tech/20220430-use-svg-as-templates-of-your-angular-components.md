@@ -19,7 +19,7 @@ keywords:
   - Templates
   - SVG
   - Figma
-permalink: https://frenchtechlead.com/posts/tech/20211027-java-memory-management/
+permalink: https://frenchtechlead.com/posts/tech/20220430-use-svg-as-templates-of-your-angular-components/
 description: 'This article we explain how to use Angular SVG Components to create a dynamic diagrams, we discuss the pros and cons of this approach and we also give some tips to help you to get started whith Angular SVG Components.'
 draft: false
 ---
