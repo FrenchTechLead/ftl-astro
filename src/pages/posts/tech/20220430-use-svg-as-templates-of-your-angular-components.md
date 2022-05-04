@@ -76,7 +76,7 @@ The corresponding Dom tree is as follows:
 From the above Dom tree, we observe that :
 - The **SVG** image has a 400x400 pixels frame.
 - A white rectangle is placed in the center of the image.
-- Two circles are placed in the top-left and bottom-right corners of the image having a red and green fill.
+- Two circles are placed in the top-left and bottom-right corners of the image having a red and a green fill.
 - A black stroke (`<path>`) is placed between the two circles.
 > You don't even need to be familiar with **SVG** to understand the Dom tree 😉  
 
