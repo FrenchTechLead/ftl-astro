@@ -33,7 +33,8 @@ One of the least known features of **Angular** is its capability to handle **SVG
 SVG templates in Angular
 ----------------
 
-> Just like **HTML**, **SVG** consists of a **DOM** tree of elements that can be styled, scripted and animated using **CSS** and **Javascript**, **SVG** elements can dispatch **Javascript** events in response of user interaction.  by combining **SVG** and **Angular**, you can easily enhance mobile and web applications with interactive controls and states.  
+> Just like **HTML**, **SVG** consists of a **DOM** tree of elements that can be styled, scripted and animated using **CSS** and **Javascript**, **SVG** elements can dispatch **Javascript** events in response of user interactions.  
+By combining **SVG** and **Angular**, you can easily enhance mobile and web applications with interactive controls and states.  
 Using **SVG** based templates in **Angular** supercharges the **SVG** images by the power of **Angular** framework, all the cool functionalities such as **property binding**, **event binding**, **directives** ,**inputs and outputs** and so on, make **SVG** images interactive, dynamic, responsive and strongly typed !
 
 <Separator/>
@@ -42,14 +43,14 @@ The Secret Origin of SVG
 ----------------
 In the early days of the Web, there was an explosion of different formats and extensions to **HTML**. From early on, it was clear that a vector graphic format for the Web would be useful, but it was not until the advent of **SVG** in the early 2000s that the Web was finally able to support it.
 Actually, before **SVG** there was no way to create vercotirial elements directly on the DOM tree, we had to use some plugins such as **Flash** to support them.
-So **SVG** was born, and it was the first vectorial format to be supported by the Web, and we can say that thanks to SVG, a tremendous amount of the Web has changed, many websites are are based on dvg manippulation.
-One great example is **draw.io**, that it is a free and open-source online drawing tool that allows you to create diagrams and share them with others, if you try to inspect the source code of **draw.io**, you will notice that it is heavily based on **SVG**.
+So **SVG** was born, and it was the first vectorial format to be natively supported by the Web, and we can say that thanks to **SVG**, a tremendous amount of the Web has changed, Nowdays, many websites are based on **SVG**** manippulations.
+One great example is **draw.io**, that it is a free and **open-source** online drawing tool that allows you to create diagrams and share them with others, if you try to inspect the source code of **draw.io**, you will notice that it is heavily based on **SVG**.
 
 <Image w="1696" h="890" src={img2} t="draw.io is SVG based" solo="true" />
 
 Why using SVG as Angular template?
 ----------------
-In my squad, we didn't think of using **SVG** to represent the **network diagram** at first because we didn't know it was possible to dynamically change the **network diagram** based on the **network state**, so we tried at first to represent the **network diagram** using some javascript libraries but the result wasn't satisfying for our stakeholders as it wasn't complitly the same as represented on the **Figma** Mockup, the problem  was that most libraries automatically calculate the positions of the elements of the network and it's not possible to have the same positions as on the **Figma** Mockup.  
+In my squad, we didn't think of using **SVG** to represent the **network diagram** at first because we didn't know it was possible to dynamically change the **network diagram** based on the **network state**, so we tried at first to represent the **network diagram** using some javascript libraries but the result wasn't satisfying for our stakeholders as it wasn't completely the same as represented on the **Figma** Mockup, the problem  was that most libraries automatically calculate the positions of the elements of the network and it's not possible to have the same positions as on the **Figma** Mockup.  
 One of the stakeholders asked us a simple question :
 > Can't you just take an image of the network diagram and overlay the data on top of it?  
 
@@ -72,7 +73,13 @@ The corresponding Dom tree is as follows:
   <path d="M313.993 320.5C314.822 320.504 315.496 319.835 315.5 319.007L315.559 305.507C315.563 304.678 314.894 304.004 314.065 304C313.237 303.997 312.563 304.665 312.559 305.494L312.507 317.493L300.507 317.441C299.678 317.437 299.004 318.106 299 318.934C298.997 319.763 299.665 320.437 300.494 320.441L313.993 320.5ZM84.9347 90.056L312.935 320.056L315.065 317.944L87.0653 87.944L84.9347 90.056Z" fill="black"/>
 </svg>
 ```
-As you can see, the **SVG** image is a 400x400 pixels frame containing a **circle** with a **green** fill, and a **red** circle with a **black** stroke, you don't even need to be familiar with **SVG** to understand the Dom tree 😉  
+From the above Dom tree, we observe that :
+- The **SVG** image has a 400x400 pixels frame.
+- A white rectangle is placed in the center of the image.
+- Two circles are placed in the top-left and bottom-right corners of the image having a red and green fill.
+- A black stroke (`<path>`) is placed between the two circles.
+> You don't even need to be familiar with **SVG** to understand the Dom tree 😉  
+
 So let's now play with this image and see how it can be used in **Angular**. 
 
 First, lets create an Angular component that use the above **SVG** image as a template.
