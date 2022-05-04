@@ -1,12 +1,13 @@
 ---
 const props  = Astro.props ;
 ---
-
-<article >
-	<a href={props.url}>
-	<header>
-		<h1 >{props.post.title}</h1>
-	</header>
-	<p>{props.post.description}</p>
-	</a>
-</article>
+<a href={props.url}>
+	<article >
+		
+		<header>
+			<h1 >{props.post.title}</h1>
+		</header>
+		<p>{props.post.description}</p>
+		
+	</article>
+</a>
