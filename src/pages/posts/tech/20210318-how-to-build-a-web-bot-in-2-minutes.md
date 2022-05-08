@@ -32,9 +32,9 @@ There is a ton of repetitive tasks that we can automate thanks to bots, in this 
 
 Chrome web driver makes it possible to manage the browser using any programming language, here we will use Python.
 
-*   First, download the webDriver [here](https://chromedriver.chromium.org/downloads).
+*   First, [download the webDriver.](https://chromedriver.chromium.org/downloads)
 *   Second, unzip the chromedriver.zip file and copy the webDriver to a specified location: `cp chromeDriver /Library/webdrivers/chromeDriver`
-*   Third, add the location of the webDriver to the PATH env variable :
+*   Third, add the location of the webDriver to the `PATH` env variable :
 
 ```
 export PATH="$PATH:/Library/webdrivers/"
