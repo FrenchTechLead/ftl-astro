@@ -153,13 +153,13 @@ class Calculator {
 
     public static void main(String[] args) {
 
-        List < String > entries = new ArrayList < > ();
+        List <String> entries = new ArrayList <>();
         entries.add("3 + 5");
         entries.add("4 - 1");
         entries.add("6 / 2");
         entries.add("3 * 2");
 
-        entries.forEach(entry - > {
+        entries.forEach(entry -> {
 
             String[] splited = entry.split("\\+|\\-|\\/|\\*");
             int left = new Integer(splited[0].trim());
@@ -206,13 +206,13 @@ _Let’s see how :_
 class Calculator {
     public static void main(String[] args) {
 
-        List < String > entries = new ArrayList < > ();
+        List <String> entries = new ArrayList <>();
         entries.add("3 + 5");
         entries.add("4 - 1");
         entries.add("6 / 2");
         entries.add("3 * 2");
 
-        entries.forEach(entry - > {
+        entries.forEach(entry -> {
 
             String[] splited = entry.split("\\+|\\-|\\/|\\*");
             int left = new Integer(splited[0].trim());
@@ -233,10 +233,10 @@ class Calculator {
 }
 
 enum Operation implements IntBinaryOperator {
-    PLUS("+", (l, r) - > l + r),
-    MINUS("-", (l, r) - > l - r),
-    MULTIPLY("*", (l, r) - > l * r),
-    DIVIDE("/", (l, r) - > l / r);
+    PLUS("+", (l, r) -> l + r),
+    MINUS("-", (l, r) -> l - r),
+    MULTIPLY("*", (l, r) -> l * r),
+    DIVIDE("/", (l, r) -> l / r);
 
     private final String symbol;
     private final IntBinaryOperator binaryOperator;
@@ -254,7 +254,6 @@ enum Operation implements IntBinaryOperator {
     public int applyAsInt(int left, int right) {
         return binaryOperator.applyAsInt(left, right);
     }
-
 }
 ```
 
