@@ -11,6 +11,7 @@
 	 --color-purple: #d83bd2;
 	 --color-black: #121212;
 	 --color-black-foreground: #1e1e1e;
+	 --color-black-0: #000000;
 }
  html {
 	 background: var(--color-black);
@@ -233,5 +234,15 @@ li::marker{
 	cursor: pointer;
 	box-shadow: 0 0 35px var(--color-purple);
 }
- 
+
+code {
+	color: var(--color-blue);
+	background-color: var(--color-black-0);
+	padding: 2px;
+	font-style: normal;
+	font-family: monospace;
+}
+.astro-code > code{
+	background-color: transparent;
+}
 </style>

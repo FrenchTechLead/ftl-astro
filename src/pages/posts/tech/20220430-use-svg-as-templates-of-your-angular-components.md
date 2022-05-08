@@ -3,7 +3,6 @@ setup: |
   import Layout from '@layouts/BlogPost.astro'
   import Separator from '@comps/Separator.astro'
   import Image from '@comps/Image.astro'
-  import NewsLetter from '@comps/NewsLetter.astro'
   import img1 from '@assets/blog/tech/20220430-svg-as-angular-template/1.avif'
   import img2 from '@assets/blog/tech/20220430-svg-as-angular-template/2.gif'
 title: Use SVG as Angular Template
