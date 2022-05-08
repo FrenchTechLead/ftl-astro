@@ -153,7 +153,7 @@ class Calculator {
 
     public static void main(String[] args) {
 
-        List <String> entries = new ArrayList <>();
+        List <String> entries = new ArrayList <> ();
         entries.add("3 + 5");
         entries.add("4 - 1");
         entries.add("6 / 2");
@@ -206,7 +206,7 @@ _Let’s see how :_
 class Calculator {
     public static void main(String[] args) {
 
-        List <String> entries = new ArrayList <>();
+        List < String > entries = new ArrayList <>();
         entries.add("3 + 5");
         entries.add("4 - 1");
         entries.add("6 / 2");
@@ -254,6 +254,7 @@ enum Operation implements IntBinaryOperator {
     public int applyAsInt(int left, int right) {
         return binaryOperator.applyAsInt(left, right);
     }
+
 }
 ```
 
