@@ -3,8 +3,8 @@ fs = require("fs");
 
 //  squoosh-cli --avif auto public/assets/blog/tech/20210615-the-hardest-production-bug/*.png -d public/assets/blog/tech/20210615-the-hardest-production-bug/
 
-const url =
-  "https://french-tech-lead.medium.com/the-missing-part-of-mediums-rest-api-5d377e02d5d9";
+const POST_ID = "9eb80de6cfbf";
+const url = "https://medium.com/p/" + POST_ID;
 // Enter url here
 mediumToMarkdown.convertFromUrl(url).then(function (markdown) {
   console.log("converting to z.md");

@@ -1,13 +1,29 @@
-[![MECHERI Akram](https://miro.medium.com/fit/c/96/96/1*NYffRVoBiReNSOZpoq8meA.png)
-
-](https://medium.com/?source=post_page-----9eb80de6cfbf--------------------------------)[MECHERI Akram](https://medium.com/?source=post_page-----9eb80de6cfbf--------------------------------)Follow
-
-Dec 15, 2020
-
-·4 min read
-
-Before learning Rest / Soap / GraphQL, You Need To Understand HTTP!
-===================================================================
+---
+setup: |
+  import Layout from '@layouts/BlogPost.astro'
+  import Separator from '@comps/Separator.astro'
+  import img1 from '@assets/blog/tech/20201215-learn-http-the-right-way/0.png'
+  import Image from '@comps/Image.astro'
+title: Learn HTTP The Right Way
+publishDate: December 15, 2020
+authorName: "@FrenchTechLead"
+authorSocial: "https://twitter.com/FrenchTechLead"
+postImageUrl: https://frenchtechlead.com/assets/blog/tech/20201215-learn-http-the-right-way/0.png
+postImageLocal: /assets/blog/tech/20201215-learn-http-the-right-way/0.png
+postImageAlt: Learn HTTP The Right Way
+postImageWidth: 1400
+postImageHeight: 700
+keywords:
+  - HTTP
+  - HTTP Protocol
+  - REST
+  - SOAP
+  - GraphQL
+  - Rfc2616
+permalink: https://frenchtechlead.com/posts/tech/20201215-learn-http-the-right-way/
+description: "HTTP stands for Hypertext Transfer Protocol, initially created for web browser/server communication, it has many more use cases today."
+draft: true
+---
 
 HTTP stands for Hypertext Transfer Protocol, initially created for **web** browser/server communication, it has many more use cases today.
 
@@ -114,16 +130,3 @@ A Web browser works exactly the same as the previous python program :
 *   Then it sends a well-formatted HTTP-Request.
 *   The server responds with a well-formatted HTTP-Response.
 *   The web browser parses the HTTP-Response and displays it.
-
-**References :**
-
-[
-
-RFC 2616 - Hypertext Transfer Protocol -- HTTP/1.1
---------------------------------------------------
-
-### Network Working Group R. Fielding Request for Comments: 2616 UC Irvine Obsoletes: 2068 J. Gettys Category: Standards…
-
-tools.ietf.org
-
-](https://tools.ietf.org/html/rfc2616)
