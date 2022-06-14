@@ -9,7 +9,6 @@ publishDate: March 26, 2021
 authorName: "@FrenchTechLead"
 authorSocial: "https://twitter.com/FrenchTechLead"
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20210318-how-to-build-a-web-bot-in-2-minutes/0.jpg
-postImageLocal: /assets/blog/tech/20210318-how-to-build-a-web-bot-in-2-minutes/0.avif
 postImageAlt: How To Build a Web Bot in 2 minutes
 postImageWidth: 842
 postImageHeight: 462

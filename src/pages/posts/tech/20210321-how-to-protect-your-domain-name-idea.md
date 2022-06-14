@@ -9,7 +9,6 @@ publishDate: March 21, 2021
 authorName: '@FrenchTechLead'
 authorSocial: 'https://twitter.com/FrenchTechLead'
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20210321-how-to-protect-your-domain-name-idea/0.jpg
-postImageLocal: /assets/blog/tech/20210321-how-to-protect-your-domain-name-idea/0.avif
 postImageAlt: 'How To Protect Your Domain Name Idea'
 postImageWidth: 842
 postImageHeight: 462

@@ -10,7 +10,6 @@ publishDate: April 30, 2022
 authorName: '@FrenchTechLead'
 authorSocial: 'https://twitter.com/FrenchTechLead'
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20220430-svg-as-angular-template/0.jpg
-postImageLocal: /assets/blog/tech/20220430-svg-as-angular-template/0.avif
 postImageAlt: Use SVG as Angular Template
 postImageWidth: 600
 postImageHeight: 327

@@ -2,14 +2,13 @@
 setup: |
   import Layout from '@layouts/BlogPost.astro'
   import Separator from '@comps/Separator.astro'
-  import img1 from '@assets/blog/tech/20201215-learn-http-the-right-way/0.png'
+  import img1 from '@assets/blog/tech/20201215-learn-http-the-right-way/1.png'
   import Image from '@comps/Image.astro'
 title: Learn HTTP The Right Way
 publishDate: December 15, 2020
 authorName: "@FrenchTechLead"
 authorSocial: "https://twitter.com/FrenchTechLead"
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20201215-learn-http-the-right-way/0.png
-postImageLocal: /assets/blog/tech/20201215-learn-http-the-right-way/0.png
 postImageAlt: Learn HTTP The Right Way
 postImageWidth: 1400
 postImageHeight: 700
@@ -25,18 +24,22 @@ description: "HTTP stands for Hypertext Transfer Protocol, initially created for
 draft: true
 ---
 
-HTTP stands for Hypertext Transfer Protocol, initially created for **web** browser/server communication, it has many more use cases today.
+**HTTP** stands for Hypertext Transfer Protocol, initially created for **web** browser/server communication, it has many more use cases today.
 
-In the last few years, I’ve observed many junior developers having a hard time creating and maintaining Rest and Soap services, after a short discussion with them, I often realized that the main reason was the lack of knowledge of the HTTP protocol.
+<Separator/>
 
+> In the last few years, I’ve observed many junior developers having a hard time creating and maintaining **REST** and **SOAP** services, after a short discussion with them, I often realized that the main reason was the lack of knowledge of the **HTTP** protocol.  
 So in this article, I’ll briefly explain the fundamentals of the HTTP protocol.
 
-![](https://miro.medium.com/max/1400/0*x6RlFfWpFDEEDYaR.png)HTTP REQUEST / HTTP RESPONSE
+<Image w="624" h="214" src={img1} t="Client/Server Architecture" solo="true" />
 
 The HTTP protocol is a request/response protocol based on the client/server based architecture where web browsers, robots, and search engines, etc. act like HTTP clients, and the Web server acts as a server.
 
-**1\. HTTP REQUEST** 💻 ➡ 🌎
-============================
+<Separator/>
+
+
+## 1 - HTTP REQUEST 💻 ➡ 🌎 :
+
 
 ![](https://miro.medium.com/max/1400/1*lTeInGCSh3y-H9OgCmlhzw.png)Example of an HTTP Request
 
@@ -88,10 +91,9 @@ HTTP Request or Response.
 
 The Request-Body of an HTTP Request is used to carry the entity-body associated with the request, A Request-Body MUST NOT be included in a request if the specification of the request method does not allow sending an entity-body in requests.
 
-2\. HTTP RESPONSE 💻 ⬅🌎
-========================
+## 2. HTTP RESPONSE 💻 ⬅🌎
 
-![](https://miro.medium.com/max/1400/1*3X8ZM5SZBeYKXQFxbMhAmQ.png)Example of an HTTP Response
+![](https://miro.medium.com/max/1400/1*3X8ZM5SZBeYKXQFxbMhAmQ.png)
 
 **2–1 Status-Line** 🆗
 

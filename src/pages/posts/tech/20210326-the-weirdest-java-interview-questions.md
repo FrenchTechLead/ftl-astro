@@ -8,7 +8,6 @@ publishDate: March 26, 2021
 authorName: "@FrenchTechLead"
 authorSocial: "https://twitter.com/FrenchTechLead"
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20210326-the-weirdest-java-interview-questions/1.jpg
-postImageLocal: /assets/blog/tech/20210326-the-weirdest-java-interview-questions/0.avif
 postImageAlt: The Weirdest Java Interview Questions
 postImageWidth: 842
 postImageHeight: 462

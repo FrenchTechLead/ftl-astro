@@ -17,7 +17,6 @@ publishDate: October 27, 2021
 authorName: '@FrenchTechLead'
 authorSocial: 'https://twitter.com/FrenchTechLead'
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20211027-java-memory-management/1.avif
-postImageLocal: /assets/blog/tech/20211027-java-memory-management/1.avif
 postImageAlt: 'Java Memory Management'
 postImageWidth: 800
 postImageHeight: 403
