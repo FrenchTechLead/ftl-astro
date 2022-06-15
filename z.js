@@ -3,7 +3,7 @@ fs = require("fs");
 
 //  squoosh-cli --avif auto public/assets/blog/tech/20210615-the-hardest-production-bug/*.png -d public/assets/blog/tech/20210615-the-hardest-production-bug/
 
-const POST_ID = "9eb80de6cfbf";
+const POST_ID = "d651f13f7597";
 const url = "https://medium.com/p/" + POST_ID;
 // Enter url here
 mediumToMarkdown.convertFromUrl(url).then(function (markdown) {

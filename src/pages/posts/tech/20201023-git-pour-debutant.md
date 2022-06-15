@@ -1,23 +1,39 @@
-[![MECHERI Akram](https://miro.medium.com/fit/c/96/96/1*NYffRVoBiReNSOZpoq8meA.png)
-
-](https://medium.com/?source=post_page-----d651f13f7597--------------------------------)[MECHERI Akram](https://medium.com/?source=post_page-----d651f13f7597--------------------------------)Follow
-
-Oct 23, 2020
-
-·8 min read
-
-L’essentiel de Git & Gitlab pour les débutants
-==============================================
-
-![Logo de Gitlab.](https://miro.medium.com/max/1400/1*qJaauN13XRFYUQf8N-nrEA.png)
+---
+setup: |
+  import Layout from '@layouts/BlogPost.astro'
+  import Separator from '@comps/Separator.astro'
+  import img1 from '@assets/blog/tech/20201023-git-pour-debutant/1.png'
+  import img2 from '@assets/blog/tech/20201023-git-pour-debutant/2.png'
+  import img3 from '@assets/blog/tech/20201023-git-pour-debutant/3.png'
+  import Image from '@comps/Image.astro'
+title: L’essentiel de Git & Gitlab pour les débutants
+publishDate: December 15, 2020
+authorName: "@FrenchTechLead"
+authorSocial: "https://twitter.com/FrenchTechLead"
+postImageUrl: https://frenchtechlead.com/assets/blog/tech/20201023-git-pour-debutant/0.png
+postImageAlt: L’essentiel de Git & Gitlab pour les débutants
+postImageWidth: 1400
+postImageHeight: 700
+keywords:
+  - HTTP
+  - HTTP Protocol
+  - REST
+  - SOAP
+  - GraphQL
+  - Rfc2616
+permalink: https://frenchtechlead.com/posts/tech/20201023-git-pour-debutant/
+description: "HTTP stands for Hypertext Transfer Protocol, initially created for web browser/server communication, it has many more use cases today."
+draft: false
+---
 
 Dans cet article, nous allons découvrir l’essentiel de Git et Gitlab afin de permettre une prise en main rapide de ces deux outils 🚀.
 
 1.  **Git** est un outil de gestion de version, c’est à dire qu’il permet de sauvegarder plusieurs versions de fichiers et dossiers, ce versioning permet de suivre l’évolution des fichiers et permet aussi de revenir sur n’importe quelle version de ces fichiers au besoin.
 2.  **Gitlab** est une plateforme de DevOps complète, elle offre énormément de fonctionnalités permettant le travail collaboratif dans le développement logiciel notamment Git, dans ce cours nous allons seulement aborder la partie **dépôt distant** de Gitlab.
 
-**1\. Git:**
-============
+<Separator/>
+
+## 1. Git:
 
 **Prérequis:**
 
@@ -30,8 +46,8 @@ Dans cette première partie, toutes les commandes vont se dérouler sur votre po
 Créer un dossier “mon\_blog” puis rentrer dans le dossier :
 
 ```
-mkdir mon\_blog  
-cd mon\_blog
+mkdir mon_blog  
+cd mon_blog
 ```
 
 Initialiser un dépôt Git local dans le dossier mon\_blog ( càd commencer à considérer le versioning du contenu de ce dossier) :
@@ -72,7 +88,9 @@ Puis on revérifie à nouveau l’état de notre dépôt avec la commande:
 
 ```
 git status
-```![](https://miro.medium.com/max/1400/1*MN9L1sJtc7Pge3RsTCdGTQ.png)
+```
+
+![](https://miro.medium.com/max/1400/1*MN9L1sJtc7Pge3RsTCdGTQ.png)
 
 Le résultat de la commande est maintenant différent car le fichier est tracké par Git, mais il n’est pas commité, càd que la version de ce fichier n’est pas encore enregistrée dans notre dépôt, afin de l’enregistrer on fait un commit :
 
@@ -98,7 +116,9 @@ Tapez la commande suivante :
 
 ```
 git log
-```![](https://miro.medium.com/max/1400/1*aaxN81NYA7O_OnHhsXIq1g.png)
+```
+
+![](https://miro.medium.com/max/1400/1*aaxN81NYA7O_OnHhsXIq1g.png)
 
 La commande git log permet d’afficher les derniers commits effectués, on remarque un long identifiant alphanumérique pour notre commit, cet identifiant est unique à un commit ( il permet d’identifier notre enregistrement, l’ID généré sur votre terminal est certainement différent du mien) par contre il n’est pas facile de mémoriser un tel identifiant par un humain, pour cette raison on peut utiliser les tag de Git (le mot tag veut dire étiquette).
 
@@ -110,7 +130,8 @@ Puis on tape la commande git log:
 
 ```
 git log
-```![](https://miro.medium.com/max/1400/1*wuZeckIelDL60MWbONC76w.png)
+```
+![](https://miro.medium.com/max/1400/1*wuZeckIelDL60MWbONC76w.png)
 
 On remarque l’apparition du tag **v1.0.0** sur notre commit initial.
 
@@ -168,13 +189,17 @@ La commande ci-dessous permet d’afficher le graphe Git qui représente nos bra
 
 ```
 git log --all --decorate --oneline --graph
-```![](https://miro.medium.com/max/1400/1*nYSVT68ARr7oZAvmipIIxA.png)Chaque \* représente un commit
+```
+
+![](https://miro.medium.com/max/1400/1*nYSVT68ARr7oZAvmipIIxA.png)Chaque \* représente un commit
 
 Maintenant on souhaite que le contenu de la branche “branche\_1”soit récupéré dans la branche “master”, pour cela on utilise la commande “git merge”:
 
 ```
 git merge branche\_1
-```![](https://miro.medium.com/max/1400/1*wyW4sRPVpL3ODvMukMzNZg.png)
+```
+
+![](https://miro.medium.com/max/1400/1*wyW4sRPVpL3ODvMukMzNZg.png)
 
 On saisit la commande ls, et on retrouve le fichier article-2.txt qui était créé dans la branche “branch\_1” :
 
