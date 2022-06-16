@@ -23,6 +23,7 @@ keywords:
   - Rfc2616
 permalink: https://frenchtechlead.com/posts/tech/20201023-git-pour-debutant/
 description: "HTTP stands for Hypertext Transfer Protocol, initially created for web browser/server communication, it has many more use cases today."
+lang: fr
 draft: false
 ---
 
