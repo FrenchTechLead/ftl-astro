@@ -74,7 +74,14 @@ git status
 
 Le résultat de la commande ci-dessus est le suivant :
 
-![](https://miro.medium.com/max/1400/1*ujlsa60JTnWk8Z8PpzBn0A.png)
+```
+On branch master
+No commits yet
+Untracked files:
+    (use "git add <file». to include in what will be committed)
+        article-l.txt
+nothing added to commit but untracked files present (use "git add" to track)
+```
 
 * La première ligne veut dire qu’on se trouve sur la branche principale dont le nom est **master**.
 
@@ -95,8 +102,14 @@ Puis on revérifie à nouveau l’état de notre dépôt avec la commande:
 ```
 git status
 ```
-
-![](https://miro.medium.com/max/1400/1*MN9L1sJtc7Pge3RsTCdGTQ.png)
+Résultat
+```
+On branch master
+No commits yet
+Changes to be committed:
+    (use "git rm - cached <file»." to unstage)
+        new file: article-l.txt
+```
 ### Git Commit:
 Le résultat de la commande est maintenant différent car le fichier est tracké par Git, mais il n’est pas commité, càd que la version de ce fichier n’est pas encore enregistrée dans notre dépôt, afin de l’enregistrer on fait un `commit` :
 
@@ -108,7 +121,7 @@ Maintenant on a bien enregistré une première version de notre article dans Git
 
 Git est conçu selon un modèle de branches, un repository Git contient au minimum une branche (**master**), mais dans la pratique on a besoin de plusieurs branches.
 
-![](https://miro.medium.com/max/1400/1*uiLZ-h0tlTazV92wFKOBxQ.png)
+<Image w="700" h="555" src={img3} t="git branches" solo="true" />
 
 Dans le schéma ci-dessus chaque point bleu représente un commit, la branche épaisse est la branche principale qui porte le nom **master** et contient 5 commits.
 
@@ -125,8 +138,15 @@ Tapez la commande suivante :
 ```
 git log
 ```
+Résultat:
+```
+commit 727ef82c26a75cba962757d1c9524a6f1030b825 (HEAD-> master)
+Author: akram mecheri <mecheri.akram@gmail.com>
+Date:
+Thu Oct 22 21:10:28 2020 +0200
 
-![](https://miro.medium.com/max/1400/1*aaxN81NYA7O_OnHhsXIq1g.png)
+    ajout de l'article 1
+```
 ### Git Tag:
 La commande `git log` permet d’afficher les derniers commits effectués, on remarque un long identifiant alphanumérique pour notre commit, cet identifiant est unique à un commit ( il permet d’identifier notre enregistrement, l’ID généré sur votre terminal est certainement différent du mien) par contre il n’est pas facile de mémoriser un tel identifiant par un humain, pour cette raison on peut utiliser les **tag** de Git (le mot tag veut dire étiquette).
 
@@ -139,7 +159,14 @@ Puis on tape la commande git log:
 ```
 git log
 ```
-![](https://miro.medium.com/max/1400/1*wuZeckIelDL60MWbONC76w.png)
+Résultat:
+```
+commit 727ef82c26a75cba962757d1c9524a6f1030b825 (HEAD -> master, tag: v1.0.0)
+Author: akram mecheri <mecheri.akram@gmail.com>
+Date: Thu Oct 22 21:10:28 2020 +0200
+
+    ajout de l'article
+```
 
 On remarque l’apparition du tag **v1.0.0** sur notre commit initial.
 
@@ -210,8 +237,13 @@ Maintenant on souhaite que le contenu de la branche **branche_1** soit récupér
 ```
 git merge branche_1
 ```
-
-![](https://miro.medium.com/max/1400/1*wyW4sRPVpL3ODvMukMzNZg.png)
+Résultat:
+```
+Merge made by the 'recursive' strategy.
+    article-2.txt | 1 +
+    1 file changed, 1 insertion(+)
+    create mode 100644 article-2.txt
+```
 
 On saisit la commande ls, et on retrouve le fichier **article-2.txt** qui était créé dans la branche **branch_1** :
 
