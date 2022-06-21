@@ -11,8 +11,9 @@ export interface Props {
 }
 const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, author } = Astro.props as Props;
 ---
+
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width" />
 <meta name="language" content={lang}>
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -37,8 +38,7 @@ const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ERV2F9WDNG"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-ERV2F9WDNG');
-</script>
+  function gtag() { dataLayer.push(arguments); }
+  gtag(' js', new Date()); gtag('config', 'G-ERV2F9WDNG' ); </script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6800477127231548"
+  crossorigin="anonymous"></script>
