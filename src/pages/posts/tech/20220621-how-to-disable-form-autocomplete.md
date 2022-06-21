@@ -129,7 +129,8 @@ This directive will put the **4** attributes on your inputs regardless of the br
 
 In order to turn off the autofill only for Google Chrome user agent, we start by detecting it, Google Chrome adds the attribute `chrome` to the global `window` object, we can check for this attribute in order to detect Google Chrome.
 
-### The final code :
+### The final code :
+
 ```ts
 import { Directive, ElementRef } from '@angular/core';
 
