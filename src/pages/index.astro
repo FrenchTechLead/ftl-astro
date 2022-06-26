@@ -11,7 +11,7 @@ import akramPic from '@assets/blog/akram.avif';
 const DEV = await import.meta.env.DEV;
 
 const title = 'FrenchTechLead - The Tech Leaders Community';
-const author = 'FrenchTechLEad';
+const author = 'FrenchTechLead';
 const description = 'FrenchTechLead is a blog about Software Engineering and Web Development, written by a team of Experienced Entrepreneurs.'
 const keywords = ['Tech Blog', 'Software Engineering', 'Cloud Computing', 'OOP', 'Reactive Programming', 'Functional Programming', 'OSS', 'DevOps'];
 const permalink = 'https://frenchtechlead.com/';
@@ -23,34 +23,44 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 ---
 
 <html lang="en">
-	
-	<head>
-		<MetaHead {title} {keywords} {description} {permalink} {postImageUrl} {author} />
-		<Styles />
-	</head>
-	<BlogHeader/>
-	
-	<body>
-		<main>
-			<section id="landing">
-				<Image w={300} h={300} src={akramPic} t="Akram's picture" />
-				<h2 style="color: var(--color-white);">Hi there 👋 Glad to see you here.</h2>
-				<p>My name is Akram, and I'm the creator of FrenchTechLead.<br/>{description}</p>
-			</section>
-			
-			<section id="landing-2">
-				<h2>Enjoy our <span style="color: var(--color-red);">Personal</span> and <span style="color: var(--color-blue);">Professional</span> insights<br/> on tech trends and web development in <span style="color: var(--color-purple);">France</span> and worldwide.</h2>
-				<h2>Stay ahead of the curve with our <span style="color: var(--color-red);">latest</span> articles that are published <span style="color: var(--color-yellow);">every week</span>, covering all things about <span style="color: var(--color-green);">Software Engineering</span>, <span style="color: var(--color-blue);">Cloud</span> Computing, <span style="color: var(--color-light-blue);">DevOps</span> and many more...</h2>
-				<h2><span style="color: var(--color-purple);">Share</span> your thoughts, experiences, and perspectives with us by submitting an <span style="color: var(--color-blue);">article</span> or writing a <span style="color: var(--color-yellow);">comment</span> on any existing article.</h2>
-			</section>
 
-			
-			<section id="latest-posts" aria-label="Blog post list">
-			    <h2>Latest posts 🔥</h2>
-				{techPosts.filter(p=> DEV || !p.frontmatter.draft ).reverse().map((p) => <BlogPostPreview post={p.frontmatter as any} url={p.url} />)}
-			</section>
-			<NewsLetter/>
-		</main>
-		<BlogFooter/>
-	</body>
+<head>
+	<MetaHead {title} {keywords} {description} {permalink} {postImageUrl} {author} />
+	<Styles />
+</head>
+<BlogHeader />
+
+<body>
+	<main>
+		<section id="landing">
+			<Image w={300} h={300} src={akramPic} t="Akram's picture" />
+			<h2 style="color: var(--color-white);">Hi there 👋 Glad to see you here.</h2>
+			<p>My name is Akram, and I'm the creator of FrenchTechLead.<br />{description}</p>
+		</section>
+
+		<section id="landing-2">
+			<h2>Enjoy our <span style="color: var(--color-red);">Personal</span> and <span
+					style="color: var(--color-blue);">Professional</span> insights<br /> on tech trends and web
+				development in <span style="color: var(--color-purple);">France</span> and worldwide.</h2>
+			<h2>Stay ahead of the curve with our <span style="color: var(--color-red);">latest</span> articles that are
+				published <span style="color: var(--color-yellow);">every week</span>, covering all things about <span
+					style="color: var(--color-green);">Software Engineering</span>, <span
+					style="color: var(--color-blue);">Cloud</span> Computing, <span
+					style="color: var(--color-light-blue);">DevOps</span> and many more...</h2>
+			<h2><span style="color: var(--color-purple);">Share</span> your thoughts, experiences, and perspectives with
+				us by submitting an <span style="color: var(--color-blue);">article</span> or writing a <span
+					style="color: var(--color-yellow);">comment</span> on any existing article.</h2>
+		</section>
+
+
+		<section id="latest-posts" aria-label="Blog post list">
+			<h2>Latest posts 🔥</h2>
+			{techPosts.filter(p=> DEV || !p.frontmatter.draft ).reverse().map((p) =>
+			<BlogPostPreview post={p.frontmatter as any} url={p.url} />)}
+		</section>
+		<NewsLetter />
+	</main>
+	<BlogFooter />
+</body>
+
 </html>
