@@ -6,12 +6,5 @@ import partytown from "@astrojs/partytown";
 // https://astro.build/config
 export default defineConfig({
   site: "https://frenchtechlead.com",
-  integrations: [
-    sitemap(),
-    preact(),
-    partytown({
-      // Example: Disable debug mode.
-      config: { debug: true },
-    }),
-  ],
+  integrations: [sitemap(), preact(), partytown()],
 });
