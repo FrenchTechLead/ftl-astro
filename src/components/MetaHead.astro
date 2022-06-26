@@ -10,7 +10,6 @@ export interface Props {
   author: string;
 }
 
-
 const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, author } = Astro.props as Props;
 ---
 
@@ -37,13 +36,11 @@ const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, 
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={postImageUrl}  />
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script is:inline > partytown = { forward: ["dataLayer.push"] }; </script>
-<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-ERV2F9WDNG"></script>
-<script type="text/partytown">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ERV2F9WDNG"></script>
+<script is:inline>
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
-  gtag("js", new Date()); gtag("config", "G-ERV2F9WDNG" ); </script>
+  gtag("js", new Date()); gtag("config", "G-ERV2F9WDNG" );
+</script>
 <!--  Google Adsens -->
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6800477127231548"
-  crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6800477127231548" crossorigin="anonymous"></script>
