@@ -5,7 +5,7 @@ setup: |
   import img0 from '@assets/blog/tech/20220627-a-story-of-a-web-developer/0.png'
   import Image from '@comps/Image.astro'
 title: A Story of a Web Developer, Part 1
-publishDate: December 15, 2020
+publishDate: June 27, 2022
 authorName: "@FrenchTechLead"
 authorSocial: "https://twitter.com/FrenchTechLead"
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20220627-a-story-of-a-web-developer/0.png
