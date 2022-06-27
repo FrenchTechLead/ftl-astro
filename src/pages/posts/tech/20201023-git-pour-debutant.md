@@ -12,17 +12,16 @@ authorName: "@FrenchTechLead"
 authorSocial: "https://twitter.com/FrenchTechLead"
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20201023-git-pour-debutant/0.png
 postImageAlt: L’essentiel de Git & Gitlab pour les débutants
-postImageWidth: 1400
-postImageHeight: 700
+postImageWidth: 700
+postImageHeight: 350
 keywords:
-  - HTTP
-  - HTTP Protocol
-  - REST
-  - SOAP
-  - GraphQL
-  - Rfc2616
+  - Git
+  - Gitlab
+  - Merge
+  - Commit
+  - Push
 permalink: https://frenchtechlead.com/posts/tech/20201023-git-pour-debutant/
-description: "HTTP stands for Hypertext Transfer Protocol, initially created for web browser/server communication, it has many more use cases today."
+description: "L’essentiel de Git & Gitlab pour les débutants, Apprenez tous les outils nécessaires à la création de votre premier projet Git."
 lang: fr
 draft: false
 ---
