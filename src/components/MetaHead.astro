@@ -8,9 +8,12 @@ export interface Props {
   keywords: string[];
   lang: string;
   author: string;
+  showAds: boolean;
 }
 const DEV = await import.meta.env.DEV;
-const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, author } = Astro.props as Props;
+const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, author, showAds} = Astro.props as Props;
+console.log(Astro);
+
 ---
 
 <meta charset="utf-8" />
@@ -42,7 +45,10 @@ const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, 
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date()); gtag("config", "G-ERV2F9WDNG" );
-    </script>
+    </script>)
+}
+{
+  !DEV && !(showAds===false) && (
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6800477127231548" crossorigin="anonymous"></script>
   )
 }

@@ -25,7 +25,7 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 <html lang="en">
 
 <head>
-	<MetaHead {title} {keywords} {description} {permalink} {postImageUrl} {author} />
+	<MetaHead {title} {keywords} {description} {permalink} {postImageUrl} {author} showAds={false} />
 	<Styles />
 </head>
 <BlogHeader />
