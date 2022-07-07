@@ -35,7 +35,7 @@ I capitalized on the training by applying it to my various university projects, 
 
 After I got my masters in 2017, I was still making sites and even npm libraries for React Js, but at work I was mostly doing Angular, at first I wasn't very supportive of using the Angular Framework instead of ReactJs while the perfs benchmarks were more favorable to React, but I didn't have the power to make decisions on these subjects, (I was only the new kid out of school), but later I learned that the choice of a Framework in a company is not only based on its performance.
 
-While learning Angular, I noticed how much junior and even less junior developers could have difficulties to understand its principles (ex: many developers apply their previous knowledge on an Angular project without further consideration, e.g.: interaction with the DOM directly with document.getElementByID).
+While learning Angular, I noticed how much junior and even less junior developers could have difficulties to understand its principles (ex: many developers apply their previous knowledge on an Angular project without further consideration, e.g.: interaction with the DOM directly with `document.getElementByID`).
 
 So despite all the rules imposed by the Angular Framework, many devs still make anti-patterns seeing no problem "as long as it works".
 At that time I learned that the choice of Angular in a large structure where the turnover is important and where the level of the devs is not always homogeneous, is rather a good idea.
