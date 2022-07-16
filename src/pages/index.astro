@@ -7,7 +7,7 @@ import Image from '@comps/Image.astro';
 import BlogPostPreview from '@comps/BlogPostPreview.astro';
 import NewsLetter from '@comps/NewsLetter.astro'
 
-import akramPic from '@assets/blog/akram.avif';
+import akramPic from '@assets/blog/akram-1.svg';
 const DEV = await import.meta.env.DEV;
 
 const title = 'FrenchTechLead - The Tech Leaders Community';
@@ -16,7 +16,7 @@ const description = 'FrenchTechLead is a blog about Software Engineering and Web
 const keywords = ['Tech Blog', 'Software Engineering', 'Cloud Computing', 'OOP', 'Reactive Programming', 'Functional Programming', 'OSS', 'DevOps'];
 const permalink = 'https://frenchtechlead.com/';
 const postImageUrl = 'https://frenchtechlead.com/assets/blog/blog-cover.avif';
-
+const showAds=false;
 
 
 const techPosts = await Astro.glob('./posts/tech/*.md');
@@ -25,7 +25,7 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 <html lang="en">
 
 <head>
-	<MetaHead {title} {keywords} {description} {permalink} {postImageUrl} {author} showAds={false} />
+	<MetaHead {title} {keywords} {description} {permalink} {postImageUrl} {author} {showAds} />
 	<Styles />
 </head>
 <BlogHeader />
@@ -33,7 +33,7 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 <body>
 	<main>
 		<section id="landing">
-			<Image w={300} h={300} src={akramPic} t="Akram's picture" />
+			<Image w={600} h={600} src={akramPic} t="Akram's picture"  solo={true}/>
 			<h2 style="color: var(--color-white);">Hi there 👋 Glad to see you here.</h2>
 			<p>My name is Akram, and I'm the creator of FrenchTechLead.<br />{description}</p>
 		</section>
