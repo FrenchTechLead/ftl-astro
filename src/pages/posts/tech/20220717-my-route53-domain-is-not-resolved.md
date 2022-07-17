@@ -37,7 +37,7 @@ nslookup bienparler.fr
 dig bienparler.fr
 ```
 
-The output of the above commands was a `SERVFAIL` error with no further information. so I tried to chack the registration status of the domain name with `whois` command.
+The output of the above commands was a `SERVFAIL` error with no further information. so I tried to check the registration status of the domain name with `whois` command.
 ```bash
 whois bienparler.fr
 ```
@@ -65,7 +65,7 @@ nserver:     ns-475.awsdns-44.com
 ```
 
 The two interesting things about the output of the `whois` command are the `ns-list` and `status` fields.
-In my case it showes that the domain name is registered and is active and also that the nameservers that are being used are the AWS nameservers.
+In my case it shows that the domain name is registered and is active and also that the nameservers that are being used are the AWS nameservers.
 ```bash
 nserver:     ns-857.awsdns-11.net
 nserver:     ns-1196.awsdns-22.org
