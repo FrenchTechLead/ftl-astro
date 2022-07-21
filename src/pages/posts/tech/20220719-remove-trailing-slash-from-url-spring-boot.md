@@ -27,7 +27,7 @@ It's all about SEO, Google will consider a page having a trailing slash as a dup
 So for beater SEO you should redirect the page having a trailing slash to the page without the trailing slash and vice versa.
 
 
-### Remove trailing slash from URL with Spring Boot
+### How Remove trailing slash from URL with Java / Spring Boot
 ```java
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
