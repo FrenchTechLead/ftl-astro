@@ -4,7 +4,7 @@ const { title, publishDate, authorName, authorSocial } = Astro.props;
 <article class="article">
 		<header>
 			<h1>{title}</h1>
-			<p>By : <a href={authorSocial}>{authorName}</a><br/>{publishDate}</p>
+			<p>By : <a href={authorSocial}>{authorName}</a><br/><time datetime={new Date(publishDate).toISOString()}>{publishDate}</time></p>
 		</header>
 		<main>
 			<slot />

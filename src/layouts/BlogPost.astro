@@ -16,22 +16,18 @@ postImageWidth, postImageHeight, keywords, author
 
 ---
 <html lang={lang || 'en'}>
-	<head>
-		<MetaHead {title} {metaTitle} {description} {permalink} {postImageUrl} {keywords} {author} />
-		<Styles/>
-	</head>
-	<BlogHeader />
-	<body>
-		<main>
-			<BlogPost {title} {authorName} {publishDate} {authorSocial} >
-				{ postImageLocal && <Image w={postImageWidth} h={postImageHeight}  src={postImageLocal} t={postImageAlt} /> }
-				<slot />
-			</BlogPost>
-
-		<Separator/>
-
-		<NewsLetter/>
-		</main>
-		<BlogFooter/>
-	</body>
+<head>
+<MetaHead {title} {metaTitle} {description} {permalink} {postImageUrl} {keywords} {author} />
+<Styles/>
+</head>
+<body>
+	<BlogHeader></BlogHeader>
+	<BlogPost {title} {authorName} {publishDate} {authorSocial} >
+		{ postImageLocal && <Image w={postImageWidth} h={postImageHeight}  src={postImageLocal} t={postImageAlt} /> }
+		<slot />
+	</BlogPost>
+	<Separator/>
+	<NewsLetter/>
+	<BlogFooter/>
+</body>
 </html>
