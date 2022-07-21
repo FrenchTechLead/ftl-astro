@@ -28,10 +28,9 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 	<MetaHead {title} {keywords} {description} {permalink} {postImageUrl} {author} {showAds} />
 	<Styles />
 </head>
-<BlogHeader />
-
 <body>
-	<main>
+	<BlogHeader />
+	<main>ss
 		<section id="landing">
 			<Image w={600} h={600} src={akramPic} t="Akram's picture"  solo={true}/>
 			<h2 style="color: var(--color-white);">Hi there 👋 Glad to see you here.</h2>
@@ -62,5 +61,4 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 	</main>
 	<BlogFooter />
 </body>
-
 </html>
