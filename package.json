@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "convert": "node z.js",
-    "postbuild": "cp ads.txt dist/ads.txt"
+    "postbuild": "cp ads.txt dist/ads.txt && cp robots.txt dist/robots.txt"
   },
   "devDependencies": {
     "@astrojs/preact": "^0.1.3",
