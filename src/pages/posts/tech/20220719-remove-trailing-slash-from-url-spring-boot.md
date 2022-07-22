@@ -24,7 +24,7 @@ draft: false
 
 ## Why should you remove a trailing slash from your URL ?
 It's all about SEO, Google will consider a page having a trailing slash as a duplicate of the one without the trailing slash.  
-So for beater SEO you should redirect the page having a trailing slash to the page without the trailing slash and vice versa.
+So for a better SEO you should redirect the page having a trailing slash to the page without the trailing slash and vice versa.
 
 
 ### How Remove trailing slash from URL with Java / Spring Boot
