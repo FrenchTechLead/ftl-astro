@@ -34,11 +34,26 @@ In this short article, I’ll try to briefly explain how Java manages Random Acc
 
 ## Types of memories in a computer
 
-| Type                       | Usage                                                                                                                                   |
-| :------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
-| Read Only Memory (ROM)     | - Read Only.<br /> - Required for computer startup, BIOS.                                                                               |
-| Disc Memory (HDD/SDD)      | - Read/Write.<br /> - Contains large files, eg: Operation Systtem, multimedia files, etc.<br/> - Low R/W speed.                         |
-| Random Access Memory (RAM) | - Read/Write.<br /> - Its content is deleted on restart.<br/> - Necessary for the operation of any application. <br/> - High R/W speed. |
+<table>
+  <caption style="caption-side:bottom">Usages of the different Memory types in a computer</caption>
+    <tr>
+        <td>Type</td>
+        <td>Usage</td>
+    </tr>
+    <tr>
+        <td>Read Only Memory (ROM)</td>
+        <td>- Read Only.&lt;br /&gt; - Required for computer startup, BIOS.</td>
+    </tr>
+    <tr>
+        <td>Disc Memory (HDD/SDD)</td>
+        <td>- Read/Write.&lt;br /&gt; - Contains large files, eg: Operation Systtem, multimedia files, etc.&lt;br/&gt; - Low R/W speed.</td>
+    </tr>
+    <tr>
+        <td>Random Access Memory (RAM)</td>
+        <td>- Read/Write.&lt;br /&gt; - Its content is deleted on restart.&lt;br/&gt; - Necessary for the operation of any application. &lt;br/&gt; - High R/W speed.</td>
+    </tr>
+</table>
+
 
 We find in a computer three main types of memories, **Read-Only Memory (ROM)** is physically contained on the motherboard of the computer, it contains the programming needed to start a PC, which is essential for boot-up; it performs major input/output tasks and holds programs or software instructions, on the other hand, **Disc Memory** is used for containing large files such as operating systems and multimedia files, it has a low Read/Write speed comparing to RAM.
 
