@@ -3,6 +3,7 @@ setup: |
   import Layout from '@layouts/BlogPost.astro'
   import Separator from '@comps/Separator.astro'
   import img1 from '@assets/blog/tech/20201223-how-to-fetch/0.avif'
+  import img2 from '@assets/blog/tech/20201223-how-to-fetch/0.jpeg'
   import Image from '@comps/Image.astro'
 title: How To Fetch the Number of Claps and Comments Under a Medium Story
 publishDate: December 23, 2020
@@ -35,7 +36,7 @@ When it comes to articles (posts), The official Medium API only provides an HTTP
 
 My first intuition was to look at the official REST API but no such feature is provided, then I looked at [the RSS feed](https://help.medium.com/hc/en-us/articles/214874118-Using-RSS-feeds-of-profiles-and-publications) by Medium and nothing was there neither, after that I started inspecting Medium using Chrome’s DevTools in order to understand how the stats are retrieved then displayed under a Medium story.
 
-![](https://miro.medium.com/max/1400/1*VV84EGcrF6iCqPvAyNQ1lQ.jpeg)
+<Image w="1400" h="766" src={img2} t="Medium Inspection with devTools" solo="true" />
 
 Surprisingly, among all the XHR requests there was no request to retrieve the stats 😮, which led me to look at the HTML response of the article page.
 

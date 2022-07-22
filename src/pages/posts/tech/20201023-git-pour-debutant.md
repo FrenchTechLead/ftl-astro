@@ -5,6 +5,17 @@ setup: |
   import img1 from '@assets/blog/tech/20201023-git-pour-debutant/1.png'
   import img2 from '@assets/blog/tech/20201023-git-pour-debutant/2.png'
   import img3 from '@assets/blog/tech/20201023-git-pour-debutant/3.png'
+  import img4 from '@assets/blog/tech/20201023-git-pour-debutant/4.png'
+  import img5 from '@assets/blog/tech/20201023-git-pour-debutant/5.png'
+  import img6 from '@assets/blog/tech/20201023-git-pour-debutant/6.png'
+  import img7 from '@assets/blog/tech/20201023-git-pour-debutant/7.png'
+  import img8 from '@assets/blog/tech/20201023-git-pour-debutant/8.png'
+  import img9 from '@assets/blog/tech/20201023-git-pour-debutant/9.png'
+  import img10 from '@assets/blog/tech/20201023-git-pour-debutant/10.png'
+  import img11 from '@assets/blog/tech/20201023-git-pour-debutant/11.png'
+  import img12 from '@assets/blog/tech/20201023-git-pour-debutant/12.png'
+  import img13 from '@assets/blog/tech/20201023-git-pour-debutant/13.png'
+  import img14 from '@assets/blog/tech/20201023-git-pour-debutant/14.png'
   import Image from '@comps/Image.astro'
 title: L’essentiel de Git & Gitlab pour les débutants
 publishDate: December 15, 2020
@@ -15,11 +26,12 @@ postImageAlt: L’essentiel de Git & Gitlab pour les débutants
 postImageWidth: 700
 postImageHeight: 350
 keywords:
-  - Git
-  - Gitlab
-  - Merge
-  - Commit
-  - Push
+  - gitlab pour les nuls
+  - gitlab commande de base
+  - git pour les nuls
+  - git merge
+  - git commit
+  - git push
 permalink: https://frenchtechlead.com/posts/tech/20201023-git-pour-debutant/
 description: "L’essentiel de Git & Gitlab pour les débutants, Apprenez tous les outils nécessaires à la création de votre premier projet Git."
 lang: fr
@@ -227,7 +239,7 @@ La commande ci-dessous permet d’afficher le graphe Git qui représente nos bra
 git log --all --decorate --oneline --graph
 ```
 
-![](https://miro.medium.com/max/1400/1*nYSVT68ARr7oZAvmipIIxA.png)
+<Image w="700" h="207" src={img6} t="git log command" solo="true" />
 
 ### Git Merge:
 
@@ -256,7 +268,7 @@ On réaffiche le graphe de nos branches et commits:
 ```
 git log --all --decorate --oneline --graph
 ```
-![](https://miro.medium.com/max/1400/1*vLaLa7uQva1MNbMd1lnJ2Q.png)
+<Image w="700" h="235" src={img8} t="git log command" solo="true" />
 
 On remarque que notre branche **branche_1** a été fusionnée **dans** la branche **master**, c’est pour cette raison qu’on retrouve le fichier **article-2.txt** dans la branche **master**.
 
@@ -278,7 +290,7 @@ Dans cette partie nous allons envoyer le contenu de notre blog sur un serveur di
 *   Cliquez sur **Create a project**
 *   Remplissez les champs comme ci-dessous puis cliquez sur **Create project**
 
-![](https://miro.medium.com/max/1400/1*DXCiHO1_2tUqM6pDEOQXFg.png)
+<Image w="700" h="478" src={img9} t="création de projet sur Gitlab" solo="true" />
 
 > Il est possible d’interagir avec Gitlab via deux protocoles, HTTPS et SSH, la méthode recommandée est en SSH.
 
@@ -286,7 +298,7 @@ Dans cette partie nous allons envoyer le contenu de notre blog sur un serveur di
 
 Pour que vous puissiez interagir avec le serveur Gitlab, il vous faudra ajouter une clé SSH à votre profil, cliquez sur **Add SSH key**:
 
-![](https://miro.medium.com/max/1400/1*SWvcZ_5LFgvEsp6GYa161A.png)
+<Image w="700" h="269" src={img10} t="SSH key warning sur gitlab" solo="true" />
 
 Attention si vous avez déjà une clé SSH dans votre dossier **~/.ssh** vous n’avez pas besoin de taper la commande ci-dessous, dans le cas contraire tapez la commande ci-dessous, puis appuyez sur **Entrer** plusieurs fois:
 
@@ -304,7 +316,7 @@ Copiez le texte qui s’affiche puis collez le dans le champ **key** de l’inte
 
 Vous devriez avoir un résultat qui ressemble à ça :
 
-![](https://miro.medium.com/max/1400/1*DapWQEoifn0P9rT77fXxHw.png)
+<Image w="700" h="229" src={img11} t="SSH key add sur gitlab" solo="true" />
 
 Maintenant vous pouvez lier votre dépôt local avec le dépôt distant (Gitlab), pour cela revenez sur votre projet **mon_blog** sur Gitlab, et cliquez sur **clone** et copiez l’URL qui s’affiche en dessous de **Clone with SSH**.
 
@@ -326,7 +338,7 @@ git push --set-upstream origin master
 
 Actualisez la page web de Gitlab, vous verrez vos articles apparaitre !
 
-![](https://miro.medium.com/max/1400/1*SmJvoX7VWC1tZunKoVNNvQ.png)
+<Image w="700" h="414" src={img12} t="gitlab commit preview" solo="true" />
 
 ### Commit depuis l'interface web gitlab:
 
@@ -339,12 +351,10 @@ Sur l’interface Web de Gitlab :
 *   Remplissez comme ci-dessous
 *   Puis cliquez sur **Commit changes**
 
-![](https://miro.medium.com/max/1400/1*EZsjT9od5FWUlV19IAB5ew.png)
-
+<Image w="700" h="480" src={img13} t="gitlab commit" solo="true" />
 Maintenant on a un 3ème article rédigé sur Gitlab.
 
-![](https://miro.medium.com/max/1400/1*cRYO1ndJK-ol0vCbHoNRTw.png)
-
+<Image w="700" h="268" src={img14} t="gitlab files" solo="true" />
 ### Git Pull:
 
 Pour récupérer l’article sur notre dépôt local :
