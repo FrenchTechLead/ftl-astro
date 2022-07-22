@@ -12,4 +12,4 @@
 
   [[headers]]
     [headers.values]
-      X-Content-Type-Options: nosniff # Disable MIME sniffing
+      X-Content-Type-Options: "nosniff"
