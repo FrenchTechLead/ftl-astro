@@ -152,12 +152,28 @@
 	/* index css */
 
 	#landing-2 {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: grid;
+		gap: 1rem;
 		margin-top: 50px;
+		font-size: 1.4rem;
+	}
+	@media (min-width: 600px) {
+		#landing-2  { grid-template-columns: repeat(2, 1fr); }
 	}
 
-	#landing-2 h2 {
+	@media (min-width: 900px) {
+		#landing-2  { grid-template-columns: repeat(3, 1fr); }
+	}
+
+	#landing-2 div {
 		color: var(--color-white);
 		margin-top: 80px;
+		margin: 5px;
+		padding: 15px;
+		border-radius: 25px;
+		background-color: #38190e;
 	}
 
 	#latest-posts {
@@ -172,16 +188,20 @@
 	#latest-posts article {
 		margin-top: 15px;
 		border: 1px solid var(--color-purple);
-		padding-left: 15px;
-		padding-right: 15px;
+		padding: 15px;
 	}
 
-	#latest-posts article h1 {
+	#latest-posts article div {
 		color: var(--color-yellow);
+		font-size: 1.5rem;
 	}
 
 	#latest-posts article p {
 		color: var(--color-white);
+		margin-bottom: 0px;
+	}
+	#latest-posts article time {
+		color: var(--color-grey);
 	}
 
 	#latest-posts article:hover {

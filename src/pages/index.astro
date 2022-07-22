@@ -33,22 +33,26 @@ const techPosts = await Astro.glob('./posts/tech/*.md');
 	<main>
 		<section id="landing">
 			<Image w={600} h={600} src={akramPic} t="Akram's picture"  solo={true}/>
-			<h2 style="color: var(--color-white);">Hi there 👋 Glad to see you here.</h2>
-			<p>My name is Akram, and I'm the creator of FrenchTechLead.<br />{description}</p>
+			<h1 style="color: var(--color-white);">Hi there 👋 Glad to see you here.</h1>
+			<p style="margin-bottom: 0px;">My name is Akram, and I'm the creator of FrenchTechLead.</p>
+			<p style="margin-top: 0px;">{description}</p>
 		</section>
 
 		<section id="landing-2">
-			<h2>Enjoy our <span style="color: var(--color-red);">Personal</span> and <span
-					style="color: var(--color-blue);">Professional</span> insights<br /> on tech trends and web
-				development in <span style="color: var(--color-purple);">France</span> and worldwide.</h2>
-			<h2>Stay ahead of the curve with our <span style="color: var(--color-red);">latest</span> articles that are
+			<div>Enjoy our <span style="color: var(--color-red);">Personal</span> and <span
+					style="color: var(--color-blue);">Professional</span> insights on tech trends and web
+				development in <span style="color: var(--color-purple);">France</span> and worldwide.
+			</div>
+			<div>Stay ahead of the curve with our <span style="color: var(--color-red);">latest</span> articles that are
 				published <span style="color: var(--color-yellow);">every week</span>, covering all things about <span
 					style="color: var(--color-green);">Software Engineering</span>, <span
 					style="color: var(--color-blue);">Cloud</span> Computing, <span
-					style="color: var(--color-light-blue);">DevOps</span> and many more...</h2>
-			<h2><span style="color: var(--color-purple);">Share</span> your thoughts, experiences, and perspectives with
+					style="color: var(--color-light-blue);">DevOps</span> and many more...
+			</div>
+			<div><span style="color: var(--color-purple);">Share</span> your thoughts, experiences, and perspectives with
 				us by submitting an <span style="color: var(--color-blue);">article</span> or writing a <span
-					style="color: var(--color-yellow);">comment</span> on any existing article.</h2>
+					style="color: var(--color-yellow);">comment</span> on any existing article.
+			</div>
 		</section>
 
 
