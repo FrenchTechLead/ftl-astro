@@ -7,6 +7,7 @@ import BlogPost from '@comps/BlogPost.astro';
 import Image from '@comps/Image.astro';
 import Separator from '@comps/Separator.astro'
 import NewsLetter from '@comps/NewsLetter.astro'
+import Sponsor from '@comps/Sponsor.astro';
 
 const { title, metaTitle, description, publishDate, 
 authorName, authorSocial, permalink, lang, 
@@ -27,6 +28,7 @@ postImageWidth, postImageHeight, keywords, author
 		<slot />
 	</BlogPost>
 	<Separator/>
+	<Sponsor />
 	<NewsLetter/>
 	<BlogFooter/>
 </body>
