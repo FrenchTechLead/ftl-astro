@@ -10,8 +10,8 @@ authorName: "@FrenchTechLead"
 authorSocial: "https://twitter.com/FrenchTechLead"
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20220804-http-snitch-the-byte-size-http-request-debugger/0.png
 postImageAlt: HTTP Snitch - The Byte Size HTTP Request Debugger
-postImageWidth: 842
-postImageHeight: 468
+postImageWidth: 1280
+postImageHeight: 720
 keywords:
   - "DEBUG HTTP REQUEST"
   - "DEBUG REVERSE PROXY"
@@ -24,8 +24,7 @@ draft: false
 ---
 
 
-![youtube-thumbnail](https://user-images.githubusercontent.com/10856604/182870189-d117e7ac-72f3-4130-9b60-17cf87cbccbe.png)
-
+<Image src={img0} w={1280} h={720} t='HTTP-SNITCH' solo={true}/>
 <Separator/>
 
 ## What is HTTP-SNITCH ?
