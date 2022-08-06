@@ -38,8 +38,7 @@ Route53 is great to route traffic to AWS resources because it brings simplicity 
 
 <Image w={1008} h={764} src={img1} solo={true} t='Route53 Record definition' />
 
-The above screenshot shows how it's nice and easy to point to an aws ressource, however the problem is that **Route53** restricts **ALIAS** record types to their network, so if you want to point your domain to let say a **Heroku** hosted website, you will have to go throught a dirty [workaround to make it work](https://devcenter.heroku.com/articles/route-53), this workround will increase your AWS bill and will make your infrastructure more complex.
-
+The above screenshot shows how it's nice and easy to point to an AWS ressource, however the problem is that **Route53** restricts **ALIAS** record types to their network, so if you want to point your domain to let say a **Heroku** hosted website, you will have to go throught a dirty [workaround to make it work](https://devcenter.heroku.com/articles/route-53), this workround will increase your AWS bill and will make your infrastructure more complex with no benefits.
 
 <Separator/>
 
@@ -49,4 +48,4 @@ If you need an entreprise grade solution that is affordable, I would recomand [d
 <Separator/>
 
 ## Final thoughts
-I had to learn the hard way that **Route53** is not a good solution for managing your domain names pointing to non aws resources, I hope this post will help you to avoid the same mistake.
+I had to learn the hard way that **Route53** is not a good solution for managing your domain names pointing to non AWS resources, I hope this post will help you to avoid the same mistake.
