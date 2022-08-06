@@ -19,7 +19,7 @@ keywords:
   - "PRINT HTTP REQUEST"
   
 permalink: https://frenchtechlead.com/posts/tech/20220804-http-snitch-the-byte-size-http-request-debugger/
-description: "This is why you should never use AWS Route53 to manage your domain names pointing to non aws resources"
+description: "HTTP-SNITCH is a tiny HTTP request debugger that prints the HTTP headers of the incoming requests. It is useful to debug reverse proxies, load balancers, and other HTTP servers."
 draft: false
 ---
 
