@@ -3,7 +3,6 @@ setup: |
   import Layout from '@layouts/BlogPost.astro'
   import Separator from '@comps/Separator.astro'
   import img0 from '@assets/blog/tech/20220804-http-snitch-the-byte-size-http-request-debugger/0.png'
-  import img1 from '@assets/blog/tech/20220804-http-snitch-the-byte-size-http-request-debugger/1.png'
   import Image from '@comps/Image.astro'
 title: HTTP Snitch - The Byte Size HTTP Request Debugger
 publishDate: August 03, 2022
@@ -61,6 +60,13 @@ This will run HTTP-SNITCH on port 8080, if you want to run it on a different por
 ```cmd
 python3 snitch.py 9090
 ```
+
+<Separator/>
+
+## Example of HTTP-SNITCH output
+Running HTTP-SNITCH on port 8080 in a GitHub Workspace instance and sending a `GET` request to it will print out the following output:
+<Image src='https://user-images.githubusercontent.com/10856604/183052857-427d2f48-a080-41aa-b5c0-c0613b820ede.png' w={1096} h={538} t='The console output of HTTP-SNITCH' solo={true}/>
+
 
 <Separator/>
 
