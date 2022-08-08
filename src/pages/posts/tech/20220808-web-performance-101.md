@@ -11,8 +11,8 @@ authorName: "@FrenchTechLead"
 authorSocial: "https://twitter.com/FrenchTechLead"
 postImageUrl: https://frenchtechlead.com/assets/blog/tech/20220808-web-performance-101/0.png
 postImageAlt: Web Performance 101
-postImageWidth: 1280
-postImageHeight: 720
+postImageWidth: 842
+postImageHeight: 462
 keywords:
   - "Web Performance"
   - "Web Performance 101"
@@ -21,8 +21,10 @@ keywords:
   
 permalink: https://frenchtechlead.com/posts/tech/20220808-web-performance-101/
 description: "A complete guide to web performance. Learn how to improve your site speed and web performance by applying the best practices."
-draft: true
+draft: false
 ---
+
+<Image src={img0} t='Web Performance 101' solo={true}/>
 
 <h2>What Does Web Performance Mean ? 🏎️</h2>
 
@@ -34,40 +36,58 @@ Web performance is the speed at which a website loads and how quickly it respond
 
 <h2>Why Is Web Performance Important ? 🤔</h2>
 There are many reasons why web performance is important. Here are the most important ones:
-- **User Experience.** A fast website will provide a better user experience. A slow website will provide a bad user experience, stats shows that **53% of users will abandon a website if it takes more than 3 seconds to load.** (Source : [thinkwithgoogle.com](https://www.thinkwithgoogle.com/consumer-insights/consumer-trends/mobile-site-load-time-statistics/))
-- **Search Engine Optimization.** Google has introduced web vitals <Tooltip txt='Web vitals are a set of metrics that measure the user experience of a website'/> and is considering page speed as a ranking factor. A fast website will rank higher in search engines, stats show that the first result in Google gets **34%** of the clicks and the second result gets **17%** of the clicks (Source: [pollthepeople.app](https://pollthepeople.app/the-value-of-google-result-positioning-3/)).
-- **Conversion Rate.** A fast website will have a higher conversion rate. A slow website will have a lower conversion rate.
-- **Bounce Rate.** A fast website will have a lower bounce rate. A slow website will have a higher bounce rate.
-- **Cost.** The hosting of a fast website more likely to cost less than the hosting of a slow website mostly because of the **bandwidth** and **CPU** usage of your hosting service.
+1. **User Experience 👌** A fast website will provide a better user experience, stats shows that **53%** of users will abandon a website if it takes more than **3 seconds** to load. (Source : [thinkwithgoogle.com](https://www.thinkwithgoogle.com/consumer-insights/consumer-trends/mobile-site-load-time-statistics/))
+2. **Search Engine Optimization ⚙️** Google has introduced web vitals <Tooltip txt='Web vitals are a set of metrics that measure the user experience of a website'/> and is considering page speed as a ranking factor. A fast website will rank higher in search engines, stats show that the first result in Google gets **34%** of the clicks and the second result gets **17%** of the clicks (Source: [pollthepeople.app](https://pollthepeople.app/the-value-of-google-result-positioning-3/)).
+3. **Conversion Rate 🤝🏻** A fast website will have a higher conversion rate. A slow website will have a lower conversion rate.
+4. **Bounce Rate 🚪** A fast website will have a lower bounce rate. A slow website will have a higher bounce rate.
+5. **Cost 🤑** The hosting cost of a fast website is more likely to cost less than the one of a slow website, mostly because of the **bandwidth** and **CPU** usage of your hosting service.
 > A good user expirience will lead to less stress and more productivity for your users, and will lead to less support tickets and more efficiency for your support team.
 
 <Separator/>
 
 <h2>What are the Top Web Performance Killers ? 💀</h2>
 
-- Too many font/back network calls.
-- Too many database queries.
-- High reponse time of the backend.
-- High response time of the database.
-- Unoptimized backend computations.
-- Unoptimized frontend computations.
+1. Too many font/back network calls.
+2. Too many database queries.
+3. High reponse time of the backend.
+4. High response time of the database.
+5. Unoptimized backend computations.
+6. Unoptimized frontend computations.
 
 <Separator/>
 
 ## How to Improve Web Performance ? 🚀
 
-- **Profiling** : tbib ya7taj diagnostique avant traitement. ma takder dir walou avant de diagnostiquer al wa9t win raw yro7. installe les outils de Profiling li lazam. Ida rak Django chouf m3a : Django debug toolbar, Django silk. CProfile. Snakeviz, Pyroscope, Pghero, Network tab te3 Chrome dev tools. Performance tab te3 chrome dev tools. Lighthouse tab te3 chrome dev tools, etc.
-- **Front caching**: Ida dert network call avec get. Khabi la réponse fel cache te3 front pour que les autres pages en profitent au lieu tab9a totlab la même donné à chaque fois. 
-- **Back caching** : Ida 3labalak la response li raja3ha back n'a pas changé, ça sert à rien t3awad tahsabha. Khabiha f RAM m3a redis w 3awad récupiriha ki ta7taj'ha.
-- **Asanah yotlab** : il faut pas charger une donnée user mazal ma tlab'hach. Asana yotlab'ha mba3ed sahal. Pagination c'est un exemple classique te3 point heda.
-- **Optimistic writing** : fel post w patch w put w delete, Ida makach validation kbira fel back y a pas besoin tasanah yrepondi 200. Update UI instantanément. astuce simple hadi mais ça fait une différence énorme.
-- **Change Detection**: change detection te3 frameworks ya9der ya3mi les perf koun ma ta3rflouch. Angular par ex donne la main de l'activer/désactiver Wella tbadal change detection strategy par component wella virtual-scroll. By the way hadi checklist Bahia te3 perf angular https://github.com/mgechev/angular-performance-checklist
-- **Computation** : Ida kaia computation pense à optimiser comment tes algo sont écrits w khaiar bien tes structures de données. dict par ex permet un accès immédiat sans parcourir une liste.
-- **GraphQL vs REST**: sa9si rohak Ida REST wella GraphQL raho plus pertinent pour ton produit pour éviter les problèmes te3 "under-fetching" w "over-fetching"
-- **DB tuning** : al3ab avec les paramètres te3 SGBD en fonction de la charge et Les ressources te3 server. pgtune ya9der y3awnek Ida rak postgres https://pgtune.leopard.in.ua/#/
-- **DB queries**: Ida une couche te3 back jabatt info men database vaut mieux tpassiha vers la couche suivante au lieu de refaire la même db query à chaque fois dans la même http request. 
-- **Indexes**: dir le bon indexe en fonction des critères de filtre w taba3 query execution plan si ça fait bien "Index Scan" au lieu de "Seq Scan".
-- **Partitionning :** Si tu arrives à segmenter les queries li yasraw f une large table. Pense a partitionner la table pour chaque segment.
-- **Denormalization** : parfois, pour des besoins de perf on est obligé de dé-normaliser la BDD en sauvegardant des données redondants calculables pour éviter de les calculer on the fly.
-- **Parallel programming** : Traitement li ma yahtajech séquentialité dirou en parallèle. Khaiar bien le bon schéma de parallélisme en fonction du besoin : multi-threading, multi-processing, task queue, etc.
-- **DevOps** : li hdarnah hatta dorka kamal dev. Mais DevOps 3ndo impact aussi. Bien paramétrer gunicorn, nginx, docker. Build front (Tree-shaking, minification, bundling, AOT compilation, etc.). Choisir les services cloud les plus pertinents, etc.
+1. **Profiling:** Before considering any improvement for a web app, we need to diagnose it, that's what profiling is all about, many tools makes it possible to profile a web app, here are some of them:
+    1. **Client Side Profiling:**
+        
+        - Lighthouse.
+        - WebPageTest.
+        - Chrome DevTools.
+        - PageSpeed Insights.
+    2. **Server Side Profiling:**
+        - Clinic.js (For NodeJs apps).
+        - VisualVM (For JVM based apps).
+        - profiling module (For Python apps).
+
+2. **Frontend caching:** You don't need to send a `GET` request on each page refresh, you can cache the response of your HTTP calls and serve them from the browser's cache. You can use the `Cache-Control` header to specify the cache duration of your HTTP calls, this is a must do for static assets like images, fonts, css, js, etc.
+3. **Backend caching:** You don't need to make a server-to-server call on resources that don't change often, you can use in memory caching (like redis) to store non-volatile date.
+4. **Consider using a CDN:** A CDN is a network of servers that are distributed across the globe, it will cache your static assets and serve them from the nearest server to the user, this will reduce the latency of your HTTP calls and will improve the performance of your website, Most CDNs implement caching and resource compression by default.
+5. **Assets Optimization:** Make sure to compress your assets using gzip and to use next generation image formats like WebP, AVIF, etc.
+5. **Don't Send It All At Once:** You don't need to send all the content of your web page at once, instead use lazy loading to load the content of your web page only when the user needs it, this concerns all kinds of resources like images, videos, fonts, and even API calls.
+5. **Optimistic UI:** You can use optimistic UI to make your web app feel faster, this is a technique that consists of updating the UI before the server responds to the user's action, this will make the user feel like the action was executed instantly, and will make the user feel like the app is faster.
+6. **Change Detection:** On each asynchronous event, Angular performs change detection over the entire component tree. Although the code which detects for changes is optimized for inline-caching, this still can be a heavy computation in complex applications. A way to improve the performance of the change detection is to not perform it for subtrees which are not supposed to be changed based on the recent actions.
+7. **Backend Computations:**
+    1. **Load Balancing & Horizontal Scaling:** Make sure that your backend is well designed so that you can distribute the backend computations across multiple servers, this will reduce the response time of your backend and make it more scalable.
+    2. **Parallelism:** Choose the right pattern for your  parallel backend computations (multi-threading, multi-processing, multi-tasking... ), some comutations don't need to be done sequentially, you can use parallelism to speed up your backend computations.
+8. **Backend Tuning:** Make sure to tune your backend to suite your available resources and the needs of your application, Depending of your infrastructure, you should tune each layer of your backend to use the right amount of CPU, RAM, Disk, DB Pool Size, Network, etc.
+9. **DataBase Tuning:** Tune your SGBD to suite your needs and the available resources of your DB Serve, [PGTune](https://pgtune.leopard.in.ua/#/) is a good tool for tuning Postgres Databases.
+10. **DataBase Queries**: Database calls can be expensive, so avoid to re-call the database to fetch a resources that another layer of your backend already fetched.
+11. **DataBase Indexes**: A SQL index is used to retrieve data from a database very fast. Indexing a table or view is, without a doubt, one of the best ways to improve the performance of queries, so make sure to put indexes on the columns that you use in your queries.
+13. **DataBase Denormalization** : It's a technique that consists of storing redundant data in a database to avoid expensive joins, this will improve the performance of your database queries.
+14. **Pick The Perfect Location For Your Servers:** Make sure to choose the right location for your servers, so that it will be the closest possible to your users, this will reduce the latency of your HTTP calls.
+
+<Separator/>
+
+<h2>Final Thoughts,</h2>
+In this article we have seen the importance of web performance and how to improve it. I hope you enjoyed it and learned something new. If you have any questions or suggestions, feel free to leave a comment below. If you liked this article, please share it with your friends and colleagues. Thank you for reading 🙏
