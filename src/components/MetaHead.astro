@@ -12,7 +12,7 @@ export interface Props {
 }
 const DEV = await import.meta.env.DEV;
 const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, author, showAds} = Astro.props as Props;
-
+const disableAds = true;
 ---
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -47,7 +47,7 @@ const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, 
     </script>)
 }
 {
-  !DEV && !(showAds===false) && (
+  !DEV && !(showAds===false) && !(disableAds) && (
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6800477127231548" crossorigin="anonymous"></script>
   )
 }
