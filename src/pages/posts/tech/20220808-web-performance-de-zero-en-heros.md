@@ -1,0 +1,90 @@
+---
+setup: |
+  import Layout from '@layouts/BlogPost.astro'
+  import Separator from '@comps/Separator.astro'
+  import Tooltip from '@comps/Tooltip.astro'
+  import img0 from '@assets/blog/tech/20220808-web-performance-de-zero-en-heros/0.png'
+  import Image from '@comps/Image.astro'
+title: Web Performance, de Zéro en Héros
+publishDate: August 08, 2022
+authorName: "@FrenchTechLead"
+authorSocial: "https://twitter.com/FrenchTechLead"
+postImageUrl: https://frenchtechlead.com/assets/blog/tech/20220808-web-performance-de-zero-en-heros/0.png
+postImageAlt: Web Performance, de Zéro en Héros
+postImageWidth: 842
+postImageHeight: 462
+keywords:
+  - "Web Performance"
+  - "Web Performance 101"
+  - "Comment améliorer la vitesse de votre site ?"
+  - "Comment améliorer la performance web ?"
+  
+permalink: https://frenchtechlead.com/posts/tech/20220808-web-performance-de-zero-en-heros/
+description: "Un guide complet sur la performance web. Apprenez comment améliorer la vitesse de votre site et la performance web en appliquant les meilleures pratiques."
+draft: false
+lang: fr
+---
+
+<Image src={img0} t='Web Performance 101' solo={true}/>
+
+<h2>Que signifie la performance web ? 🏎️</h2>
+Les performances Web sont la vitesse de chargement d'un site Web et la rapidité avec laquelle il répond aux interactions des utilisateurs. C'est un facteur critique dans le succès d'un site web.
+
+<Separator/>
+
+<h2>Pourquoi les performances du Web sont-elles importantes ? 🤔</h2>
+
+- **👌 Expérience utilisateur:** Un site web rapide offrira une meilleure expérience utilisateur, les statistiques montrent que 53% des utilisateurs abandonneront un site web s'il prend plus de 3 secondes à charger.
+- **⚙️ SEO:** Google a introduit des vitaux web et considère la vitesse des pages comme un facteur de classement. Un site web rapide sera mieux classé dans les moteurs de recherche, les statistiques montrent que le premier résultat dans Google obtient 34% des clics et le deuxième résultat obtient 17% des clics.
+- **🤝🏻 Taux de conversion:** Un site web rapide aura un taux de conversion plus élevé. Un site web lent aura un taux de conversion plus faible.
+- **🚪 Taux de rebond:** Un site web rapide aura un taux de rebond plus faible. Un site web lent aura un taux de rebond plus élevé.
+- **🤑 Coûts:** Le coût d'hébergement d'un site rapide est plus susceptible de coûter moins cher que celui d'un site lent, principalement en raison de la bande passante et de l'utilisation du CPU de votre service d'hébergement.
+
+> Une bonne expérience utilisateur conduira à moins de stress et à plus de productivité pour vos utilisateurs, et conduira à moins de tickets de support et à plus d'efficacité pour votre équipe de support.
+
+<Separator/>
+
+<h2>Quels sont les principaux tueurs de performances Web ? 💀</h2>
+
+1. Trop d'appels réseau de type font/back.
+2. Trop de requêtes de base de données.
+3. Temps de réponse élevé du backend.
+4. Temps de réponse élevé de la base de données.
+5. Calculs du backend non optimisés.
+6. Calculs frontaux non optimisés.
+
+<Separator/>
+
+<h2>Comment améliorer les performances du Web ? 🚀</h2>
+
+1. **Profilage:** Avant d'envisager toute amélioration pour une application web, il faut la diagnostiquer, c'est tout l'intérêt du profilage, de nombreux outils permettent de profiler une application web, en voici quelques-uns :
+    * **Client Side Profiling:**
+      - Lighthouse.
+      - WebPageTest.
+      - Chrome DevTools.
+      - PageSpeed Insights.
+    * **Server Side Profiling:**
+      - Clinic.js (pour les applications NodeJs).
+      - VisualVM (pour les applications basées sur JVM).
+      - Profiling module (pour les applications Python).
+2. **Mise en cache côté front:** Vous n'avez pas besoin d'envoyer une requête GET à chaque rafraîchissement de page, vous pouvez mettre en cache la réponse de vos appels HTTP et les servir à partir du cache du navigateur. Vous pouvez utiliser l'en-tête Cache-Control pour spécifier la durée de mise en cache de vos appels HTTP, ce qui est indispensable pour les ressources statiques telles que les images, les polices, les css, les js, etc.
+3. **Mise en cache du backend:** vous n'avez pas besoin de faire un appel de serveur à serveur sur des ressources qui ne changent pas souvent, vous pouvez utiliser la mise en cache en mémoire (comme redis) pour stocker des données non volatiles.
+4. **Envisagez l'utilisation d'un CDN:** Un CDN est un réseau de serveurs distribués dans le monde entier, il mettra en cache vos ressources statiques et les servira à partir du serveur le plus proche de l'utilisateur, ce qui réduira la latence de vos appels HTTP et améliorera les performances de votre site Web.
+5. **Optimisation des ressources:** Veillez à compresser vos ressources à l'aide de gzip et à utiliser des formats d'image de nouvelle génération comme WebP, AVIF, etc.
+6. **N'envoyez pas tout en même temps:** Vous n'avez pas besoin d'envoyer tout le contenu de votre page web en même temps, utilisez plutôt le chargement paresseux pour charger le contenu de votre page web uniquement lorsque l'utilisateur en a besoin, cela concerne toutes sortes de ressources comme les images, les vidéos, les polices et même les appels API.
+7. **Interface utilisateur optimiste:** Vous pouvez utiliser l'interface utilisateur optimiste pour donner l'impression que votre application Web est plus rapide. Il s'agit d'une technique qui consiste à mettre à jour l'interface utilisateur avant que le serveur ne réponde à l'action de l'utilisateur, ce qui donnera à l'utilisateur l'impression que l'action a été exécutée instantanément et que l'application est plus rapide.
+8. **Détection des changements:** À chaque événement asynchrone, Angular/React effectue une détection des changements sur l'ensemble de l'arbre des composants. Bien que le code qui détecte les changements soit optimisé pour la mise en cache en ligne, cela peut encore être un calcul lourd dans les applications complexes. Une façon d'améliorer les performances de la détection des changements est de ne pas l'effectuer pour les sous-arbres qui ne sont pas censés être modifiés en fonction des actions récentes.
+9. **Calculs côté serveur:**
+Équilibrage de la charge et scalabilité horizontale: Assurez-vous que votre backend est bien conçu afin de pouvoir distribuer les calculs du backend sur plusieurs serveurs, ce qui réduira le temps de réponse de votre backend et le rendra plus évolutif.
+Parallélisme: Choisissez le bon modèle pour vos calculs parallèles (multi-threading, multi-processing, multi-tasking... ), certains calculs n'ont pas besoin d'être effectués séquentiellement, vous pouvez utiliser le parallélisme pour accélérer vos calculs.
+10. **Tuning du backend:** Assurez-vous de régler votre backend en fonction de vos ressources disponibles et des besoins de votre application. En fonction de votre infrastructure, vous devez régler chaque couche de votre backend pour utiliser la bonne quantité de CPU, RAM, Disque, Taille du pool de DB, Réseau, etc.
+11. **Tuning de la base de données:** Réglez votre SGBD en fonction de vos besoins et des ressources disponibles de votre serveur de BD. PGTune est un bon outil pour régler les bases de données Postgres.
+12. **Requêtes de la base de données:** Les appels à la base de données peuvent être coûteux, évitez donc de rappeler la base de données pour récupérer une ressource qu'une autre couche de votre backend a déjà récupérée.
+13. **Indexation de vos colonnes:** Un index SQL est utilisé pour récupérer très rapidement des données dans une base de données. L'indexation d'une table ou d'une vue est, sans aucun doute, l'un des meilleurs moyens d'améliorer les performances des requêtes. Veillez donc à mettre des index sur les colonnes que vous utilisez dans vos requêtes.
+14. **Dénormalisation de la base de données:** C'est une technique qui consiste à stocker les données redondantes dans une base de données pour éviter les jointures coûteuses, cela améliorera les performances de vos requêtes de base de données.
+15. **Choisissez l'emplacement idéal pour vos serveurs:** Assurez-vous de choisir le bon emplacement pour vos serveurs, afin qu'il soit le plus proche possible de vos utilisateurs, cela réduira la latence de vos appels HTTP.
+
+<Separator/>
+
+<h2>Pour finir,</h2>
+Dans cet article, nous avons vu l'importance des performances web et comment les améliorer. J'espère que vous l'avez apprécié et que vous avez appris quelque chose de nouveau. Si vous avez des questions ou des suggestions, n'hésitez pas à laisser un commentaire ci-dessous. Si vous avez aimé cet article, merci de le partager avec vos amis et collègues. Merci de votre lecture 🙏
