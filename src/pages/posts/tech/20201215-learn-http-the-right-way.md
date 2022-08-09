@@ -140,7 +140,7 @@ You can find the exhaustive list of status codes in the [official RFC of HTTP](h
 
 ###  2–2 Response-Headers:
 
-The R**esponse-Header** fields allow the server to pass additional information about the response which cannot be placed in the **Status-Line**. These header fields give information about the server and about further access to the resource identified by the Request-URI, E.g:
+The **Response-Header** fields allow the server to pass additional information about the response which cannot be placed in the **Status-Line**. These header fields give information about the server and about further access to the resource identified by the Request-URI, E.g:
 
 ```marko
 Content-Type: Indicates the media type of the entity-body 
