@@ -1,12 +1,5 @@
 ---
-setup: |
-  import Layout from '@layouts/BlogPost.astro'
-  import Separator from '@comps/Separator.astro'
-  import img0 from '@assets/blog/tech/20220717-my-route53-domain-is-not-resolved/0.png'
-  import img1 from '@assets/blog/tech/20220717-my-route53-domain-is-not-resolved/1.png'
-  import img2 from '@assets/blog/tech/20220717-my-route53-domain-is-not-resolved/2.png'
-  import img3 from '@assets/blog/tech/20220717-my-route53-domain-is-not-resolved/3.png'
-  import Image from '@comps/Image.astro'
+
 title: My Route53 domain is not getting resolved
 publishDate: Jully 17, 2022
 authorName: "@FrenchTechLead"
@@ -25,6 +18,14 @@ permalink: https://frenchtechlead.com/posts/tech/20220717-my-route53-domain-is-n
 description: "Dubugging why my newely created Route53 domain name is not getting resolved on the internet"
 draft: false
 ---
+import Layout from '@layouts/BlogPost.astro'
+import Separator from '@comps/Separator.astro'
+import img0 from '@assets/blog/tech/20220717-my-route53-domain-is-not-resolved/0.png'
+import img1 from '@assets/blog/tech/20220717-my-route53-domain-is-not-resolved/1.png'
+import img2 from '@assets/blog/tech/20220717-my-route53-domain-is-not-resolved/2.png'
+import img3 from '@assets/blog/tech/20220717-my-route53-domain-is-not-resolved/3.png'
+import Image from '@comps/Image.astro'
+
 A few days ago i bought a new domain name (https://bienparler.fr) for my Nth side project 😅, I purchased the domain name directly from AWS Route53 but surprisingly, the domain name was not getting resolved.
 <Separator/>
 ## Debugging with nslookup & dig 🕵️

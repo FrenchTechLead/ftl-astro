@@ -1,10 +1,6 @@
 ---
-setup: |
-  import Layout from '@layouts/BlogPost.astro'
-  import Separator from '@comps/Separator.astro'
-  import img1 from '@assets/blog/tech/20201223-how-to-fetch/0.avif'
-  import img2 from '@assets/blog/tech/20201223-how-to-fetch/0.jpeg'
-  import Image from '@comps/Image.astro'
+
+
 title: How To Fetch the Number of Claps and Comments Under a Medium Story
 publishDate: December 23, 2020
 authorName: "@FrenchTechLead"
@@ -22,6 +18,11 @@ permalink: https://frenchtechlead.com/posts/tech/20201223-how-to-fetch-the-numbe
 description: "How to programmatically retrieve the stats (number of claps and comments) of any Medium.com post using a custom REST API."
 draft: false
 ---
+import Layout from '@layouts/BlogPost.astro'
+import Separator from '@comps/Separator.astro'
+import img1 from '@assets/blog/tech/20201223-how-to-fetch/0.avif'
+import img2 from '@assets/blog/tech/20201223-how-to-fetch/0.jpeg'
+import Image from '@comps/Image.astro'
 
 In this article I will explain how to programmatically retrieve the stats (number of claps and comments) of any Medium post using a custom REST API, the lack of this feature in the official Medium REST API is what motivated me to create this custom REST API.
 <Separator/>

@@ -1,9 +1,4 @@
 ---
-setup: |
-  import Layout from '@layouts/BlogPost.astro'
-  import Separator from '@comps/Separator.astro'
-  import img0 from '@assets/blog/tech/20220627-a-story-of-a-web-developer/0.png'
-  import Image from '@comps/Image.astro'
 title: A Story of a Web Developer, Part 1
 publishDate: June 27, 2022
 authorName: "@FrenchTechLead"
@@ -20,6 +15,10 @@ permalink: https://frenchtechlead.com/posts/tech/20220627-a-story-of-a-web-devel
 description: "Some thoughts about web developmeent and the right framework to use."
 draft: false
 ---
+import Layout from '@layouts/BlogPost.astro'
+import Separator from '@comps/Separator.astro'
+import img0 from '@assets/blog/tech/20220627-a-story-of-a-web-developer/0.png'
+import Image from '@comps/Image.astro'
 
 ### Just some random Thoughts 👨‍💻
 I started JavaScript in 2010 when I graduated from high school.
@@ -38,7 +37,7 @@ After I got my masters in 2017, I was still making sites and even npm libraries 
 While learning Angular, I noticed how much junior and even less junior developers could have difficulties to understand its principles (ex: many developers apply their previous knowledge on an Angular project without further consideration, e.g.: interaction with the DOM directly with `document.getElementByID`).
 
 So despite all the rules imposed by the Angular Framework, many devs still make anti-patterns seeing no problem "as long as it works".
-At that time I learned that the choice of Angular in a large structure where the turnover is important and where the level of the devs is not always homogeneous, is rather a good idea.
+At that time I learned that the choice of Angular in a large structure where the turnover isimportant and where the level of the devs is not always homogeneous, is rather a good idea.
 
 As for me, I learned to use Angular by taking advantage of its strong default typing, routing, modularity, lazy loading, observability by default ...
 

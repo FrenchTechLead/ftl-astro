@@ -1,10 +1,5 @@
 ---
-setup: |
-  import Layout from '@layouts/BlogPost.astro'
-  import Separator from '@comps/Separator.astro'
-  import Tooltip from '@comps/Tooltip.astro'
-  import img0 from '@assets/blog/tech/20220808-web-performance-de-zero-en-heros/0.png'
-  import Image from '@comps/Image.astro'
+
 title: Web Performance, de Zéro en Héros
 publishDate: August 08, 2022
 authorName: "@FrenchTechLead"
@@ -24,6 +19,11 @@ description: "Un guide complet sur la performance web. Apprenez comment amélior
 draft: false
 lang: fr
 ---
+import Layout from '@layouts/BlogPost.astro'
+import Separator from '@comps/Separator.astro'
+import Tooltip from '@comps/Tooltip.astro'
+import img0 from '@assets/blog/tech/20220808-web-performance-de-zero-en-heros/0.png'
+import Image from '@comps/Image.astro'
 
 <Image src={img0} t='Web Performance 101' solo={true}/>
 
@@ -32,7 +32,7 @@ Les performances Web sont la vitesse de chargement d'un site Web et la rapidité
 
 <Separator/>
 
-<h2>Pourquoi les performances du Web sont-elles importantes ? 🤔</h2>
+<h2>Pourquoi les performances du Web sont-ellesimportantes ? 🤔</h2>
 
 - **👌 Expérience utilisateur:** Un site web rapide offrira une meilleure expérience utilisateur, les statistiques montrent que 53% des utilisateurs abandonneront un site web s'il prend plus de 3 secondes à charger.
 - **⚙️ SEO:** Google a introduit des vitaux web et considère la vitesse des pages comme un facteur de classement. Un site web rapide sera mieux classé dans les moteurs de recherche, les statistiques montrent que le premier résultat dans Google obtient 34% des clics et le deuxième résultat obtient 17% des clics.
