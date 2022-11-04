@@ -21,7 +21,7 @@ permalink: https://frenchtechlead.com/posts/tech/20210615-the-hardest-production
 description: "In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we diagnosed it, and correct it in my company."
 ---
 import Layout from '@layouts/BlogPost.astro'
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import Image from '@comps/Image.astro'
 import img1 from '@assets/blog/tech/20210615-the-hardest-production-bug/1.avif'
 import img2 from '@assets/blog/tech/20210615-the-hardest-production-bug/2.avif'
@@ -32,11 +32,11 @@ import img4 from '@assets/blog/tech/20210615-the-hardest-production-bug/4.avif'
 
 In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we **diagnosed it**, and the way we managed to **correct it** in my company.
 
-<Separator/>
+
 
 By the time you’re reading this article, IE might not exist anymore since Microsoft has announced its abandonment by [June 15, 2022](https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/), so most companies and individuals should work on moving to another browser in order to stay safe, this is good news for web developers because they know that Internet Explorer has always been a pain-in-the-neck when it comes to web development, mostly because of its various CSS and JavaScript incompatibilities, often we can find some polyfills for these kinds of issues; **The issue I’m going to describe in this article isn’t related to JS or CSS, it’s a very weird behavior from IE when it receives an exotic HTTP response, so for once we can’t really say that its IE’s fault.**
 
-<Separator/>
+
 
 ## The context 📃
 
@@ -53,7 +53,7 @@ What makes the bug so exotic 🥝
 *   It only happens on IE and on the production environment.
 *   No major changes were pushed to prod before the bug report.
 
-<Separator/>
+
 
 ## Reproducing the Bug 🐛
 
@@ -127,12 +127,12 @@ We have found a serious lead by using **Fiddler**, we noticed that our **304** r
 
 > A 304 response [cannot contain a message-body](https://httpstatuses.com/304); it is always terminated by the first empty line after the header fields.
 
-<Separator/>
+
 
 > Check out the following article to learn HTTP the right way ✅
 > [Before Learning Rest / Soap / GraphQL / You Need To Understand HTTP !](https://mecheri-akram.medium.com/before-learning-rest-soap-graphql-you-need-to-understand-http-9eb80de6cfbf)
 
-<Separator/>
+
 
 
 

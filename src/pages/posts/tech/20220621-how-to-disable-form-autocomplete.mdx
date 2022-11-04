@@ -1,5 +1,4 @@
 ---
-
 title: How To Disable HTML Form Autocomplete
 publishDate: June 21, 2022
 authorName: '@FrenchTechLead'
@@ -26,15 +25,13 @@ import img3 from '@assets/blog/tech/20220621-how-to-disable-form-autocomplete/3.
 Have you ever felt the frustration of Chrome’s form autocomplete suggesting values to your inputs that are not suitable to their context ?
 
 
-<Separator/>
-
 ## Form Autocomplete in action:
 
 ### Example 1:
 
 <label for="ex1">Click on the input below and see the autocomplete suggestions, Does it make sense ?</label><br/>
 
-<input style="margin-top:20px;" placeholder="Name" name="name" id="ex1"/>
+<input style="margin-top:20px;" placeholder="Name" name="name" id="ex1" />
 
 Well it does not make sense, because the suggestions are not relevant to the context of the input, For me Google Chrome is suggesting the following values to the input:
 
@@ -43,12 +40,11 @@ Well it does not make sense, because the suggestions are not relevant to the con
 Google Chrome is suggesting the above values based on the name attribute of the HTML input element.
 
 ```html
-<input placeholder="Name" name="name" id="ex1"/>
+<input placeholder="Name" name="name" id="ex1" />
 ```
 Each time you submit a form containing an input having the **name attribute**, Google Chrome will save the submitted value to the browser’s local storage and will suggest the same value to the next input with the same **name** attribute.  
 However, sometimes you want to disable this behavior, and have a clean and coherent experience for the user regardless of the value of the name attribute.
 
-<Separator/>
 
 
 ## How to diable HTML Form Autofill / Autocomplete:
@@ -66,7 +62,7 @@ By inspecting the Google Search input, we see that it has following attributes:
     autocorrect="off"
     spellcheck="false"
     title="Rechercher"
-    >
+    />
 
 ```html
 <input 
@@ -82,7 +78,6 @@ By inspecting the Google Search input, we see that it has following attributes:
 
 So Google is using the above attributes in order to disable the browser's native autocomplete behaviour of the input, reagardless of the value of the name attribute with is always the same **(q)**.
 
-<Separator/>
 
 ## Disabling HTML Form Autofill / Autocomplete with pure HTML:
 Just do like Google and use the following **4** HTML Attributes:
@@ -95,7 +90,6 @@ Just do like Google and use the following **4** HTML Attributes:
     >
 ```
 
-<Separator/>
 
 ## Disabling HTML Form Autofill / Autocomplete with Angular:
 > It would be a boring and repeating task to put these **4** HTML attributes on all your HTML inputs, we can do better thanks to Angular **Directives**.
@@ -151,7 +145,6 @@ export class AutocompleteOffDirective {
   }
 ```
 
-<Separator/>
 
 Final thoughts,
 ----

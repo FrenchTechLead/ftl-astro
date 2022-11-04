@@ -17,14 +17,14 @@ description: 'This article we explain how to use Angular SVG Components to creat
 draft: false
 ---
 import Layout from '@layouts/BlogPost.astro'
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import Image from '@comps/Image.astro'
 import img1 from '@assets/blog/tech/20220430-svg-as-angular-template/1.avif'
 import img2 from '@assets/blog/tech/20220430-svg-as-angular-template/2.gif'
 
 One of the least known features of **Angular** is its capability to handle **SVGs** as **Templates**, most people use **HTML** as the templating language for their components, but do you know that you can use **SVG** as well? I didn't ! until I came across a situation where I had to represent a very complicated and dynamic **network diagram** the same way it was designed on the **Figma** Mockup by the UI Team of my company.
 
-<Separator/>
+
 
 
 SVG templates in Angular
@@ -34,7 +34,7 @@ SVG templates in Angular
 By combining **SVG** and **Angular**, you can easily enhance mobile and web applications with interactive controls and states.  
 Using **SVG** based templates in **Angular** supercharges the **SVG** images by the power of **Angular** framework, all the cool functionalities such as **property binding**, **event binding**, **directives** ,**inputs and outputs** and so on, make **SVG** images interactive, dynamic, responsive and strongly typed !
 
-<Separator/>
+
 
 The Secret Origin of SVG 
 ----------------
@@ -55,7 +55,7 @@ Well i thought it was a brilliant idea 💡
 And that's how i came up with the idea of using **SVG** as **Angular** template.  
 The actual **network diagram** is a property of my previous company, so I'll use a different diagram to illustrate the idea.
 
-<Separator/>
+
 
 Example of an Angular SVG Template
 ----------------
@@ -187,14 +187,14 @@ interface SvgTexts {
 }
 ```
 
-<Separator/>
+
 
 Run Angular SVG Component on Stackblitz:
 ---------------------------------------------------------------------------------------------------
 You can run now the component on Stackblitz by following this link : [Angular SVG Template](https://stackblitz.com/edit/angular-ivy-w68tpr?file=src/app/app.component.svg)
 
 
-<Separator/>
+
 
 Pros of using Angular SVG Components
 ----
@@ -207,7 +207,7 @@ You can have many advantages when using Angular SVG Components instead of a diag
 6. You don't have to learn a new library to use diagrams in your project (the learning curve of such a library is often an S-Curve).
 7. SVG is basically XML, if you know HTML you know SVG too.
 
-<Separator/>
+
 
 Cons of using Angular SVG Components
 ----
@@ -219,7 +219,7 @@ On the other hand, you can have some disadvantages when using Angular SVG Compon
 
 > If you wanna handle zoom events I suggest you to try [panzoom](https://github.com/anvaka/panzoom) which does the job really well.
 
-<Separator/>
+
 
 Final thoughts,
 ----

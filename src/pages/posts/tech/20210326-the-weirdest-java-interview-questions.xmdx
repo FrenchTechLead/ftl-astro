@@ -17,12 +17,12 @@ description: "This is a post that gathers the weirdest Java interview questions 
 draft: false
 ---
 import Layout from '@layouts/BlogPost.astro'
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import Image from '@comps/Image.astro'
 
 This is a post that gathers the weirdest Java interview questions that I personally faced during job interviews or heard of during my career as a Software Engineer.
 
-<Separator/>
+
 
 ## 1\. Print Hello World without using any semicolon :
 
@@ -32,7 +32,7 @@ When I first heard this question I found it really funny, I was asking myself wh
 
 Well, No this has nothing to do with being a better programmer, but it highlights someone’s ability to think out of the box.
 
-<Separator/>
+
 
 **Answer 1.** Here is one way to do it :
 
@@ -44,7 +44,7 @@ public static void main(String[] args) {
 
 The `printf` method not only prints a `String` to the standard output stream `System.out` but it also returns a `PrintStream` object representing this standard output stream, we can make a `null` condition check inside an `if` statement to achieve our goal.
 
-<Separator/>
+
 
 ## 2\. The Weird Integer Type :
 
@@ -81,7 +81,7 @@ false
 
 This is because The `Integer` type keeps a cache of all objects with a value in the range of **-128** to **127** for performance reasons. So when you declare new variables in that range, you’re actually referring to the same object.
 
-<Separator/>
+
 
 ## 3\. Checked VS Unchecked Exceptions :
 
@@ -141,7 +141,7 @@ The overriding method can not throw a higher `Exception` than the original. So i
 
 So, Snippet 1 is **not valid** and Snippet 2 is **valid**!
 
-<Separator/>
+
 
 ## 4\. Enums and Lambda expressions :
 
@@ -259,7 +259,7 @@ enum Operation implements IntBinaryOperator {
 
 > The use of lambdas, in this case, reduces boilerplate considerably, though these are some very simple calculation methods, it would not be correct to use lambdas when the methods are complex and require a lot of code. It would just become cumbersome.
 
-<Separator/>
+
 
 ## Final Thoughts :
 

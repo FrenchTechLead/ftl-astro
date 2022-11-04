@@ -18,14 +18,14 @@ description: "There is a ton of repetitive tasks that we can automate thanks to 
 draft: false
 ---
 import Layout from '@layouts/BlogPost.astro'
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import img1 from '@assets/blog/tech/20210318-how-to-build-a-web-bot-in-2-minutes/1.gif'
 import Image from '@comps/Image.astro'
 
 There is a ton of repetitive tasks that we can automate thanks to bots, in this article I’ll show you the easiest and the fastest way to build a bot using Python and Selenium 🚀🚀🚀.
 
 
-<Separator/>
+
 
 1 . Download the Chrome Web Driver 🔨 :
 ---------------------------------------
@@ -40,7 +40,7 @@ Chrome web driver makes it possible to manage the browser using any programming 
 export PATH="$PATH:/Library/webdrivers/"
 ```
 
-<Separator/>
+
 
 2\. Install the Selenium package for Python 📦 :
 ------------------------------------------------
@@ -49,7 +49,7 @@ export PATH="$PATH:/Library/webdrivers/"
 pip install selenium
 ```
 
-<Separator/>
+
 
 3\. The Python code 🐍 :
 ------------------------
@@ -71,6 +71,6 @@ This is a simple bot program that shows you how Selenium works, there is a lot o
 *   End-to-end tests of a web application.
 *   ….
 
-<Separator/>
+
 
 **That’s it**, if you find this article interesting don’t hesitate to let me a comment or hit the 👏 button below.

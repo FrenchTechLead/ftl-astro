@@ -21,7 +21,7 @@ lang: fr
 draft: false
 ---
 import Layout from '@layouts/BlogPost.astro'
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import img1 from '@assets/blog/tech/20201023-git-pour-debutant/1.png'
 import img2 from '@assets/blog/tech/20201023-git-pour-debutant/2.png'
 import img3 from '@assets/blog/tech/20201023-git-pour-debutant/3.png'
@@ -39,12 +39,12 @@ import img14 from '@assets/blog/tech/20201023-git-pour-debutant/14.png'
 import Image from '@comps/Image.astro'
 
 Dans cet article, nous allons découvrir l’essentiel de Git et Gitlab afin de permettre une prise en main rapide de ces deux outils 🚀.
-<Separator/>
+
 
 1.  **Git** est un outil de gestion de version, c’est à dire qu’il permet de sauvegarder plusieurs versions de fichiers et dossiers, ce versioning permet de suivre l’évolution des fichiers et permet aussi de revenir sur n’importe quelle version de ces fichiers au besoin.
 2.  **Gitlab** est une plateforme de DevOps complète, elle offre énormément de fonctionnalités permettant le travail collaboratif dans le développement logiciel notamment Git, dans ce cours nous allons seulement aborder la partie **dépôt distant** de Gitlab.
 
-<Separator/>
+
 
 ## 1. Git:
 
@@ -277,7 +277,7 @@ Maintenant qu’on a mergé la branche **branche_1** on peut la supprimer:
 ```
 git branch -d branche_1
 ```
-<Separator/>
+
 
 ## 2. Gitlab
 
@@ -373,7 +373,7 @@ article-1.txt     article-2.txt     article-3.txt
 On retrouve le fichier article-3.txt qu’on a créé sur Gitlab.
 
 
-<Separator/>
+
 
 
 Et voilà tout pour ce petit cours Git / Gitlab, vous êtes censé maintenant connaitre assez de commandes Git pour versionner vos fichiers, vous savez aussi comment envoyer ces fichiers sur un dépôts distant.
@@ -387,7 +387,7 @@ git fetch
 git --help
 ```
 
-<Separator/>
+
 
 ## Pour finir,
 

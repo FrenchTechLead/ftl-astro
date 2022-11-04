@@ -20,7 +20,7 @@ description: "HTTP stands for Hypertext Transfer Protocol, initially created for
 draft: false
 ---
 import Layout from '@layouts/BlogPost.astro'
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import img1 from '@assets/blog/tech/20201215-learn-http-the-right-way/1.png'
 import img2 from '@assets/blog/tech/20201215-learn-http-the-right-way/2.png'
 import img3 from '@assets/blog/tech/20201215-learn-http-the-right-way/3.png'
@@ -28,7 +28,7 @@ import Image from '@comps/Image.astro'
 
 **HTTP** stands for Hypertext Transfer Protocol, initially created for **web** browser/server communication, it has many more use cases today.
 
-<Separator/>
+
 
 In the last few years, I’ve observed many junior developers having a hard time creating and maintaining **REST** and **SOAP** services, after a short discussion with them, I often realized that the main reason was the lack of knowledge of the **HTTP** protocol.  
 So in this article, I’ll briefly explain the fundamentals of the HTTP protocol.
@@ -37,7 +37,7 @@ So in this article, I’ll briefly explain the fundamentals of the HTTP protocol
 
 The HTTP protocol is a request/response protocol based on the client/server based architecture where web browsers, robots, and search engines, etc. act like HTTP clients, and the Web server acts as a server.
 
-<Separator/>
+
 
 
 ## 1 - HTTP REQUEST 💻 ➡ 🌎 :
@@ -60,7 +60,7 @@ E.g:
 GET /posts/post-1.html HTTP/1.1
 ```
 
-<Separator/>
+
 
 ###  1-1-1 Request-Methods:
 
@@ -75,14 +75,14 @@ _Most used HTTP Methods :_
 > Other HTTP Methods exists like : HEAD, CONNECT, PATCH… we will not cover them in this article because they are rarely used in API design.
 
 
-<Separator/>
+
 
 ###  1–1–2: Request-URI (Path):
 
 The **Request-URI** is a Uniform Resource Identifier and identifies the resource on the server upon which to apply the request.
 
 
-<Separator/>
+
 
 ###  1-2 Request-Headers:
 
@@ -97,14 +97,14 @@ Host: Identifies the server being requested
 Content-Type: Identifies the MIME type of the entity-body carried in HTTP Request or Response
 ```
 
-<Separator/>
+
 
 ###  1–3 Request-Body:
 
 The Request-Body of an HTTP Request is used to carry the entity-body associated with the request, A Request-Body MUST NOT be included in a request if the specification of the request method does not allow sending an entity-body in requests.
 
 
-<Separator/>
+
 
 ## 2. HTTP RESPONSE 💻 ⬅🌎
 ```
@@ -124,7 +124,7 @@ Content-Length: 97
 </html>
 ```
 
-<Separator/>
+
 
 ### 2–1 Status-Line:
 
@@ -136,7 +136,7 @@ HTTP/1.1 200 OK
 
 You can find the exhaustive list of status codes in the [official RFC of HTTP](https://tools.ietf.org/html/rfc2616#section-10).
 
-<Separator/>
+
 
 ###  2–2 Response-Headers:
 
@@ -147,7 +147,7 @@ Content-Type: Indicates the media type of the entity-body
 Content-Length: Indicates the size of the entity-body, in decimal number of bytes
 ```
 
-<Separator/>
+
 
 ###  2–3 Response-Body:
 
@@ -194,7 +194,7 @@ Running this Python code will render the following output :
 
 <Image w="1110" h="958" src={img3} t="Example of HTTP Request" solo="true" />
 
-<Separator/>
+
 
 **A Web browser works exactly the same as the previous python program :**
 
@@ -203,7 +203,7 @@ Running this Python code will render the following output :
 *   The server responds with a well-formatted HTTP-Response.
 *   The web browser parses the HTTP-Response and displays it.
 
-<Separator/>
+
 
 ## Final thoughts,
 In this article, we have learned the basics of HTTP, and how to use it to send and receive bytes from an HTTP server.  

@@ -19,17 +19,17 @@ description: "How to programmatically retrieve the stats (number of claps and co
 draft: false
 ---
 import Layout from '@layouts/BlogPost.astro'
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import img1 from '@assets/blog/tech/20201223-how-to-fetch/0.avif'
 import img2 from '@assets/blog/tech/20201223-how-to-fetch/0.jpeg'
 import Image from '@comps/Image.astro'
 
 In this article I will explain how to programmatically retrieve the stats (number of claps and comments) of any Medium post using a custom REST API, the lack of this feature in the official Medium REST API is what motivated me to create this custom REST API.
-<Separator/>
+
 
 First, let’s see the documentation of the official public [REST API](https://github.com/Medium/medium-api-docs) by Medium.
 
-<Separator/>
+
 
 When it comes to articles (posts), The official Medium API only provides an HTTP POST method to create a Medium article (cf [section 3.3](https://github.com/Medium/medium-api-docs#33-posts)), **you can not edit or retrieve an article using the official REST API** 😥, I don’t really know why Medium staff has decided not to implement such a useful feature, but it’s certainly a regretting design choice.
 
@@ -81,7 +81,7 @@ console.log(window.__APOLLO_STATE__["Post:POST_ID"]);
 
 Now that we found where the stats are available at, we only need to parse the HTML page and look for the two tokens containing the number of claps and comments which are `clapCount` and `postResponses.count` .
 
-<Separator/>
+
 
 ## How to use the custom API :
 

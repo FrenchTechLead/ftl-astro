@@ -20,7 +20,7 @@ draft: false
 lang: fr
 ---
 import Layout from '@layouts/BlogPost.astro'
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import Tooltip from '@comps/Tooltip.astro'
 import img0 from '@assets/blog/tech/20220808-web-performance-de-zero-en-heros/0.png'
 import Image from '@comps/Image.astro'
@@ -30,7 +30,7 @@ import Image from '@comps/Image.astro'
 <h2>Que signifie la performance web ? 🏎️</h2>
 Les performances Web sont la vitesse de chargement d'un site Web et la rapidité avec laquelle il répond aux interactions des utilisateurs. C'est un facteur critique dans le succès d'un site web.
 
-<Separator/>
+<Separator><Separator/>
 
 <h2>Pourquoi les performances du Web sont-ellesimportantes ? 🤔</h2>
 
@@ -42,7 +42,7 @@ Les performances Web sont la vitesse de chargement d'un site Web et la rapidité
 
 > Une bonne expérience utilisateur conduira à moins de stress et à plus de productivité pour vos utilisateurs, et conduira à moins de tickets de support et à plus d'efficacité pour votre équipe de support.
 
-<Separator/>
+<Separator><Separator/>
 
 <h2>Quels sont les principaux tueurs de performances Web ? 💀</h2>
 
@@ -53,7 +53,7 @@ Les performances Web sont la vitesse de chargement d'un site Web et la rapidité
 5. Calculs du backend non optimisés.
 6. Calculs frontaux non optimisés.
 
-<Separator/>
+<Separator><Separator/>
 
 <h2>Comment améliorer les performances du Web ? 🚀</h2>
 
@@ -84,7 +84,7 @@ Parallélisme: Choisissez le bon modèle pour vos calculs parallèles (multi-thr
 14. **Dénormalisation de la base de données:** C'est une technique qui consiste à stocker les données redondantes dans une base de données pour éviter les jointures coûteuses, cela améliorera les performances de vos requêtes de base de données.
 15. **Choisissez l'emplacement idéal pour vos serveurs:** Assurez-vous de choisir le bon emplacement pour vos serveurs, afin qu'il soit le plus proche possible de vos utilisateurs, cela réduira la latence de vos appels HTTP.
 
-<Separator/>
+<Separator><Separator/>
 
 <h2>Pour finir,</h2>
 Dans cet article, nous avons vu l'importance des performances web et comment les améliorer. J'espère que vous l'avez apprécié et que vous avez appris quelque chose de nouveau. Si vous avez des questions ou des suggestions, n'hésitez pas à laisser un commentaire ci-dessous. Si vous avez aimé cet article, merci de le partager avec vos amis et collègues. Merci de votre lecture 🙏
