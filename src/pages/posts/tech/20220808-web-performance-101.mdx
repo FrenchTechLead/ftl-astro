@@ -1,5 +1,6 @@
 ---
 
+layout: '@layouts/BlogPostLayout.astro'
 title: Web Performance 101
 publishDate: August 08, 2022
 authorName: "@FrenchTechLead"
@@ -18,15 +19,15 @@ permalink: https://frenchtechlead.com/posts/tech/20220808-web-performance-101/
 description: "A complete guide to web performance. Learn how to improve your site speed and web performance by applying the best practices."
 draft: false
 ---
-import Layout from '@layouts/BlogPost.astro'
-import Separator from '@comps/Separator.jsx'
+import Layout from '@layouts/BlogPostLayout.astro'
+import Separator from '@comps/Separator.astro'
 import Tooltip from '@comps/Tooltip.astro'
 import img0 from '@assets/blog/tech/20220808-web-performance-101/0.png'
 import Image from '@comps/Image.astro'
 
 <Image src={img0} t='Web Performance 101' solo={true}/>
 
-<h2>What Does Web Performance Mean ? 🏎️</h2>
+<h2>What Does Web Performance Mean ? 🏎️ </h2>
 
 Web performance is the speed at which a website loads and how quickly it responds to user interactions. It is a critical factor in the success of a website. A slow website will have a **high bounce rate** and **low conversion rate <Tooltip txt='A conversion is the general term for a visitor completing a site goal, like subscibing or buying a product ...' />**. A fast website will have a **high conversion rate** and **low bounce rate <Tooltip txt='Bounce Rate is defined as the percentage of visitors that leave a webpage without taking any action' />**.
 
@@ -34,7 +35,7 @@ Web performance is the speed at which a website loads and how quickly it respond
 
 
 
-<h2>Why Is Web Performanceimportant ? 🤔</h2>
+<h2>Why Is Web Performanceimportant ? 🤔 </h2>
 There are many reasons why web performance isimportant. Here are the mostimportant ones:
 1. **User Experience 👌** A fast website will provide a better user experience, stats shows that **53%** of users will abandon a website if it takes more than **3 seconds** to load. (Source : [thinkwithgoogle.com](https://www.thinkwithgoogle.com/consumer-insights/consumer-trends/mobile-site-load-time-statistics/))
 2. **Search Engine Optimization ⚙️** Google has introduced web vitals <Tooltip txt='Web vitals are a set of metrics that measure the user experience of a website'/> and is considering page speed as a ranking factor. A fast website will rank higher in search engines, stats show that the first result in Google gets **34%** of the clicks and the second result gets **17%** of the clicks (Source: [pollthepeople.app](https://pollthepeople.app/the-value-of-google-result-positioning-3/)).
@@ -45,7 +46,7 @@ There are many reasons why web performance isimportant. Here are the mostimporta
 
 
 
-<h2>What are the Top Web Performance Killers ? 💀</h2>
+<h2>What are the Top Web Performance Killers ? 💀 </h2>
 
 1. Too many font/back network calls.
 2. Too many database queries.
@@ -89,5 +90,5 @@ There are many reasons why web performance isimportant. Here are the mostimporta
 
 
 
-<h2>Final Thoughts,</h2>
+<h2>Final Thoughts, </h2>
 In this article we have seen theimportance of web performance and how to improve it. I hope you enjoyed it and learned something new. If you have any questions or suggestions, feel free to leave a comment below. If you liked this article, please share it with your friends and colleagues. Thank you for reading 🙏

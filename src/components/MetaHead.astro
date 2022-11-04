@@ -1,53 +1,45 @@
 ---
-export interface Props {
-  title: string;
-  metaTitle: string;
-  description: string;
-  permalink: string;
-  postImageUrl: string;
-  keywords: string[];
-  lang: string;
-  author: string;
-  showAds: boolean;
-}
 const DEV = await import.meta.env.DEV;
-const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, author, showAds} = Astro.props as Props;
+const { title, metaTitle, description, permalink, postImageUrl, keywords, lang, author, showAds} = Astro.props;
 const disableAds = true;
 ---
-<meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="language" content={lang}>
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="canonical" href={permalink}>
-<title>{title}</title>
-<meta name="title" content={metaTitle || title} />
-<meta name="description" content={description} />
-<meta name="keywords" content={keywords.join(', ')}>
-<meta name="robots" content="index, follow">
-<meta name="revisit-after" content="2 days">
-<meta name="author" content={author}>
-<meta property="og:type" content="website" />
-<meta property="og:url" content={permalink} />
-<meta property="og:title" content={metaTitle || title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={postImageUrl} />
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={permalink} />
-<meta property="twitter:title" content={metaTitle || title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={postImageUrl}  />
-{
-  !DEV && (
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ERV2F9WDNG"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("js", new Date()); gtag("config", "G-ERV2F9WDNG" );
-    </script>)
-}
-{
-  !DEV && !(showAds===false) && !(disableAds) && (
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6800477127231548" crossorigin="anonymous"></script>
-  )
-}
+
+<>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="language" content={lang}>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="canonical" href={permalink}>
+  <title>{title}</title>
+  <meta name="title" content={metaTitle || title} />
+  <meta name="description" content={description} />
+  <meta name="keywords" content={keywords.join(', ')}>
+  <meta name="robots" content="index, follow">
+  <meta name="revisit-after" content="2 days">
+  <meta name="author" content={author}>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={permalink} />
+  <meta property="og:title" content={metaTitle || title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={postImageUrl} />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={permalink} />
+  <meta property="twitter:title" content={metaTitle || title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={postImageUrl}  />
+  {
+    !DEV && (
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ERV2F9WDNG"></script>
+      <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag("js", new Date()); gtag("config", "G-ERV2F9WDNG" );
+      </script>)
+  }
+  {
+    !DEV && !(showAds===false) && !(disableAds) && (
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6800477127231548" crossorigin="anonymous"></script>
+    )
+  }
+</>

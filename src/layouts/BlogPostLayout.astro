@@ -9,7 +9,7 @@ import Separator from '@comps/Separator.astro'
 import NewsLetter from '@comps/NewsLetter.astro'
 import Sponsor from '@comps/Sponsor.astro';
 
-const { title, metaTitle, description, publishDate, 
+const { title, metaTitle, description, publishDate , 
 authorName, authorSocial, permalink, lang, 
 postImageUrl, postImageLocal, postImageAlt,
 postImageWidth, postImageHeight, keywords, author
@@ -19,10 +19,10 @@ postImageWidth, postImageHeight, keywords, author
 <html lang={lang || 'en'}>
 <head>
 <MetaHead {title} {metaTitle} {description} {permalink} {postImageUrl} {keywords} {author} />
-<Styles/>
+<Styles />
 </head>
 <body>
-	<BlogHeader></BlogHeader>
+	<BlogHeader />
 	<BlogPost {title} {authorName} {publishDate} {authorSocial} >
 		{ postImageLocal && <Image w={postImageWidth} h={postImageHeight}  src={postImageLocal} t={postImageAlt} /> }
 		<slot />
