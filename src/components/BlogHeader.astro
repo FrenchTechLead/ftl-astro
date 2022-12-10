@@ -1,7 +1,23 @@
 ---
+const s = {
+	header: "background-color: var(--color-heavy-blue-2); height: 75px; padding: 20px; display: flex; justify-content: space-between; align-items: center;",
+	div1: "font-size: 2rem; padding-top: 5px;",
+	div2: "float: right; font-size: 2rem; font-family: monospace;",
+	a: "",
+	span1:"color: var(--color-black); background: var(--color-yellow); text-shadow: none; font-size: 2rem;font-weight: bold;",
+	span2: "color: var(--color-white);text-decoration: none;font-size: 2rem;text-shadow: 0 0 20px var(--color-white);font-weight: bold;",
+	span3: "color: black; background-color: var(--color-yellow);",
+	span4: "font-weight: bold; color: black; background-color: var(--color-yellow);"
+};
 ---
-<header id="header">
-	<a href="/">
-		<span id="span-1">French</span><span>TechLead</span>
-	</a>
+<header style={s.header}>
+	<div style={s.div1}>
+		<a style={s.a} href="/">
+			<span style={s.span1}>French</span><span style={s.span2}>TechLead</span>
+		</a>
+	</div>
+	<div style={s.div2} class="hidden-for-phone">
+		<span style={s.span3}>Software Engineering</span><br>
+		<span style={s.span4}>DONE RIGHT.</span>
+	</div>
 </header>

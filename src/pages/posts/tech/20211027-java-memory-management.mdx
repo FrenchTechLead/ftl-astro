@@ -17,7 +17,7 @@ permalink: https://frenchtechlead.com/posts/tech/20211027-java-memory-management
 description: "In this short article, I’ll try to briefly explain how Java manages Random Access Memory (RAM), explaining the basics of garbage collecting, the two main Memory types in Java, Memory Leaks: how to diagnose them and how to ensure that your application handles the memory the right way."
 ---
 import Layout from '@layouts/BlogPostLayout.astro'
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import Image from '@comps/Image.astro'
 import img2 from '@assets/blog/tech/20211027-java-memory-management/2.avif'
 import img3 from '@assets/blog/tech/20211027-java-memory-management/3.avif'
@@ -73,7 +73,7 @@ Actually, there are N number of Stacks per Java process, where N is equal to the
 
 On the other hand, there is only **one Java **Heap** per Java process.**
 
-
+<Separator/>
 
 ## Stack
 Let's take a look at the following program :
@@ -92,7 +92,7 @@ public class Stack {
 
 **Stack** memory is always referenced in **LIFO (Last-In-First-Out)** order. **Whenever a method is invoked, a new block is created on top of the **Stack** memory** for the method to hold local **primitive values** and **reference** to other objects in the method, As soon as the method ends, the block is popped from the top of the Stack, **Stack** memory size is very less compared to **Heap** memory.
 
-
+<Separator/>
 
 ## Heap
 Let's take a look at the following program :
@@ -108,7 +108,7 @@ public static void main(String[] args) {
 
 The above example represents the state of the **Stack** and the **Heap** on the execution of the last line of code of the main method, we notice that the first instructions are on the bottom of the **Stack** and the last one on the top of it, we also notice that the **Stack** holds **primitive** values and **references** to non-primitive types that are stored on the **Heap** memory.
 
-
+<Separator/>
 
 ## StackOverFlowError
 Let's take a look at the following program :
@@ -128,7 +128,7 @@ The above program will cause a **StackOverFlowError** because **toto()** method 
 
 Like we said before every method invocation creates a block on the top of the **Stack** memory, and since the program of the example above recursively invokes the **toto()** method with no stop condition, it causes a **StackOverFlow** error.
 
-
+<Separator/>
 
 ## OutOfMemoryError
 Let's take a look at the following program :
@@ -146,14 +146,14 @@ The above program will cause an **OutOfMemoryError** it keeps adding new **Strin
 
 **OutOfMemoryError** is another common error in the Java world, it concerns the **Heap** memory and happens when there is no more **Heap** space to allocate for new objects, the above program creates new entries in a List of Strings until there is no more **Heap** space for it.
 
-
+<Separator/>
 
 ## Memory Leaks
 <Image w="858" h="494" src={img8} t="intellij's Profiler" />
 
 **Java memory leak** happens when an application unintentionally (due to logical errors in code) holds on to object references that are no longer required. These unintentional object references prevent the built-in Java garbage collection mechanism from freeing up the memory consumed by these objects.
 
-
+<Separator/>
 
 ## Performing a Heap Dump with Intellij
 There are several ways to perfom a JVM **Heap Dump** using one of the many tools of the Java eco-system, most of the tools are prety similars, so what’s we’re going to see here with Intellij can be done with any other tool such as VisualVM or JDK Mission control …
@@ -262,7 +262,7 @@ This will make sure that the dependency is added to the classpath at the conveni
 - Define the max memory size that the JVM can allocate ex: **-Xmx2048m**
 - Define the Garbage Collector execution mode that best suits your configuration ex: **-XX: + UseSerialGC**
 
-
+<Separator/>
 
 Final thoughts,
 ----

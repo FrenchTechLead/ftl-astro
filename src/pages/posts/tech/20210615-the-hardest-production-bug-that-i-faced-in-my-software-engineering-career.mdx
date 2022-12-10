@@ -19,7 +19,7 @@ permalink: https://frenchtechlead.com/posts/tech/20210615-the-hardest-production
 description: "In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we diagnosed it, and correct it in my company."
 ---
 import Layout from '@layouts/BlogPostLayout.astro'
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import Image from '@comps/Image.astro'
 import img1 from '@assets/blog/tech/20210615-the-hardest-production-bug/1.avif'
 import img2 from '@assets/blog/tech/20210615-the-hardest-production-bug/2.avif'
@@ -30,11 +30,11 @@ import img4 from '@assets/blog/tech/20210615-the-hardest-production-bug/4.avif'
 
 In this article, I’ll describe the weirdest Internet Explorer bug that I faced in my life, how we **diagnosed it**, and the way we managed to **correct it** in my company.
 
-
+<Separator/>
 
 By the time you’re reading this article, IE might not exist anymore since Microsoft has announced its abandonment by [June 15, 2022](https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/), so most companies and individuals should work on moving to another browser in order to stay safe, this is good news for web developers because they know that Internet Explorer has always been a pain-in-the-neck when it comes to web development, mostly because of its various CSS and JavaScript incompatibilities, often we can find some polyfills for these kinds of issues; **The issue I’m going to describe in this article isn’t related to JS or CSS, it’s a very weird behavior from IE when it receives an exotic HTTP response, so for once we can’t really say that its IE’s fault.**
 
-
+<Separator/>
 
 ## The context 📃
 
@@ -51,7 +51,7 @@ What makes the bug so exotic 🥝
 *   It only happens on IE and on the production environment.
 *   No major changes were pushed to prod before the bug report.
 
-
+<Separator/>
 
 ## Reproducing the Bug 🐛
 
@@ -99,6 +99,8 @@ For this purpose, we had to look at the architecture of the app from an infrastr
 1.  The Mashup server is responsible for Server-Side integration, it acts directly on the HTML rendering, it might have a bug when retrieving cached assets from the CMS, so we tried to disable cache on the CMS server but the bug was still there.
 2.  Javascript can edit the HTML on the client-side after sending some XHR requests, we analyzed the XHR requests one by one, but none of them had a 304 response code, but we observed that the **Not Modified** string was not part of the **first paint content**, so we had a strong belief that Javascript was responsible for the bug at this point (later we knew that we were wrong ).
 
+<Separator/>
+
 Getting Deeper into debugging 🧿
 --------------------------------
 
@@ -118,6 +120,8 @@ We decided to view how a single **304** resource is received from our backend, f
 
 <Image w="1400" h="392" src={img4} t="HTTP response in Fiddler" />
 
+<Separator/>
+
 Bingo  🎉
 -------
 
@@ -125,17 +129,20 @@ We have found a serious lead by using **Fiddler**, we noticed that our **304** r
 
 > A 304 response [cannot contain a message-body](https://httpstatuses.com/304); it is always terminated by the first empty line after the header fields.
 
-
+<Separator/>
 
 > Check out the following article to learn HTTP the right way ✅
+
+<Separator/>
+
 > [Before Learning Rest / Soap / GraphQL / You Need To Understand HTTP !](https://mecheri-akram.medium.com/before-learning-rest-soap-graphql-you-need-to-understand-http-9eb80de6cfbf)
 
 
-
-
-
+<Separator/>
 
 > So we know now that our servers are returning some exotic HTTP responses for cached resources, and unlike Chrome and Firefox, IE does not tolerate this protocol violation and acts weirdly by printing the Body of these responses directly onto the DOM.
+
+<Separator/>
 
 So where did the 304 HTTP response got her Body from? 🍑
 -----------------------------------------------------
@@ -151,6 +158,9 @@ When we **GET** a resource directly from the Mashup Server we receive a **304** 
 The RP connects to the Mashup Server through [AJP](https://en.wikipedia.org/wiki/Apache_JServ_Protocol) Protocol, we did some research about the AJP connector of our Tomcat server and it turned out that there is indeed a [problem with this connector](https://bz.apache.org/bugzilla/show_bug.cgi?id=55453).
 
 The bug was fixed on Tomcat version 7.0.43 onwards, so we just had to upgrade the version of our Tomcat server to correct this issue.
+
+
+<Separator/>
 
 Final thoughts,
 ---------------

@@ -1,13 +1,19 @@
 ---
 const props  = Astro.props ;
-console.log(props.post.publishDate);
+
+const s = {
+	article: "margin-top: 15px; border: 1px solid var(--color-purple); padding: 15px;",
+	div: "color: var(--color-yellow); font-size: 1.5rem;",
+	p: "color: var(--color-white); margin-bottom: 0px;",
+	time: "color: var(--color-grey);"
+};
 ---
 <a href={props.url}>
-	<article >
+	<article style={s.article}>
 		<header>
-			<div >{props.post.title}</div>
+			<div style={s.div}>{props.post.title}</div>
 		</header>
-		<p>{props.post.description}</p>
-		<time datetime={new Date(props.post.publishDate).toISOString()}>{props.post.publishDate}</time>
+		<p style={s.p}>{props.post.description}</p>
+		<time style={s.time} datetime={new Date(props.post.publishDate).toISOString()}>{props.post.publishDate}</time>
 	</article>
 </a>

@@ -2,11 +2,8 @@
 import MetaHead from '@comps/MetaHead.astro';
 import BlogHeader from '@comps/BlogHeader.astro';
 import BlogFooter from '@comps/BlogFooter.astro';
-import Styles from '@comps/Styles.astro';
-import Image from '@comps/Image.astro';
+import Styles from '@comps/styles/Styles.astro';
 
-import akramPic from '@assets/blog/akram-1.svg';
-const DEV = await import.meta.env.DEV;
 
 const title = 'FrenchTechLead - The Tech Leaders Community';
 const author = 'FrenchTechLead';
@@ -32,12 +29,6 @@ const techPosts = await Astro.glob('./posts/tech/*.mdx');
 <body>
 	<BlogHeader />
 	<main>
-		<section id="landing">
-			<Image w={600} h={600} src={akramPic} t="Akram's picture"  solo={true}/>
-			<h1 style="color: var(--color-white);">Hi there 👋 Glad to see you here.</h1>
-			<p style="margin-bottom: 0px;">My name is Akram, and I'm the creator of FrenchTechLead.</p>
-			<p style="margin-top: 0px;">{description}</p>
-		</section>
 
 		<section id="contact-section">
 			<div class="preview">

@@ -1,0 +1,156 @@
+<style lang="css" is:inline>
+    h2 {
+		color: var(--color-yellow);
+	}
+
+	h3 {
+		color: var(--color-blue);
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--color-red);
+	}
+
+	caption{
+		color: var(--color-red);
+	}
+	::-moz-selection {
+		color: var(--color-black);
+		background: var(--color-yellow);
+		text-shadow: none;
+	}
+
+	::selection {
+		color: var(--color-black);
+		background: var(--color-yellow);
+		text-shadow: none;
+	}
+	
+	table,
+	th,
+	td {
+		border: 1px solid var(--color-white);
+		border-collapse: collapse;
+	}
+
+	th,
+	td {
+		padding: 5px;
+	}
+
+	img,
+	svg {
+		margin: 10px auto 20px;
+		max-width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	blockquote {
+		border-left: var(--color-purple) 3px solid;
+		padding: 15px;
+		font-style: italic;
+		margin: 0px;
+		background-color: var(--color-black-foreground);
+	}
+
+	li {
+		margin-bottom: 15px;
+	}
+
+	li::marker {
+		color: var(--color-purple);
+		font-weight: 600;
+	}
+
+	.separator {
+		text-align: center;
+		color: var(--color-red);
+	}
+
+	.article header {
+		text-align: center;
+	}
+
+	.article header h1 {
+		font-size: 2.3rem;
+		color: var(--color-white);
+	}
+
+	.article header p {
+		font-size: small;
+	}
+
+	.article strong {
+		color: var(--color-light-blue);
+	}
+
+	.astro-code {
+		padding: 10px;
+		box-shadow: 0 0 5px var(--color-green);
+	}
+
+	#mce-EMAIL {
+		width: 100%;
+		max-width: 500px;
+		height: 35px;
+	}
+
+	#mc_embed_signup {
+		background-color: var(--color-black-foreground);
+		padding: 25px;
+		margin-top: 25px;
+	}
+
+	#mc-embedded-subscribe {
+		color: var(--color-white);
+		background-color: var(--color-black);
+		padding: 15px 32px 15px 32px;
+		margin-top: 25px;
+		font-weight: 800;
+		border: none;
+		cursor: pointer;
+		box-shadow: 0 0 35px var(--color-purple);
+	}
+
+	code {
+		color: var(--color-blue);
+		background-color: var(--color-black-0);
+		padding: 2px;
+		font-style: normal;
+		font-family: monospace;
+	}
+
+	.astro-code>code {
+		background-color: transparent;
+	}
+	[data-tooltip] {
+		position: relative;
+		cursor: help;
+		color: var(--color-red);
+	}
+	[data-tooltip]:hover::before {
+		transform: translate(0);
+		opacity: 1;
+	}
+	[data-tooltip]::before {
+		content: attr(data-tooltip);
+		position: absolute;
+		width: 200px;
+		display: block;
+		background: #FFF;
+		padding: 10px;
+		top: -50px;
+		box-shadow: 0px 2px 5px #0000008c;
+		border-radius: 3px;
+		text-align: center;
+		color: #000000;
+		left: 0;
+		z-index: 1;
+		opacity: 0;
+		pointer-events: none;
+		transform: translateY(20px);
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+</style>

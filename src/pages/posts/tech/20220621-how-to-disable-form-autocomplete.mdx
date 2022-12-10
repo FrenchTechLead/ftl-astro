@@ -17,13 +17,14 @@ description: 'A Step By Step Guide on how to disable Autofill/Autocomplete HTML 
 draft: false
 ---
 
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import Image from '@comps/Image.astro'
 import img2 from '@assets/blog/tech/20220621-how-to-disable-form-autocomplete/2.png'
 import img3 from '@assets/blog/tech/20220621-how-to-disable-form-autocomplete/3.png'
 
 Have you ever felt the frustration of Chrome’s form autocomplete suggesting values to your inputs that are not suitable to their context ?
 
+<Separator/>
 
 ## Form Autocomplete in action:
 
@@ -45,7 +46,7 @@ Google Chrome is suggesting the above values based on the name attribute of the 
 Each time you submit a form containing an input having the **name attribute**, Google Chrome will save the submitted value to the browser’s local storage and will suggest the same value to the next input with the same **name** attribute.  
 However, sometimes you want to disable this behavior, and have a clean and coherent experience for the user regardless of the value of the name attribute.
 
-
+<Separator/>
 
 ## How to diable HTML Form Autofill / Autocomplete:
 There are a lot of articles on the web that explain how to disable HTML Form Autofill / Autocomplete, but I wanted to share a step by step guide on how to find the right way to disable it, one great website using a pure HTML input that doesn't have the autocomplete bahaviour is https://google.com
@@ -78,6 +79,7 @@ By inspecting the Google Search input, we see that it has following attributes:
 
 So Google is using the above attributes in order to disable the browser's native autocomplete behaviour of the input, reagardless of the value of the name attribute with is always the same **(q)**.
 
+<Separator/>
 
 ## Disabling HTML Form Autofill / Autocomplete with pure HTML:
 Just do like Google and use the following **4** HTML Attributes:
@@ -90,6 +92,7 @@ Just do like Google and use the following **4** HTML Attributes:
     >
 ```
 
+<Separator/>
 
 ## Disabling HTML Form Autofill / Autocomplete with Angular:
 > It would be a boring and repeating task to put these **4** HTML attributes on all your HTML inputs, we can do better thanks to Angular **Directives**.
@@ -124,6 +127,8 @@ This directive will put the **4** attributes on your inputs regardless of the br
 
 In order to turn off the autofill only for Google Chrome user agent, we start by detecting it, Google Chrome adds the attribute `chrome` to the global `window` object, we can check for this attribute in order to detect Google Chrome.
 
+<Separator/>
+
 ### The final code :
 
 ```ts
@@ -145,6 +150,7 @@ export class AutocompleteOffDirective {
   }
 ```
 
+<Separator/>
 
 Final thoughts,
 ----

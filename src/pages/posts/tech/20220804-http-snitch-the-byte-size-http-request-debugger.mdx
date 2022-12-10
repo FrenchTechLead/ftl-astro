@@ -20,7 +20,7 @@ description: "HTTP-SNITCH is a tiny HTTP request debugger that prints the HTTP h
 draft: false
 ---
 import Layout from '@layouts/BlogPostLayout.astro'
-import Separator from '@comps/Separator.astro'
+import Separator from '@comps/Separator.jsx'
 import img0 from '@assets/blog/tech/20220804-http-snitch-the-byte-size-http-request-debugger/0.png'
 import Image from '@comps/Image.astro'
 
@@ -30,25 +30,25 @@ import Image from '@comps/Image.astro'
 ## What is HTTP-SNITCH ?
 HTTP-SNITCH is a mini HTTP server that prints out every requests that it receives.  
 
-
+<Separator/>
 
 ## When you need to use HTTP-SNITCH
 You can use HTTP-SNITCH to debug any HTTP Client,  
 Send any valid HTTP request (GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD, CONNECT, TRACE, QUERY) to HTTP-SNITCH, and it will print out the received request with its headers and body included.
 
-
+<Separator/>
 
 ## Can HTTP-SNITCH be used to debug Reverse-Proxies ?
 HTTP-SNITCH is great to debug various HTTP clients and reverse proxies just forward your requests to the listening HTTP-SNITCH server, and it will print out the received requests.
 
-
+<Separator/>
 
 ## How to install HTTP-SNITCH ?
 1- Make sure to have `python3` and `pip3` installed.  
 2- Install the `colorama` python package `pip3 install colorama`  
 3- Download the file `snitch.py` in the [official HTTP-SNITCH repository](https://github.com/FrenchTechLead/http-snitch)
 
-
+<Separator/>
 
 ## How to run HTTP-SNITCH ?
 In order to run HTTP-SNITCH open a new `Terminal` and run the following command:  
@@ -59,7 +59,7 @@ This will run HTTP-SNITCH on port 8080, if you want to run it on a different por
 ```cmd
 python3 snitch.py 9090
 ```
-
+<Separator/>
 
 
 ## Example of HTTP-SNITCH output
@@ -67,7 +67,7 @@ Running HTTP-SNITCH on port 8080 in a GitHub Workspace instance and sending a `G
 <Image src='https://user-images.githubusercontent.com/10856604/183052857-427d2f48-a080-41aa-b5c0-c0613b820ede.png' w={1096} h={538} t='The console output of HTTP-SNITCH' solo={true}/>
 
 
-
+<Separator/>
 
 ## Demo 
 View the demo video on [Youtube](https://youtu.be/iTNLP3WP6m0)

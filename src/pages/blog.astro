@@ -3,7 +3,11 @@ import MetaHead from '@comps/MetaHead.astro';
 import BlogHeader from '@comps/BlogHeader.astro';
 import BlogFooter from '@comps/BlogFooter.astro';
 import Styles from '@comps/styles/Styles.astro';
-import S1 from '@comps/landing/S1.astro';
+import BlogPostPreview from '@comps/BlogPostPreview.astro';
+import NewsLetter from '@comps/NewsLetter.astro'
+
+import akramPic from '@assets/blog/akram-1.svg';
+const DEV = await import.meta.env.DEV;
 
 const title = 'FrenchTechLead - The Tech Leaders Community';
 const author = 'FrenchTechLead';
@@ -12,9 +16,12 @@ const keywords = ['Tech Blog', 'Software Engineering', 'Cloud Computing', 'OOP',
 const permalink = 'https://frenchtechlead.com/';
 const postImageUrl = 'https://frenchtechlead.com/assets/blog/blog-cover.avif';
 const showAds=false;
+
+
+const techPosts = await Astro.glob('./posts/tech/*.mdx');
 ---
 
-<html lang="fr">
+<html lang="en">
 
 <head>
 	<MetaHead {title} {keywords} {description} {permalink} {postImageUrl} {author} {showAds} />
@@ -23,7 +30,13 @@ const showAds=false;
 <body>
 	<BlogHeader />
 	<main>
-		<S1/>
+
+		<section style="margin-top: 50px;" aria-label="Blog post list">
+			<h2 style="color: var(--color-white); text-shadow: 0 0 30px var(--color-blue);">Latest posts 🔥</h2>
+			{techPosts.filter(p=> DEV || !p.frontmatter.draft ).reverse().map((p) =>
+			<BlogPostPreview post={p.frontmatter as any} url={p.url + '/'} />)}
+		</section>
+		<NewsLetter />
 	</main>
 	<BlogFooter />
 </body>

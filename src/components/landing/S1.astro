@@ -1,0 +1,51 @@
+---
+import moon from '@assets/moon.png';
+import cloud from '@assets/cloud.png';
+
+const s = {
+    section: "",
+    img: "width: 250px; margin: unset; display: inline; margin-top: 60px",
+    left: "text-align: left;",
+    right: "text-align: right;",
+    title: "color: var(--color-yellow); font-size: 4rem; margin-block-start: 0px; margin-block-end: 0px; ",
+    div1: "font-size: 2rem;"
+};
+
+const data : {title: string, img: string, txt: string}[] = [
+    {
+        title: "Software Engineering",
+        img: moon,
+        txt: `Notre expertise en ingénierie logicielle nous permet de 
+        vous proposer des prestations de qualité en matière de développement logiciel (Web, Mobile, Desktop, Batchs ...)
+        Nous vous garantissons un code de qualité respectant les meilleurs pratiques de l'industrie logicielle.`
+    },
+    {
+        title: "Cloud Computing",
+        img: cloud,
+        txt: `Notre expertise en ingénierie logicielle nous permet de 
+        vous proposer des prestations de qualité en matière de développement logiciel (Web, Mobile, Desktop, Batchs ...)
+        Nous vous garantissons un code de qualité respectant les meilleurs pratiques de l'industrie logicielle.`
+    },
+    {
+        title: "DevOps",
+        img: cloud,
+        txt: `Notre expertise en ingénierie logicielle nous permet de 
+        vous proposer des prestations de qualité en matière de développement logiciel (Web, Mobile, Desktop, Batchs ...)
+        Nous vous garantissons un code de qualité respectant les meilleurs pratiques de l'industrie logicielle.`
+    },
+];
+---
+<section style={s.section}>
+    
+    {
+        data.map((x, index) => (
+            <div style={index % 2 === 0 ? s.right : s.left}>
+                <div style={index % 2 === 0 ? s.left : s.right}>
+                    <img src={x.img} style={s.img} />
+                </div>
+                <h1 style={s.title}>{x.title}</h1>
+                <div style={s.div1}>{x.txt}</div>
+            </div>
+        ))
+    }
+</section>

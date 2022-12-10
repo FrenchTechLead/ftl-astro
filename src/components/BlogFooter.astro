@@ -1,4 +1,38 @@
-<footer>
-  <p>All Rights Reserved, <a href="https://twitter.com/FrenchTechLead" target="_blank" rel="noopener noreferrer">@FrenchTechLead</a>   <a style="margin-left:20px;" href="/contact-us/">Contact Us</a></p>
-
+---
+const s = {
+  
+  footer: [
+    "margin-top: 40px",
+    "background-color: var(--color-heavy-blue-2)",
+    "display: flex",
+    "justify-content: space-around",
+    "flex-wrap: wrap",
+    "align-items: center",
+    "height: 300px"
+    
+  ].join(";"),
+  widget:"width: 250px",
+  title: "font-size: 25px; color: var(--color-yellow)"
+};
+---
+<footer style={s.footer}>
+  <div style={s.widget}>
+    <div style={s.title}>FrenchTechLead</div>
+    <div>12 Rue Henri Sainte-Claire Deville</div> 
+    <div>92500, Rueil-Malmaison</div>
+  </div>
+  <div style={s.widget}>
+    <div style={s.title}>Contact</div>
+    <div>email: contact@frenchtechlead.com</div>
+    <div><a href="/contact-us/">Formulaire de Contact</a></div>
+  </div>
+  <div style={s.widget}>
+    <div style={s.title}>Blog</div>
+    <div><a href="/blog">Derniers articles</a></div>
+  </div>
+  <div style={s.widget}>
+    <div style={s.title}>Réseaux</div>
+    <div>Twitter: <a href="https://twitter.com/FrenchTechLead" target="_blank" rel="noopener noreferrer">@FrenchTechLead</a></div>
+    <div>Github: <a href="https://github.com/FrenchTechLead" target="_blank" rel="noopener noreferrer">@FrenchTechLead</a></div>
+  </div>
 </footer>
