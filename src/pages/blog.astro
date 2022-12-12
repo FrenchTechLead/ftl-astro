@@ -1,12 +1,11 @@
 ---
 import MetaHead from '@comps/MetaHead.astro';
-import BlogHeader from '@comps/BlogHeader.astro';
-import BlogFooter from '@comps/BlogFooter.astro';
+import Header from '@comps/Header.astro';
+import Footer from '@comps/Footer.astro';
 import Styles from '@comps/styles/Styles.astro';
 import BlogPostPreview from '@comps/BlogPostPreview.astro';
 import NewsLetter from '@comps/NewsLetter.astro'
 
-import akramPic from '@assets/blog/akram-1.svg';
 const DEV = await import.meta.env.DEV;
 
 const title = 'FrenchTechLead - The Tech Leaders Community';
@@ -19,25 +18,63 @@ const showAds=false;
 
 
 const techPosts = await Astro.glob('./posts/tech/*.mdx');
+
+const s = {
+	postsList: "margin-top: 50px;",
+	postElement: "color: var(--color-white); text-shadow: 0 0 30px var(--color-blue);",
+	tag: [
+	"display: inline-block",
+	"border-radius: 20px",
+	"color: white",
+	"padding: 5px",
+	"margin:5px",
+	"background-color: var(--color-heavy-blue)"
+	].join(";")
+}
+function onlyUnique(value, index, self) {
+	return self.indexOf(value) === index;
+  }
 ---
 
 <html lang="en">
 
 <head>
-	<MetaHead {title} {keywords} {description} {permalink} {postImageUrl} {author} {showAds} />
+	<MetaHead 
+		title={title}
+		keywords={keywords}
+		description={description}
+		permalink={permalink}
+		postImageUrl={postImageUrl}
+		author={author}
+		showAds={showAds} 
+	/>
 	<Styles />
 </head>
 <body>
-	<BlogHeader />
+	<Header />
 	<main>
-
-		<section style="margin-top: 50px;" aria-label="Blog post list">
-			<h2 style="color: var(--color-white); text-shadow: 0 0 30px var(--color-blue);">Latest posts 🔥</h2>
+		<section>
+			<h2>Tags</h2>
+			{
+				techPosts
+				.map(a=> a.frontmatter.tags)
+				.flatMap(a => a)
+				.filter(onlyUnique)
+				.sort()
+				//.map(a => a.toUpperCase())
+				.map(a => (
+					<a href="#" style={s.tag}>{a}</a>
+				))
+			}
+		</section>
+		<section style={s.postsList} aria-label="Blog post list">
+			<h2 style={s.postElement}>Latest posts 🔥</h2>
 			{techPosts.filter(p=> DEV || !p.frontmatter.draft ).reverse().map((p) =>
 			<BlogPostPreview post={p.frontmatter as any} url={p.url + '/'} />)}
 		</section>
 		<NewsLetter />
 	</main>
-	<BlogFooter />
+	<Footer />
 </body>
 </html>
+

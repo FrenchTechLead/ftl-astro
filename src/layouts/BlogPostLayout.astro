@@ -1,8 +1,8 @@
 ---
 import MetaHead from '@comps/MetaHead.astro';
-import BlogHeader from '@comps/BlogHeader.astro';
+import Header from '@comps/Header.astro';
+import Footer from '@comps/Footer.astro';
 import Styles from '@comps/styles/Styles.astro';
-import BlogFooter from '@comps/BlogFooter.astro';
 import BlogPost from '@comps/BlogPost.astro';
 import Image from '@comps/Image.astro';
 import Separator from '@comps/Separator.jsx'
@@ -22,7 +22,7 @@ postImageWidth, postImageHeight, keywords, author
 <Styles />
 </head>
 <body>
-	<BlogHeader />
+	<Header />
 	<BlogPost {title} {authorName} {publishDate} {authorSocial} >
 		{ postImageLocal && <Image w={postImageWidth} h={postImageHeight}  src={postImageLocal} t={postImageAlt} /> }
 		<slot />
@@ -30,6 +30,6 @@ postImageWidth, postImageHeight, keywords, author
 	<Separator/>
 	<Sponsor />
 	<NewsLetter/>
-	<BlogFooter/>
+	<Footer/>
 </body>
 </html>

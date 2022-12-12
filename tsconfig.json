@@ -1,3 +1,4 @@
+// @ts-off
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {

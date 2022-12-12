@@ -1,7 +1,7 @@
 ---
 import MetaHead from '@comps/MetaHead.astro';
-import BlogHeader from '@comps/BlogHeader.astro';
-import BlogFooter from '@comps/BlogFooter.astro';
+import Header from '@comps/Header.astro';
+import Footer from '@comps/Footer.astro';
 import Styles from '@comps/styles/Styles.astro';
 
 
@@ -27,7 +27,7 @@ const techPosts = await Astro.glob('./posts/tech/*.mdx');
     </style>
 </head>
 <body>
-	<BlogHeader />
+	<Header />
 	<main>
 
 		<section id="contact-section">
@@ -89,6 +89,6 @@ const techPosts = await Astro.glob('./posts/tech/*.mdx');
 
 
 	</main>
-	<BlogFooter />
+	<Footer />
 </body>
 </html>

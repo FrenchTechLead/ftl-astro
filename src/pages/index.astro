@@ -1,7 +1,7 @@
 ---
 import MetaHead from '@comps/MetaHead.astro';
-import BlogHeader from '@comps/BlogHeader.astro';
-import BlogFooter from '@comps/BlogFooter.astro';
+import Header from '@comps/Header.astro';
+import Footer from '@comps/Footer.astro';
 import Styles from '@comps/styles/Styles.astro';
 import S1 from '@comps/landing/S1.astro';
 import S2 from '@comps/landing/S2.astro';
@@ -24,12 +24,12 @@ const showAds=false;
 	<Styles />
 </head>
 <body>
-	<BlogHeader />
+	<Header />
 	<main>
 		<S1/>
 		<S2/>
 		<S3/>
 	</main>
-	<BlogFooter />
+	<Footer />
 </body>
 </html>
