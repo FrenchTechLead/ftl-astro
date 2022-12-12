@@ -2,37 +2,48 @@
 const s = {
   
   footer: [
-    "margin-top: 40px",
     "background-color: var(--color-heavy-blue-2)",
+    "padding: 40px 0px 40px 0px",
+    "margin-top: 40px"
+  ].join(";"),
+  windgetContainer: [
     "display: flex",
     "justify-content: space-around",
     "flex-wrap: wrap",
-    "align-items: center",
-    "height: 300px"
-    
+    "align-items: center",    
   ].join(";"),
-  widget:"width: 250px",
-  title: "font-size: 25px; color: var(--color-yellow)"
+  widget:"width: 260px",
+  title: "font-size: 25px; color: var(--color-yellow)",
+  legal: "text-align: center; padding-top:30px"
 };
 ---
 <footer style={s.footer}>
-  <div style={s.widget}>
-    <div style={s.title}>FrenchTechLead</div>
-    <div>12 Rue Henri Sainte-Claire Deville</div> 
-    <div>92500, Rueil-Malmaison</div>
+  <div style={s.windgetContainer}>
+    <div style={s.widget}>
+      <div style={s.title}>FrenchTechLead</div>
+      <div>12 Rue Henri Sainte-Claire Deville</div> 
+      <div>92500, Rueil-Malmaison</div>
+    </div>
+    <div style={s.widget}>
+      <div style={s.title}>Contact</div>
+      <div>email: contact@frenchtechlead.com</div>
+      <div><a href="/contact-us/">Formulaire de Contact</a></div>
+    </div>
+    <div style={s.widget}>
+      <div style={s.title}>Blog</div>
+      <div><a href="/blog">Derniers articles</a></div>
+    </div>
+    <div style={s.widget}>
+      <div style={s.title}>Réseaux</div>
+      <div>Twitter: <a href="https://twitter.com/FrenchTechLead" target="_blank" rel="noopener noreferrer">@FrenchTechLead</a></div>
+      <div>Github: <a href="https://github.com/FrenchTechLead" target="_blank" rel="noopener noreferrer">@FrenchTechLead</a></div>
+    </div>
   </div>
-  <div style={s.widget}>
-    <div style={s.title}>Contact</div>
-    <div>email: contact@frenchtechlead.com</div>
-    <div><a href="/contact-us/">Formulaire de Contact</a></div>
+  <div style={s.legal}>
+    SASU FrenchTechLead
+    SIREN 920195120 - RCS Nanterre - NAF 6202A
+    TVA intracommunautaire : FR01920195120<br/>
+    Copyright: @FrenchTechLead - 2023
   </div>
-  <div style={s.widget}>
-    <div style={s.title}>Blog</div>
-    <div><a href="/blog">Derniers articles</a></div>
-  </div>
-  <div style={s.widget}>
-    <div style={s.title}>Réseaux</div>
-    <div>Twitter: <a href="https://twitter.com/FrenchTechLead" target="_blank" rel="noopener noreferrer">@FrenchTechLead</a></div>
-    <div>Github: <a href="https://github.com/FrenchTechLead" target="_blank" rel="noopener noreferrer">@FrenchTechLead</a></div>
-  </div>
+ 
 </footer>

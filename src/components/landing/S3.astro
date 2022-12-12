@@ -1,0 +1,32 @@
+---
+const s = {
+    section: [
+        `background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(43,54,131,1) 38%, rgba(72,85,6,1) 100%)`,
+        "border-radius: 10px",
+        "padding: 20px 0px 20px 0px;",
+        "margin-top: 40px",
+        "display: flex",
+        "justify-content: space-around"
+        ].join(";"),
+    row: "flex: 1 1 0px; padding: 0px 20px 0px 20px",
+    title: "font-size: 2rem; margin: 0px 0px 20px 0px;",
+    txt: "font-size:1.4rem"
+};
+
+---
+<section style={s.section}>
+    <div style={s.row}>
+        <h2 style={s.title}>Blog 🚀</h2>
+        <div style={s.txt} >Consulter notre blog technique et suivez tendances du marché de l'IT.</div>
+        <form action="/blog">
+            <button class="btn-grad">GO</button>
+        </form>
+    </div>
+    <div style={s.row}>
+        <h2 style={s.title}>Nous contacter 🌟</h2>
+        <div style={s.txt}>Pour vous accompagner dans vos projets, n'hésitez pas à nous contacter.</div>
+        <form action="/contact-us">
+            <button class="btn-grad">GO</button>
+        </form>        
+    </div>
+</section>

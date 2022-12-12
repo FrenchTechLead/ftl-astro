@@ -1,6 +1,7 @@
 ---
 import moon from '@assets/moon.png';
 import cloud from '@assets/cloud.png';
+import robot from '@assets/robot.png';
 
 const s = {
     section: "",
@@ -8,30 +9,40 @@ const s = {
     left: "text-align: left;",
     right: "text-align: right;",
     title: "color: var(--color-yellow); font-size: 4rem; margin-block-start: 0px; margin-block-end: 0px; ",
-    div1: "font-size: 2rem;"
+    div1: "font-size: 2rem; text-align: left;",
+    iconsBar: "margin-top:10px; display: flex; justify-content: space-between;background-color: mintcream; padding:3px; width:100px",
+    icon: "font-size:30px; color: var(--color-heavy-blue);",
 };
 
-const data : {title: string, img: string, txt: string}[] = [
+const data : {
+    title: string,
+    img: string,
+    txt: string,
+    icons: string []
+}[] = [
     {
         title: "Software Engineering",
-        img: moon,
+        img: moon,          
+        icons:["devicon-java-plain", "devicon-python-plain", "devicon-javascript-plain"],
         txt: `Notre expertise en ingénierie logicielle nous permet de 
         vous proposer des prestations de qualité en matière de développement logiciel (Web, Mobile, Desktop, Batchs ...)
-        Nous vous garantissons un code de qualité respectant les meilleurs pratiques de l'industrie logicielle.`
+        Nous vous garantissons un code de qualité respectant les meilleures pratiques de l'industrie logicielle.`
     },
     {
         title: "Cloud Computing",
-        img: cloud,
-        txt: `Notre expertise en ingénierie logicielle nous permet de 
-        vous proposer des prestations de qualité en matière de développement logiciel (Web, Mobile, Desktop, Batchs ...)
-        Nous vous garantissons un code de qualité respectant les meilleurs pratiques de l'industrie logicielle.`
+        img: cloud,          
+        icons:["devicon-azure-plain", "devicon-amazonwebservices-plain","devicon-googlecloud-plain"],
+        txt: `Nous vous acompagnons dans la transformation numérique de votre entreprise et garantissons un passage serein sur 
+        le cloud, nous vous aidons à tirer le meilleur parti de vos services AWS et Azure afin de  répondre à vos besoins en 
+        matière de stockage, de calcul et de sécurité des données.`
     },
     {
         title: "DevOps",
-        img: cloud,
-        txt: `Notre expertise en ingénierie logicielle nous permet de 
-        vous proposer des prestations de qualité en matière de développement logiciel (Web, Mobile, Desktop, Batchs ...)
-        Nous vous garantissons un code de qualité respectant les meilleurs pratiques de l'industrie logicielle.`
+        img: robot,
+        icons:["devicon-jenkins-plain", "devicon-ansible-plain", "devicon-terraform-plain"],
+        txt: `Nous vous aidons dans la mise en place des pratiques et des outils efficaces pour optimiser 
+        la livraison continue de vos applications et services, nos consultants expérimentés vous aiderons à 
+        mettre en œuvre une stratégie DevOps adaptée à votre entreprise.`
     },
 ];
 ---
@@ -45,6 +56,9 @@ const data : {title: string, img: string, txt: string}[] = [
                 </div>
                 <h1 style={s.title}>{x.title}</h1>
                 <div style={s.div1}>{x.txt}</div>
+                <div style={s.iconsBar}>
+                { x.icons.map(a => (<i style={s.icon} class={a}></i>)) }    
+                </div>
             </div>
         ))
     }

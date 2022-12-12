@@ -4,6 +4,8 @@ import BlogHeader from '@comps/BlogHeader.astro';
 import BlogFooter from '@comps/BlogFooter.astro';
 import Styles from '@comps/styles/Styles.astro';
 import S1 from '@comps/landing/S1.astro';
+import S2 from '@comps/landing/S2.astro';
+import S3 from '@comps/landing/S3.astro';
 
 const title = 'FrenchTechLead - The Tech Leaders Community';
 const author = 'FrenchTechLead';
@@ -18,12 +20,15 @@ const showAds=false;
 
 <head>
 	<MetaHead {title} {keywords} {description} {permalink} {postImageUrl} {author} {showAds} />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 	<Styles />
 </head>
 <body>
 	<BlogHeader />
 	<main>
 		<S1/>
+		<S2/>
+		<S3/>
 	</main>
 	<BlogFooter />
 </body>

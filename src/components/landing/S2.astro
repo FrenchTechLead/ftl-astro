@@ -1,0 +1,75 @@
+---
+const s = {
+    section: [
+    `background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(43,54,131,1) 38%, rgba(72,85,6,1) 100%)`,
+    "border-radius: 10px",
+    "padding:20px",
+    "text-align: center",
+    "margin-top: 40px"
+        ].join(";"),
+    title: "font-size: 4rem; margin: 0px 0px 20px 0px;",
+    row: [
+        "margin-top:10px",
+        "text-align: left",
+        "display: flex",
+        "justify-content: flex-start",
+        "align-items: center",
+    ].join(';'),
+    
+    
+    col1: "font-size: 100px; color: var(--color-purple)",
+    col2: "padding-left: 100px",
+    subtitle: "font-weight: bold; font-size: 2rem; color: var(--color-blue);",
+    txt: "font-size: 1.4rem"
+}
+
+const data: {
+    title: string,
+    icon: string,
+    txt: string
+} [] = [
+    {
+        title: "Software Building",
+        icon: "devicon-vscode-plain",
+        txt: `Nos consultants sont des experts du build logiciel, capables de 
+        concevoir et de mettre en œuvre des systèmes informatiques complexes 
+        pour répondre aux exigences spécifiques de chaque client.`
+    },
+    {
+        title: "Continuous Delivery",
+        icon: "devicon-kubernetes-plain",
+        txt: `Nous offrons une gamme complète de services liés au cycle de vie du 
+        développement logiciel, notamment en matière de continuous integration (CI) 
+        et de continuous deployment (CD). Grâce à notre expertise en CI/CD, nous pouvons 
+        aider les entreprises à accélérer leur processus de développement de logiciel, 
+        en veillant à ce que leur code soit intégré et déployé de manière continue et 
+        efficace.`
+    },
+    {
+        title: "Build for the cloud",
+        icon: "devicon-googlecloud-plain",
+        txt: `Nous aidons les entreprises à tirer pleinement parti des avantages du cloud 
+        computing en leur fournissant des solutions adaptées à leurs besoins spécifiques. 
+        Nous pouvons les aider à déplacer leurs applications et leurs données vers le cloud, 
+        à optimiser leur utilisation des ressources cloud et à gérer leurs environnements 
+        cloud de manière efficace.`
+    },
+];
+
+---
+<section style={s.section}>
+    <h2 style={s.title}>Notre expertise</h2>
+    {
+        data.map(x=>(
+        <div style={s.row}>
+            <div style={s.col1}>
+                <i class={x.icon}></i>
+            </div>
+            <div style={s.col2}>
+                <div style={s.subtitle}>{x.title}</div>
+                <div style={s.txt}>{x.txt}</div>
+            </div>
+        </div>
+        ))
+    }
+</section>

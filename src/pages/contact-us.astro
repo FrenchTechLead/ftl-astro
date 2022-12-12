@@ -7,6 +7,8 @@ import Image from '@comps/Image.astro';
 
 
 import akramPic from '@assets/blog/akram-1.svg';
+import S2 from '@comps/landing/S2.astro';
+import S3 from '@comps/landing/S3.astro';
 
 const title = 'FrenchTechLead - The Tech Leaders Community';
 const author = 'FrenchTechLead';
@@ -57,6 +59,8 @@ const techPosts = await Astro.glob('./posts/tech/*.mdx');
 	<BlogHeader />
 	<main>
 
+        
+
 		<section id="contact-section">
 			<h2>Contact Us</h2>
             <form action="https://submit-form.com/FIV9Qtla">
@@ -75,6 +79,8 @@ const techPosts = await Astro.glob('./posts/tech/*.mdx');
                 <button type="submit">Send</button>
               </form>
 		</section>
+
+        <S3/>
 
 
 	</main>
