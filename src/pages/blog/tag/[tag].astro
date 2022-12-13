@@ -1,14 +1,34 @@
 ---
+import { onlyUniqueArrayFilter } from "src/utils/utils";
 import MetaHead from '@comps/MetaHead.astro';
 import Header from '@comps/Header.astro';
 import Footer from '@comps/Footer.astro';
 import Styles from '@comps/styles/Styles.astro';
 import BlogPostPreview from '@comps/BlogPostPreview.astro';
 import NewsLetter from '@comps/NewsLetter.astro'
-import { onlyUniqueArrayFilter } from 'src/utils/utils';
+import S3 from "@comps/landing/S3.astro";
 
+
+const techPosts = await Astro.glob('/src/pages/posts/tech/*.mdx');
+
+
+export async function getStaticPaths() {
+    const techPosts = await Astro.glob('/src/pages/posts/tech/*.mdx');
+    return techPosts
+	    .map(a=> a.frontmatter.tags)
+		.flatMap(a => a)
+		.filter(onlyUniqueArrayFilter)
+		.map(a => {
+            return {
+                params:{
+                    tag: a
+                }
+            }
+        })
+}
+
+const { tag } = Astro.params;
 const DEV = await import.meta.env.DEV;
-
 const title = 'FrenchTechLead - The Tech Leaders Community';
 const author = 'FrenchTechLead';
 const description = 'FrenchTechLead is a blog about Software Engineering and Web Development, written by a team of Experienced Entrepreneurs.'
@@ -16,9 +36,6 @@ const keywords = ['Tech Blog', 'Software Engineering', 'Cloud Computing', 'OOP',
 const permalink = 'https://frenchtechlead.com/';
 const postImageUrl = 'https://frenchtechlead.com/assets/blog/blog-cover.avif';
 const showAds=false;
-
-
-const techPosts = await Astro.glob('./posts/tech/*.mdx');
 
 const s = {
 	postsList: "margin-top: 50px;",
@@ -34,9 +51,7 @@ const s = {
 }
 
 ---
-
 <html lang="en">
-
 <head>
 	<MetaHead 
 		title={title}
@@ -53,7 +68,7 @@ const s = {
 	<Header />
 	<main>
 		<section>
-			<h2>Tags</h2>
+			<h1 style="color:var(--color-red)">#{tag}</h1>
 			{
 				techPosts
 				.map(a=> a.frontmatter.tags)
@@ -62,18 +77,22 @@ const s = {
 				.sort()
 				//.map(a => a.toUpperCase())
 				.map(a => (
-					<a href={'/blog/tag/' + a} style={s.tag}>{a}</a>
+				<a href={'/blog/tag/' + a} style={s.tag}>{a}</a>
 				))
 			}
 		</section>
 		<section style={s.postsList} aria-label="Blog post list">
 			<h2 style={s.postElement}>Latest posts 🔥</h2>
-			{techPosts.filter(p=> DEV || !p.frontmatter.draft ).reverse().map((p) =>
-			<BlogPostPreview post={p.frontmatter as any} url={p.url + '/'} />)}
+			{
+				techPosts.filter(p=> DEV || !p.frontmatter.draft )
+				.filter(p => p.frontmatter.tags.includes(tag))
+				.reverse()
+				.map((p) =>(<BlogPostPreview post={p.frontmatter as any} url={p.url + '/'} />))
+			}
 		</section>
 		<NewsLetter />
+		<S3/>
 	</main>
 	<Footer />
 </body>
 </html>
-
