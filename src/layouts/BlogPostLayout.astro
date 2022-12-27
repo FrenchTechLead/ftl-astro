@@ -12,7 +12,7 @@ import Sponsor from '@comps/Sponsor.astro';
 const { title, metaTitle, description, publishDate , 
 authorName, authorSocial, permalink, lang, 
 postImageUrl, postImageLocal, postImageAlt,
-postImageWidth, postImageHeight, keywords, author
+postImageWidth, postImageHeight, keywords, author, url
 } = Astro.props.content;
 
 ---
@@ -29,6 +29,13 @@ postImageWidth, postImageHeight, keywords, author
 	</BlogPost>
 	<Separator/>
 	<Sponsor />
+	<script src="https://utteranc.es/client.js"
+		repo="FrenchTechLead/ftl-astro"
+		issue-term={url}
+		theme="gruvbox-dark"
+		crossorigin="anonymous"
+		async>
+	</script>
 	<NewsLetter/>
 	<Footer/>
 </body>
