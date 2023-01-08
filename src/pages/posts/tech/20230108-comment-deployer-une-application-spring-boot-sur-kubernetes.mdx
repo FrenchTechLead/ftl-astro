@@ -1,0 +1,474 @@
+---
+
+layout: '@layouts/BlogPostLayout.astro'
+title: Comment déployer une application spring-boot et Postgres sur Kubernetes
+publishDate: January 08, 2023
+authorName: "@FrenchTechLead"
+authorSocial: "https://twitter.com/FrenchTechLead"
+postImageUrl: https://frenchtechlead.com/assets/blog/tech/20201023-git-pour-debutant/0.png
+postImageAlt: Comment déployer une application spring-boot et Postgres sur Kubernetes
+postImageWidth: 700
+postImageHeight: 350
+keywords:
+ - Kubernetes
+ - Spring-Boot
+ - Postgres
+ - cert-manager
+ - lets-encrypt
+tags:
+ - Kubernetes
+ - Spring-Boot
+ - Postgres
+ - cert-manager
+ - lets-encrypt
+description: "Apprenez à déployer une application spring-boot sur kubernetes avec une base de données Postgres avec un certificat SSL gratuit Let's encrypt."
+lang: fr
+draft: false
+---
+import Layout from '@layouts/BlogPostLayout.astro'
+import Separator from '@comps/Separator.jsx'
+import img0 from '@assets/blog/tech/20230108-comment-deployer-une-application-spring-boot-sur-kubernetes/0.png'
+import img1 from '@assets/blog/tech/20230108-comment-deployer-une-application-spring-boot-sur-kubernetes/1.png'
+import img2 from '@assets/blog/tech/20230108-comment-deployer-une-application-spring-boot-sur-kubernetes/2.png'
+import img3 from '@assets/blog/tech/20230108-comment-deployer-une-application-spring-boot-sur-kubernetes/3.png'
+import img4 from '@assets/blog/tech/20230108-comment-deployer-une-application-spring-boot-sur-kubernetes/4.png'
+
+import Image from '@comps/Image.astro'
+
+<Image src={img0} t='Comment déployer une application spring-boot et Postgres sur Kubernetes' solo={true}/>
+
+## Introduction
+Dans cet article nous allons découvrir ensemble comment déployer une application spring-boot avec une base de données Postgres sur Kubernetes, nous allons aussi installer un ingress controller de type Nginx et gérer automatiquement les certificats SSL délivrés par l'autorité de certification let's encrypt en utilisant cert-manager.  
+Nous allons héberger le cluster Kubernetes à domicile et l'ouvrir sur internet.  
+Le tutoriel traitera les points suivants:
+### Configuration réseau
+- Ouverture de votre serveur local sur internet (Free).
+- Attribution d'un nom de domaine pour votre adresse IP ([dnsimple.com](https://dnsimple.com/r/831d68650580b6)).
+- Test de la configuration réseau.
+### Construction de l'image Docker et Push sur Docker Hub
+- Construction de l'image Docker pour l'application spring-boot.
+- Push de l'image sur DockerHub avec GitHub Actions.
+### Installation du ingress nginx
+- Installation du ingress controller nginx.  
+- Installation du cert-manager.   
+### Déploiement de l'application spring-boot et de la BDD sur Kubernetes
+- Déploiement de la BDD Postgres.
+- Déploiement de l'application spring-boot.
+- Demande de certificat let's encrypt.
+- Déploiement de l'ingress ressource.
+
+
+
+<Separator/>
+
+## Pré-requis
+Pour pouvoir écécuter les différentes commandes de ce tutoriel, vous devez d'abord installer les programmes suivants.
+- [Docker](https://www.docker.com/products/docker-desktop/)
+- [Kubernetes](https://kubernetes.io/fr/docs/home/)
+- [Helm](https://helm.sh/fr/docs/intro/install/)
+- [kubectl](https://kubernetes.io/fr/docs/tasks/tools/install-kubectl/)
+
+> Docker desktop vient avec un cluster kubernetes intégré que vous pouvez activer depuis les paramètres, vous n'aurez pas besoin d'installer kubernetes et kubectl si vous choisissez d'utiliser Docker Desktop.
+<Separator/>
+
+## Configuration réseau
+### Ouverture de votre serveur local sur internet (Free)
+Pour que votre serveur local soit accessible depuis internet, vous devez autoriser le trafic entrant dans votre box internet et le redériger vers votre serveur, nous allons décrire comment faire cela avec l'opérateur free.    
+#### 1 - Demander une adresse IP fixe
+La demande d'une adresse IP fixe est nécéssaire pour que votre serveur soit toujours accessible sur la même adresse, la demande se fait sur votre [espace abonné](https://subscribe.free.fr/login/)
+
+<Image src={img1} t='Demande d IP fixe pour Freebox' solo={true}/>
+
+> Une fois l'adresse IP attribuée, vous devez ouvrir les ports 80 et 443 de votre box et redériger le traffic vers votre serveur.
+
+#### 2 - Ouverture des ports 80 et 443 et redirection vers le serveur 
+L'ouverture des ports se fait sur l'espace de configuration de votre box, l'adresse pour free est la suivante http://mafreebox.freebox.fr/
+Une fois connecté dirigez-vous sur **Paramètre de la Freebox** puis **Gestion des ports** puis ajoutez les deux règles suivantes en adaptant la première ligne à votre situation. (adresse de votre serveur)
+<Image src={img2} t='Redirection du port 80' solo={true}/>
+<Image src={img3} t='Redirection du port 443' solo={true}/>
+
+### Attribution d’un nom de domaine pour votre adresse IP
+Pour associer un nom de domaine à votre adresse IP vous devez effectuer une configuration DNS, vous devez ajouter l'entrée **A** à vos DNS Records.
+Si vous n'avez pas encore de nom de domaine et vous voulez bénéficier d'un service DNS de qualité, je vous suggère d'utiliser [dnsimple.com](https://dnsimple.com/r/831d68650580b6)
+
+Quel-que-soit votre service DNS vous devez ajouter l'entrée **A** à vos Records et lui affecter comme valeur votre adresse IP externe, pour connaitre votre adresse IP externe vous pouvez utiliser le service suivant : [ifconfig.me](https://ifconfig.me/)
+Exemple:
+<Image src={img4} t='DNS A Record sur dnsimple.com' solo={true}/>
+
+> Une fois la [propagation DNS](https://dnschecker.org/) soit faite, vous deverez recevoir du trafic sur votre serveur par le biais de votre nom de domaine.
+
+### Test de la configuration réseau
+Une fois la [propagation DNS](https://dnschecker.org/) soit faite, vous deverez recevoir du trafic sur votre serveur par le biais de votre nom de domaine.
+
+Pour tester cela vous pouvez lancer un serveur web sur le port 80 et vérifier que vous recevez du traffic en passant par votre nom de domaine.
+
+Vous pouvez utilisez l'utilitaire **http-snitch** pour tester cela.
+```sh
+docker pull meshredded/http-snitch
+docker run -p 80:8080 --name http-snitch meshredded/http-snitch
+```
+puis requetez votre nom de domaine via un curl:
+```sh
+curl votreNomDeDomaine.fr
+```
+Les logs suivantes devrait s'afficher dans votre contenaire http-snitch
+
+```
+GET / HTTP/1.1
+Host: votreNomDeDomaine.fr
+User-Agent: curl/7.84.0
+Accept: */*
+```
+Si les logs ci-dessus s'affichent, alors **félicitations !**, votre nom de domaine pointe bien sur votre adresse ip externe (celle de votre box) et votre box redérige bien le traffic reçu sur le port 80 vers votre serveur.
+Vous pouvez alors arrêter le contenaire de test **http-snitch**.
+```
+docker stop http-snitch
+docker rm http-snitch
+```
+<Separator/>
+
+## Construction de l’image Docker et Push sur Docker Hub
+### Dockerfile pour une application spring-boot
+Sur la racine de votre projet Spring-Boot créez un Dockerfile avec le contenu suivant:
+```Dockerfile
+FROM amazoncorretto:17
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app.jar"]
+```
+> Vous pouvez adapter le contenu du Dockerfile à votre situation, ici on choisi de partir sur une version 17 du JDK correto fourni par Amazon.
+
+### Push de l’image sur DockerHub avec GitHub Actions
+Vous pouvez utiliser le service Github Actions pour la construction de votre image Docker et sa publication sur DockerHub à chaque push de votre code sur Github.
+> Vous devez au préalable avoir un compte sur [DockerHub](https://hub.docker.com/) et créer un Access Token pour que le push sur votre repository DockerHub soit possible.
+
+> Ajoutez une secret **DOCKER_HUB_TOKEN** sur votre repository Github contenant votre access Token DockerHub.
+```sh
+# Lien pour l'ajout du secret
+https://github.com/VOTRE_USERNAME/VOTRE_PROJET/settings/secrets/actions
+```
+
+Créez le fichier **deploy.yml** dans l’arboréscence suivante: **.github/workflows/deploy.yml**
+```yaml
+name: Deployment
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build and Push to DockerHub
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '17'
+      - name: Build with Maven
+        run: mvn -B package -DskipTests --file pom.xml
+      - name: Build Docker Image
+        run: docker build  . -t USERNAME/APP_NAME
+      - name: DockerHub Login
+        run: docker login -u USERNAME -p ${{ secrets.DOCKER_HUB_TOKEN }}
+      - name: DockerHub Image Push
+        run: docker push USERNAME/APP_NAME
+```
+
+> N'oubliez pas d'adapter les valeurs de **USERNAME** (votre username sur DockerHub) et **APP_NAME** (le nom de votre application)
+
+> Pour chaque push ou merge sur la branche master, une github action sera exécutée pour construire l'image Docker de votre application et la pusher sur DockerHub.
+<Separator/>
+
+## Installation du ingress nginx et du cert-manager
+### 1 - Installation du ingress nginx
+L'installation du nginx en tant que ingress controller vas rendre ce dernier comme le point d'entrée unique pour les connextion HTTP et HTTPS de votre cluster Kubernetes.
+Afin d'installer nginx ingress controller vous devez avoir [Helm](https://helm.sh/fr/docs/intro/install/) d'installé.
+
+Ajoutez le repo helm pour ingress-nginx et installez le:
+```
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install nginx ingress-nginx/ingress-nginx
+```
+Vérification de l'installation:
+```
+kubectl get svc
+NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+kubernetes                                         ClusterIP      10.96.0.1        <none>        443/TCP                      6d1h
+nginx-ingress-ingress-nginx-controller             LoadBalancer   10.96.94.203     localhost     80:30982/TCP,443:32374/TCP   2d
+nginx-ingress-ingress-nginx-controller-admission   ClusterIP      10.103.146.144   <none>        443/TCP                      2d
+```
+
+### 2 - Installation du cert-manager
+cert-manager ajoute des certificats et des émetteurs de certificats en tant que types de ressources dans les clusters Kubernetes et simplifie le processus d'obtention, de renouvellement et d'utilisation de ces certificats.  
+```sh
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.1/cert-manager.yaml
+```
+
+<Separator/>
+
+## Déploiement de l'application spring-boot et de la BDD sur Kubernetes
+Les scripts suivants vont faire référence à une application nommée **bien-parler** disponible sur le lien suivant [bienparler.fr](https://bienparler.fr), vous devez adaptez les scripts à votre application.
+### Déploiement de la BDD Postgres
+1. Créez un fichier **1-database-deployment.yaml** avec le contenu suivant:
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: ns-bien-parler
+  name: bien-parler-database
+spec:
+  serviceName: bien-parler-database
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bien-parler-database
+  template:
+    metadata:
+      labels:
+        app: bien-parler-database
+    spec:
+      containers:
+        - name: bien-parler-database
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: mysecretpassword
+            - name: POSTGRES_DB
+              value: postgres
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
+```
+> Ce script yaml concerne la création d'un déploiement d'une BDD Postgres avec un seul réplicat et ayant comme username **postgres** et mot de passe **mysecretpassword** le port exposé par le contenaire de la BDD sera **5432**
+
+2. Créez un fichier **2-database-service.yaml** avec le contenu suivant:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ns-bien-parler
+  name: postgres-service
+  labels:
+    app: bien-parler-database
+spec:
+  type: NodePort
+  ports:
+    - name: "postgres"
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+      nodePort: 30432
+  selector:
+    app: bien-parler-database
+```
+> Le service ci-dessus permet de router le trafic du cluster sur le port **5432** vers la base de donnée **bien-parler-database**
+3. Appliquer les deux scripts avec kubectl
+```sh
+kubectl apply -f 1-database-deployment.yaml
+kubectl apply -f 2-database-service.yaml
+```
+
+### Déploiement de l’application spring-boot
+1. Créez un fichier **3-backend-configmap.yaml** avec le contenu suivant:
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: ns-bien-parler
+  name: bien-parler-config-map
+data:
+  SPRING_DATASOURCE_URL: jdbc:postgresql://${POSTGRES_SERVICE_SERVICE_HOST}:5432/postgres
+  SPRING_DATASOURCE_USERNAME: postgres
+  SPRING_DATASOURCE_PASSWORD: mysecretpassword
+```
+> Cette configMap contient les différentes variables d'environnement que notre contenaire spring-boot va utiliser, notez l'utilisation de la syntaxe **\$\{POSTGRES_SERVICE_SERVICE_HOST}** qui fait référence à une variable d'environnement gérée par Kubernetes.
+
+2. Créez un fichier **4-backend-deployment.yaml** avec le contenu suivant:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ns-bien-parler
+  name: bien-parler-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bien-parler-backend
+  template:
+    metadata:
+      labels:
+        app: bien-parler-backend
+    spec:
+      containers:
+        - name: bien-parler-backend
+          image: meshredded/bien-parler
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: bien-parler-config-map
+```
+> Ce déploiement concerne notre application spring-boot, n'oubliez pas d'adapter le nom de l'image et de l'application à votre cas.
+
+3. Créez un fichier **5-backend-service.yaml** avec le contenu suivant:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ns-bien-parler
+  name: bien-parler-backend-service
+spec:
+  selector:
+    app: bien-parler-backend
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+```
+> Ce service peremt de mapper le port 8080 de notre application au port 80 de notre cluster.
+
+3. Appliquer les trois scripts avec kubectl
+```sh
+kubectl apply -f 3-backend-configmap.yaml 
+kubectl apply -f 4-backend-deployment.yaml 
+kubectl apply -f 5-backend-service.yaml
+```
+
+### Demande de certificat let's encrypt
+Nous allons configurer deux émetteurs pour Let's Encrypt dans cet exemple : staging et production.
+
+L'émetteur de production de Let's Encrypt a des limites de débit très strictes. Lorsque vous expérimentez et apprenez, il est très facile de atteindre ces limites. En raison de ce risque, nous commencerons avec l'émetteur de staging de Let's Encrypt, et une fois que nous serons sûrs qu'il fonctionne, nous passerons à l'émetteur de production.
+
+Notez que vous verrez un avertissement concernant les certificats non fiables de l'émetteur de staging, mais c'est tout à fait normal.  
+
+1. Créez un fichier **6-lets-encrypt-prod-issuer.yaml** avec le contenu suivant:
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  namespace: ns-bien-parler
+  name: bien-parler-letsencrypt-prod-issuer
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: mecheri.akram@gmail.com
+    privateKeySecretRef:
+      name: bien-parler-letsencrypt-prod-secret
+    solvers:
+      - http01:
+          ingress:
+            class:  nginx
+```
+> Cet issuer concerne la PROD de Let's encrypt, nous l'utiliserons une fois que l'emetteur de staging est fonctionnel.
+
+2. Créez un fichier **8-lets-encrypt-staging-issuer.yaml** avec le contenu suivant:
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  namespace: ns-bien-parler
+  name: bien-parler-letsencrypt-staging-issuer
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: mecheri.akram@gmail.com
+    privateKeySecretRef:
+      name: bien-parler-letsencrypt-staging-secret
+    solvers:
+      - http01:
+          ingress:
+            class:  nginx
+```
+> Cet issuer concerne le Staging de Let's encrypt, nous l'utiliserons pour tester notre configuration de cert-manager.
+
+2. Créez un fichier **9-ingress-ressource.yaml** avec le contenu suivant:
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: ns-bien-parler
+  name: bien-parler-ingress-ressource
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/issuer: "bien-parler-letsencrypt-staging-issuer"
+spec:
+  tls:
+    - hosts:
+        - bienparler.fr
+      secretName: bien-parler-tls
+  rules:
+    - host: bienparler.fr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bien-parler-backend-service
+                port:
+                  number: 80
+```
+> Cette ingress ressource va configurer notre ingress controller afin qu'il fasse suivre les requettes HTTP ayant comme valeur du header Host **bienparler.fr** vers le service **bien-parler-backend-service**, elle définit aussi un certificat TLS **bien-parler-tls** issu par l'emetteur **bien-parler-letsencrypt-staging-issuer**.
+
+3. Appliquer les trois scripts avec kubectl
+```sh
+kubectl apply -f 6-lets-encrypt-prod-issuer.yaml 
+kubectl apply -f 8-lets-encrypt-staging-issuer.yaml
+kubectl apply -f 9-ingress-ressource.yaml 
+```
+
+à ce stade on devrait avoir notre application de disponible sur le nom de domaine **bienparler.fr** en HTTPS.  
+Cependant le certificat ayant été émis par l'autorité de certification staging de let's encrypt, votre navigateur web devrait vous avertir du rique d esécurité encouru.  
+Pour switcher sur un certificat de production, vous devez editer le script **9-ingress-ressource.yaml** en modifiant  **cert-manager.io/issuer: "bien-parler-letsencrypt-staging-issuer"** par **cert-manager.io/issuer: "bien-parler-letsencrypt-prod-issuer"**, ensuite supprimer la secret **bien-parler-tls** afin qu'une nouvelle demande de certificat soit émise par le cert-manager:
+```sh
+kubectl delete secret bien-parler-tls
+```
+Cela démarrera le processus pour obtenir un nouveau certificat, et en utilisant la commande describe, vous pouvez voir l'état. Une fois le certificat de production mis à jour, vous devriez voir votre site disponible en HTTPS avec un certificat TLS valide 🔒 https://bienparler.fr
+.
+```sh
+kubectl describe certificate bien-parler-tls
+⬇️ ⬇️ ⬇️ ⬇️
+Events:
+  Type    Reason         Age                  From          Message
+  ----    ------         ----                 ----          -------
+  Normal  Generated      11m                  cert-manager  Generated new private key
+  Normal  OrderCreated   11m                  cert-manager  Created Order resource "bien-parler-tls-889745041"
+  Normal  OrderComplete  10m                  cert-manager  Order "bien-parler-tls-889745041f" completed successfully
+
+```
+
+
+<Separator/>
+
+## Pour finir,
+Ce tutoriel a couvert les sujets suivants:
+1. Ouverture de ports 80 et 443 et redirection de trafic entrant vers un serveur local.
+2. Attribution d'un nom de domaine et configuration de ce dernier à notre IP fixe.
+3. Création d'une image Docker pour une application spring-boot via un Dockerfile.
+4. Construction d'une image Docker et push sur DockerHub avec GitHub Actions.
+5. Installation de nginx ingress controller.
+6. Installation de cert-manager.
+7. Déploiement d'une application spring-boot et une bdd Postgres sur Kubernetes.
+8. Configuration de nginx ingress controller.
+9. Géneration de certificats SSL (let's encrypt) par cert-manager.

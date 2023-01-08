@@ -10,10 +10,12 @@ import NewsLetter from '@comps/NewsLetter.astro'
 import Sponsor from '@comps/Sponsor.astro';
 
 const { title, metaTitle, description, publishDate , 
-authorName, authorSocial, permalink, lang, 
+authorName, authorSocial, lang, 
 postImageUrl, postImageLocal, postImageAlt,
 postImageWidth, postImageHeight, keywords, author, url
 } = Astro.props.content;
+
+const permalink = "https://frenchtechlead.com" + Astro.props.url;
 
 ---
 <html lang={lang || 'en'}>
