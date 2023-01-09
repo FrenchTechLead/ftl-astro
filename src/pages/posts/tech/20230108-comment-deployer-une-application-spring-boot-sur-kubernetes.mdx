@@ -83,7 +83,7 @@ La demande d'une adresse IP fixe est nécéssaire pour que votre serveur soit to
 
 #### 2 - Ouverture des ports 80 et 443 et redirection vers le serveur 
 L'ouverture des ports se fait sur l'espace de configuration de votre box, l'adresse pour free est la suivante http://mafreebox.freebox.fr/
-Une fois connecté dirigez-vous sur **Paramètre de la Freebox** puis **Gestion des ports** puis ajoutez les deux règles suivantes en adaptant la première ligne à votre situation. (adresse de votre serveur)
+Une fois connecté dirigez-vous sur **Paramètres de la Freebox** puis **Gestion des ports** puis ajoutez les deux règles suivantes en adaptant la première ligne à votre situation. (adresse de votre serveur)
 <Image src={img2} t='Redirection du port 80' solo={true}/>
 <Image src={img3} t='Redirection du port 443' solo={true}/>
 
@@ -98,7 +98,7 @@ Exemple:
 > Une fois la [propagation DNS](https://dnschecker.org/) soit faite, vous deverez recevoir du trafic sur votre serveur par le biais de votre nom de domaine.
 
 ### Test de la configuration réseau
-Une fois la [propagation DNS](https://dnschecker.org/) soit faite, vous deverez recevoir du trafic sur votre serveur par le biais de votre nom de domaine.
+Une fois que la [propagation DNS](https://dnschecker.org/) soit faite, vous deverez recevoir du trafic sur votre serveur par le biais de votre nom de domaine.
 
 Pour tester cela vous pouvez lancer un serveur web sur le port 80 et vérifier que vous recevez du traffic en passant par votre nom de domaine.
 
@@ -109,7 +109,7 @@ docker run -p 80:8080 --name http-snitch meshredded/http-snitch
 ```
 puis requetez votre nom de domaine via un curl:
 ```sh
-curl votreNomDeDomaine.fr
+curl -H "Host: votreNomDeDomaine.fr" votreNomDeDomaine.fr
 ```
 Les logs suivantes devrait s'afficher dans votre contenaire http-snitch
 
