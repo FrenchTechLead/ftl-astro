@@ -68,18 +68,18 @@ Pour pouvoir écécuter les différentes commandes de ce tutoriel, vous devez d'
 - [Helm](https://helm.sh/fr/docs/intro/install/)
 - [kubectl](https://kubernetes.io/fr/docs/tasks/tools/install-kubectl/)
 
-> Docker desktop vient avec un cluster kubernetes intégré que vous pouvez activer depuis les paramètres, vous n'aurez pas besoin d'installer kubernetes et kubectl si vous choisissez d'utiliser Docker Desktop.
+> Docker desktop vient avec un cluster kubernetes intégré que vous pouvez activer depuis les paramètres, vous n'aurez pas besoin d'installer kubernetes ni kubectl si vous choisissez d'utiliser Docker Desktop.
 <Separator/>
 
 ## Configuration réseau
 ### Ouverture de votre serveur local sur internet (Free)
-Pour que votre serveur local soit accessible depuis internet, vous devez autoriser le trafic entrant dans votre box internet et le redériger vers votre serveur, nous allons décrire comment faire cela avec l'opérateur free.    
+Pour que votre serveur local soit accessible depuis internet, vous devez autoriser le trafic entrant dans votre box internet et le rediriger vers votre serveur, nous allons décrire comment faire cela avec l'opérateur free.    
 #### 1 - Demander une adresse IP fixe
 La demande d'une adresse IP fixe est nécéssaire pour que votre serveur soit toujours accessible sur la même adresse, la demande se fait sur votre [espace abonné](https://subscribe.free.fr/login/)
 
 <Image src={img1} t='Demande d IP fixe pour Freebox' solo={true}/>
 
-> Une fois l'adresse IP attribuée, vous devez ouvrir les ports 80 et 443 de votre box et redériger le traffic vers votre serveur.
+> Une fois que l'adresse IP attribuée, vous devez ouvrir les ports 80 et 443 de votre box et rediriger le traffic vers votre serveur.
 
 #### 2 - Ouverture des ports 80 et 443 et redirection vers le serveur 
 L'ouverture des ports se fait sur l'espace de configuration de votre box, l'adresse pour free est la suivante http://mafreebox.freebox.fr/
@@ -439,8 +439,15 @@ kubectl apply -f 9-ingress-ressource.yaml
 ```
 
 à ce stade on devrait avoir notre application de disponible sur le nom de domaine **bienparler.fr** en HTTPS.  
-Cependant le certificat ayant été émis par l'autorité de certification staging de let's encrypt, votre navigateur web devrait vous avertir du rique d esécurité encouru.  
-Pour switcher sur un certificat de production, vous devez editer le script **9-ingress-ressource.yaml** en modifiant  **cert-manager.io/issuer: "bien-parler-letsencrypt-staging-issuer"** par **cert-manager.io/issuer: "bien-parler-letsencrypt-prod-issuer"**, ensuite supprimer la secret **bien-parler-tls** afin qu'une nouvelle demande de certificat soit émise par le cert-manager:
+Cependant le certificat ayant été émis par l'autorité de certification staging de let's encrypt, votre navigateur web devrait vous avertir du rique de sécurité encouru.  
+Pour switcher sur un certificat de production, vous devez editer le script **9-ingress-ressource.yaml** en modifiant  **cert-manager.io/issuer: "bien-parler-letsencrypt-staging-issuer"** par **cert-manager.io/issuer: "bien-parler-letsencrypt-prod-issuer"**.
+Appliquer la modification du script:
+```sh
+kubectl apply -f 9-ingress-ressource.yaml
+```
+Ensuite supprimez la secret **bien-parler-tls** afin qu'une nouvelle demande de certificat soit émise par le cert-manager:
+
+
 ```sh
 kubectl delete secret bien-parler-tls
 ```
