@@ -8,21 +8,23 @@ const s = {
     img: "width: 250px; margin: unset; display: inline; margin-top: 60px",
     left: "text-align: left;",
     right: "text-align: right;",
-    title: "color: var(--color-yellow); font-size: 4rem; margin-block-start: 0px; margin-block-end: 0px; ",
-    div1: "font-size: 2rem; text-align: left;",
+    title: "color: var(--color-yellow); margin-block-start: 0px; margin-block-end: 0px; ",
+    div1: "text-align: left;",
     iconsBar: "margin-top:10px; display: flex; justify-content: space-between;background-color: mintcream; padding:3px; width:100px",
-    icon: "font-size:30px; color: var(--color-heavy-blue);",
+    icon: "color: var(--color-heavy-blue);",
 };
 
 const data : {
     title: string,
     img: string,
+    imgWidth: string,
     txt: string,
     icons: string []
 }[] = [
     {
         title: "Software Engineering",
-        img: moon,          
+        img: moon,
+        imgWidth: "100px;",
         icons:["devicon-java-plain", "devicon-python-plain", "devicon-javascript-plain"],
         txt: `Notre expertise en ingénierie logicielle nous permet de 
         vous proposer des prestations de qualité en matière de développement logiciel (Web, Mobile, Desktop, Batchs ...)
@@ -30,7 +32,8 @@ const data : {
     },
     {
         title: "Cloud Computing",
-        img: cloud,          
+        img: cloud,
+        imgWidth: "100px;",        
         icons:["devicon-azure-plain", "devicon-amazonwebservices-plain","devicon-googlecloud-plain"],
         txt: `Nous vous acompagnons dans la transformation numérique de votre entreprise et garantissons un passage serein sur 
         le cloud, nous vous aidons à tirer le meilleur parti de vos services AWS et Azure afin de  répondre à vos besoins en 
@@ -52,9 +55,9 @@ const data : {
         data.map((x, index) => (
             <div style={index % 2 === 0 ? s.right : s.left}>
                 <div style={index % 2 === 0 ? s.left : s.right}>
-                    <img src={x.img} style={s.img} />
+                    <img src={x.img} style={s.img} alt={x.title} width={}/>
                 </div>
-                <h1 style={s.title}>{x.title}</h1>
+                <h2 style={s.title}>{x.title}</h2>
                 <div style={s.div1}>{x.txt}</div>
                 <div style={s.iconsBar}>
                 { x.icons.map(a => (<i style={s.icon} class={a}></i>)) }    

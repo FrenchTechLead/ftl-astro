@@ -1,0 +1,97 @@
+---
+layout: '@layouts/BlogPostLayout.astro'
+title: CSS Breakpoint Debugger With Simple HTML
+publishDate: 'December, 12, 2022'
+authorName: "@FrenchTechLead"
+authorSocial: "https://twitter.com/FrenchTechLead"
+postImageUrl: https://frenchtechlead.com/assets/blog/tech/20221214-very-simple-css-breakpoint-debugger/0.png
+postImageAlt: CSS Breakpoint Debugger With Simple HTML
+postImageWidth: 842
+postImageHeight: 462
+keywords:
+  - "CSS Breakpoint Debugger"
+  - "Detect screen size change in CSS"
+  - "CSS Media Queries"
+tags:
+ - Css
+ - CssBreakpoint
+ - CssBreakpointDebugger
+permalink: https://frenchtechlead.com/posts/tech/20221214-very-simple-css-breakpoint-debugger/
+description: "Detect Screen size change with this simple HTML and CSS based breakpoint debugger"
+draft: false
+lang: en
+---
+import Layout from '@layouts/BlogPostLayout.astro'
+import Separator from '@comps/Separator.jsx'
+import Tooltip from '@comps/Tooltip.astro'
+import img0 from '@assets/blog/tech/20221214-very-simple-css-breakpoint-debugger/0.png'
+import Image from '@comps/Image.astro'
+
+<Image src={img0} t='CSS Breakpoint Debugger With Simple HTML' solo={true}/>
+
+## What are CSS breakpoints ?
+CSS breakpoints are used by developers to ensure that website content is properly displayed on devices with different screen sizes and resolutions. These breakpoints, which are defined in the code, are activated by media queries and allow the website content to adjust itself to the size of the screen. This ensures that the content is properly aligned and visually appealing to the user. CSS breakpoints are also sometimes referred to as media query breakpoints.
+
+<Separator/>
+
+## How to debug CSS breakpoints ?
+
+To debug CSS breakpoints, you can use your browser's developer tools. In most browsers, you can access the developer tools by right-clicking on the page and selecting "Inspect" or "Inspect Element". Once you have opened the developer tools, you can use the "Responsive Design Mode" or "Mobile View" feature to simulate different screen sizes and see how your website's content responds to different breakpoints.
+
+You can also use the "Styles" tab in the developer tools to inspect the CSS code and see how the styles change at different breakpoints. This can help you identify any issues with your breakpoints or the media queries that activate them.
+
+Additionally, you can use the "Console" tab in the developer tools to log information and track down any errors or issues with your CSS code. This can be particularly useful for debugging media queries or other complex parts of your CSS.
+
+Overall, using the developer tools in your browser is the best way to debug CSS breakpoints and ensure that your website's content is properly displayed on all devices.
+
+<Separator/>
+
+## How to debug CSS breakpoints without using devTools ?
+
+In some cases you might want to debug CSS breakpoints without using devTools to have a full screen view on your page, you can use the following HTML code to acheive that:
+```html
+<style>
+  /*  0 - 800  */
+  @media (min-width: 0px) and ( max-width: 800px) {
+    ._0-800{
+      display: block !important;
+    }
+  }
+  /*  801 - 1600  */
+  @media (min-width: 801px) and ( max-width: 1600px) {
+    ._801-1600{
+      display: block !important;
+    }
+  }
+  /*  1601 - 2400  */
+  @media (min-width: 1601px) and ( max-width: 2400px) {
+    ._1601-2400{
+      display: block !important;
+    }
+  }
+  /*  2401 - 9999  */
+  @media (min-width: 2401px) and ( max-width: 9999px)  {
+    ._2401-9999{
+      display: block !important;
+    }
+  }
+</style>
+<div style="background-color:brown; color:white; position:fixed; top:0px; font-size:3rem;">
+    <div class="_0-800" style="display: none;"> 0 - 800</div>
+    <div class="_801-1600" style="display: none;">801 - 1600</div>
+    <div class="_1601-2400" style="display: none;">1601 - 2400</div>
+    <div class="_2401-9999" style="display: none;">2401 - 9999</div>
+</div>
+```
+> Make sure to remove the previous code fragment on prod environment.
+
+This code defines a set of CSS media queries that target specific ranges of screen sizes. The media queries use the min-width and max-width attributes to specify the range of screen sizes that they apply to. For example, the first media query targets screen sizes between 0 and 800 pixels wide.
+
+The media queries define styles for four different classes: ._0-800, ._801-1600, ._1601-2400, and ._2401-9999. These classes are associated with the text that appears within the `<div>` elements in the HTML code. The styles defined by the media queries set the display property of these classes to block, and apply the !important rule to make sure that these styles take precedence over any other styles that may be applied to the same elements.
+
+This code will cause the text within the `<div>` elements to be displayed only when the screen size falls within the range specified by the corresponding media query. For example, if the screen size is between 0 and 800 pixels wide, the text within the `<div>` element with the ._0-800 class will be displayed. If the screen size is between 801 and 1600 pixels wide, the text within the `<div>` element with the ._801-1600 class will be displayed, and so on.
+
+<Separator/>
+
+## Final Thoughts,
+In this article we have explained the CSS Media queries and we have seen an easy way to debug CSS breakpoints without openning the browser's devTools.

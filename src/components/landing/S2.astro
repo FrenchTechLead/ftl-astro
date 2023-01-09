@@ -7,7 +7,7 @@ const s = {
     "text-align: center",
     "margin-top: 40px"
         ].join(";"),
-    title: "font-size: 4rem; margin: 0px 0px 20px 0px;",
+    title: "margin: 0px 0px 20px 0px;",
     row: [
         "margin-top:10px",
         "text-align: left",
@@ -17,10 +17,10 @@ const s = {
     ].join(';'),
     
     
-    col1: "font-size: 100px; color: var(--color-purple)",
+    col1: "color: var(--color-purple); font-size:5rem;",
     col2: "padding-left: 100px",
-    subtitle: "font-weight: bold; font-size: 2rem; color: var(--color-blue);",
-    txt: "font-size: 1.4rem"
+    subtitle: "font-weight: bold; color: var(--color-blue); margin:0px;",
+    txt: ""
 }
 
 const data: {
@@ -66,7 +66,7 @@ const data: {
                 <i class={x.icon}></i>
             </div>
             <div style={s.col2}>
-                <div style={s.subtitle}>{x.title}</div>
+                <h3 style={s.subtitle}>{x.title}</h3>
                 <div style={s.txt}>{x.txt}</div>
             </div>
         </div>

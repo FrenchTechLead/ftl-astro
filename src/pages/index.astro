@@ -6,7 +6,9 @@ import Styles from '@comps/styles/Styles.astro';
 import S1 from '@comps/landing/S1.astro';
 import S2 from '@comps/landing/S2.astro';
 import S3 from '@comps/landing/S3.astro';
+import BreakPointsDebugger from '@comps/BreakPointsDebugger.astro';
 
+const DEV = await import.meta.env.DEV;
 const title = 'FrenchTechLead - The Tech Leaders Community';
 const author = 'FrenchTechLead';
 const description = 'FrenchTechLead is a blog about Software Engineering and Web Development, written by a team of Experienced Entrepreneurs.'
@@ -19,7 +21,15 @@ const showAds=false;
 <html lang="fr">
 
 <head>
-	<MetaHead {title} {keywords} {description} {permalink} {postImageUrl} {author} {showAds} />
+	<MetaHead 
+		title={title} 
+		keywords={keywords} 
+		description={description} 
+		permalink={permalink} 
+		postImageUrl={postImageUrl} 
+		author={author} 
+		showAds={showAds} 
+	/>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 	<Styles />
 </head>
@@ -31,5 +41,6 @@ const showAds=false;
 		<S3/>
 	</main>
 	<Footer />
+	{ DEV && <BreakPointsDebugger/>}
 </body>
 </html>
