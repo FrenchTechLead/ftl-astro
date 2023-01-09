@@ -280,7 +280,7 @@ spec:
     app: bien-parler-database
 ```
 > Le service ci-dessus permet de router le trafic du cluster sur le port **5432** vers la base de donnée **bien-parler-database**
-3. Appliquer les deux scripts avec kubectl
+3. Appliquez les deux scripts avec kubectl
 ```sh
 kubectl apply -f 1-database-deployment.yaml
 kubectl apply -f 2-database-service.yaml
@@ -348,7 +348,7 @@ spec:
 ```
 > Ce service peremt de mapper le port 8080 de notre application au port 80 de notre cluster.
 
-3. Appliquer les trois scripts avec kubectl
+4. Appliquez les trois scripts avec kubectl
 ```sh
 kubectl apply -f 3-backend-configmap.yaml 
 kubectl apply -f 4-backend-deployment.yaml 
@@ -402,7 +402,7 @@ spec:
 ```
 > Cet issuer concerne le Staging de Let's encrypt, nous l'utiliserons pour tester notre configuration de cert-manager.
 
-2. Créez un fichier **9-ingress-ressource.yaml** avec le contenu suivant:
+3. Créez un fichier **9-ingress-ressource.yaml** avec le contenu suivant:
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -429,9 +429,9 @@ spec:
                 port:
                   number: 80
 ```
-> Cette ingress ressource va configurer notre ingress controller afin qu'il fasse suivre les requettes HTTP ayant comme valeur du header Host **bienparler.fr** vers le service **bien-parler-backend-service**, elle définit aussi un certificat TLS **bien-parler-tls** issu par l'emetteur **bien-parler-letsencrypt-staging-issuer**.
+> Cette ingress ressource va configurer notre ingress controller afin qu'il fasse suivre les requettes HTTP ayant comme valeur du header Host **bienparler.fr** vers le service **bien-parler-backend-service**, elle définit aussi un certificat TLS **bien-parler-tls** issu par l'emetteur **bien-parler-letsencrypt-staging-issuer**.  
 
-3. Appliquer les trois scripts avec kubectl
+4. Appliquez les trois scripts avec kubectl
 ```sh
 kubectl apply -f 6-lets-encrypt-prod-issuer.yaml 
 kubectl apply -f 8-lets-encrypt-staging-issuer.yaml
@@ -440,8 +440,8 @@ kubectl apply -f 9-ingress-ressource.yaml
 
 à ce stade on devrait avoir notre application de disponible sur le nom de domaine **bienparler.fr** en HTTPS.  
 Cependant le certificat ayant été émis par l'autorité de certification staging de let's encrypt, votre navigateur web devrait vous avertir du rique de sécurité encouru.  
-Pour switcher sur un certificat de production, vous devez editer le script **9-ingress-ressource.yaml** en modifiant  **cert-manager.io/issuer: "bien-parler-letsencrypt-staging-issuer"** par **cert-manager.io/issuer: "bien-parler-letsencrypt-prod-issuer"**.
-Appliquer la modification du script:
+Pour switcher sur un certificat de production, vous devez editer le script **9-ingress-ressource.yaml** en modifiant  **cert-manager.io/issuer: "bien-parler-letsencrypt-staging-issuer"** par **cert-manager.io/issuer: "bien-parler-letsencrypt-prod-issuer"**.  
+Appliquez la modification du script:
 ```sh
 kubectl apply -f 9-ingress-ressource.yaml
 ```
