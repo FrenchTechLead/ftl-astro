@@ -10,7 +10,7 @@ import NewsLetter from "@comps/NewsLetter.astro";
 import Sponsor from "@comps/Sponsor.astro";
 import BreakPointsDebugger from "@comps/BreakPointsDebugger.astro";
 import AuthorCard from "@comps/AuthorCard";
-
+import { getFileName } from "@utils/utils";
 const DEV = await import.meta.env.DEV;
 const {
   title,
@@ -20,7 +20,6 @@ const {
   authorName,
   authorSocial,
   lang,
-  postImageUrl,
   postImageLocal,
   postImageAlt,
   postImageWidth,
@@ -31,6 +30,10 @@ const {
 } = Astro.props.content;
 
 const permalink = "https://frenchtechlead.com" + Astro.props.url;
+const postImageUrl =
+  "https://frenchtechlead.com/assets/blog/tech/" +
+  getFileName(Astro) +
+  "/0.png";
 ---
 
 <html lang={lang || "en"}>
