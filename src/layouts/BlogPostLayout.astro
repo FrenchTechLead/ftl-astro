@@ -1,47 +1,80 @@
 ---
-import MetaHead from '@comps/MetaHead.astro';
-import Header from '@comps/Header.astro';
-import Footer from '@comps/Footer.astro';
-import Styles from '@comps/styles/Styles.astro';
-import BlogPost from '@comps/BlogPost.astro';
-import Image from '@comps/Image.astro';
-import Separator from '@comps/Separator.jsx'
-import NewsLetter from '@comps/NewsLetter.astro'
-import Sponsor from '@comps/Sponsor.astro';
-import BreakPointsDebugger from '@comps/BreakPointsDebugger.astro';
+import MetaHead from "@comps/MetaHead.astro";
+import Header from "@comps/Header.astro";
+import Footer from "@comps/Footer.astro";
+import Styles from "@comps/styles/Styles.astro";
+import BlogPost from "@comps/BlogPost.astro";
+import Image from "@comps/Image.astro";
+import Separator from "@comps/Separator.jsx";
+import NewsLetter from "@comps/NewsLetter.astro";
+import Sponsor from "@comps/Sponsor.astro";
+import BreakPointsDebugger from "@comps/BreakPointsDebugger.astro";
+import AuthorCard from "@comps/AuthorCard";
 
 const DEV = await import.meta.env.DEV;
-const { title, metaTitle, description, publishDate , 
-authorName, authorSocial, lang, 
-postImageUrl, postImageLocal, postImageAlt,
-postImageWidth, postImageHeight, keywords, author, url
+const {
+  title,
+  metaTitle,
+  description,
+  publishDate,
+  authorName,
+  authorSocial,
+  lang,
+  postImageUrl,
+  postImageLocal,
+  postImageAlt,
+  postImageWidth,
+  postImageHeight,
+  keywords,
+  author,
+  url,
 } = Astro.props.content;
 
 const permalink = "https://frenchtechlead.com" + Astro.props.url;
-
 ---
-<html lang={lang || 'en'}>
-<head>
-<MetaHead {title} {metaTitle} {description} {permalink} {postImageUrl} {keywords} {author} />
-<Styles />
-</head>
-<body>
-	<Header />
-	<BlogPost {title} {authorName} {publishDate} {authorSocial} >
-		{ postImageLocal && <Image w={postImageWidth} h={postImageHeight}  src={postImageLocal} t={postImageAlt} /> }
-		<slot />
-	</BlogPost>
-	<Separator/>
-	<Sponsor />
-	<script src="https://utteranc.es/client.js"
-		repo="FrenchTechLead/ftl-astro"
-		issue-term={url}
-		theme="gruvbox-dark"
-		crossorigin="anonymous"
-		async>
-	</script>
-	<NewsLetter/>
-	<Footer/>
-	{ DEV && <BreakPointsDebugger/>}
-</body>
+
+<html lang={lang || "en"}>
+  <head>
+    <MetaHead
+      {title}
+      {metaTitle}
+      {description}
+      {permalink}
+      {postImageUrl}
+      {keywords}
+      {author}
+    />
+    <Styles />
+  </head>
+  <body>
+    <Header />
+    <BlogPost {title} {authorName} {publishDate} {authorSocial}>
+      {
+        postImageLocal && (
+          <Image
+            w={postImageWidth}
+            h={postImageHeight}
+            src={postImageLocal}
+            t={postImageAlt}
+          />
+        )
+      }
+      <slot />
+      <Separator />
+      <AuthorCard id="akram_mecheri" lang={lang} />
+    </BlogPost>
+    <Separator />
+    <Sponsor />
+    <script
+      src="https://utteranc.es/client.js"
+      repo="FrenchTechLead/ftl-astro"
+      issue-term={url}
+      theme="gruvbox-dark"
+      crossorigin="anonymous"
+      async
+    ></script>
+    <NewsLetter />
+    <Footer />
+    {DEV && <BreakPointsDebugger />}
+  </body>
 </html>
