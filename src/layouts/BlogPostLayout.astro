@@ -8,10 +8,8 @@ import Image from "@comps/Image.astro";
 import Separator from "@comps/Separator.jsx";
 import NewsLetter from "@comps/NewsLetter.astro";
 import Sponsor from "@comps/Sponsor.astro";
-import BreakPointsDebugger from "@comps/BreakPointsDebugger.astro";
 import AuthorCard from "@comps/AuthorCard";
 import { getFileName } from "@utils/utils";
-const DEV = await import.meta.env.DEV;
 const {
   title,
   metaTitle,
@@ -78,6 +76,5 @@ const postImageUrl =
     ></script>
     <NewsLetter />
     <Footer />
-    {DEV && <BreakPointsDebugger />}
   </body>
 </html>
