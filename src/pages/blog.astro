@@ -1,79 +1,94 @@
 ---
-import MetaHead from '@comps/MetaHead.astro';
-import Header from '@comps/Header.astro';
-import Footer from '@comps/Footer.astro';
-import Styles from '@comps/styles/Styles.astro';
-import BlogPostPreview from '@comps/BlogPostPreview.astro';
-import NewsLetter from '@comps/NewsLetter.astro'
-import { onlyUniqueArrayFilter } from 'src/utils/utils';
+import MetaHead from "@comps/MetaHead.astro";
+import Header from "@comps/Header.astro";
+import Footer from "@comps/Footer.astro";
+import Styles from "@comps/styles/Styles.astro";
+import BlogPostPreview from "@comps/BlogPostPreview.astro";
+import NewsLetter from "@comps/NewsLetter.astro";
+import { onlyUniqueArrayFilter } from "src/utils/utils";
 
 const DEV = await import.meta.env.DEV;
 
-const title = 'FrenchTechLead - The Tech Leaders Community';
-const author = 'FrenchTechLead';
-const description = 'FrenchTechLead is a blog about Software Engineering and Web Development, written by a team of Experienced Entrepreneurs.'
-const keywords = ['Tech Blog', 'Software Engineering', 'Cloud Computing', 'OOP', 'Reactive Programming', 'Functional Programming', 'OSS', 'DevOps'];
-const permalink = 'https://frenchtechlead.com/blog/';
-const postImageUrl = 'https://frenchtechlead.com/assets/blog/blog-cover.avif';
-const showAds=false;
+const title = "FrenchTechLead - The Tech Leaders Community";
+const author = "FrenchTechLead";
+const description =
+  "FrenchTechLead is a blog about Software Engineering and Web Development, written by a team of Experienced Entrepreneurs.";
+const keywords = [
+  "Tech Blog",
+  "Software Engineering",
+  "Cloud Computing",
+  "OOP",
+  "Reactive Programming",
+  "Functional Programming",
+  "OSS",
+  "DevOps",
+];
+const permalink = "https://frenchtechlead.com/blog/";
+const postImageUrl = "https://frenchtechlead.com/assets/blog/blog-cover.avif";
+const showAds = false;
 
-
-const techPosts = await Astro.glob('./posts/tech/*.mdx');
+const techPosts = await Astro.glob("./posts/tech/*.mdx");
 
 const s = {
-	postsList: "margin-top: 50px;",
-	postElement: "color: var(--color-white); text-shadow: 0 0 30px var(--color-blue);",
-	tag: [
-	"display: inline-block",
-	"border-radius: 20px",
-	"color: white",
-	"padding: 5px",
-	"margin:5px",
-	"background-color: var(--color-heavy-blue)"
-	].join(";")
-}
-
+  postsList: "margin-top: 50px;",
+  postElement:
+    "color: var(--color-white); text-shadow: 0 0 30px var(--color-blue);",
+  tag: [
+    "display: inline-block",
+    "border-radius: 20px",
+    "color: white",
+    "padding: 5px",
+    "margin:5px",
+    "background-color: var(--color-heavy-blue)",
+  ].join(";"),
+};
 ---
 
-<html lang="en">
-
-<head>
-	<MetaHead 
-		title={title}
-		keywords={keywords}
-		description={description}
-		permalink={permalink}
-		postImageUrl={postImageUrl}
-		author={author}
-		showAds={showAds} 
-	/>
-	<Styles />
-</head>
-<body>
-	<Header />
-	<main>
-		<section>
-			<h2>Tags</h2>
-			{
-				techPosts
-				.map(a=> a.frontmatter.tags)
-				.flatMap(a => a)
-				.filter(onlyUniqueArrayFilter)
-				.sort()
-				//.map(a => a.toUpperCase())
-				.map(a => (
-					<a href={'/blog/tag/' + a} style={s.tag}>{a}</a>
-				))
-			}
-		</section>
-		<section style={s.postsList} aria-label="Blog post list">
-			<h2 style={s.postElement}>Latest posts 🔥</h2>
-			{techPosts.filter(p=> DEV || !p.frontmatter.draft ).reverse().map((p) =>
-			<BlogPostPreview post={p.frontmatter as any} url={p.url + '/'} />)}
-		</section>
-		<NewsLetter />
-	</main>
-	<Footer />
-</body>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <MetaHead
+      title={title}
+      keywords={keywords}
+      description={description}
+      permalink={permalink}
+      postImageUrl={postImageUrl}
+      author={author}
+      showAds={showAds}
+    />
+    <Styles />
+  </head>
+  <body>
+    <Header />
+    <main class="container">
+      <section>
+        <h2>Tags</h2>
+        {
+          techPosts
+            .map((a) => a.frontmatter.tags)
+            .flatMap((a) => a)
+            .filter(onlyUniqueArrayFilter)
+            .sort()
+            //.map(a => a.toUpperCase())
+            .map((a) => (
+              <a href={"/blog/tag/" + a} class="badge text-bg-secondary me-2">
+                {a}
+              </a>
+            ))
+        }
+      </section>
+      <section style={s.postsList} aria-label="Blog post list">
+        <h2 style={s.postElement}>Latest posts 🔥</h2>
+        {
+          techPosts
+            .filter((p) => DEV || !p.frontmatter.draft)
+            .reverse()
+            .map((p) => (
+              <BlogPostPreview post={p.frontmatter as any} url={p.url + "/"} />
+            ))
+        }
+      </section>
+      <NewsLetter />
+    </main>
+    <Footer />
+  </body>
 </html>
-
