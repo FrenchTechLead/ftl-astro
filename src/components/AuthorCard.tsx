@@ -8,20 +8,22 @@ export type AuthorCardProps = {
 export default function AuthorCard(props: AuthorCardProps) {
   const author: Author = getAuthorByID(props.id);
   return (
-    <div class="author-card">
+    <div class="card author-card">
       <img
         src={"/assets/authors/" + author.id + ".png"}
+        style="width: 150px !important; "
+        class="card-img-top"
         alt={author.firstName + " " + author.lastName}
-        class="author-photo"
       />
-      <div class="author-info">
-        <div class="author-name">
-          {author.firstName + " " + author.lastName}
-        </div>
-        <div class="author-position">{author.position}</div>
-        <p class="author-bio">
+      <div class="card-body">
+        <h5 class="card-title">{author.firstName + " " + author.lastName}</h5>
+        <h6>{author.position}</h6>
+        <p class="card-text">
           {props.lang === "fr" ? author.bioFR : author.bioEN}
         </p>
+        <a href={author.prefferedSocialMediaURL} target="_blank" class="btn">
+          Get in Touch
+        </a>
       </div>
     </div>
   );

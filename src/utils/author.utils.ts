@@ -5,6 +5,7 @@ export interface Author {
   position: string;
   bioEN: string;
   bioFR: string;
+  prefferedSocialMediaURL: string;
 }
 
 const AUTHORS: Record<string, Author> = {
@@ -13,6 +14,8 @@ const AUTHORS: Record<string, Author> = {
     firstName: "Akram",
     lastName: "MECHERI",
     position: "Technical Leader | Blogger | Freelancer",
+    prefferedSocialMediaURL:
+      "https://www.linkedin.com/in/techlead-java-angular/",
     bioEN:
       "As a passionate technical leader, I am skilled in FullStack Java development and have a strong background in DevOps, " +
       "Cloud, and Kubernetes. I have a track record of delivering high-quality software, and I am always seeking to improve " +

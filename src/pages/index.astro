@@ -5,6 +5,7 @@ import Footer from "@comps/Footer.astro";
 import Styles from "@comps/styles/Styles.astro";
 import type { Frontmatter } from "@models/fontmatter";
 import { buildURL } from "@utils/utils";
+import rocket from "@assets/rocket.webp";
 
 const PERMALINK = await buildURL(Astro.url.pathname);
 const IMG_SRC = "https://frenchtechlead.com/assets/blog/blog-cover.avif";
@@ -43,7 +44,10 @@ const fm: Frontmatter = {
   </head>
   <body>
     <Header />
-    <main class="container"></main>
+    <main class="container">
+      <img class="pt-5 mt-0" src={rocket} />
+      <h1 class="text-center">Préparez vous pour le décollage</h1>
+    </main>
     <Footer />
   </body>
 </html>

@@ -33,10 +33,10 @@ const IMG_SRC = await buildURL("/assets/blog/tech/" + FILE_NAME + "/0.png");
   <body>
     <Header />
     <BlogPost title={fm.title} publishDate={PUBLISH_DATE}>
+      <AuthorCard id="akram_mecheri" lang={fm.lang} />
       {(<Image w={842} h={462} src={IMG_SRC} t={fm.title} />)}
       <slot />
       <Separator />
-      <AuthorCard id="akram_mecheri" lang={fm.lang} />
     </BlogPost>
     <Separator />
     <Sponsor />
