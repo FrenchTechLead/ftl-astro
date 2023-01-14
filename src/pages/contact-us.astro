@@ -3,11 +3,6 @@ import MetaHead from "@comps/MetaHead.astro";
 import Header from "@comps/Header.astro";
 import Footer from "@comps/Footer.astro";
 import Styles from "@comps/styles/Styles.astro";
-import Image from "@comps/Image.astro";
-
-import akramPic from "@assets/blog/akram-1.svg";
-import S2 from "@comps/landing/S2.astro";
-import S3 from "@comps/landing/S3.astro";
 
 const title = "FrenchTechLead - The Tech Leaders Community";
 const author = "FrenchTechLead";
@@ -26,12 +21,10 @@ const keywords = [
 const permalink = "https://frenchtechlead.com/";
 const postImageUrl = "https://frenchtechlead.com/assets/blog/blog-cover.avif";
 const showAds = false;
-
-const techPosts = await Astro.glob("./posts/tech/*.mdx");
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="fr" data-bs-theme="dark">
   <head>
     <MetaHead
       {title}
@@ -57,60 +50,57 @@ const techPosts = await Astro.glob("./posts/tech/*.mdx");
       textarea {
         min-height: 200px;
       }
-      button {
-        background-color: #000;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      form {
-        margin-bottom: 300px;
-      }
-      #contact-section {
-        margin: 0% 20% 0% 20%;
-      }
     </style>
   </head>
   <body>
     <Header />
     <main class="container">
-      <section id="contact-section">
-        <h2>Contact Us</h2>
-        <form action="https://submit-form.com/FIV9Qtla">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Name"
-            required=""
-          />
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            required=""
-          />
-          <label for="message">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            placeholder="Message"
-            required=""></textarea>
-          <input
-            type="hidden"
-            name="_botpoison"
-            value="pk_95922840-1780-4e0e-91a3-939b44300651"
-          />
-          <button type="submit">Send</button>
-        </form>
-      </section>
-
-      <S3 />
+      <div class="modal position-static d-block">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title">Nous contacter</h1>
+            </div>
+            <form action="https://submit-form.com/FIV9Qtla" method="GET">
+              <div class="modal-body">
+                <label for="name">Name</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Name"
+                  required=""
+                />
+                <label for="email">Email</label>
+                <input
+                  class="form-control"
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  required=""
+                />
+                <label for="message">Message</label>
+                <textarea
+                  class="form-control"
+                  id="message"
+                  name="message"
+                  placeholder="Message"
+                  required=""></textarea>
+                <input
+                  type="hidden"
+                  name="_botpoison"
+                  value="pk_95922840-1780-4e0e-91a3-939b44300651"
+                />
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary">Envoyer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </main>
     <Footer />
   </body>

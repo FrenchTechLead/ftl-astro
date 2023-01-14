@@ -1,49 +1,119 @@
 ---
 const s = {
-  
   footer: [
     "background-color: var(--color-heavy-blue-2)",
     "padding: 40px 0px 40px 0px",
-    "margin-top: 40px"
+    "margin-top: 40px",
   ].join(";"),
   windgetContainer: [
     "display: flex",
     "justify-content: space-around",
     "flex-wrap: wrap",
-    "align-items: center",    
+    "align-items: center",
   ].join(";"),
-  widget:"width: 260px",
+  widget: "width: 260px",
   title: "color: var(--color-yellow)",
-  legal: "text-align: center; padding-top:30px"
+  legal: "text-align: center; padding-top:30px",
 };
 ---
-<footer style={s.footer}>
-  <div style={s.windgetContainer}>
-    <div style={s.widget}>
-      <div style={s.title}>FrenchTechLead</div>
-      <div>12 Rue Henri Sainte-Claire Deville</div> 
-      <div>92500, Rueil-Malmaison</div>
-    </div>
-    <div style={s.widget}>
-      <div style={s.title}>Contact</div>
-      <div>email: contact@frenchtechlead.com</div>
-      <div><a href="/contact-us/">Formulaire de Contact</a></div>
-    </div>
-    <div style={s.widget}>
-      <div style={s.title}>Blog</div>
-      <div><a href="/blog">Derniers articles</a></div>
-    </div>
-    <div style={s.widget}>
-      <div style={s.title}>Réseaux</div>
-      <div>Twitter: <a href="https://twitter.com/FrenchTechLead" target="_blank" rel="noopener noreferrer">@FrenchTechLead</a></div>
-      <div>Github: <a href="https://github.com/FrenchTechLead" target="_blank" rel="noopener noreferrer">@FrenchTechLead</a></div>
-    </div>
+
+<footer class="bg-body-tertiary text-white mt-5">
+  <div class="container pt-5">
+    <section>
+      <form
+        action="https://frenchtechlead.us10.list-manage.com/subscribe/post?u=18ec3b3f8638062e5a576682b&id=120ed2a396"
+        method="post"
+        target="_blank"
+      >
+        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+        </div>
+        <div class="row d-flex justify-content-center">
+          <div class="col-auto">
+            <p class="pt-2">
+              <strong>Rejoignez notre newsletter</strong>
+            </p>
+          </div>
+          <div class="col-md-5 col-12">
+            <div class="form-outline form-white mb-4">
+              <input
+                required
+                class="form-control"
+                name="EMAIL"
+                type="email"
+                name="b_18ec3b3f8638062e5a576682b_120ed2a396"
+                tabindex="-1"
+                value=""
+              />
+            </div>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-outline-light mb-4">
+              Inscription
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <h5 class="text-uppercase">Liens</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="/contact-us/" class="text-white">Nous contacter</a>
+            </li>
+            <li>
+              <a href="/blog" class="text-white">Blog</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <h5 class="text-uppercase">FrenchTechLead</h5>
+          <div>12 Rue Henri Sainte-Claire Deville</div>
+          <div>92500, Rueil-Malmaison</div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="https://www.facebook.com/profile.php?id=100083082081415"
+            role="button"
+            ><i class="fab fa-facebook-f"></i>
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="https://twitter.com/FrenchTechLead"
+            role="button"
+            ><i class="fab fa-twitter"></i>
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="https://www.linkedin.com/company/86909953"
+            role="button"
+            ><i class="fab fa-linkedin-in"></i>
+          </a>
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="https://github.com/FrenchTechLead"
+            role="button"
+            ><i class="fab fa-github"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="mb-4 text-muted">
+      <p>
+        SASU FrenchTechLead SIREN 920195120 - RCS Nanterre - NAF 6202A TVA
+        intracommunautaire : FR01920195120 Copyright: @FrenchTechLead - 2023
+      </p>
+    </section>
   </div>
-  <div style={s.legal}>
-    SASU FrenchTechLead
-    SIREN 920195120 - RCS Nanterre - NAF 6202A
-    TVA intracommunautaire : FR01920195120<br/>
-    Copyright: @FrenchTechLead - 2023
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2023 Copyright:
+    <a class="text-white" href="https://frenchtechlead.com/"
+      >frenchtechlead.com</a
+    >
   </div>
- 
 </footer>

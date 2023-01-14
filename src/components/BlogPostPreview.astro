@@ -1,19 +1,23 @@
 ---
-const props  = Astro.props ;
+import type { Frontmatter } from "@models/fontmatter";
 
-const s = {
-	article: "margin-top: 15px; border: 1px solid var(--color-purple); padding: 15px;",
-	div: "color: var(--color-yellow);",
-	p: "color: var(--color-white); margin-bottom: 0px;",
-	time: "color: var(--color-grey);"
-};
+export interface Props {
+  frontmatter: Frontmatter;
+  url: string;
+}
+const props = Astro.props;
+const frontmatter = Astro.props.frontmatter;
 ---
-<a href={props.url}>
-	<article style={s.article}>
-		<header>
-			<div style={s.div}>{props.post.title}</div>
-		</header>
-		<p style={s.p}>{props.post.description}</p>
-		<time style={s.time} datetime={new Date(props.post.publishDate).toISOString()}>{props.post.publishDate}</time>
-	</article>
+
+<a
+  href={props.url}
+  class="list-group-item list-group-item-action"
+  aria-current="true"
+>
+  <div class="d-flex w-100 justify-content-between">
+    <h3 class="mb-1">{frontmatter.title}</h3>
+    <small>{frontmatter.publishDate}</small>
+  </div>
+  <p class="mb-1">{frontmatter.description}</p>
+  <small>And some small print.</small>
 </a>
