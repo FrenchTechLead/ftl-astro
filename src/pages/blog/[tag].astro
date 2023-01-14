@@ -9,7 +9,7 @@ import type { Frontmatter } from "@models/fontmatter";
 
 // For Dynamic Routes
 export async function getStaticPaths() {
-  const INDEX_TAG: string = "index";
+  const INDEX_TAG: string = "_index";
   const techPosts = await Astro.glob<Frontmatter>(
     "/src/pages/posts/tech/*.mdx"
   );
@@ -28,7 +28,7 @@ export async function getStaticPaths() {
 const techPosts = await Astro.glob<Frontmatter>("/src/pages/posts/tech/*.mdx");
 const uniqueTags = mergeTags(techPosts.map((a) => a.frontmatter.tags));
 const currTag = Astro.params.tag;
-const INDEX_TAG: string = "index";
+const INDEX_TAG: string = "_index";
 
 const isDevMode = await import.meta.env.DEV;
 
