@@ -3,8 +3,6 @@ import MetaHead from "@comps/MetaHead.astro";
 import Header from "@comps/Header.astro";
 import Footer from "@comps/Footer.astro";
 import Styles from "@comps/styles/Styles.astro";
-import S1 from "@comps/landing/S1.astro";
-import S2 from "@comps/landing/S2.astro";
 import type { Frontmatter } from "@models/fontmatter";
 import { buildURL } from "@utils/utils";
 
@@ -45,10 +43,7 @@ const fm: Frontmatter = {
   </head>
   <body>
     <Header />
-    <main class="container">
-      <S1 />
-      <S2 />
-    </main>
+    <main class="container"></main>
     <Footer />
   </body>
 </html>

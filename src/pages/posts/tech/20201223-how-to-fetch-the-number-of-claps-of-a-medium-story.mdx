@@ -15,8 +15,7 @@ draft: false
 ---
 import Layout from '@layouts/BlogPostLayout.astro'
 import Separator from '@comps/Separator.jsx'
-import img1 from '@assets/blog/tech/20201223-how-to-fetch-the-number-of-claps-of-a-medium-story/0.avif'
-import img2 from '@assets/blog/tech/20201223-how-to-fetch-the-number-of-claps-of-a-medium-story/0.jpeg'
+import img1 from '@assets/blog/tech/20201223-how-to-fetch-the-number-of-claps-of-a-medium-story/1.jpeg'
 import Image from '@comps/Image.astro'
 
 In this article I will explain how to programmatically retrieve the stats (number of claps and comments) of any Medium post using a custom REST API, the lack of this feature in the official Medium REST API is what motivated me to create this custom REST API.
@@ -32,7 +31,7 @@ When it comes to articles (posts), The official Medium API only provides an HTTP
 
 My first intuition was to look at the official REST API but no such feature is provided, then I looked at [the RSS feed](https://help.medium.com/hc/en-us/articles/214874118-Using-RSS-feeds-of-profiles-and-publications) by Medium and nothing was there neither, after that I started inspecting Medium using Chrome’s DevTools in order to understand how the stats are retrieved then displayed under a Medium story.
 
-<Image w="1400" h="766" src={img2} t="Medium Inspection with devTools" solo="true" />
+<Image w="1400" h="766" src={img1} t="Medium Inspection with devTools" solo="true" />
 
 Surprisingly, among all the XHR requests there was no request to retrieve the stats 😮, which led me to look at the HTML response of the article page.
 
