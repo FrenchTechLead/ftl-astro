@@ -7,7 +7,7 @@ import type { Frontmatter } from "@models/fontmatter";
 import { buildURL } from "@utils/utils";
 
 const PERMALINK = await buildURL(Astro.url.pathname);
-const IMG_SRC = await buildURL("/assets/blog/blog-cover.avif");
+const IMG_SRC = await buildURL("/assets/blog/social-cover-default.png");
 
 const fm: Frontmatter = {
   layout: "",
@@ -40,7 +40,7 @@ const fm: Frontmatter = {
   </head>
   <body>
     <Header />
-    <main class="container">
+    <main class="container mt-5">
       <section id="contact-section">
         <div class="preview">
           <h1>Privacy Policy for FrenchTechLead</h1>
