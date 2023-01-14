@@ -5,7 +5,7 @@ export function onlyUniqueArrayFilter(
   index: number,
   self: string[]
 ) {
-  return self.indexOf(value) === index;
+  return self.indexOf(value.toLowerCase()) === index;
 }
 
 export async function getTechPosts(Astro: AstroType) {

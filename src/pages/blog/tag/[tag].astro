@@ -10,11 +10,19 @@ import S3 from "@comps/landing/S3.astro";
 
 const techPosts = await Astro.glob("/src/pages/posts/tech/*.mdx");
 
+const uniqueTags = techPosts
+  .map((a) => a.frontmatter.tags)
+  .flatMap((a) => a)
+  .map((a) => a.toLowerCase())
+  .sort()
+  .filter(onlyUniqueArrayFilter);
+
 export async function getStaticPaths() {
   const techPosts = await Astro.glob("/src/pages/posts/tech/*.mdx");
   return techPosts
     .map((a) => a.frontmatter.tags)
     .flatMap((a) => a)
+    .map((a) => a.toLowerCase())
     .filter(onlyUniqueArrayFilter)
     .map((a) => {
       return {
@@ -51,6 +59,7 @@ const s = {
 };
 ---
 
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
   <head>
     <MetaHead
@@ -67,28 +76,43 @@ const s = {
   <body>
     <Header />
     <main class="container">
-      <section>
+      <section class="mt-4">
         <h1>#{tag}</h1>
-        {
-          techPosts
-            .map((a) => a.frontmatter.tags)
-            .flatMap((a) => a)
-            .filter(onlyUniqueArrayFilter)
-            .sort()
-            //.map(a => a.toUpperCase())
-            .map((a) => (
-              <a href={"/blog/tag/" + a} class="badge text-bg-secondary me-2">
+        <div class="input-group mb-3" style="max-width: 420px;">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Recherchez dans le site"
+            aria-label="Recherchez dans le site"
+            aria-describedby="button-addon2"
+            list="tags"
+            onchange="goToPage(this)"
+          />
+
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            id="button-addon2">Rechercher</button
+          >
+        </div>
+        <datalist id="tags">
+          {
+            uniqueTags.map((a) => (
+              <option class="tag-option" value={a}>
                 {a}
-              </a>
+              </option>
             ))
-        }
+          }
+        </datalist>
       </section>
       <section style={s.postsList} aria-label="Blog post list">
         <h2 style={s.postElement}>Latest posts 🔥</h2>
         {
           techPosts
             .filter((p) => DEV || !p.frontmatter.draft)
-            .filter((p) => p.frontmatter.tags.includes(tag))
+            .filter((p) =>
+              p.frontmatter.tags.map((a) => a.toLowerCase()).includes(tag)
+            )
             .reverse()
             .map((p) => (
               <BlogPostPreview post={p.frontmatter as any} url={p.url + "/"} />
@@ -97,6 +121,13 @@ const s = {
       </section>
       <NewsLetter />
       <S3 />
+      <script is:inline>
+        function goToPage(e) {
+          const allTags = document.querySelectorAll(".tag-option");
+          console.log(allTags);
+          window.location.replace("/blog/tag/" + e.value);
+        }
+      </script>
     </main>
     <Footer />
   </body>

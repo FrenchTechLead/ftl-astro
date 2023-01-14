@@ -1,4 +1,14 @@
 ---
+const links = [
+  {
+    text: "Nous contacter",
+    link: "/contact-us",
+  },
+  {
+    text: "Blog",
+    link: "/blog",
+  },
+];
 ---
 
 <header>
@@ -31,13 +41,15 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a href="/blog" class="nav-link">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a href="/contact-us" class="nav-link">Nous contacter</a>
-          </li>
-          <li></li>
+          {
+            links.map((a) => (
+              <li class="nav-item">
+                <a href={a.link} class="nav-link">
+                  {a.text}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>

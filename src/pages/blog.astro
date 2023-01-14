@@ -7,6 +7,14 @@ import BlogPostPreview from "@comps/BlogPostPreview.astro";
 import NewsLetter from "@comps/NewsLetter.astro";
 import { onlyUniqueArrayFilter } from "src/utils/utils";
 
+const techPosts = await Astro.glob("/src/pages/posts/tech/*.mdx");
+
+const uniqueTags = techPosts
+  .map((a) => a.frontmatter.tags)
+  .flatMap((a) => a)
+  .map((a) => a.toLowerCase())
+  .filter(onlyUniqueArrayFilter);
+
 const DEV = await import.meta.env.DEV;
 
 const title = "FrenchTechLead - The Tech Leaders Community";
@@ -27,8 +35,6 @@ const permalink = "https://frenchtechlead.com/blog/";
 const postImageUrl = "https://frenchtechlead.com/assets/blog/blog-cover.avif";
 const showAds = false;
 
-const techPosts = await Astro.glob("./posts/tech/*.mdx");
-
 const s = {
   postsList: "margin-top: 50px;",
   postElement:
@@ -44,6 +50,7 @@ const s = {
 };
 ---
 
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
   <head>
     <MetaHead
@@ -60,21 +67,34 @@ const s = {
   <body>
     <Header />
     <main class="container">
-      <section>
-        <h2>Tags</h2>
-        {
-          techPosts
-            .map((a) => a.frontmatter.tags)
-            .flatMap((a) => a)
-            .filter(onlyUniqueArrayFilter)
-            .sort()
-            //.map(a => a.toUpperCase())
-            .map((a) => (
-              <a href={"/blog/tag/" + a} class="badge text-bg-secondary me-2">
+      <section class="mt-4">
+        <h1>Recherche</h1>
+        <div class="input-group mb-3" style="max-width: 420px;">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Recherchez dans le site"
+            aria-label="Recherchez dans le site"
+            aria-describedby="button-addon2"
+            list="tags"
+            onchange="goToPage(this)"
+          />
+
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            id="button-addon2">Rechercher</button
+          >
+        </div>
+        <datalist id="tags">
+          {
+            uniqueTags.map((a) => (
+              <option class="tag-option" value={a}>
                 {a}
-              </a>
+              </option>
             ))
-        }
+          }
+        </datalist>
       </section>
       <section style={s.postsList} aria-label="Blog post list">
         <h2 style={s.postElement}>Latest posts 🔥</h2>
@@ -88,6 +108,19 @@ const s = {
         }
       </section>
       <NewsLetter />
+      <script is:inline>
+        function goToPage(e) {
+          const txt = e.value;
+          const allTags = document.querySelectorAll(".tag-option");
+          allTags.forEach((z) => {
+            if (z.value === txt) {
+              window.location.replace("/blog/tag/" + txt);
+            } else {
+              console.log(z.value, txt);
+            }
+          });
+        }
+      </script>
     </main>
     <Footer />
   </body>
