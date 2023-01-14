@@ -8,68 +8,42 @@ import Image from "@comps/Image.astro";
 import Separator from "@comps/Separator.jsx";
 import Sponsor from "@comps/Sponsor.astro";
 import AuthorCard from "@comps/AuthorCard";
-import { getFileName } from "@utils/utils";
-const {
-  title,
-  metaTitle,
-  description,
-  publishDate,
-  authorName,
-  authorSocial,
-  lang,
-  postImageLocal,
-  postImageAlt,
-  postImageWidth,
-  postImageHeight,
-  keywords,
-  author,
-  url,
-} = Astro.props.content;
+import {
+  getFileName,
+  getPublishDateStrFromFileName,
+  buildURL,
+} from "@utils/utils";
+import type { Frontmatter } from "@models/fontmatter";
 
-const permalink = "https://frenchtechlead.com" + Astro.props.url;
-const postImageUrl =
-  "https://frenchtechlead.com/assets/blog/tech/" +
-  getFileName(Astro) +
-  "/0.png";
+const fm = Astro.props.content as Frontmatter;
+
+const FILE_NAME = getFileName(Astro);
+console.log(FILE_NAME);
+const PUBLISH_DATE = getPublishDateStrFromFileName(FILE_NAME);
+const PERMALINK = await buildURL(Astro.url.pathname);
+const IMG_SRC = await buildURL("/assets/blog/tech/" + FILE_NAME + "/0.png");
 ---
 
 <!DOCTYPE html>
-<html lang={lang || "en"} data-bs-theme="dark">
+<html lang={fm.lang} data-bs-theme="dark">
   <head>
-    <MetaHead
-      {title}
-      {metaTitle}
-      {description}
-      {permalink}
-      {postImageUrl}
-      {keywords}
-      {author}
-    />
+    <MetaHead frontmatter={fm} permalink={PERMALINK} imgSrc={IMG_SRC} />
     <Styles />
   </head>
   <body>
     <Header />
-    <BlogPost {title} {authorName} {publishDate} {authorSocial}>
-      {
-        postImageLocal && (
-          <Image
-            w={postImageWidth}
-            h={postImageHeight}
-            src={postImageLocal}
-            t={postImageAlt}
-          />
-        )
-      }
+    <BlogPost title={fm.title} publishDate={PUBLISH_DATE}>
+      {(<Image w={842} h={462} src={IMG_SRC} t={fm.title} />)}
       <slot />
       <Separator />
-      <AuthorCard id="akram_mecheri" lang={lang} />
+      <AuthorCard id="akram_mecheri" lang={fm.lang} />
     </BlogPost>
     <Separator />
     <Sponsor />
     <script
       src="https://utteranc.es/client.js"
       repo="FrenchTechLead/ftl-astro"
-      issue-term={url}
+      issue-term={PERMALINK}
       theme="gruvbox-dark"
       crossorigin="anonymous"
       async

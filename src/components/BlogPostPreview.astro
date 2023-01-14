@@ -1,12 +1,14 @@
 ---
 import type { Frontmatter } from "@models/fontmatter";
+import { getPublishDateStrFromFileName } from "@utils/utils";
 
 export interface Props {
   frontmatter: Frontmatter;
   url: string;
 }
 const props = Astro.props;
-const frontmatter = Astro.props.frontmatter;
+const fm = Astro.props.frontmatter;
+const publishDateStr = getPublishDateStrFromFileName(props.url);
 ---
 
 <a
@@ -15,9 +17,8 @@ const frontmatter = Astro.props.frontmatter;
   aria-current="true"
 >
   <div class="d-flex w-100 justify-content-between">
-    <h3 class="mb-1">{frontmatter.title}</h3>
-    <small>{frontmatter.publishDate}</small>
+    <h3 class="mb-1">{fm.title}</h3>
+    <small>{new Date(publishDateStr).toDateString()}</small>
   </div>
-  <p class="mb-1">{frontmatter.description}</p>
-  <small>And some small print.</small>
+  <p class="mb-1">{fm.description}</p>
 </a>

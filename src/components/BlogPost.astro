@@ -1,14 +1,19 @@
 ---
-const { title, publishDate, authorName, authorSocial } = Astro.props;
+export interface Props {
+  title: string;
+  publishDate: string;
+}
+
+const { title, publishDate } = Astro.props;
+const date = new Date(publishDate);
+console.log(publishDate);
 ---
 
 <article class="article">
   <header class="pt-5">
     <h1>{title}</h1>
     <p>
-      By : <a href={authorSocial}>{authorName}</a><br /><time
-        datetime={new Date(publishDate).toISOString()}>{publishDate}</time
-      >
+      <time datetime={publishDate}>{date.toDateString()}</time>
     </p>
   </header>
   <main class="container">

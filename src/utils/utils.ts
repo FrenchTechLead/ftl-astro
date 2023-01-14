@@ -1,18 +1,9 @@
-import type { Frontmatter } from "@models/fontmatter";
 import type { AstroType } from "./types";
 
-export function onlyUniqueArrayFilter(
-  value: string,
-  index: number,
-  self: string[]
-) {
+function onlyUniqueArrayFilter(value: string, index: number, self: string[]) {
   return (
     self.map((a) => a.toLowerCase()).indexOf(value.toLowerCase()) === index
   );
-}
-
-export function getTechPosts(Astro: AstroType) {
-  return Astro.glob<Frontmatter>("./posts/tech/*.mdx");
 }
 
 export function getFileName(Astro: AstroType) {
@@ -26,4 +17,28 @@ export function mergeTags(arr: Array<Array<string>>) {
     .flatMap((a) => a)
     .map((a) => a.toLowerCase())
     .filter(onlyUniqueArrayFilter);
+}
+
+export function getPublishDateStrFromFileName(str: string): string {
+  const regex = /\d\d\d\d\d\d\d\d/;
+  str = str.match(regex)[0];
+  console.log(str);
+  let year = str.substring(0, 4);
+  let month = str.substring(4, 6);
+  let day = str.substring(6);
+  return year + "-" + month + "-" + day;
+}
+
+export async function isDevMode(): Promise<boolean> {
+  return import.meta.env.DEV;
+}
+
+export function getBaseURL(): Promise<string> {
+  return isDevMode().then((a) => {
+    return a ? "http://localhost:3000" : "https://frenchtechlead.com";
+  });
+}
+
+export function buildURL(uri: string): Promise<string> {
+  return getBaseURL().then((a) => a + uri);
 }

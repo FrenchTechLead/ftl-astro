@@ -1,15 +1,10 @@
 export interface Frontmatter {
   layout: string;
   title: string;
-  publishDate: string;
-  authorName: string;
-  authorSocial: string;
-  postImageAlt: string;
-  postImageWidth: number;
-  postImageHeight: number;
+  description: string;
+  authorID: string;
   keywords: string[];
   tags: string[];
-  description: string;
   lang: string;
   draft: boolean;
 }

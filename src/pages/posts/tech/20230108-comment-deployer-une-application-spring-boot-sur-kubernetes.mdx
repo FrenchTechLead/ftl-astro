@@ -1,13 +1,8 @@
 ---
-
 layout: '@layouts/BlogPostLayout.astro'
+authorID: akram_mecheri
 title: Comment déployer une application spring-boot et Postgres sur Kubernetes
-publishDate: January 08, 2023
-authorName: "@FrenchTechLead"
-authorSocial: "https://twitter.com/FrenchTechLead"
-postImageAlt: Comment déployer une application spring-boot et Postgres sur Kubernetes
-postImageWidth: 700
-postImageHeight: 350
+description: "Apprenez à déployer une application spring-boot sur kubernetes avec une base de données Postgres avec un certificat SSL gratuit Let's encrypt."
 keywords:
  - Kubernetes
  - Spring-Boot
@@ -20,7 +15,6 @@ tags:
  - Postgres
  - cert-manager
  - lets-encrypt
-description: "Apprenez à déployer une application spring-boot sur kubernetes avec une base de données Postgres avec un certificat SSL gratuit Let's encrypt."
 lang: fr
 draft: false
 ---
@@ -34,7 +28,6 @@ import img4 from '@assets/blog/tech/20230108-comment-deployer-une-application-sp
 
 import Image from '@comps/Image.astro'
 
-<Image src={img0} t='Comment déployer une application spring-boot et Postgres sur Kubernetes' solo={true}/>
 
 ## Introduction
 Dans cet article nous allons découvrir ensemble comment déployer une application spring-boot avec une base de données Postgres sur Kubernetes, nous allons aussi installer un ingress controller de type Nginx et gérer automatiquement les certificats SSL délivrés par l'autorité de certification let's encrypt en utilisant cert-manager.  

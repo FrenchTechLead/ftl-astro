@@ -5,39 +5,38 @@ import Footer from "@comps/Footer.astro";
 import Styles from "@comps/styles/Styles.astro";
 import S1 from "@comps/landing/S1.astro";
 import S2 from "@comps/landing/S2.astro";
+import type { Frontmatter } from "@models/fontmatter";
+import { buildURL } from "@utils/utils";
 
-const DEV = await import.meta.env.DEV;
-const title = "FrenchTechLead - The Tech Leaders Community";
-const author = "FrenchTechLead";
-const description =
-  "FrenchTechLead is a blog about Software Engineering and Web Development, written by a team of Experienced Entrepreneurs.";
-const keywords = [
-  "Tech Blog",
-  "Software Engineering",
-  "Cloud Computing",
-  "OOP",
-  "Reactive Programming",
-  "Functional Programming",
-  "OSS",
-  "DevOps",
-];
-const permalink = "https://frenchtechlead.com/";
-const postImageUrl = "https://frenchtechlead.com/assets/blog/blog-cover.avif";
-const showAds = false;
+const PERMALINK = await buildURL(Astro.url.pathname);
+const IMG_SRC = "https://frenchtechlead.com/assets/blog/blog-cover.avif";
+
+const fm: Frontmatter = {
+  layout: "",
+  title: "FrenchTechLead - The Tech Leaders Community",
+  description:
+    "FrenchTechLead is a blog about Software Engineering and Web Development, written by a team of Experienced Entrepreneurs.",
+  authorID: "akram_mecheri",
+  keywords: [
+    "Tech Blog",
+    "Software Engineering",
+    "Cloud Computing",
+    "OOP",
+    "Reactive Programming",
+    "Functional Programming",
+    "OSS",
+    "DevOps",
+  ],
+  tags: [],
+  lang: "fr",
+  draft: false,
+};
 ---
 
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="dark">
   <head>
-    <MetaHead
-      title={title}
-      keywords={keywords}
-      description={description}
-      permalink={permalink}
-      postImageUrl={postImageUrl}
-      author={author}
-      showAds={showAds}
-    />
+    <MetaHead frontmatter={fm} permalink={PERMALINK} imgSrc={IMG_SRC} />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"
