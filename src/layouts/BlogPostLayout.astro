@@ -18,7 +18,7 @@ import type { Frontmatter } from "@models/fontmatter";
 const fm = Astro.props.content as Frontmatter;
 
 const FILE_NAME = getFileName(Astro);
-console.log(FILE_NAME);
+const PATH_NAME = Astro.url.pathname;
 const PUBLISH_DATE = getPublishDateStrFromFileName(FILE_NAME);
 const PERMALINK = await buildURL(Astro.url.pathname);
 const IMG_SRC = await buildURL("/assets/blog/tech/" + FILE_NAME + "/0.png");
@@ -43,7 +43,7 @@ const IMG_SRC = await buildURL("/assets/blog/tech/" + FILE_NAME + "/0.png");
     <script
       src="https://utteranc.es/client.js"
       repo="FrenchTechLead/ftl-astro"
-      issue-term={PERMALINK}
+      issue-term={PATH_NAME}
       theme="gruvbox-dark"
       crossorigin="anonymous"
       async

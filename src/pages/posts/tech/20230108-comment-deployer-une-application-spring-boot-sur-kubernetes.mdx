@@ -122,7 +122,7 @@ docker rm http-snitch
 ## Construction de l’image Docker et Push sur Docker Hub
 ### Dockerfile pour une application spring-boot
 Sur la racine de votre projet Spring-Boot créez un Dockerfile avec le contenu suivant:
-```Dockerfile
+```
 FROM amazoncorretto:17
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar

@@ -117,8 +117,6 @@ const fm: Frontmatter = {
       </section>
       <script is:inline>
         function goToPage(e) {
-          const allTags = document.querySelectorAll(".tag-option");
-          console.log(allTags);
           window.location.replace("/blog/" + e.value);
         }
       </script>

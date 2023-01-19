@@ -22,7 +22,6 @@ export function mergeTags(arr: Array<Array<string>>) {
 export function getPublishDateStrFromFileName(str: string): string {
   const regex = /\d\d\d\d\d\d\d\d/;
   str = str.match(regex)[0];
-  console.log(str);
   let year = str.substring(0, 4);
   let month = str.substring(4, 6);
   let day = str.substring(6);
