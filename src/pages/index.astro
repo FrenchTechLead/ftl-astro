@@ -44,9 +44,59 @@ const fm: Frontmatter = {
   </head>
   <body>
     <Header />
-    <main class="container">
-      <img class="pt-5 mt-0" src={rocket} />
-      <h1 class="text-center">Préparez vous pour le décollage</h1>
+    <main class="container align-middle">
+      <div class="row pt-5 mt-0 align-items-end">
+        <div class="col-xs-12 col-md-6">
+          <div class="card border-0">
+            <div class="card-body">
+              <div class="card-title h1">
+                <h1>
+                  Nous allons faire <span class="text-warning">décoller</span> vos
+                  projets !
+                </h1>
+              </div>
+              <div class="card-text">
+                Vous cherchez une expertise technique dans les domaines du
+                Développement logiciel, le DevOps et ou Cloud (AWS / Azure) ?<br
+                />
+                Nous proposons deux types de préstation:
+                <ul class="mt-2">
+                  <li>
+                    <span class="text-primary">Méthode au forfait:</span> Nous nous
+                    occupons de TOUT, vous nous communiquez votre besoin et nous
+                    réalisons les développements de A à Z, vous serez livrés dans
+                    délais très courts et à des tarifs très attractifs.
+                  </li>
+                  <li>
+                    <span class="text-primary">Méthode en régie:</span> Nous intégrons
+                    vos équipes et réalisons vos projets dans vos locaux tout en
+                    assurant la montée en compétences de vos collaborateur.
+                  </li>
+                </ul>
+              </div>
+              <div class="pt-3">
+                <a href="/contact-us" class="btn btn-secondary"
+                  >Nous contacter</a
+                >
+                <a href="/blog/_index" class="btn btn-secondary"
+                  >Visiter notre Blog</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-xs-12 col-md-6"
+          style="border-bottom: solid 1px var(--bs-heading-color);"
+        >
+          <img
+            width="300px"
+            style="margin-bottom: 0px; padding-top:0px !important;"
+            class="pt-5 mt-0"
+            src={rocket}
+          />
+        </div>
+      </div>
     </main>
     <Footer />
   </body>
