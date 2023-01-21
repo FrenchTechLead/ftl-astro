@@ -16,7 +16,8 @@ export function mergeTags(arr: Array<Array<string>>) {
   return arr
     .flatMap((a) => a)
     .map((a) => a.toLowerCase())
-    .filter(onlyUniqueArrayFilter);
+    .filter(onlyUniqueArrayFilter)
+    .sort();
 }
 
 export function getPublishDateStrFromFileName(str: string): string {

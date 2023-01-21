@@ -10,7 +10,7 @@ export default function AuthorCard(props: AuthorCardProps) {
   return (
     <div class="card author-card">
       <img
-        src={"/assets/authors/" + author.id + ".png"}
+        src={"/assets/authors/" + author.id + ".jpeg"}
         style="width: 150px !important; "
         class="card-img-top"
         alt={author.firstName + " " + author.lastName}
