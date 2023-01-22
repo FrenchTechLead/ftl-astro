@@ -54,8 +54,65 @@ const links = [
               </li>
             ))
           }
+          <li class="nav-item">
+            <a href="#" class="nav-link" onclick="return toggleTheme()"
+              ><i id="theme-icon" class="fa-solid fa-moon"></i>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
+  <script is:inline>
+    const DARK = "dark";
+    const LIGHT = "light";
+    const themeIcon = document.querySelector("#theme-icon");
+    const theme = window.localStorage.getItem("theme");
+
+    if (theme) {
+      theme === DARK ? setDarkTheme() : setLightTheme();
+    }
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        const newColorScheme = event.matches ? DARK : LIGHT;
+        newColorScheme === DARK
+          ? setDarkTheme(newColorScheme)
+          : setLightTheme();
+      });
+    if (theme === undefined) {
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        setDarkTheme();
+      } else {
+        setLightTheme();
+      }
+    }
+
+    function toggleTheme() {
+      const theme = window.localStorage.getItem("theme");
+      if (theme === DARK) {
+        setLightTheme();
+      } else {
+        setDarkTheme();
+      }
+      return false;
+    }
+
+    function setDarkTheme() {
+      document.documentElement.setAttribute("data-bs-theme", DARK);
+      window.localStorage.setItem("theme", DARK);
+      themeIcon.classList.remove("fa-moon");
+      themeIcon.classList.add("fa-sun");
+    }
+
+    function setLightTheme() {
+      document.documentElement.setAttribute("data-bs-theme", LIGHT);
+      window.localStorage.setItem("theme", LIGHT);
+      themeIcon.classList.remove("fa-sun");
+      themeIcon.classList.add("fa-moon");
+    }
+  </script>
 </header>
