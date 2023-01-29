@@ -38,13 +38,13 @@ import img13 from '@assets/blog/tech/20201023-git-pour-debutant/13.png'
 import img14 from '@assets/blog/tech/20201023-git-pour-debutant/14.png'
 import Image from '@comps/Image.astro'
 
-Dans cet article, nous allons découvrir l’essentiel de Git et Gitlab afin de permettre une prise en main rapide de ces deux outils 🚀.
 
+Dans cet article, nous allons découvrir l’essentiel de Git et Gitlab afin de permettre une prise en main rapide de ces deux outils 🚀.
 
 1.  **Git** est un outil de gestion de version, c’est à dire qu’il permet de sauvegarder plusieurs versions de fichiers et dossiers, ce versioning permet de suivre l’évolution des fichiers et permet aussi de revenir sur n’importe quelle version de ces fichiers au besoin.
 2.  **Gitlab** est une plateforme de DevOps complète, elle offre énormément de fonctionnalités permettant le travail collaboratif dans le développement logiciel notamment Git, dans ce cours nous allons seulement aborder la partie **dépôt distant** de Gitlab.
 
-
+<Separator/>
 
 ## 1. Git:
 
@@ -55,6 +55,8 @@ Dans cet article, nous allons découvrir l’essentiel de Git et Gitlab afin de 
 > Les commandes ci-dessous doivent être saisies sur le programme git bash si vous utilisez windows, sinon utilisez un simple terminal pour mac et linux.
 
 Dans cette première partie, toutes les commandes vont se dérouler sur votre poste local, il n’y aura pas d’interaction avec un dépôt distant.
+
+<Separator/>
 
 ### Initialisation du dépot local Git:
 
@@ -100,6 +102,8 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 * La troisième, quatrième et cinquième lignes veulent dire qu’il existe un fichier (**article-1.txt**) mais qui n’est pas tracké, c’est à dire qu’on a pas encore accordé la permission à Git de commencer à suivre les changements dans ce fichier.
 
+<Separator/>
+
 ### Git Add:
 
 Par la suite, Git propose la commande `add` afin de commencer à tracker notre fichier **article-1.txt**
@@ -121,6 +125,9 @@ Changes to be committed:
     (use "git rm - cached <file»." to unstage)
         new file: article-l.txt
 ```
+
+<Separator/>
+
 ### Git Commit:
 Le résultat de la commande est maintenant différent car le fichier est tracké par Git, mais il n’est pas commité, càd que la version de ce fichier n’est pas encore enregistrée dans notre dépôt, afin de l’enregistrer on fait un `commit` :
 
@@ -140,6 +147,8 @@ La branche **brache_1** a comme base le 3 ème commit de la branche **master** e
 
 la branche **branche_2** a comme base le 4ème commit de la branche **master** et contient 3 commits propres à elle seule.
 
+<Separator/>
+
 ### Git Log:
 
 Revenons à notre exercice :
@@ -158,6 +167,8 @@ Thu Oct 22 21:10:28 2020 +0200
 
     ajout de l'article 1
 ```
+<Separator/>
+
 ### Git Tag:
 La commande `git log` permet d’afficher les derniers commits effectués, on remarque un long identifiant alphanumérique pour notre commit, cet identifiant est unique à un commit ( il permet d’identifier notre enregistrement, l’ID généré sur votre terminal est certainement différent du mien) par contre il n’est pas facile de mémoriser un tel identifiant par un humain, pour cette raison on peut utiliser les **tag** de Git (le mot tag veut dire étiquette).
 
@@ -180,7 +191,7 @@ Date: Thu Oct 22 21:10:28 2020 +0200
 ```
 
 On remarque l’apparition du tag **v1.0.0** sur notre commit initial.
-
+<Separator/>
 ### Git Checkout:
 
 Maintenant créons une nouvelle branche :
@@ -241,6 +252,8 @@ git log --all --decorate --oneline --graph
 
 <Image w="700" h="207" src={img6} t="git log command" solo="true" />
 
+<Separator/>
+
 ### Git Merge:
 
 Maintenant on souhaite que le contenu de la branche **branche_1** soit récupéré dans la branche **master**, pour cela on utilise la commande `git merge`:
@@ -278,11 +291,14 @@ Maintenant qu’on a mergé la branche **branche_1** on peut la supprimer:
 git branch -d branche_1
 ```
 
+<Separator/>
 
 ## 2. Gitlab
 
 
 Dans cette partie nous allons envoyer le contenu de notre blog sur un serveur distant (Gitlab), de cette façon nous allons sauvegarder notre travail dans le cloud et on peut le partager avec nos équipes.
+
+<Separator/>
 
 ### Création d'un projet sur Gitlab:
 
@@ -293,6 +309,8 @@ Dans cette partie nous allons envoyer le contenu de notre blog sur un serveur di
 <Image w="700" h="478" src={img9} t="création de projet sur Gitlab" solo="true" />
 
 > Il est possible d’interagir avec Gitlab via deux protocoles, HTTPS et SSH, la méthode recommandée est en SSH.
+
+<Separator/>
 
 ### Ajout d'une clé SSH:
 
@@ -320,6 +338,8 @@ Vous devriez avoir un résultat qui ressemble à ça :
 
 Maintenant vous pouvez lier votre dépôt local avec le dépôt distant (Gitlab), pour cela revenez sur votre projet **mon_blog** sur Gitlab, et cliquez sur **clone** et copiez l’URL qui s’affiche en dessous de **Clone with SSH**.
 
+<Separator/>
+
 ### Liaison du repo local avec gitlab:
 
 Revenez sur git bash et dans votre projet **mon_blog** tapez la commande ci-dessous en adaptant la valeur de l’URL SSH avec celle que vous avez copié:
@@ -327,6 +347,7 @@ Revenez sur git bash et dans votre projet **mon_blog** tapez la commande ci-dess
 ```
 git remote add origin git@gitlab.com:mecheri.akram/mon_blog.git
 ```
+<Separator/>
 
 ### Git Push:
 
@@ -339,6 +360,8 @@ git push --set-upstream origin master
 Actualisez la page web de Gitlab, vous verrez vos articles apparaitre !
 
 <Image w="700" h="414" src={img12} t="gitlab commit preview" solo="true" />
+
+<Separator/>
 
 ### Commit depuis l'interface web gitlab:
 
@@ -355,6 +378,9 @@ Sur l’interface Web de Gitlab :
 Maintenant on a un 3ème article rédigé sur Gitlab.
 
 <Image w="700" h="268" src={img14} t="gitlab files" solo="true" />
+
+<Separator/>
+
 ### Git Pull:
 
 Pour récupérer l’article sur notre dépôt local :
@@ -387,7 +413,7 @@ git fetch
 git --help
 ```
 
-
+<Separator/>
 
 ## Pour finir,
 
