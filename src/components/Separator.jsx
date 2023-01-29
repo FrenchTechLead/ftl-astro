@@ -1,5 +1,5 @@
 export default function Separator(props) {
     return (
-        <div class="separator">🔥  🔥  🔥</div>
+        <div className="separator mt-5 mb-5">✤ ✤ ✤ ✤ ✤</div>
     )
   }
