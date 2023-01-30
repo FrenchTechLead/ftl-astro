@@ -69,18 +69,16 @@ const links = [
     const themeIcon = document.querySelector("#theme-icon");
     const theme = window.localStorage.getItem("theme");
 
-    if (theme) {
-      theme === DARK ? setDarkTheme() : setLightTheme();
-    }
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (event) => {
         const newColorScheme = event.matches ? DARK : LIGHT;
-        newColorScheme === DARK
-          ? setDarkTheme(newColorScheme)
-          : setLightTheme();
+        newColorScheme === DARK ? setDarkTheme() : setLightTheme();
       });
-    if (theme === undefined) {
+
+    if (theme) {
+      theme === DARK ? setDarkTheme() : setLightTheme();
+    } else {
       if (
         window.matchMedia &&
         window.matchMedia("(prefers-color-scheme: dark)").matches
