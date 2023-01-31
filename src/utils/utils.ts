@@ -6,26 +6,20 @@ function onlyUniqueArrayFilter(value: string, index: number, self: string[]) {
   );
 }
 
-export function getFileName(Astro: AstroType) {
-  const url: string = Astro.props.url;
-  const lastIndex = url.lastIndexOf("/");
-  return url.substring(lastIndex + 1);
-}
-
 export function mergeTags(arr: Array<Array<string>>) {
   return arr
-    .flatMap((a) => a)
-    .map((a) => a.toLowerCase())
+    .flat()
+    .map((a) => a?.toLowerCase())
     .filter(onlyUniqueArrayFilter)
     .sort();
 }
 
-export function getPublishDateStrFromFileName(str: string): string {
+export function getPublishDateFromSlug(slug: string): string {
   const regex = /\d\d\d\d\d\d\d\d/;
-  str = str.match(regex)[0];
-  let year = str.substring(0, 4);
-  let month = str.substring(4, 6);
-  let day = str.substring(6);
+  slug = slug.match(regex)[0];
+  let year = slug.substring(0, 4);
+  let month = slug.substring(4, 6);
+  let day = slug.substring(6);
   return year + "-" + month + "-" + day;
 }
 

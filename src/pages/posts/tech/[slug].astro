@@ -1,0 +1,58 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import MetaHead from "@comps/MetaHead.astro";
+import Header from "@comps/Header.astro";
+import Footer from "@comps/Footer.astro";
+import Styles from "@comps/styles/Styles.astro";
+import BlogPost from "@comps/BlogPost.astro";
+import Image from "@comps/Image.astro";
+import Separator from "@comps/Separator.jsx";
+import AuthorCard from "@comps/AuthorCard";
+import { getPublishDateFromSlug, buildURL } from "@utils/utils";
+
+interface Props {
+  entry: CollectionEntry<"posts">;
+}
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("posts");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry: entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const data = entry.data;
+
+const SLUG = entry.slug;
+const PUBLISH_DATE = getPublishDateFromSlug(SLUG);
+const PERMALINK = await buildURL(SLUG);
+const IMG_SRC = await buildURL("/assets/blog/tech/" + SLUG + "/0.png");
+---
+
+<!DOCTYPE html>
+<html lang={data.lang} data-bs-theme="dark">
+  <head>
+    <MetaHead data={data} permalink={PERMALINK} imgSrc={IMG_SRC} />
+    <Styles />
+  </head>
+  <body>
+    <Header />
+    <BlogPost title={data.title} publishDate={PUBLISH_DATE}>
+      <AuthorCard id="akram_mecheri" lang={data.lang} />
+      {(<Image w={842} h={462} src={IMG_SRC} t={data.title} />)}
+      <Content />
+      <Separator />
+    </BlogPost>
+    <script
+      src="https://utteranc.es/client.js"
+      repo="FrenchTechLead/ftl-astro"
+      issue-term={SLUG}
+      theme="gruvbox-dark"
+      crossorigin="anonymous"
+      async
+    ></script>
+    <Footer />
+  </body>
+</html>

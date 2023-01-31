@@ -5,15 +5,14 @@ import Footer from "@comps/Footer.astro";
 import Styles from "@comps/styles/Styles.astro";
 import BlogPostPreview from "@comps/BlogPostPreview.astro";
 import { mergeTags } from "@utils/utils";
-import type { Frontmatter } from "@models/fontmatter";
+import { getCollection } from "astro:content";
+import type { PostType } from "src/content/config";
 
 // For Dynamic Routes
 export async function getStaticPaths() {
   const INDEX_TAG: string = "_index";
-  const techPosts = await Astro.glob<Frontmatter>(
-    "/src/pages/posts/tech/*.mdx"
-  );
-  const uniqueTags = mergeTags(techPosts.map((a) => a.frontmatter.tags));
+  const techPosts = await getCollection("posts");
+  const uniqueTags = mergeTags(techPosts.map((a) => a.data.tags));
   const x: Array<{ params: { tag: string } }> = uniqueTags.map((a) => {
     return {
       params: {
@@ -25,8 +24,8 @@ export async function getStaticPaths() {
   return x;
 }
 
-const techPosts = await Astro.glob<Frontmatter>("/src/pages/posts/tech/*.mdx");
-const uniqueTags = mergeTags(techPosts.map((a) => a.frontmatter.tags));
+const techPosts = await getCollection("posts");
+const uniqueTags = mergeTags(techPosts.map((a) => a.data.tags));
 const currTag = Astro.params.tag;
 const INDEX_TAG: string = "_index";
 
@@ -36,8 +35,7 @@ const PERMALINK = "https://frenchtechlead.com/blog/tag/" + currTag;
 const IMG_SRC =
   "https://frenchtechlead.com/assets/blog/social-cover-default.png";
 
-const fm: Frontmatter = {
-  layout: "",
+const fm: PostType = {
   title: "Blog - FrenchTechLead #" + currTag,
   description: "FrenchTechLead search result for: " + currTag,
   authorID: "akram_mecheri",
@@ -60,7 +58,7 @@ const fm: Frontmatter = {
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
   <head>
-    <MetaHead frontmatter={fm} permalink={PERMALINK} imgSrc={IMG_SRC} />
+    <MetaHead data={fm} permalink={PERMALINK} imgSrc={IMG_SRC} />
     <Styles />
   </head>
   <body>
@@ -100,18 +98,14 @@ const fm: Frontmatter = {
         <div class="list-group">
           {
             techPosts
-              .filter((p) => isDevMode || !p.frontmatter.draft)
+              .filter((p) => isDevMode || !p.data.draft)
               .filter((p) =>
                 currTag === INDEX_TAG
                   ? p
-                  : p.frontmatter.tags
-                      .map((a) => a.toLowerCase())
-                      .includes(currTag)
+                  : p.data.tags.map((a) => a.toLowerCase()).includes(currTag)
               )
               .reverse()
-              .map((p) => (
-                <BlogPostPreview frontmatter={p.frontmatter} url={p.url} />
-              ))
+              .map((p) => <BlogPostPreview frontmatter={p} url={p.slug} />)
           }
         </div>
       </section>

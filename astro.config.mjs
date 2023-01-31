@@ -7,5 +7,11 @@ import preact from "@astrojs/preact";
 // https://astro.build/config
 export default defineConfig({
   site: "https://frenchtechlead.com",
-  integrations: [sitemap(), mdx(), preact()],
+  integrations: [
+    sitemap(),
+    mdx({
+      extendPlugins: "markdown",
+    }),
+    preact(),
+  ],
 });

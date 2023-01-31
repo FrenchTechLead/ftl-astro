@@ -3,13 +3,12 @@ import MetaHead from "@comps/MetaHead.astro";
 import Header from "@comps/Header.astro";
 import Footer from "@comps/Footer.astro";
 import Styles from "@comps/styles/Styles.astro";
-import type { Frontmatter } from "@models/fontmatter";
+import type { PostType } from "src/content/config";
 
 const PERMALINK = "https://frenchtechlead.com/privacy-policy";
 const IMG_SRC = "https://frenchtechlead.com/assets/blog/blog-cover.avif";
 
-const fm: Frontmatter = {
-  layout: "",
+const data: PostType = {
   title: "FrenchTechLead - The Tech Leaders Community",
   description:
     "FrenchTechLead is a blog about Software Engineering and Web Development, written by a team of Experienced Entrepreneurs.",
@@ -33,7 +32,7 @@ const fm: Frontmatter = {
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="dark">
   <head>
-    <MetaHead frontmatter={fm} permalink={PERMALINK} imgSrc={IMG_SRC} />
+    <MetaHead data={data} permalink={PERMALINK} imgSrc={IMG_SRC} />
     <Styles />
     <style>
       label,

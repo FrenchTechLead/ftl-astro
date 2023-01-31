@@ -1,24 +1,25 @@
 ---
-import type { Frontmatter } from "@models/fontmatter";
-import { getPublishDateStrFromFileName } from "@utils/utils";
+import { getPublishDateFromSlug } from "@utils/utils";
+import type { CollectionEntry } from "astro:content";
 
 export interface Props {
-  frontmatter: Frontmatter;
+  frontmatter: CollectionEntry<"posts">;
   url: string;
 }
 const props = Astro.props;
 const fm = Astro.props.frontmatter;
-const publishDateStr = getPublishDateStrFromFileName(props.url);
+const data = fm.data;
+const publishDateStr = getPublishDateFromSlug(props.url);
 ---
 
 <a
-  href={props.url}
+  href={"/posts/tech/" + fm.slug}
   class="list-group-item list-group-item-action"
   aria-current="true"
 >
   <div class="d-flex w-100 justify-content-between">
-    <h3 class="mb-1">{fm.title}</h3>
+    <h3 class="mb-1">{data.title}</h3>
     <small>{new Date(publishDateStr).toDateString()}</small>
   </div>
-  <p class="mb-1">{fm.description}</p>
+  <p class="mb-1">{data.description}</p>
 </a>
