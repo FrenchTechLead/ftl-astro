@@ -104,6 +104,7 @@ const links = [
       window.localStorage.setItem("theme", DARK);
       themeIcon.classList.remove("fa-moon");
       themeIcon.classList.add("fa-sun");
+      toggleRocketImage(DARK);
     }
 
     function setLightTheme() {
@@ -111,6 +112,19 @@ const links = [
       window.localStorage.setItem("theme", LIGHT);
       themeIcon.classList.remove("fa-sun");
       themeIcon.classList.add("fa-moon");
+      toggleRocketImage(LIGHT);
+    }
+
+    function toggleRocketImage(theme) {
+      const rocketImage = document.querySelector("#rocket");
+      if (rocketImage) {
+        rocketImage.setAttribute("src", "/assets/rocket-" + theme + ".webp");
+      } else {
+        setTimeout(() => {
+          const rocketImage = document.querySelector("#rocket");
+          rocketImage.setAttribute("src", "/assets/rocket-" + theme + ".webp");
+        }, 100);
+      }
     }
   </script>
 </header>

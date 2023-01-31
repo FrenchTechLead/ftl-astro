@@ -5,7 +5,7 @@ import Footer from "@comps/Footer.astro";
 import Styles from "@comps/styles/Styles.astro";
 import type { Frontmatter } from "@models/fontmatter";
 import { buildURL } from "@utils/utils";
-import rocket from "@assets/rocket.webp";
+import rocketDark from "@assets/rocket-dark.webp";
 
 const PERMALINK = await buildURL(Astro.url.pathname);
 const IMG_SRC = "https://frenchtechlead.com/assets/blog/blog-cover.avif";
@@ -87,13 +87,14 @@ const fm: Frontmatter = {
         </div>
         <div
           class="col-xs-12 col-md-4"
-          style="border-bottom: solid 1px var(--bs-heading-color); border-right: solid 1px var(--bs-heading-color);"
+          style="border-bottom: solid 2px var(--bs-body-color); border-right: solid 2px var(--bs-body-color);"
         >
           <img
+            id="rocket"
             width="300px"
             style="margin-bottom: 0px; padding-top:0px !important;"
             class="pt-5 mt-0"
-            src={rocket}
+            src={rocketDark}
           />
         </div>
       </div>
