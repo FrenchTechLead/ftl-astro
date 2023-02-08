@@ -1,6 +1,7 @@
 <style lang="css" is:inline>
   :root {
-    --color-white: #fff;
+    --color-white: rgb(255, 255, 255);
+    --color-white-2: rgb(233, 232, 232);
     --color-grey: #d0d0d0;
     --color-green: #6bd968;
     --color-light-blue: #3defe9;
@@ -13,37 +14,61 @@
     --color-black: #121212;
     --color-black-foreground: #1e1e1e;
     --color-black-0: #000000;
+    --color-glow-purple: hsla(269, 79%, 50%, 1);
   }
 
   :root {
     color-scheme: dark;
     --c-h1: var(--color-white);
-    --c-h2: var(--color-yellow);
-    --c-h3: var(--color-blue);
-    --c-h4: var(--color-blue);
-    --c-h5: var(--color-blue);
+    --c-h2: var(--color-white);
+    --c-h3: var(--color-white-2);
+    --c-h4: var(--color-white);
+    --c-h5: var(--color-white);
     --c-txt: var(--color-grey);
-    --c-link: var(--color-red);
+    --c-link: var(--color-white);
     --c-caption: var(--color-red);
-    --c-selection: var(--color-red);
-    --c-blockquote: var(--color-red);
+    --c-selection: var(--color-black);
+    --c-blockquote: var(--color-grey);
     --c-separator: var(--color-heavy-blue);
-    --c-code: var(--color-red);
-    --c-article: var(--color-red);
-    --c-tooltip: var(--color-red);
+    --c-tooltip: var(--color-black);
     --c-card-btn: var(--color-white);
     --c-strong: var(--color-white);
-    --border-code: hsla(269, 79%, 50%, 1);
+    --border-code: var(--color-glow-purple);
+    --border-blockquote: var(--color-white);
     --bg-code: linear-gradient(249.13deg, #0e1270 3.45%, #000);
     --bg-card-btn: teal;
     --bg-tooltip: var(--color-white);
     --bg-selection: var(--color-yellow);
+    --bg-blockquote: var(--color-black-foreground);
     --shadow-card: rgba(0, 0, 0, 0.2);
     --shadow-tooltip: #0000008c;
   }
 
-  [data-theme="white"] {
+  [data-bs-theme="light"] {
     color-scheme: light;
+    --c-h1: var(--color-black);
+    --c-h2: var(--color-black);
+    --c-h3: var(--color-black);
+    --c-h4: var(--color-black);
+    --c-h5: var(--color-black);
+    --c-txt: var(--color-black);
+    --c-link: var(--color-blue);
+    --c-caption: var(--color-red);
+    --c-selection: var(--color-black);
+    --c-blockquote: var(--color-black);
+    --c-separator: var(--color-heavy-blue);
+    --c-tooltip: var(--color-black);
+    --c-card-btn: var(--color-white);
+    --c-strong: var(--color-black-0);
+    --border-code: var(--color-glow-purple);
+    --border-blockquote: var(--color-black);
+    --bg-code: linear-gradient(249.13deg, #0e1270 3.45%, #000);
+    --bg-card-btn: teal;
+    --bg-tooltip: var(--color-white);
+    --bg-selection: var(--color-yellow);
+    --bg-blockquote: var(--color-grey);
+    --shadow-card: rgba(0, 0, 0, 0.2);
+    --shadow-tooltip: #0000008c;
   }
   h1 {
     color: var(--c-h1);
@@ -105,13 +130,13 @@
   }
 
   blockquote {
-    border-left: var(--color-purple) 4px solid;
+    border-left: var(--border-blockquote) 4px solid;
     padding: 15px;
     font-style: italic;
     margin-top: 20px;
     margin-bottom: 20px;
-    background-color: var(--color-black-foreground);
-    color: var(--color-grey);
+    background-color: var(--bg-blockquote);
+    color: var(--c-blockquote);
   }
 
   li::marker {
