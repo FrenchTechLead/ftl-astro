@@ -27,7 +27,7 @@ const data = entry.data;
 
 const SLUG = entry.slug;
 const PUBLISH_DATE = getPublishDateFromSlug(SLUG);
-const PERMALINK = await buildURL("/assets/blog/tech/" + SLUG);
+const PERMALINK = await buildURL("/posts/tech/" + SLUG);
 const IMG_SRC = await buildURL("/assets/blog/tech/" + SLUG + "/0.png");
 ---
 
