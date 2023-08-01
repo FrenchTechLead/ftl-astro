@@ -5,12 +5,14 @@ import Footer from "@comps/Footer.astro";
 import Styles from "@comps/styles/Styles.astro";
 import { buildURL } from "@utils/utils";
 import rocketDark from "@assets/rocket-dark.webp";
+/*
 import client1 from "@assets/clients/client-1.png";
 import client2 from "@assets/clients/client-2.jpg";
 import client3 from "@assets/clients/client-3.png";
 import client4 from "@assets/clients/client-4.png";
 import client5 from "@assets/clients/client-5.png";
 import client6 from "@assets/clients/client-6.png";
+*/
 
 const PERMALINK = await buildURL(Astro.url.pathname);
 const IMG_SRC = "https://frenchtechlead.com/assets/blog/blog-cover.avif";
@@ -103,9 +105,9 @@ const fm = {
           />
         </div>
       </div>
+      <!-- clients showcase 
       <div class="text-center">
         <h3>Nos clients</h3>
-        <!-- clients showcase -->
         <div class="row">
           <div class="col-md-3 col-sm-6">
             <div class="client-logo">
@@ -137,6 +139,7 @@ const fm = {
           </div>
         </div>
       </div>
+    -->
       <Footer />
     </main>
   </body>
