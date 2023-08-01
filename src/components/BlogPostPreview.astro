@@ -18,7 +18,9 @@ const publishDateStr = getPublishDateFromSlug(props.url);
   aria-current="true"
 >
   <div class="d-flex w-100 justify-content-between">
-    <h3 class="mb-1">{data.title}</h3>
+    <h3 class="mb-1">
+      {data.title}
+    </h3>
     <small>{new Date(publishDateStr).toDateString()}</small>
   </div>
   <p class="mb-1">{data.description}</p>

@@ -7,6 +7,7 @@ import BlogPostPreview from "@comps/BlogPostPreview.astro";
 import { mergeTags } from "@utils/utils";
 import { getCollection } from "astro:content";
 import type { PostType } from "src/content/config";
+import { ViewTransitions } from "astro:transitions";
 
 // For Dynamic Routes
 export async function getStaticPaths() {
@@ -59,6 +60,7 @@ const fm: PostType = {
 <html lang="en" data-bs-theme="dark">
   <head>
     <MetaHead data={fm} permalink={PERMALINK} imgSrc={IMG_SRC} />
+    <ViewTransitions />
     <Styles />
   </head>
   <body>
@@ -74,7 +76,9 @@ const fm: PostType = {
             aria-label="Recherchez dans le site"
             aria-describedby="button-addon2"
             list="tags"
-            onchange="goToPage(this)"
+            onchange="
+            goToPage(this)
+            "
           />
 
           <button

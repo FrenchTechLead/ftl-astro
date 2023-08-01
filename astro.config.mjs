@@ -14,4 +14,7 @@ export default defineConfig({
     }),
     preact(),
   ],
+  experimental: {
+    viewTransitions: true,
+  },
 });

@@ -1,4 +1,5 @@
 ---
+
 export interface Props {
   title: string;
   publishDate: string;
@@ -10,7 +11,9 @@ const date = new Date(publishDate);
 
 <article class="article">
   <header class="pt-5">
-    <h1>{title}</h1>
+    <h1 transition:name="heading" transition:animate="morph" >
+      {title}
+    </h1>
     <p>
       <time datetime={publishDate}>{date.toDateString()}</time>
     </p>
