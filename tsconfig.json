@@ -1,14 +1,13 @@
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    "importsNotUsedAsValues": "error",
     "baseUrl": ".",
     "paths": {
       "@comps/*": [
         "src/components/*"
       ],
       "@assets/*": [
-        "/assets/*"
+        "public/assets/*"
       ],
       "@layouts/*": [
         "src/layouts/*"

@@ -78,14 +78,14 @@ while shouldContinue:
 
 After running this program for some time, we managed to reproduce the bug and export the HTML containing the **Not Modified** string.
 
-<Image w="883" h="661" src={img1} t="Not Modified" />
+<Image w="883" h="661" src={img1.src} t="Not Modified" />
 
 
 > Now that we managed to reproduce the bug we need to understand how the heck we end up having this unexpected content at the top of our page.
 
 For this purpose, we had to look at the architecture of the app from an infrastructure perspective:
 
-<Image w="883" h="661" src={img2} t="Not Modified" />
+<Image w="883" h="661" src={img2.src} t="Not Modified" />
 
 > From the following architecture, we identified some potential guilty components and had some assumptions.
 
@@ -107,13 +107,13 @@ We had a strong belief that some JS was responsible for printing these weird hea
 
 Unlike recent web browsers like Chrome and Firefox, IE doesn’t have some decent debugging capabilities, and the network tab on IE misled us in our investigations, let me explain how :
 
-<Image w="1400" h="392" src={img3} t="Chrome's Network Tab" />
+<Image w="1400" h="392" src={img3.src} t="Chrome's Network Tab" />
 
 The misleading thing about the network tab here is the fact that an **HTTP 304** response is associated with a Body content, there is no indication that the Body is retrieved from the local cache and not from the actual response(that should have no Body content associated to it), so if you don’t really pay attention, you get easily into thinking that the Body has been returned from the server with the **304** response.
 
 We decided to view how a single **304** resource is received from our backend, for that, we used a very interesting program called **Fiddler** which is a **debugging proxy server** tool used to log, inspect, and alter **HTTP** and even **HTTPS** traffic between a web client and a web server.
 
-<Image w="1400" h="392" src={img4} t="HTTP response in Fiddler" />
+<Image w="1400" h="392" src={img4.src} t="HTTP response in Fiddler" />
 
 <Separator/>
 

@@ -72,13 +72,13 @@ nserver:     ns-475.awsdns-44.com
 ```
 The above nameservers were assigned by AWS on domain registration and before creating a hosted zone for the domain.  
 when I created a hosted zone for the domain, some different nameservers were assigned to my hosted zone that were visible on the `NS` record type in the hosted zone.
-<Image w="1472" h="851" src={img1} t="AWS Hosted Zone Records" solo="true" />
+<Image w="1472" h="851" src={img1.src} t="AWS Hosted Zone Records" solo="true" />
 
 We notice a mismatch between the nameservers that were returned by the `whois` command and the nameservers that were assigned to the hosted zone.
 Actually the nameservers returned by the `whois` command were on a different page of the AWS console.  
 
 **Route53 > Registered domains > bienparler.fr**
-<Image w="1063" h="273" src={img2} t="AWS Registred Domains Tab" solo="true" />
+<Image w="1063" h="273" src={img2.src} t="AWS Registred Domains Tab" solo="true" />
 
 **So the Problem for me was a mismatch between the nameservers of the Hosted Zone and those of the Registred Domains.**
 
@@ -86,7 +86,7 @@ Actually the nameservers returned by the `whois` command were on a different pag
 I could fix this problem by changing the nameservers by clicking on **Add or edit name servers** in the Registred Domains tab so that the nameservers of the Hosted Zone are used.
 
 After that the DNS propagation started and my site was available on the internet after one day.
-<Image w="649" h="444" src={img3} t="DNS Propagation Map" solo="true" />
+<Image w="649" h="444" src={img3.src} t="DNS Propagation Map" solo="true" />
 
 <Separator/>
 

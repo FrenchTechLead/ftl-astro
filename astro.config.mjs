@@ -7,14 +7,14 @@ import preact from "@astrojs/preact";
 // https://astro.build/config
 export default defineConfig({
   site: "https://frenchtechlead.com",
+  server: {
+    port: 3000
+  },
   integrations: [
     sitemap(),
     mdx({
       extendPlugins: "markdown",
     }),
     preact(),
-  ],
-  experimental: {
-    viewTransitions: true,
-  },
+  ]
 });

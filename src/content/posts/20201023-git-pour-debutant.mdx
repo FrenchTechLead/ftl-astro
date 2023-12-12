@@ -137,7 +137,7 @@ Maintenant on a bien enregistré une première version de notre article dans Git
 
 Git est conçu selon un modèle de branches, un repository Git contient au minimum une branche (**master**), mais dans la pratique on a besoin de plusieurs branches.
 
-<Image w="700" h="555" src={img3} t="git branches" solo="true" />
+<Image w="700" h="555" src={img3.src} t="git branches" solo="true" />
 
 Dans le schéma ci-dessus chaque point bleu représente un commit, la branche épaisse est la branche principale qui porte le nom **master** et contient 5 commits.
 
@@ -248,7 +248,7 @@ La commande ci-dessous permet d’afficher le graphe Git qui représente nos bra
 git log --all --decorate --oneline --graph
 ```
 
-<Image w="700" h="207" src={img6} t="git log command" solo="true" />
+<Image w="700" h="207" src={img6.src} t="git log command" solo="true" />
 
 <Separator/>
 
@@ -279,7 +279,7 @@ On réaffiche le graphe de nos branches et commits:
 ```
 git log --all --decorate --oneline --graph
 ```
-<Image w="700" h="235" src={img8} t="git log command" solo="true" />
+<Image w="700" h="235" src={img8.src} t="git log command" solo="true" />
 
 On remarque que notre branche **branche_1** a été fusionnée **dans** la branche **master**, c’est pour cette raison qu’on retrouve le fichier **article-2.txt** dans la branche **master**.
 
@@ -304,7 +304,7 @@ Dans cette partie nous allons envoyer le contenu de notre blog sur un serveur di
 *   Cliquez sur **Create a project**
 *   Remplissez les champs comme ci-dessous puis cliquez sur **Create project**
 
-<Image w="700" h="478" src={img9} t="création de projet sur Gitlab" solo="true" />
+<Image w="700" h="478" src={img9.src} t="création de projet sur Gitlab" solo="true" />
 
 > Il est possible d’interagir avec Gitlab via deux protocoles, HTTPS et SSH, la méthode recommandée est en SSH.
 
@@ -314,7 +314,7 @@ Dans cette partie nous allons envoyer le contenu de notre blog sur un serveur di
 
 Pour que vous puissiez interagir avec le serveur Gitlab, il vous faudra ajouter une clé SSH à votre profil, cliquez sur **Add SSH key**:
 
-<Image w="700" h="269" src={img10} t="SSH key warning sur gitlab" solo="true" />
+<Image w="700" h="269" src={img10.src} t="SSH key warning sur gitlab" solo="true" />
 
 Attention si vous avez déjà une clé SSH dans votre dossier **~/.ssh** vous n’avez pas besoin de taper la commande ci-dessous, dans le cas contraire tapez la commande ci-dessous, puis appuyez sur **Entrer** plusieurs fois:
 
@@ -332,7 +332,7 @@ Copiez le texte qui s’affiche puis collez le dans le champ **key** de l’inte
 
 Vous devriez avoir un résultat qui ressemble à ça :
 
-<Image w="700" h="229" src={img11} t="SSH key add sur gitlab" solo="true" />
+<Image w="700" h="229" src={img11.src} t="SSH key add sur gitlab" solo="true" />
 
 Maintenant vous pouvez lier votre dépôt local avec le dépôt distant (Gitlab), pour cela revenez sur votre projet **mon_blog** sur Gitlab, et cliquez sur **clone** et copiez l’URL qui s’affiche en dessous de **Clone with SSH**.
 
@@ -357,7 +357,7 @@ git push --set-upstream origin master
 
 Actualisez la page web de Gitlab, vous verrez vos articles apparaitre !
 
-<Image w="700" h="414" src={img12} t="gitlab commit preview" solo="true" />
+<Image w="700" h="414" src={img12.src} t="gitlab commit preview" solo="true" />
 
 <Separator/>
 
@@ -372,10 +372,10 @@ Sur l’interface Web de Gitlab :
 *   Remplissez comme ci-dessous
 *   Puis cliquez sur **Commit changes**
 
-<Image w="700" h="480" src={img13} t="gitlab commit" solo="true" />
+<Image w="700" h="480" src={img13.src} t="gitlab commit" solo="true" />
 Maintenant on a un 3ème article rédigé sur Gitlab.
 
-<Image w="700" h="268" src={img14} t="gitlab files" solo="true" />
+<Image w="700" h="268" src={img14.src} t="gitlab files" solo="true" />
 
 <Separator/>
 

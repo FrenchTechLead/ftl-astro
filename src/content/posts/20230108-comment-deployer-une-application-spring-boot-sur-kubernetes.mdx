@@ -68,15 +68,15 @@ Pour que votre serveur local soit accessible depuis internet, vous devez autoris
 #### 1 - Demander une adresse IP fixe
 La demande d'une adresse IP fixe est nécéssaire pour que votre serveur soit toujours accessible sur la même adresse, la demande se fait sur votre [espace abonné](https://subscribe.free.fr/login/)
 
-<Image src={img1} t='Demande d IP fixe pour Freebox' solo={true}/>
+<Image src={img1.src} t='Demande d IP fixe pour Freebox' solo={true}/>
 
 > Une fois que l'adresse IP attribuée, vous devez ouvrir les ports 80 et 443 de votre box et rediriger le traffic vers votre serveur.
 
 #### 2 - Ouverture des ports 80 et 443 et redirection vers le serveur 
 L'ouverture des ports se fait sur l'espace de configuration de votre box, l'adresse pour free est la suivante http://mafreebox.freebox.fr/
 Une fois connecté dirigez-vous sur **Paramètres de la Freebox** puis **Gestion des ports** puis ajoutez les deux règles suivantes en adaptant la première ligne à votre situation. (adresse de votre serveur)
-<Image src={img2} t='Redirection du port 80' solo={true}/>
-<Image src={img3} t='Redirection du port 443' solo={true}/>
+<Image src={img2.src} t='Redirection du port 80' solo={true}/>
+<Image src={img3.src} t='Redirection du port 443' solo={true}/>
 
 ### Attribution d’un nom de domaine pour votre adresse IP
 Pour associer un nom de domaine à votre adresse IP vous devez effectuer une configuration DNS, vous devez ajouter l'entrée **A** à vos DNS Records.
@@ -84,7 +84,7 @@ Si vous n'avez pas encore de nom de domaine et vous voulez bénéficier d'un ser
 
 Quel-que-soit votre service DNS vous devez ajouter l'entrée **A** à vos Records et lui affecter comme valeur votre adresse IP externe, pour connaitre votre adresse IP externe vous pouvez utiliser le service suivant : [ifconfig.me](https://ifconfig.me/)
 Exemple:
-<Image src={img4} t='DNS A Record sur dnsimple.com' solo={true}/>
+<Image src={img4.src} t='DNS A Record sur dnsimple.com' solo={true}/>
 
 > Une fois la [propagation DNS](https://dnschecker.org/) soit faite, vous deverez recevoir du trafic sur votre serveur par le biais de votre nom de domaine.
 
