@@ -31,7 +31,7 @@ const PERMALINK = await buildURL("/posts/tech/" + SLUG);
 const IMG_SRC = await buildURL("/assets/blog/tech/" + SLUG + "/0.png");
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang={data.lang} data-bs-theme="dark">
   <head>
     <MetaHead data={data} permalink={PERMALINK} imgSrc={IMG_SRC} />
@@ -51,8 +51,28 @@ const IMG_SRC = await buildURL("/assets/blog/tech/" + SLUG + "/0.png");
       issue-term={SLUG}
       theme="gruvbox-dark"
       crossorigin="anonymous"
-      async
-    ></script>
+      async></script>
+    <script>
+      const codes = document.getElementsByClassName("astro-code");
+
+      for (let code of codes) {
+        const copyCodeBtn = document.createElement("button");
+        copyCodeBtn.innerHTML = "Copy";
+        copyCodeBtn.style.float = "right";
+        copyCodeBtn.addEventListener("click", (e) => {
+          console.log(e);
+          const code = e.target.parentElement.firstChild;
+          const text = code.innerText;
+          navigator.clipboard.writeText(text).then(() => {
+            copyCodeBtn.innerHTML = "Copied!";
+            setTimeout(() => {
+              copyCodeBtn.innerHTML = "Copy";
+            }, 2000);
+          });
+        });
+        code.append(copyCodeBtn);
+      }
+    </script>
     <Footer />
   </body>
 </html>
