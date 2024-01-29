@@ -1,0 +1,57 @@
+---
+authorID: akram_mecheri
+title: Evitez cette mauvaise pratique en programmation orientée objet
+description: Evitez cette mauvaise pratique en programmation orientée objet
+keywords:
+ - java bonnes pratiques
+ - java output parameters
+ - POO bonnes
+tags:
+ - java bonnes pratiques
+ - java output parameters
+ - POO bonnes
+lang: fr
+draft: false
+---
+import Separator from '@comps/Separator.jsx'
+import img1 from '@assets/blog/tech/20240129-evitez-cette-mauvaise-pratique-en-programmation-orientee-objet/1.jpg'
+
+import Image from '@comps/Image.astro'
+
+## Introduction
+
+En programmation, les paramètres de méthode jouent un rôle crucial dans la transmission d'informations entre différentes parties du code. Il est essentiel de les considérer principalement comme des entrées, permettant ainsi de garantir un code plus lisible, maintenable et conforme aux principes de conception orientée objet. Cependant, il existe des cas spécifiques où la mutation de l'état interne de ces paramètres est justifiée, notamment pour des raisons d'optimisation de la mémoire. Dans cet article, nous explorerons les bonnes pratiques entourant l'utilisation des paramètres de méthode, en mettant en lumière les situations où la mutation de leur état peut être tolérée, tout en soulignant les implications sur la lisibilité et la maintenabilité du code.
+
+<Separator/>
+
+<Image w="550" h="550" src={img1.src} t="java output parameters" solo="true" />
+
+## Considérer les Paramètres comme des Entrées
+
+Les paramètres de méthode sont traditionnellement conçus pour recevoir des données en entrée, contribuant ainsi à la modularité du code. En suivant cette approche, chaque méthode est capable d'accomplir sa tâche spécifique en se basant uniquement sur les informations qu'elle reçoit. Cette pratique favorise une meilleure lisibilité, car elle rend les dépendances explicites et facilite la compréhension du flux de données dans le programme.
+
+Dans le cadre de la conception orientée objet, considérer les paramètres comme des entrées correspond à l'idée fondamentale de l'encapsulation. Chaque objet maintient son état interne et expose une interface claire à travers ses méthodes. En adoptant cette approche, le code devient plus prévisible, facilitant ainsi la maintenance et l'extension du logiciel.
+
+<Separator/>
+
+## Mutation des Paramètres : Cas Justifiés
+
+Cependant, il existe des situations exceptionnelles où la mutation de l'état interne des paramètres peut être justifiée. L'un des cas les plus courants est lié à l'optimisation de la mémoire. Dans des contextes où les performances sont cruciales et la consommation de mémoire doit être minimisée, la modification des paramètres peut être utilisée pour éviter la création d'objets temporaires.
+
+Bien que cette approche puisse offrir des gains de performance, elle présente des compromis importants en termes de lisibilité et de maintenabilité. Les effets secondaires de la mutation des paramètres peuvent rendre le code difficile à comprendre, car le flux des données devient moins évident. De plus, cela peut indiquer une conception orientée objet insuffisante, car les objets perdent une partie de leur encapsulation.
+
+<Separator/>
+
+## Bonnes Pratiques
+
+Pour maintenir un équilibre entre les impératifs de performance et la qualité du code, il est recommandé de suivre certaines bonnes pratiques. Tout d'abord, priorisez la conception orientée objet solide en considérant les paramètres comme des entrées. Cette approche favorise la clarté du code et simplifie la gestion des dépendances.
+
+Dans les cas où la mutation des paramètres est inévitable pour des raisons de performance, documentez clairement cette décision et veillez à minimiser les effets secondaires. Utilisez des noms de méthodes et de paramètres explicites pour rendre le code plus compréhensible, et assurez-vous que toute modification de l'état des paramètres est justifiée et documentée.
+
+<Separator/>
+
+## Conclusion
+
+En conclusion, bien que les paramètres de méthode devraient généralement être considérés comme des entrées pour garantir un code lisible et maintenable, il existe des situations où la mutation de leur état peut être justifiée. Cependant, cette approche doit être utilisée avec précaution et accompagnée de bonnes pratiques visant à minimiser les compromis sur la lisibilité et la maintenabilité du code. En suivant ces recommandations, les développeurs peuvent trouver le juste équilibre entre performances optimales et code de qualité.
+
+
