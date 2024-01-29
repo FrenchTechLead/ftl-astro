@@ -1,4 +1,5 @@
-import { Author, getAuthorByID } from "@utils/author.utils";
+import type { Author } from "@utils/author.utils";
+import { getAuthorByID } from "@utils/author.utils";
 
 export type AuthorCardProps = {
   id: string;
