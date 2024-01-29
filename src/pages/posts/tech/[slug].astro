@@ -36,6 +36,13 @@ const IMG_SRC = await buildURL("/assets/blog/tech/" + SLUG + "/0.png");
   <head>
     <MetaHead data={data} permalink={PERMALINK} imgSrc={IMG_SRC} />
     <Styles />
+    <style lang="css" is:inline>
+      .btn-xs {
+        --bs-btn-padding-y: 0.25rem;
+        --bs-btn-padding-x: 0.5rem;
+        --bs-btn-font-size: 0.75rem;
+      }
+    </style>
   </head>
   <body>
     <Header />
@@ -56,12 +63,14 @@ const IMG_SRC = await buildURL("/assets/blog/tech/" + SLUG + "/0.png");
       const codes = document.getElementsByClassName("astro-code");
 
       for (let code of codes) {
+        const copyBtnContainer = document.createElement("div");
+        copyBtnContainer.className = "d-flex justify-content-end";
         const copyCodeBtn = document.createElement("button");
+        copyCodeBtn.className = "btn btn-xs btn-outline-light";
         copyCodeBtn.innerHTML = "Copy";
-        copyCodeBtn.style.float = "right";
         copyCodeBtn.addEventListener("click", (e) => {
           console.log(e);
-          const code = e.target.parentElement.firstChild;
+          const code = e.target.parentElement.parentElement.children[1];
           const text = code.innerText;
           navigator.clipboard.writeText(text).then(() => {
             copyCodeBtn.innerHTML = "Copied!";
@@ -70,7 +79,8 @@ const IMG_SRC = await buildURL("/assets/blog/tech/" + SLUG + "/0.png");
             }, 2000);
           });
         });
-        code.append(copyCodeBtn);
+        copyBtnContainer.appendChild(copyCodeBtn);
+        code.insertBefore(copyBtnContainer, code.firstChild);
       }
     </script>
     <Footer />
