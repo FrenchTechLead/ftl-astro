@@ -32,6 +32,7 @@ Les paramètres de méthode sont traditionnellement conçus pour recevoir des do
 
 Dans le cadre de la conception orientée objet, considérer les paramètres comme des entrées correspond à l'idée fondamentale de l'encapsulation. Chaque objet maintient son état interne et expose une interface claire à travers ses méthodes. En adoptant cette approche, le code devient plus prévisible, facilitant ainsi la maintenance et l'extension du logiciel.
 
+
 <Separator/>
 
 ## Mutation des Paramètres : Cas Justifiés
@@ -40,6 +41,8 @@ Cependant, il existe des situations exceptionnelles où la mutation de l'état i
 
 Bien que cette approche puisse offrir des gains de performance, elle présente des compromis importants en termes de lisibilité et de maintenabilité. Les effets secondaires de la mutation des paramètres peuvent rendre le code difficile à comprendre, car le flux des données devient moins évident. De plus, cela peut indiquer une conception orientée objet insuffisante, car les objets perdent une partie de leur encapsulation.
 
+> Arguments are most naturally interpreted as inputs to a function.
+Anything that forces you to check the function signature is equivalent to a double-take. It’s a cognitive break and should be avoided. In the days before object oriented programming it was sometimes necessary to have output arguments. However, much of the need for output arguments disappears in OO languages -- From "Clean Code" by Uncle Bob --
 <Separator/>
 
 ## Bonnes Pratiques
