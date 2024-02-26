@@ -71,12 +71,12 @@ const disableAds = false;
     )
   }
   {
-    !DEV && !disableAds && (
+    !DEV(
       <script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6800477127231548"
         crossorigin="anonymous"
-      />
+      />,
     )
   }
 </>
