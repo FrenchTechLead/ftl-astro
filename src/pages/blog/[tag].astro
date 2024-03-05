@@ -4,7 +4,7 @@ import Header from "@comps/Header.astro";
 import Footer from "@comps/Footer.astro";
 import Styles from "@comps/styles/Styles.astro";
 import BlogPostPreview from "@comps/BlogPostPreview.astro";
-import { mergeTags } from "@utils/utils";
+import { isDevMode, mergeTags } from "@utils/utils";
 import { getCollection } from "astro:content";
 import type { PostType } from "src/content/config";
 import { ViewTransitions } from "astro:transitions";
@@ -30,7 +30,7 @@ const uniqueTags = mergeTags(techPosts.map((a) => a.data.tags));
 const currTag = Astro.params.tag;
 const INDEX_TAG: string = "_index";
 
-const isDevMode = await import.meta.env.DEV;
+const isDevModeOn = await isDevMode();
 
 const PERMALINK = "https://frenchtechlead.com/blog/tag/" + currTag;
 const IMG_SRC =
@@ -56,7 +56,7 @@ const fm: PostType = {
 };
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-bs-theme="dark">
   <head>
     <MetaHead data={fm} permalink={PERMALINK} imgSrc={IMG_SRC} />
@@ -102,11 +102,11 @@ const fm: PostType = {
         <div class="list-group">
           {
             techPosts
-              .filter((p) => isDevMode || !p.data.draft)
+              .filter((p) => isDevModeOn || !p.data.draft)
               .filter((p) =>
                 currTag === INDEX_TAG
                   ? p
-                  : p.data.tags.map((a) => a.toLowerCase()).includes(currTag)
+                  : p.data.tags.map((a) => a.toLowerCase()).includes(currTag),
               )
               .reverse()
               .map((p) => <BlogPostPreview frontmatter={p} url={p.slug} />)
