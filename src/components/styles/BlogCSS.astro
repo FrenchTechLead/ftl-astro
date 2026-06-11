@@ -108,6 +108,85 @@
     text-shadow: none;
   }
 
+  .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1.05rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow:
+      0 16px 44px rgba(15, 23, 42, 0.12),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(26px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .brand-badge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(255, 255, 255, 0.24),
+        transparent 24%
+      ),
+      radial-gradient(
+        circle at 80% 60%,
+        rgba(172, 224, 255, 0.16),
+        transparent 18%
+      );
+    pointer-events: none;
+  }
+
+  .brand-word {
+    font-family:
+      Inter,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(30, 40, 55, 0.96);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.18);
+    position: relative;
+    z-index: 1;
+  }
+
+  .brand-word--accent {
+    color: #3ddcff;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    border: none;
+    box-shadow: 0 0 16px rgba(61, 220, 255, 0.25);
+  }
+
+  .brand-logo:hover .brand-badge {
+    transform: translateY(-1px);
+    box-shadow:
+      0 18px 48px rgba(15, 23, 42, 0.16),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.32);
+  }
+
+  .brand-logo:focus-visible .brand-badge {
+    outline: 2px solid var(--color-yellow);
+    outline-offset: 3px;
+  }
+
   table,
   th,
   td {
