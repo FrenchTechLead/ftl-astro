@@ -317,10 +317,10 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@esbuild/linux-x64@0.19.8":
+"@esbuild/darwin-arm64@0.19.8":
   version "0.19.8"
-  resolved "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.19.8.tgz"
-  integrity sha512-lytMAVOM3b1gPypL2TRmZ5rnXl7+6IIk8uB3eLsV1JwcizuolblXRrc5ShPrO9ls/b+RTp+E6gbsuLWHWi2zGg==
+  resolved "https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.19.8.tgz"
+  integrity sha512-RQw9DemMbIq35Bprbboyf8SmOr4UXsRVxJ97LgB55VKKeJOOdvsIPy0nFyF2l8U+h4PtBx/1kRf0BelOYCiQcw==
 
 "@jridgewell/gen-mapping@^0.1.0":
   version "0.1.1"
@@ -477,15 +477,10 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@rollup/rollup-linux-x64-gnu@4.7.0":
+"@rollup/rollup-darwin-arm64@4.7.0":
   version "4.7.0"
-  resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.7.0.tgz"
-  integrity sha512-cCkoGlGWfBobdDtiiypxf79q6k3/iRVGu1HVLbD92gWV5WZbmuWJCgRM4x2N6i7ljGn1cGytPn9ZAfS8UwF6vg==
-
-"@rollup/rollup-linux-x64-musl@4.7.0":
-  version "4.7.0"
-  resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.7.0.tgz"
-  integrity sha512-R2oBf2p/Arc1m+tWmiWbpHBjEcJnHVnv6bsypu4tcKdrYTpDfl1UT9qTyfkIL1iiii5D4WHxUHCg5X0pzqmxFg==
+  resolved "https://registry.npmjs.org/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.7.0.tgz"
+  integrity sha512-4VXG1bgvClJdbEYYjQ85RkOtwN8sqI3uCxH0HC5w9fKdqzRzgG39K7GAehATGS8jghA7zNoS5CjSKkDEqWmNZg==
 
 "@types/acorn@^4.0.0":
   version "4.0.6"
@@ -577,17 +572,10 @@
   dependencies:
     "@types/unist" "^2"
 
-"@types/node@*", "@types/node@^17.0.5":
+"@types/node@*", "@types/node@^17.0.5", "@types/node@^18.0.0 || >=20.0.0":
   version "17.0.45"
   resolved "https://registry.npmjs.org/@types/node/-/node-17.0.45.tgz"
   integrity sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==
-
-"@types/node@^18.0.0 || >=20.0.0":
-  version "20.10.4"
-  resolved "https://registry.npmjs.org/@types/node/-/node-20.10.4.tgz"
-  integrity sha512-D08YG6rr8X90YB56tSIuBaddy/UXAA9RKJoFvrsnogAum/0pmjkgi4+2nx96A330FmioegBWmEYQ+syqCFaveg==
-  dependencies:
-    undici-types "~5.26.4"
 
 "@types/sax@^1.2.1":
   version "1.2.4"
@@ -1364,6 +1352,11 @@ fs-constants@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fs-constants/-/fs-constants-1.0.0.tgz"
   integrity sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==
+
+fsevents@~2.3.2, fsevents@~2.3.3:
+  version "2.3.3"
+  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
+  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
 function-bind@^1.1.2:
   version "1.1.2"
@@ -3429,11 +3422,6 @@ typescript@^5.0.0, typescript@^5.1.6:
   version "5.1.6"
   resolved "https://registry.npmjs.org/typescript/-/typescript-5.1.6.tgz"
   integrity sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==
-
-undici-types@~5.26.4:
-  version "5.26.5"
-  resolved "https://registry.npmjs.org/undici-types/-/undici-types-5.26.5.tgz"
-  integrity sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==
 
 unherit@^3.0.0:
   version "3.0.1"
