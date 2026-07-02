@@ -1,0 +1,1347 @@
+---
+authorID: akram_mecheri
+title: "Dictionnaire du codage IA : le vocabulaire expliqué en clair"
+description: "Traduction française complète du AI Coding Dictionary de Matt Pocock (aihero.dev) : agents, tokens, harnais, fenêtre de contexte, hallucinations, passations... tout le vocabulaire pour comprendre comment fonctionnent vraiment les outils de codage IA."
+keywords:
+  - "dictionnaire IA"
+  - "vocabulaire codage IA"
+  - "agents IA"
+  - "context window"
+  - "hallucination IA"
+  - "Claude Code"
+  - "vibe coding"
+  - "FrenchTechLead"
+tags:
+  - IA
+  - Glossaire
+  - CodageIA
+lang: fr
+draft: false
+---
+
+import Separator from '@comps/Separator.jsx'
+
+> **Note de traduction :** cet article est une traduction française du [**AI Coding Dictionary**](https://www.aihero.dev/ai-coding-dictionary), créé par **Matt Pocock** (AI Hero). Tout le mérite du contenu original — les définitions, les analogies, les exemples — lui revient. Si vous lisez l'anglais, allez faire un tour sur la version originale et sur son [**AI Coding for Real Engineers**](https://www.aihero.dev/cohorts/ai-coding-for-real-engineers-m0k0w). Cette traduction vise simplement à rendre ce vocabulaire accessible aux développeurs francophones.
+
+## Introduction
+
+**Le codage avec l'IA peut donner l'impression d'être réservé aux experts.** Du jargon jamais expliqué. Des échecs mystérieux. Des factures qui ne semblent pas correspondre au travail fourni.
+
+Ce n'est pas vraiment le cas. Une bonne partie de la confusion est fabriquée : **il existe toute une économie financée par le capital-risque qui a intérêt à ce que ça reste difficile à comprendre**.
+
+Les termes de base s'apprennent en un après-midi. Une fois qu'on les a en tête, tout cela cesse de ressembler à une loterie.
+
+Pourquoi le contexte se dégrade-t-il ? Pourquoi la facture est-elle si élevée ? Pourquoi le même prompt se comporte-t-il différemment d'un jour à l'autre ?
+
+Chaque question a une réponse propre, une fois qu'on connaît les mots pour la poser.
+
+C'est à ça que sert ce dictionnaire. **Le vocabulaire du codage IA, traduit en clair.**
+
+<Separator/>
+
+## Sommaire
+
+**Section 1 — Le modèle** : IA, Modèle, Paramètres, Entraînement, Inférence, Effort, Token, Prédiction du prochain token, Non-déterminisme, Fournisseur de modèle, Harnais, Requête au fournisseur de modèle, Tokens d'entrée, Tokens de sortie, Cache de préfixe, Tokens de cache.
+
+**Section 2 — Sessions, fenêtres de contexte et tours** : Sans état, Contexte, Fenêtre de contexte, Avec état, Agent, Prompt système, Session, Tour.
+
+**Section 3 — Outils et environnement** : Environnement, Système de fichiers, Outil, Appel d'outil, Résultat d'outil, MCP, Demande de permission, Mode de permission, Mode agent, Bac à sable.
+
+**Section 4 — Modes de défaillance** : Complaisance, Hallucination, Connaissance paramétrique, Date de coupure des connaissances, Connaissance contextuelle, Relation d'attention, Budget d'attention, Dégradation de l'attention, Smart zone.
+
+**Section 5 — Passations** : Réinitialisation, Passation, Source primaire, Source secondaire, Artefact de passation, Spec, Ticket, Compaction, Compaction automatique.
+
+**Section 6 — Mémoire et pilotage** : Système de mémoire, AGENTS.md, Divulgation progressive, Pointeur de contexte, Skill, Sous-agent.
+
+**Section 7 — Patterns de travail** : Humain dans la boucle, AFK, Vérification automatisée, Revue automatisée, Revue humaine, Vibe coding, Concept de design, Interrogatoire, Prototypage, DX, AX.
+
+<Separator/>
+
+## Section 1 — Le modèle
+
+### IA
+
+Une étiquette mouvante, pas une technologie. « IA » ne désigne pas une chose fixe comme le fait **Modèle** ou **Token** — le mot pointe vers tout ce que les ordinateurs savent faire de nouveau et d'impressionnant. Aujourd'hui, il désigne les grands modèles de langage. Il a désigné des choses très différentes par le passé :
+
+| Époque | Ce que « IA » signifiait |
+| --- | --- |
+| Années 1950 | Raisonnement symbolique — démonstrateurs de théorèmes, programmes de jeu de dames. |
+| Années 1960-70 | Programmes symboliques à base de règles — ELIZA, SHRDLU. |
+| Années 1980 | Systèmes experts — des milliers de règles si-alors écrites à la main encodant une expertise humaine. |
+| Années 1990 | Recherche dans un arbre de jeu — Deep Blue battant Kasparov (1997). Les chercheurs évitaient totalement le mot « IA ». |
+| Années 2000 | Apprentissage automatique statistique — filtres anti-spam, recommandeurs. Toujours vendu comme du « machine learning », pas de l'« IA ». |
+| Années 2010 | Deep learning — reconnaissance d'images (AlexNet, 2012), AlphaGo (2016). |
+| Années 2020 | Grands modèles de langage — ChatGPT (2022) a fait que « IA » signifie désormais « chatbot ». |
+
+Ce déplacement suit un mécanisme connu, parfois appelé l'effet IA : dès qu'une technique fonctionne de façon fiable, on la renomme — ce n'est « que » de la recherche, « que » des statistiques — et « IA » glisse vers le prochain problème non résolu. L'observation est ancienne. Bertram Raphael la formulait ainsi en 1971 : « L'IA est un nom collectif pour les problèmes que nous ne savons pas encore résoudre correctement par ordinateur. » La version de Larry Tesler, vers 1979 : « L'intelligence, c'est ce que les machines n'ont pas encore fait. »
+
+C'est pour ça que les discussions sur l'IA tournent si souvent en rond. Une affirmation comme « l'IA ne sait pas raisonner » ou « l'IA est surestimée » porte un horodatage caché — elle peut concerner les systèmes experts, les classifieurs d'images des années 2010, ou le LLM du mois dernier, et chaque référence soutient une conclusion différente. Quand une discussion sur l'IA s'enlise, la solution consiste généralement à remplacer le mot par le terme précis réellement visé : le modèle, le harnais, l'agent, le contexte qui lui a été fourni.
+
+_À éviter :_ « IA » dans toute affirmation technique — nommez plutôt la partie concernée. « Codage IA » comme étiquette de la pratique, ça va ; « l'IA hallucine » n'est pas acceptable.
+
+_En pratique :_
+
+« Le CTO veut savoir si l'IA pourrait gérer la file de tickets. »
+
+« Il faut traduire ça avant de le cadrer : elle veut dire un LLM dans un harnais avec accès au système de tickets. « IA » toute seule, ce n'est pas une spec. »
+
+### Modèle
+
+Les **paramètres**. Sans état — il ne fait que de la prédiction du prochain token, rien d'autre. « Claude Opus 4.x » et « GPT-5.x » sont des modèles. Seul, un modèle ne peut rien faire d'agentique ; il doit être harnaché.
+
+Les modèles ne peuvent pas lire de fichiers, exécuter des commandes, naviguer sur le web, ni se souvenir d'hier — ils prennent des tokens en entrée et prédisent des tokens en sortie, une fois par requête au fournisseur de modèle. Tout ce qui ressemble à un agent en train de travailler — choisir des outils, lire des résultats, boucler jusqu'à ce que la tâche soit terminée — c'est le harnais qui orchestre un grand nombre de ces prédictions à la suite.
+
+Les fournisseurs de modèle livrent leurs modèles par paliers : un gros modèle, le plus intelligent mais lent et cher, et des modèles plus petits, plus rapides et moins chers mais moins capables. Choisir un palier est une vraie décision — le poids lourd pour la planification et le débogage difficile, le léger pour les changements mécaniques — et les harnais permettent de changer en cours de session.
+
+Être rigoureux sur ce mot affine aussi le diagnostic. « Le modèle est mauvais pour ça » est une affirmation précise — le même modèle dans un harnais différent, ou avec un contexte différent, se comporte souvent de façon complètement différente. Avant d'accuser le modèle, vérifiez ce qu'on lui a donné : la plupart des résultats décevants viennent du contexte ou du harnais, pas des paramètres.
+
+_En pratique :_
+
+« On devrait passer de Sonnet à Opus pour l'étape de planification ? »
+
+« Essaie — mais c'est le harnais qui fait l'essentiel du travail sur cette tâche. Changer de modèle ne servira à rien si le prompt système et les outils sont mal réglés. »
+
+### Paramètres
+
+Les nombres à l'intérieur d'un **modèle** — souvent des milliards — ajustés pendant l'**entraînement**. Tout ce que le modèle « sait » vit dans ces nombres. L'entraînement les fixe ; l'**inférence** les utilise sans les modifier. Aussi appelés _poids_.
+
+Mécaniquement, les paramètres sont ce qui transforme l'entrée en sortie. La prédiction du prochain token est un calcul géant : les tokens de la fenêtre de contexte entrent, sont multipliés à travers les paramètres, et une prédiction pour le token suivant en sort. Il n'y a pas de base de données de faits à l'intérieur du modèle, pas de table de correspondance — juste ces nombres, agencés pour que le calcul produise généralement un résultat utile. Les faits que le modèle peut réciter depuis l'entraînement, comme une API de bibliothèque standard, constituent de la **connaissance paramétrique** : stockée dans les paramètres, pas récupérée quelque part.
+
+Le détail à retenir, c'est que les paramètres sont figés après l'entraînement. Rien de ce que vous faites dans une session ne les modifie — aucune correction que vous apportez, aucun code que vous montrez, aucune erreur dont il « apprendrait ». Chaque session tourne sur les mêmes nombres. C'est pour ça que le modèle est sans état, que ses connaissances intégrées s'arrêtent à la date de coupure des connaissances, et que tout ce qui est spécifique à un projet doit arriver via le contexte. La seule façon de changer les paramètres, c'est plus d'entraînement — ce qui produit, en fait, un modèle différent.
+
+_En pratique :_
+
+« On peut le fine-tuner sur notre codebase ? »
+
+« Ça changerait les paramètres — un modèle différent après coup. Pour un seul projet, il est presque toujours moins cher de charger la codebase en contexte que de réentraîner. »
+
+### Entraînement
+
+Le processus qui fixe les **paramètres** d'un **modèle**, en l'exposant à d'énormes quantités de texte et en ajustant les paramètres pour améliorer la **prédiction du prochain token**. Un processus coûteux, réalisé une seule fois par le **fournisseur de modèle**. Il englobe à la fois le pré-entraînement (la passe massive initiale) et le post-entraînement (les raffinements ultérieurs comme le suivi d'instructions et la sécurité) ; la distinction n'a pas d'importance au niveau de ce glossaire.
+
+Le mécanisme, c'est la répétition à grande échelle : montrer au modèle un morceau de texte, lui faire prédire le token suivant, ajuster légèrement les paramètres vers le token réellement suivant, et répéter sur des billions de tokens. Rien n'est stocké comme des faits ou des règles — tout ce que le modèle « sait » est un effet secondaire du fait de devenir meilleur en prédiction, comprimé dans les paramètres sous forme de connaissance paramétrique.
+
+Deux conséquences comptent au quotidien. L'entraînement s'arrête à un moment donné, donc le modèle a une date de coupure des connaissances — il n'a pas vu la version de la bibliothèque vers laquelle vous êtes passé le mois dernier. Et l'entraînement n'est pas quelque chose que vous pouvez faire vous-même : quand le modèle ne connaît pas votre codebase, vos conventions ou vos API internes, la solution n'est jamais « apprendre au modèle » — c'est de mettre cette matière dans le contexte, le seul levier que vous contrôlez réellement.
+
+_En pratique :_
+
+« On peut lui faire connaître notre API interne ? »
+
+« Pas via l'entraînement — c'est un processus de plusieurs mois chez le fournisseur de modèle. Charge plutôt la doc de l'API dans le contexte, c'est le levier que tu as vraiment. »
+
+### Inférence
+
+Faire tourner un **modèle** entraîné pour générer une sortie — ce qui se passe à chaque **requête au fournisseur de modèle**. Les **paramètres** restent fixes ; le modèle ne fait que de la **prédiction du prochain token** sur le **contexte** qu'on lui donne. Peu coûteux comparé à l'**entraînement**, mais facturé par token et c'est le coût dominant de l'utilisation d'un modèle.
+
+La vie d'un modèle se découpe en deux phases :
+
+| Phase | Quand ça arrive | Ce que ça fait | Paramètres |
+| --- | --- | --- | --- |
+| Entraînement | Une fois, avant la sortie | Produit les paramètres à partir d'un corpus d'entraînement | En cours d'écriture |
+| Inférence | À chaque utilisation du modèle | Fait tourner les paramètres figés sur votre contexte pour générer des tokens | Lecture seule |
+
+Rien de ce que vous faites au moment de l'inférence n'est réécrit dans les paramètres — c'est pour ça qu'une correction faite aujourd'hui ne tient pas demain. Le modèle qui refait la même erreur à la session suivante, après que vous lui avez soigneusement expliqué le correctif, ne vous a pas ignoré ; il est incapable d'apprendre de cet échange. Le modèle est sans état — la continuité doit venir de l'extérieur — de la fenêtre de contexte ou d'un système de mémoire.
+
+Ce mécanisme explique aussi comment vous êtes facturé. Chaque requête fait tourner le modèle sur l'ensemble du contexte, donc le coût évolue avec les tokens d'entrée et les tokens de sortie, et un agent qui fait des dizaines d'appels d'outils paie l'inférence à chaque aller-retour. C'est pour ça que la taille du contexte est autant une question de coût que de qualité.
+
+_En pratique :_
+
+« Pourquoi la facture augmente-t-elle avec l'usage au lieu d'être une licence à prix fixe ? »
+
+« Tu paies l'inférence — chaque requête au fournisseur de modèle fait tourner le modèle sur le matériel du fournisseur. L'entraînement a déjà eu lieu, mais l'inférence coûte à chaque requête, et un seul tour peut se transformer en plusieurs requêtes quand des outils sont appelés. »
+
+### Effort
+
+L'effort est un curseur qui règle la quantité de raisonnement qu'un **modèle** effectue avant de répondre. Fixé par **requête au fournisseur de modèle**, il contrôle la longueur de la réflexion que le modèle traverse avant de commencer à écrire la réponse que vous voyez. Cette réflexion est générée à l'**inférence** comme tout le reste ; le **harnais** la cache souvent, mais c'est un vrai travail que le modèle effectue.
+
+Un effort plus élevé coûte plus cher et tourne plus lentement. Le raisonnement est émis sous forme de **tokens**, facturé comme **tokens de sortie** même quand vous ne les voyez jamais, et produit un token à la fois — donc augmenter l'effort allonge l'attente avant que la réponse arrive et augmente la facture. Le compromis, c'est plus de délibération contre de la vitesse et du coût.
+
+La plupart des harnais exposent l'effort comme une petite échelle :
+
+| Niveau | À quoi ça sert |
+| --- | --- |
+| Bas | Modifications mécaniques, recherches, changements bien spécifiés avec un seul chemin clair. |
+| Moyen | Le codage du quotidien — le réglage par défaut habituel. |
+| Haut | Bugs délicats, décisions de conception, plans à plusieurs étapes. |
+| Max | Les problèmes les plus difficiles, où une mauvaise réponse coûte cher à défaire. |
+
+Le symptôme d'une mauvaise configuration joue dans les deux sens. Réglez l'effort trop bas sur un problème difficile et vous obtenez une réponse assurée mais superficielle, qui a sauté le raisonnement dont le problème avait besoin — ça a l'air correct et c'est faux d'une façon qui vous coûtera plus tard. Réglez-le sur max pour un renommage d'une ligne et vous subissez une longue réflexion qui ne produit rien que le réglage le plus bas n'aurait pas produit.
+
+Adaptez l'effort à la tâche, pas à la **session**. Montez-le pour la partie qui est vraiment difficile à raisonner, et redescendez-le pour le travail mécanique autour.
+
+_En pratique :_
+
+« Il rate ce correctif de concurrence à chaque fois — je le lui ai réexpliqué trois fois. »
+
+« Augmente l'effort. C'est un bug qui demande du raisonnement, et au réglage par défaut il ne réfléchit pas assez longtemps avant de s'engager sur une approche. »
+
+### Token
+
+L'unité atomique qu'un **modèle** lit et écrit. Grossièrement de la taille d'un mot, mais pas exactement — les mots courants font un token, les mots rares ou longs se découpent en plusieurs. La taille de la **fenêtre de contexte**, le coût et la latence se comptent tous en tokens.
+
+Le texte devient des tokens via un tokeniseur : un vocabulaire fixe de dizaines de milliers de fragments, appris avant l'**entraînement**, qui découpe n'importe quelle entrée en une séquence d'entrées du vocabulaire. Le modèle ne voit jamais de caractères ni de mots — chaque morceau de texte est converti en tokens à l'entrée, et la **prédiction du prochain token** produit la sortie un token à la fois.
+
+En règle générale, un token correspond à environ trois quarts d'un mot anglais, donc mille tokens font à peu près 750 mots. Le code est moins prévisible : les mots-clés et idiomes courants se tokenisent de façon compacte, tandis que les identifiants générés, les hashs, les blobs en base64 et le code minifié se découpent en de nombreux tokens par « mot ». Le principe : le texte qui apparaissait souvent dans les données du tokeniseur obtient des encodages courts et efficaces ; celui qui n'apparaissait pas se retrouve découpé en petits morceaux. Un hash comme `a3f9c2e1` n'est jamais apparu nulle part, donc il se découpe en de nombreux tokens, alors que `function` en fait un seul. C'est pour ça qu'un petit fichier plein de chaînes inhabituelles peut occuper une part surprenante de la fenêtre de contexte.
+
+Les tokens sont l'unité dans laquelle tout le reste se mesure. Le coût est par token — les fournisseurs facturent séparément les tokens d'entrée et les tokens de sortie. La vitesse se mesure en tokens par seconde, puisque la sortie est générée un token à la fois. Et la fenêtre de contexte est un nombre fixe de tokens, donc le nombre de tokens de vos fichiers détermine ce qui rentre.
+
+_À éviter :_ « mot » — les frontières de tokens ne correspondent pas aux frontières de mots, et tokens par seconde / tokens par dollar sont les unités qui comptent vraiment.
+
+_En pratique :_
+
+« Ce prompt va faire quelle taille ? »
+
+« Passe-le dans le tokeniseur — le schéma est compact mais les clés JSON sont bizarres, elles vont se découper en plus de tokens que tu ne le penses. »
+
+### Prédiction du prochain token
+
+Ce que le **modèle** fait réellement. Étant donné un **contexte**, il échantillonne un **token** suivant, l'ajoute, et recommence. Chaque sortie — une phrase, un **appel d'outil**, un fichier de mille lignes — est construite un token à la fois. Le modèle n'a pas d'autre mode de fonctionnement.
+
+Chaque étape fonctionne de la même façon : les tokens de la **fenêtre de contexte** passent à travers les **paramètres**, qui produisent une probabilité pour chaque token du vocabulaire — celui-ci est très probable ensuite, celui-là moins. Un token est échantillonné parmi ces probabilités, ajouté, et la boucle recommence avec le contexte légèrement plus long. Cette étape d'échantillonnage explique pourquoi le même prompt produit des sorties différentes selon les exécutions : le **non-déterminisme** est intégré au mécanisme, ce n'est pas un bug ajouté par-dessus.
+
+Garder ce mécanisme en tête explique des comportements qui sembleraient étranges autrement. Le modèle ne vérifie jamais si un token est _vrai_ avant de l'émettre — seulement s'il est _probable_ — ce qui est la racine de l'**hallucination**. Il s'engage sur chaque token au fur et à mesure, donc une phrase d'ouverture qui sonne bien peut orienter le reste de la réponse dans la mauvaise direction. Et comme les **tokens de sortie** sont produits strictement un par un, la vitesse de génération fixe une limite basse à la rapidité de travail de n'importe quel **agent**.
+
+_En pratique :_
+
+« Comment l'agent “décide”-t-il d'appeler un outil ? »
+
+« Il ne décide pas — c'est de la prédiction du prochain token de bout en bout. L'appel d'outil n'est qu'une chaîne structurée que le harnais extrait du flux de sortie. »
+
+### Non-déterminisme
+
+La même entrée peut produire une sortie différente. Faites tourner un **modèle** deux fois avec un **contexte** identique et vous pouvez obtenir deux réponses différentes — parfois un mot, parfois une approche complètement différente. Rien dans votre code n'a besoin de changer pour que ça arrive.
+
+C'est une propriété de la façon dont les modèles génèrent du texte, et dont les **fournisseurs de modèle** servent les **requêtes**. Pendant l'**inférence**, le modèle produit une distribution de probabilité sur les **tokens** suivants possibles et un est échantillonné dedans — généralement avec un peu d'aléatoire volontaire, car toujours choisir le token le plus probable produit un texte répétitif et de moindre qualité. Un token échantillonné différemment tôt dans une réponse change tous les tokens qui suivent, ce qui explique comment un seul mot différent devient une approche complètement différente. Le service côté fournisseur ajoute encore de la variation par-dessus : les requêtes sont regroupées sur du matériel partagé, et de minuscules différences de calcul en virgule flottante entre les lots peuvent faire pencher un choix serré entre deux tokens. Il n'y a pas de réglage à activer pour faire disparaître tout ça.
+
+Attendez-vous à une dispersion de résultats d'un **agent** sur la même tâche. La plupart des réponses tombent dans une courbe en cloche raisonnable de qualité — c'est ce qui rend le non-déterminisme tolérable — mais les extrêmes sont réels : certains jours le modèle semblera affûté ; d'autres jours il semblera avoir perdu le fil. Même tâche, jets de dés différents. Ça a deux conséquences pratiques. Réessayer est une stratégie légitime : une tentative ratée est un tirage dans la distribution, et une tentative fraîche sur la même tâche peut tout simplement mieux tomber. Et la vérification compte plus qu'avec des outils déterministes — vous ne pouvez pas tester le comportement d'un agent une fois et compter sur sa répétition, donc les **vérifications automatisées** doivent rattraper les mauvais tirages.
+
+Attention à ne pas trop dramatiser tout ça. Les humains sont des machines à repérer des motifs, et une série de mauvaises exécutions peut donner l'impression d'être la preuve que « le modèle s'est dégradé cette semaine ». C'est généralement juste la distribution.
+
+_En pratique :_
+
+« Claude a été nul aujourd'hui. Ils ont sorti une version moins bonne ? »
+
+« Probablement pas — la sortie du modèle est non-déterministe. Tu vas avoir de bons et de mauvais jours sur la même tâche. Réessaie demain avant d'aller chercher une cause. »
+
+### Fournisseur de modèle
+
+Ce qui sert un **modèle** pour l'**inférence**. Généralement un service distant (Anthropic, OpenAI, Google), mais peut aussi être local — Ollama, LM Studio, llama.cpp tournant sur votre propre machine. Le **harnais** ne fait pas tourner le modèle lui-même ; il demande à un fournisseur de le faire.
+
+Le fournisseur possède la machinerie : les **paramètres** vivent sur son matériel, et chaque **requête au fournisseur de modèle** consiste pour le harnais à envoyer des **tokens** sur le réseau et à recevoir des prédictions en retour. Ça fait du fournisseur la source de toute une catégorie de problèmes mal attribués au modèle ou au harnais — les limites de débit, la capacité dégradée et les pannes vivent tous ici. Quand l'**agent** se bloque en pleine **session** ou renvoie une erreur à chaque **tour**, la page de statut du fournisseur mérite d'être vérifiée avant toute autre chose.
+
+Le fournisseur fixe aussi les conditions commerciales : tarification par token pour l'**entrée** et la **sortie**, remises de **cache de préfixe**, et quels modèles sont disponibles. Notez que le fournisseur et le créateur du modèle peuvent être des entreprises différentes — Bedrock, Vertex et OpenRouter servent les modèles d'autres acteurs.
+
+Les fournisseurs locaux échangent de la capacité contre du contrôle : les modèles qui tiennent sur votre propre matériel sont bien plus petits que les modèles de pointe, mais rien ne quitte la machine et il n'y a pas de facture par token.
+
+_En pratique :_
+
+« On peut faire tourner ça hors ligne pour le client isolé du réseau ? »
+
+« Passe le fournisseur de modèle à un fournisseur local — Ollama ou llama.cpp sur leur machine. Le harnais s'en fiche, il tape juste sur un endpoint différent. »
+
+### Harnais
+
+Tout ce qui entoure le **modèle** et le transforme en **agent** : **outils**, **prompt système**, gestion de la **fenêtre de contexte**, permissions, hooks. **Claude.ai** et **Claude Code** tournent sur le même modèle mais se comportent différemment parce que leurs harnais diffèrent.
+
+Le modèle en lui-même ne fait qu'une chose : prendre du texte en entrée, produire du texte en sortie. Il ne peut pas lire un fichier, exécuter une commande, ni se souvenir du dernier **tour**. Le harnais fournit tout ça. Il assemble le **contexte** pour chaque **requête au fournisseur de modèle**, exécute les **appels d'outils** demandés par le modèle, réinjecte les **résultats d'outils**, stocke l'historique de la **session**, vous demande la permission avant les actions risquées, et décide quand **compacter**. La boucle de l'agent — le modèle propose, le harnais exécute, on recommence — est pilotée par le harnais.
+
+Ça compte pour le diagnostic. Quand le comportement diffère entre deux produits, ou entre hier et aujourd'hui, le modèle n'est souvent pas la variable — c'est le harnais. Un prompt système différent, un ensemble d'outils différent, un réglage de permission par défaut modifié, ou une nouvelle stratégie de gestion du contexte changent tous le comportement sans aucun changement du modèle. Ça veut aussi dire que le harnais est là où vit la majeure partie de votre configuration : les fichiers **AGENTS.md**, les réglages de permission et les hooks sont tous des instructions données au harnais, pas au modèle.
+
+Exemples : Claude Code, Cursor, Codex CLI — et Claude.ai, qui est un harnais de discussion plutôt qu'un harnais de codage.
+
+_En pratique :_
+
+« Même modèle, pourquoi Claude Code édite des fichiers et Claude.ai se contente de répondre à des questions ? »
+
+« Des harnais différents — Claude Code a des outils de système de fichiers, un prompt système différent, et une couche de permissions. Le modèle n'est pas la variable ici. »
+
+### Requête au fournisseur de modèle
+
+Un aller-retour entre le **harnais** et le **fournisseur de modèle**. Le harnais envoie le **contexte** actuel ; le fournisseur renvoie une réponse (un **appel d'outil** ou une réponse finale). Un seul message utilisateur peut engendrer de nombreuses requêtes au fournisseur de modèle si l'**agent** appelle des **outils** — chaque **résultat d'outil** déclenche une nouvelle requête.
+
+Chaque requête transporte tout : le **prompt système**, toute la conversation jusqu'ici, chaque résultat d'outil. Le **modèle** est **sans état**, donc le fournisseur ne garde rien entre les requêtes — la requête quarante renvoie ce que la requête trente-neuf a envoyé, plus un résultat d'outil supplémentaire. Le **cache de préfixe** existe pour rendre cette répétition abordable.
+
+La requête est aussi l'unité de facturation. Les **tokens d'entrée**, les **tokens de sortie** et les remises de cache se comptent tous par requête, ce qui explique pourquoi une question d'apparence anodine peut coûter une somme surprenante : le coût n'est pas proportionnel à votre message, il est proportionnel au nombre de requêtes multiplié par la taille du contexte que chacune transporte.
+
+Il vaut la peine de distinguer la requête du **tour**. Un tour est un échange avec vous, et un seul tour — « corrige le test qui échoue » — se déroule comme une chaîne de requêtes :
+
+| Requête | Le modèle renvoie | Le harnais fait ensuite |
+| --- | --- | --- |
+| 1 | Appel d'outil : lancer les tests | Les lance, ajoute la sortie d'échec |
+| 2 | Appel d'outil : lire le fichier de test | Ajoute le contenu du fichier |
+| 3 | Appel d'outil : lire le fichier source | Ajoute le contenu du fichier |
+| 4 | Appel d'outil : éditer le fichier source | Applique la modification, ajoute le résultat |
+| 5 | Appel d'outil : relancer les tests | Les relance, ajoute la sortie de réussite |
+| 6 | Réponse finale : « corrigé, les tests passent » | Vous la montre |
+
+Six requêtes pour un seul tour — chacune renvoyant tout le contexte. Quand vous vous demandez où sont passés les **tokens**, comptez les requêtes, pas les tours.
+
+_En pratique :_
+
+« Une seule question a brûlé quarante mille tokens ? »
+
+« Regarde les appels d'outils — douze grep, huit read, quatre edits. Chaque résultat d'outil engendre une nouvelle requête au fournisseur de modèle, et tout le préfixe de la session est renvoyé à chaque fois. »
+
+### Tokens d'entrée
+
+Les **tokens** que le **harnais** envoie à chaque **requête au fournisseur de modèle** — le **prompt système**, l'historique de la conversation, les **résultats d'outils**, tout ce que le **modèle** lit avant d'écrire. Facturés à un taux inférieur aux **tokens de sortie**, car moins coûteux à traiter.
+
+Dans le codage IA, les tokens d'entrée constituent l'essentiel de votre facture. Le modèle est **sans état**, donc chaque **tour** renvoie toute la **session** en entrée : votre premier message, chaque réponse, chaque résultat d'outil depuis. L'entrée du cinquantième tour contient les quarante-neuf tours précédents. Une seule requête au fournisseur de modèle peut produire quelques centaines de tokens de sortie mais renvoyer cent mille tokens d'entrée d'historique accumulé.
+
+Le **cache de préfixe** réduit le coût : l'historique qui correspond exactement à une requête précédente est facturé comme des **tokens de cache** bon marché plutôt qu'en entrée à plein tarif. Quand le coût de l'entrée fait encore mal, la solution consiste à réduire ce qui est renvoyé — **réinitialiser** ou **compacter** entre deux tâches.
+
+_En pratique :_
+
+« La facture est élevée mais l'agent n'écrit presque rien. »
+
+« Ce sont les tokens d'entrée — chaque tour renvoie toute la session. Sans le cache de préfixe, tu repaies pour l'historique à chaque requête. »
+
+### Tokens de sortie
+
+Les **tokens** que le **modèle** génère en retour. Facturés à un taux supérieur aux **tokens d'entrée** — souvent environ cinq fois le taux — car ils coûtent plus de calcul à produire.
+
+Tout ce que le modèle écrit compte : le texte que vous lisez, le code qu'il émet, les **appels d'outils**, et toute réflexion étendue que le modèle fait avant de répondre. Ce dernier point surprend souvent les gens — les tokens de raisonnement sont facturés comme de la sortie même quand le **harnais** ne vous les montre souvent pas, et augmenter l'**effort** en dépense davantage.
+
+Les tokens de sortie fixent aussi le rythme d'une **session**. Le modèle lit l'entrée rapidement mais génère la sortie un token à la fois, donc quand un **tour** semble lent, c'est presque toujours la sortie en train d'être écrite, pas l'entrée en train d'être lue. Une longue attente signifie généralement qu'une longue réponse arrive.
+
+_En pratique :_
+
+« La session de refactoring consomme du crédit alors que les entrées sont petites. »
+
+« L'agent réécrit des fichiers entiers au lieu de patcher. Les tokens de sortie coûtent environ cinq fois le taux d'entrée — fais-le émettre des edits et la facture baisse. »
+
+### Cache de préfixe
+
+Le stockage côté **fournisseur** qui permet à des **requêtes au fournisseur de modèle** consécutives de sauter le retraitement d'un préfixe partagé. Quand le début d'une requête correspond au début d'une requête récente — même **prompt système**, même historique jusqu'à un certain point — le fournisseur réutilise son travail précédent et facture ces **tokens** comme des **tokens de cache** à un taux bien inférieur.
+
+Le cache est rentable parce que les sessions grandissent en ajout uniquement. Chaque requête renvoie tout l'historique en **tokens d'entrée**, et dans une **session** normale l'historique ne change qu'à la fin — chaque requête est la précédente plus quelques nouveaux messages. Le fournisseur traite une seule fois le long début partagé, stocke le résultat, et reprend là où le préfixe s'arrête. Sans le cache, une session de 50 **tours** paierait pour retraiter le premier tour cinquante fois.
+
+Les caches expirent aussi. La durée pendant laquelle une entrée reste chaude varie selon le fournisseur — typiquement des minutes, pas des heures. Laissez une session inactive au-delà de cette fenêtre et la requête suivante reconstruit le préfixe à plein tarif une fois avant que la mise en cache reprenne. C'est surtout une préoccupation pour les concepteurs de **harnais** ; côté utilisateur, l'effet visible est que les requêtes après une longue pause coûtent plus cher que celles d'avant.
+
+_En pratique :_
+
+« Pourquoi la facture a-t-elle bondi en milieu de session ? »
+
+« Le harnais a commencé à injecter l'heure actuelle dans le prompt système à chaque tour. Le cache de préfixe casse au premier token modifié, donc toutes les requêtes après ça ont été facturées à plein tarif. »
+
+### Tokens de cache
+
+Les **tokens d'entrée** que le **fournisseur** a mis en cache depuis une **requête au fournisseur de modèle** précédente, donc il n'a pas besoin de les retraiter. Quand des requêtes consécutives partagent un préfixe, le fournisseur réutilise le travail via son **cache de préfixe** et facture la portion en cache à un taux bien inférieur. Le levier qui rend les **sessions** longues abordables — sans lui, chaque **tour** repaierait pour tout l'historique.
+
+La raison pour laquelle ça compte tient à la façon dont les sessions sont facturées. Le **modèle** est **sans état**, donc chaque requête renvoie toute la conversation — **prompt système**, chaque message, chaque **résultat d'outil** — en tokens d'entrée. Au cinquantième tour, chaque requête transporte cinquante tours d'historique, et vous paieriez plein tarif sur tout ça, à chaque fois. Le cache change les calculs : les tokens que le fournisseur a déjà traités dans un préfixe identique sont facturés comme tokens de cache, souvent à un dixième du taux d'entrée ou moins. Sur une longue session, l'essentiel de ce que vous envoyez sont des tokens de cache, et la facture reste raisonnable.
+
+Un exemple montre quand les tokens sont mis en cache et quand ils ne le sont pas. Chaque lettre représente un bloc de contenu de conversation ; chaque requête envoie la conversation jusqu'ici :
+
+| La requête envoie | En cache | Facturé plein tarif | Pourquoi |
+| --- | --- | --- | --- |
+| `AB` | rien | `AB` | Première requête — rien à comparer |
+| `ABC` | `AB` | `C` | `AB` est un préfixe exact de la requête précédente |
+| `ABCD` | `ABC` | `D` | Le préfixe est encore intact |
+| `AXCD` | `A` | `XCD` | Une édition a changé `B` en `X` ; la correspondance échoue à partir de là |
+
+Le cache est fragile d'une façon bien précise : il fait correspondre des préfixes exacts. Si quoi que ce soit change plus tôt dans la conversation — le **harnais** réordonne le contenu, un horodatage se met à jour, la représentation d'un fichier change — le cache rate la correspondance à partir de ce point et tout ce qui suit est facturé à plein tarif en entrée. Les caches expirent aussi après quelques minutes d'inactivité, donc une session reprise après une longue pause repaie son historique une fois. Quand le coût d'une session bondit sans cause apparente, comparez les tokens de cache aux tokens d'entrée dans le rapport d'usage — un cache cassé s'y montre en premier.
+
+_En pratique :_
+
+« Le coût sur les longues sessions est brutal — huit dollars pour un refactoring. »
+
+« Regarde les tokens de cache. Si le harnais réordonne le prompt système ou les fichiers entre les tours, le préfixe casse et tu repaies plein tarif en entrée à chaque requête. »
+
+<Separator/>
+
+## Section 2 — Sessions, fenêtres de contexte et tours
+
+### Sans état
+
+Ne transporte aucune information vers l'avenir. Le **modèle** est sans état entre les **requêtes au fournisseur de modèle** — chaque requête renvoie toute la **fenêtre de contexte**, parce que le modèle n'a aucun autre moyen de voir quoi que ce soit. Un **agent** est sans état entre les **sessions** par défaut : une nouvelle session démarre vide, sans trace des précédentes. Contrepartie de **avec état**.
+
+Le modèle lui-même est en permanence sans état : ses **paramètres** sont figés après l'**entraînement**, et rien de ce que vous faites à l'**inférence** ne les modifie. Le modèle n'apprend pas de vos corrections, ne se souvient pas qu'on lui a dit la même chose hier, et ne fait pas connaissance avec vous — même si la conversation donne cette impression. Le sentiment de continuité au sein d'une session est fabriqué par le **harnais**, qui garde la transcription et la renvoie à chaque requête. Le modèle ne se souvient pas de la conversation ; il la relit.
+
+La conséquence pratique : si vous voulez que quelque chose soit retenu d'une session à l'autre, vous devez l'écrire quelque part que l'agent relira. C'est à ça que servent les fichiers **AGENTS.md**, les **systèmes de mémoire** et les **artefacts de passation** — des fichiers chargés dans le contexte des sessions futures, tenant lieu de la mémoire que le modèle n'a pas. Quand l'agent continue de faire une erreur que vous avez déjà corrigée, la question n'est pas de savoir pourquoi il n'a pas appris — il ne peut pas — mais où cette correction devrait être écrite pour que chaque session future la lise.
+
+_En pratique :_
+
+« Pourquoi oublie-t-il la convention à chaque fois que je réinitialise ? »
+
+« Le modèle est sans état — la nouvelle session démarre vide. Si tu veux que ce soit conservé, écris-le dans AGENTS.md ou dans un fichier de mémoire que le harnais charge au démarrage de la session. »
+
+### Contexte
+
+L'information pertinente à laquelle l'**agent** a accès en ce moment. Le nom abstrait — pas l'entrée brute que voit le modèle (c'est la **fenêtre de contexte**), pas l'historique en cours (c'est la **session**), mais _ce que l'agent sait qui est pertinent pour la tâche_. « Charger quelque chose en contexte » signifie l'ajouter à cet ensemble ; « l'ingénierie de contexte » est la discipline qui consiste à le sélectionner.
+
+Les trois termes se distinguent clairement :
+
+| Terme | Ce qu'il désigne |
+| --- | --- |
+| Contexte | L'information pertinente pour la tâche que l'agent possède actuellement |
+| Fenêtre de contexte | La séquence littérale de tokens que le modèle voit par requête |
+| Session | La conversation en cours que le harnais stocke |
+
+Cette séparation compte parce que le contexte est une mesure de qualité, pas de quantité. Une fenêtre de contexte peut être presque pleine et le contexte être quand même médiocre — des milliers de tokens de résultats d'outils périmés, aucun rapport avec la tâche en cours. Elle peut aussi être presque vide et le contexte excellent : la seule définition de type dont la tâche dépend.
+
+La plupart des échecs quotidiens remontent au contexte. Quand l'agent invente une API, contredit une décision, ou devine un schéma, la première question est de savoir ce qui était en contexte quand ça s'est produit — généralement le fait pertinent n'a jamais été chargé, ou était enterré sous la **dégradation de l'attention**. La solution, c'est la sélection : charger ce dont la tâche a besoin, laisser dehors ce dont elle n'a pas besoin.
+
+_En pratique :_
+
+« Il n'arrête pas d'inventer des champs qui ne sont pas dans le type. »
+
+« Le fichier de type n'est pas en contexte — il lit les sites d'appel et devine. Fais-lui lire d'abord la définition. »
+
+### Fenêtre de contexte
+
+Tout ce que le **modèle** voit à chaque **requête au fournisseur de modèle**. Finie, spécifique au modèle, et c'est la _seule_ surface par laquelle le modèle perçoit quoi que ce soit.
+
+C'est une seule séquence de **tokens** : le **prompt système**, la conversation jusqu'ici, chaque **résultat d'outil** que le **harnais** a réinjecté. Si quelque chose est dans cette séquence, le modèle peut l'utiliser ; sinon, le modèle ignore que ça existe — ni votre codebase, ni le fichier que vous avez édité hier, ni l'instruction que vous avez donnée il y a trois sessions. Tout ce qui est en dehors de la fenêtre doit y être amené, généralement via un **appel d'outil**, avant de pouvoir influencer quoi que ce soit.
+
+Finie veut dire que ça se remplit. Chaque tour ajoute davantage — vos messages, les réponses du modèle, les résultats d'outils — et une longue **session** finira par atteindre la limite, forçant une **compaction** ou une **réinitialisation**. Ça veut aussi dire que tout dans la fenêtre est en compétition : chaque token que vous chargez est un token de moins disponible pour le reste, et le contenu dont vous n'aviez pas besoin occupe quand même l'**attention** du modèle. La position pratique, c'est de traiter la fenêtre comme un budget — charger ce dont la tâche a besoin, laisser le reste dehors.
+
+_À éviter :_ « mémoire » — la fenêtre de contexte est un état de travail et ne persiste pas d'une session à l'autre. La **mémoire** est un concept séparé, superposé par-dessus.
+
+_En pratique :_
+
+« Je peux juste coller tout le monorepo dans le prompt ? »
+
+« La fenêtre de contexte fait 200k tokens — c'est peut-être un cinquième du repo. Choisis les fichiers que la tâche touche, laisse le reste derrière un appel d'outil. »
+
+### Avec état
+
+Transporte l'information vers l'avenir. Une **session** est avec état à travers les **tours** — le **contexte** s'accumule au fur et à mesure que la session avance, ce qui explique pourquoi les longues sessions dérivent vers la **dumb zone**. Un **agent** peut être rendu avec état à travers les **sessions** en ajoutant un **système de mémoire** qui persiste l'information dans l'**environnement** et la recharge au début des sessions futures. Le **modèle** n'est jamais avec état ; toute continuité apparente est le **harnais** qui réinjecte le contexte. Contrepartie de **sans état**.
+
+Où l'état vit à chaque couche :
+
+| Couche | Avec état ? | Comment |
+| --- | --- | --- |
+| Modèle | Jamais | Les paramètres sont figés ; il ne voit que ce qui est dans chaque requête |
+| Session | À travers les tours | Le harnais ajoute chaque message et résultat d'outil au contexte |
+| Harnais | À travers les sessions | Fichiers de mémoire, AGENTS.md, artefacts de passation — écrits, rechargés plus tard |
+| Environnement | Toujours | Les fichiers persistent, qu'une session tourne ou non |
+
+L'état de chaque couche est construit en relisant quelque chose stocké dans une couche en dessous : la session semble continue parce que le harnais renvoie l'historique des messages au modèle sans état, et l'agent se souvient d'une session à l'autre parce que le harnais recharge des fichiers depuis l'environnement. Aucun état n'est jamais stocké dans le modèle lui-même.
+
+L'état n'est pas toujours souhaité. Tout ce qui est transporté influence ce qui vient ensuite, donc une hypothèse erronée faite tôt dans une session est transportée aussi. La **réinitialisation** est l'acte délibéré de jeter l'état de session et de repartir de ce qui est écrit.
+
+_En pratique :_
+
+« Il se souvenait de mes préférences d'hier — ça veut dire que le modèle les a apprises ? »
+
+« Non, l'agent est avec état parce que le harnais les a écrites dans un fichier de mémoire et les a rechargées au démarrage de la session. Le modèle lui-même n'a rien vu d'hier. »
+
+### Agent
+
+Un **modèle** **harnaché** avec des **outils**, un **prompt système**, et une **fenêtre de contexte**, qui prend des **tours** avec un utilisateur. _Claude Code est un agent. Cursor est un agent. Claude.ai est un agent._ Un agent, c'est ce à quoi vous parlez réellement — c'est le modèle en mouvement, configuré dans un but précis.
+
+Contrairement à la plupart des termes de ce dictionnaire, « agent » ne désigne pas une pièce mécanique. Le modèle est un fichier de **paramètres** ; le harnais est un logiciel que vous pouvez montrer du doigt. L'agent n'est ni l'un ni l'autre — c'est l'unité à laquelle vous vous adressez. Les gens anthropomorphisent constamment l'**IA**, et l'agent est l'unité anthropomorphisée : la chose à laquelle vous déléguez, la chose qui lit votre message et répond, le « il » dans « il a encore cassé le build ». Quand vous dites que l'agent a fait quelque chose, vous voulez dire que le modèle-plus-harnais l'a fait, mais vous vous adressez à la combinaison comme à un acteur unique.
+
+L'idée est plus ancienne que cette vague d'IA. Les agents logiciels — des programmes auxquels on délègue un objectif, qui agissent en votre nom — sont un concept qui existe depuis aussi longtemps que l'IA elle-même.
+
+_À éviter :_ « l'IA », « le bot » (trop vague — ça cache si vous parlez des paramètres ou de la chose harnachée).
+
+_En pratique :_
+
+« Quel agent utilises-tu pour la migration ? »
+
+« Claude Code en local, Cursor pour le travail sur l'UI — même modèle en dessous, harnais différents. »
+
+### Prompt système
+
+Les instructions que le **harnais** ajoute au début de chaque **requête au fournisseur de modèle** — le mandat permanent de l'**agent** : qui il est, comment se comporter, quels **outils** il peut appeler, quelles conventions suivre. Généralement stable sur toute une **session**.
+
+Le prompt système est écrit par l'éditeur du harnais, pas par vous, et dans les harnais de codage il est volumineux — souvent des dizaines de milliers de **tokens** de règles comportementales, de descriptions d'outils et de gestion de cas particuliers, tous payés comme **tokens d'entrée** à chaque **tour**. Vos propres instructions permanentes voyagent avec lui : des fichiers comme **AGENTS.md** sont chargés juste à côté du prompt système au début de la session, donc le **modèle** lit le mandat de l'éditeur et le vôtre ensemble avant même de voir votre message.
+
+Parce qu'il est identique à chaque requête, il forme le début du **cache de préfixe** — ce qui explique en partie pourquoi les harnais le gardent fixe pour toute une session plutôt que de l'éditer au fil de l'eau.
+
+Les modèles sont entraînés à prioriser le prompt système par rapport aux messages utilisateur. Donc quand un agent insiste sur une convention que vous n'avez jamais demandée, ou formate la sortie d'une façon dont vous ne pouvez pas vous débarrasser, c'est généralement qu'il obéit à son prompt système — et votre message perd la partie. Certains harnais sont personnalisables : ils vous donnent un accès complet au prompt système, pour que vous puissiez lire ce qu'on dit réellement à l'agent et le changer.
+
+_En pratique :_
+
+« Deux harnais, même modèle, comportement totalement différent sur le même prompt. »
+
+« Des prompts système différents. L'un est réglé pour des modifications de code laconiques, l'autre pour expliquer — c'est là que vit la divergence, avant même que ton message arrive. »
+
+### Session
+
+Une exécution bornée d'interaction avec un **agent**. Démarre vide, accumule des messages, des **résultats d'outils** et des fichiers lus, et se termine quand elle est **réinitialisée**, fermée, ou **compactée** en une nouvelle session. La session est ce qui _remplit_ la **fenêtre de contexte** : si la fenêtre de contexte est la boîte, la session est ce qui la remplit lentement. Un travail trop grand pour une seule fenêtre de contexte doit être réparti sur plusieurs sessions.
+
+L'historique des messages de la session est la mémoire de travail de l'agent. Le **modèle** est **sans état**, donc tout ce dont il semble se souvenir — ce que vous avez demandé, ce que les tests ont dit, ce qu'il a décidé trois tours plus tôt — est dans l'historique des messages, renvoyé à chaque **requête au fournisseur de modèle**. Tout ce qui n'est pas dans la session n'existe pas pour l'agent.
+
+Cette mémoire s'arrête avec la session. Une nouvelle session démarre de zéro : l'agent qui connaissait bien votre codebase à la fin de la session d'hier n'en connaît plus rien ce matin. Ce qui survit, c'est le **système de fichiers** — les fichiers écrits pendant une session peuvent être lus par la suivante, ce sur quoi reposent les **passations**, les **systèmes de mémoire** et **AGENTS.md**.
+
+Vous choisissez où une session se termine. Tout dans une session influence chaque **tour** ultérieur, donc des tâches sans rapport faites dans une même session laissent un résidu qui colore la réponse suivante. Une tâche par session garde le contexte pertinent ; terminer une tâche est un point naturel pour réinitialiser.
+
+_En pratique :_
+
+« Combien de temps une session peut-elle tourner avant de s'effondrer ? »
+
+« Ça dépend du travail — un refactoring ciblé reste affûté plus longtemps qu'une recherche ouverte. Une fois que la session gonfle, fais une passation ou compacte, ne force pas le passage. »
+
+### Tour
+
+Un message utilisateur plus tout ce que l'**agent** fait en réponse, jusqu'à ce qu'il rende la main à l'utilisateur. Contient une ou plusieurs **requêtes au fournisseur de modèle** — beaucoup, si l'agent appelle des **outils**. Une question de clarification clôt le tour ; votre réponse en ouvre un nouveau. La hiérarchie est **Session > Tour > Requête au fournisseur de modèle**.
+
+Ce qui rend le tour digne d'être nommé, c'est que sa longueur est la décision de l'agent, pas la vôtre. Vous transmettez un message ; l'agent décide combien d'appels d'outils enchaîner avant de rendre la main. Un tour peut être une réponse d'une phrase ou vingt minutes de lecture, d'édition et de tests. C'est la même propriété vue sous deux angles : les tours longs sont ce qui rend possible le travail **AFK**, et les tours longs sont aussi là où les choses tournent mal sans surveillance — au moment où l'agent rend la main, il peut avoir dérivé loin de ce que vous vouliez dire.
+
+Le tour est aussi l'unité naturelle pour piloter. Tout ce qui se passe dans un tour se passe sans vous ; les intervalles entre les tours sont où vous redirigez. La plupart des **harnais** adoucissent ça : vous pouvez interrompre en plein tour pour arrêter l'agent et le rediriger, ou taper un message pendant qu'il travaille, qui sera lu une fois le tour terminé. Si vous vous retrouvez régulièrement mécontent de là où les tours aboutissent, la solution consiste généralement à demander des tours plus petits — un plan d'abord, une étape à la fois — en échangeant de l'autonomie contre des intervalles plus fréquents pour piloter.
+
+_En pratique :_
+
+« Un tour a pris deux minutes ? »
+
+« Il a fait quatorze appels d'outils dans ce tour — chacun est une requête au fournisseur de modèle séparée. La latence s'accumule avant que l'agent finisse par rendre la main. »
+
+<Separator/>
+
+## Section 3 — Outils et environnement
+
+### Environnement
+
+Le monde sur lequel l'**agent** agit — tout ce qui est en dehors du **harnais** que l'agent perçoit via des **résultats d'outils** et modifie via des **appels d'outils**. Le harnais _fait tourner_ l'agent ; l'environnement est ce dans quoi l'agent _travaille_. Un fichier comme **AGENTS.md** vit dans l'environnement ; le harnais est ce qui le charge dans la **fenêtre de contexte**. Un **système de fichiers** est le type d'environnement le plus courant, mais pas le seul (une base de données, une API distante, une session de navigateur peuvent toutes être des environnements).
+
+L'agent ne voit l'environnement que lorsqu'il regarde. Tout ce qu'il sait de l'environnement est arrivé via un résultat d'outil, donc son image est une collection d'instantanés, chacun exact au moment où il a été pris. Si un fichier change après que l'agent l'a lu — vous l'éditez à la main, une étape de build le régénère — l'agent continue de raisonner à partir de la copie périmée jusqu'à ce que quelque chose déclenche une relecture. Un agent qui décrit avec assurance un fichier qui ne ressemble plus à ça, c'est généralement ça : l'environnement a bougé, l'instantané non.
+
+L'environnement est aussi la couche qui persiste — la seule qui est toujours **avec état**. Le contexte d'une **session** disparaît quand la session se termine, mais les fichiers écrits dans l'environnement restent pour que la session suivante les lise — ce sur quoi reposent les **systèmes de mémoire**, les **artefacts de passation** et `AGENTS.md`. Tout ce qu'un agent devrait encore savoir demain doit finir dans l'environnement.
+
+Vous décidez de la taille de l'environnement. Un **bac à sable** le réduit, limitant ce que l'agent peut atteindre ; ajouter un **outil** l'étend, amenant une base de données ou une API à portée. Ce qui est à l'intérieur de la frontière est ce que l'agent peut percevoir et modifier ; tout ce qui est à l'extérieur n'existe pas pour l'agent. À quel point l'environnement est bien conçu pour soutenir le travail de l'agent, c'est l'**AX** de la codebase.
+
+_À éviter :_ utiliser « environnement » pour le runtime ou le harnais lui-même — le harnais est l'emballage, l'environnement est l'espace de travail.
+
+_En pratique :_
+
+« L'agent ne peut pas voir le schéma de la base de staging. »
+
+« Câble-le dans l'environnement — donne-lui un outil `psql` cantonné en lecture seule sur staging. Le harnais va bien, il n'a juste rien sur quoi agir. »
+
+### Système de fichiers
+
+Une arborescence de fichiers et de répertoires que l'**agent** lit, modifie et dans laquelle il exécute des commandes — le type d'**environnement** par défaut pour un agent de codage. **AGENTS.md**, les **skills**, le code source, les scripts de build et les configurations d'**outils** vivent tous dans un système de fichiers. Quand un **harnais** « démarre dans votre projet », il pointe l'agent vers un système de fichiers.
+
+L'agent y touche uniquement via des **appels d'outils** — lire un fichier, en écrire un, exécuter une commande shell. Rien sur le disque n'est dans la **fenêtre de contexte** tant qu'un appel d'outil ne l'a pas chargé, ce qui permet à l'agent de travailler dans un dépôt bien plus grand que la fenêtre : le système de fichiers contient tout, le contexte ne contient que ce que la tâche en cours a lu. Certains harnais chargent par défaut les noms de fichiers du répertoire courant dans la fenêtre de contexte — pas le contenu, juste l'arborescence — qui agissent comme des **pointeurs de contexte** : l'agent voit ce qui existe et lit les fichiers dont il a besoin.
+
+Et il est partagé avec vous. Les fichiers que l'agent édite sont les mêmes que ceux que vous ouvrez dans votre éditeur et que vous diffez dans git — le système de fichiers est l'espace de travail commun où vous revoyez ce que l'agent a fait.
+
+_En pratique :_
+
+« Pourquoi ne prend-il pas en compte mon AGENTS.md ? »
+
+« Il tourne contre un système de fichiers différent — le bac à sable a monté le répertoire parent, pas la racine du projet. Repointe le harnais. »
+
+### Outil
+
+Une fonction que le **harnais** expose pour que l'**agent** puisse l'appeler — Read, Write, Bash, Search. Les outils sont la façon dont un agent perçoit et agit sur l'**environnement** : il ne peut pas voir l'environnement autrement que par des **résultats d'outils**, et ne peut pas le modifier autrement que par des **appels d'outils**. Chaque appel d'outil coûte une **requête au fournisseur de modèle** supplémentaire, puisque le résultat doit retourner au modèle avant qu'il puisse décider de la suite.
+
+Outils que la plupart des agents de codage embarquent :
+
+| Outil | Ce qu'il fait |
+| --- | --- |
+| Read | Renvoie le contenu d'un fichier comme résultat d'outil |
+| Write | Crée ou édite un fichier dans le **système de fichiers** |
+| Bash | Exécute une commande shell et renvoie sa sortie |
+| Search | Trouve des fichiers ou du texte correspondant à un motif dans la codebase |
+
+Un outil se définit par trois choses : un nom, une description de ce qu'il fait, et un schéma pour ses paramètres. Le harnais envoie ces définitions au **modèle** à chaque requête, et le modèle choisit un outil de la même façon qu'il produit tout le reste — en écrivant des **tokens**, dans ce cas un appel structuré avec des arguments. Le modèle n'exécute jamais rien lui-même ; le harnais lit l'appel, exécute la fonction, et renvoie le résultat.
+
+La liste d'outils fixe ce que l'agent peut faire. Un modèle capable avec un ensemble d'outils restreint est un agent restreint : il fera passer tout par ce qu'il a, ce qui explique pourquoi les agents s'appuient tant sur Bash — un shell est un seul outil qui atteint la majeure partie du système. Pour donner proprement une capacité à un agent, ajoutez un outil pour ça ; **MCP** est le standard pour brancher des outils venant de l'extérieur du harnais.
+
+Les définitions d'outils occupent du **contexte** à chaque requête, donc un large ensemble d'outils a un coût de base avant même qu'un outil soit appelé — et de nombreux outils décrits de façon similaire rendent le modèle moins bon pour choisir le bon.
+
+_En pratique :_
+
+« L'agent peut-il interroger staging directement ? »
+
+« Ajoute un outil `psql` au harnais, cantonné en lecture seule sur staging. Sans outil pour ça, l'agent est aveugle à tout ce qui est en dehors du système de fichiers. »
+
+### Appel d'outil
+
+La sortie du **modèle** nommant un **outil** et ses arguments — juste du texte structuré. Ça ne fait rien tout seul ; le **harnais** doit le lire et l'exécuter. Produit par le modèle en une **requête au fournisseur de modèle**.
+
+Le cycle de vie d'un appel d'outil :
+
+| Étape | Qui | Ce qui se passe |
+| --- | --- | --- |
+| 1 | Modèle | Apprend quels outils existent depuis les descriptions dans le **prompt système** |
+| 2 | Modèle | Émet un appel — nom de l'outil plus arguments, généralement en JSON — et s'arrête |
+| 3 | Harnais | Analyse l'appel et le vérifie contre le **mode de permission** |
+| 4 | Harnais | L'exécute si autorisé |
+| 5 | Harnais | Renvoie le résultat sous forme de **résultat d'outil** dans la requête suivante |
+
+Un **tour** de travail d'**agent** correspond généralement à beaucoup de ces allers-retours enchaînés.
+
+Comme l'appel est généré par **prédiction du prochain token** comme tout le reste, il peut être faux de la même façon que n'importe quelle sortie de modèle peut l'être : un chemin qui n'existe pas, un flag que la commande n'a pas, des arguments plausibles plutôt que corrects. Le harnais exécute ce qui a été écrit, pas ce qui était voulu — un chemin mal orthographié ne renvoie pas gentiment une erreur, il édite le mauvais fichier.
+
+_En pratique :_
+
+« Il a dit qu'il avait lancé les tests mais les timestamps des fichiers n'ont pas changé. »
+
+« Regarde la transcription — a-t-il vraiment émis un appel d'outil, ou juste décrit qu'il les lançait ? Le modèle produit l'appel, mais si le harnais ne l'a pas exécuté, rien ne s'est passé. »
+
+### Résultat d'outil
+
+Ce que le **harnais** renvoie après avoir exécuté un **appel d'outil** — le contenu du fichier, la sortie de la commande, l'erreur. La seule vue de l'**agent** sur l'**environnement**. Voyage vers le **modèle** dans la _prochaine_ **requête au fournisseur de modèle**, où le modèle décide quoi en faire. L'appel d'outil et le résultat d'outil sont les deux bouts du même échange, tous deux à l'intérieur d'un **tour**.
+
+Le cycle de vie d'un résultat d'outil :
+
+| Étape | Qui | Ce qui se passe |
+| --- | --- | --- |
+| 1 | Harnais | Exécute l'appel d'outil — lance la commande, lit le fichier |
+| 2 | Harnais | Capture le résultat : sortie, contenu, ou erreur |
+| 3 | Harnais | L'ajoute au **contexte** comme un message |
+| 4 | Harnais | Envoie tout le contexte au fournisseur dans la requête suivante |
+| 5 | Modèle | Lit le résultat et décide : un autre appel d'outil, ou une réponse finale |
+
+Le résultat reste dans le contexte pour le reste de la **session**. Les résultats d'outils constituent généralement l'essentiel du contexte d'une session de codage : chaque fichier lu, chaque test lancé, chaque recherche atterrit en entier et continue d'occuper des **tokens** longtemps après avoir cessé d'être utile. Quelques gros résultats — un log de test verbeux, un fichier généré lu en entier — peuvent pousser une session vers la limite de la **fenêtre de contexte** plus vite que la conversation elle-même.
+
+Comme le résultat est tout ce que le modèle voit, le modèle n'a aucun moyen de vérifier l'environnement derrière lui. Si la sortie a été tronquée, si la commande a échoué silencieusement, ou si le harnais a renvoyé une erreur au lieu du contenu, le modèle raisonne à partir de ce qu'on lui a donné. Quand l'image que l'agent a de votre système semble fausse, les résultats d'outils sont l'endroit où regarder : quelque part dans la transcription se trouve un résultat qui dit quelque chose de différent de ce que vous savez être vrai.
+
+_En pratique :_
+
+« Il raisonne sur le fichier comme s'il était vide. »
+
+« Le résultat d'outil est revenu comme un refus de permission, pas le contenu. Le modèle n'a vu que le message d'erreur — il n'a aucun autre moyen de voir le fichier. »
+
+### MCP
+
+**Model Context Protocol.** Un protocole pour brancher des serveurs d'outils externes dans un **harnais** — comment un **agent** obtient des **outils** au-delà de ceux fournis par le harnais. L'agent n'« appelle » jamais MCP à proprement parler ; il appelle un outil, et il se trouve que le harnais a obtenu cet outil depuis un serveur MCP. Expose aussi des ressources (données en lecture seule) et des prompts (modèles réutilisables), mais la fourniture d'outils est l'usage principal.
+
+Le protocole résout un problème d'intégration. Sans standard, chaque harnais aurait besoin de sa propre intégration Linear, sa propre intégration Slack, sa propre intégration base de données — écrite et maintenue séparément pour chacun. Avec MCP, l'intégration est écrite une fois comme un serveur, et n'importe quel harnais compatible MCP peut l'utiliser. Le harnais se connecte au serveur, le serveur annonce les outils qu'il propose, et ces outils deviennent disponibles pour l'agent aux côtés de ceux intégrés.
+
+Le coût se paie en **contexte**. Chaque outil qu'un serveur annonce arrive comme une définition — nom, description, schéma de paramètres — et le **modèle** ne peut appeler que les outils qu'il connaît. L'approche naïve charge toutes les définitions dans la **fenêtre de contexte** dès le départ : installez quelques serveurs généreux et une **session** démarre avec des milliers de **tokens** de schémas d'outils avant même que vous ayez tapé quoi que ce soit, dépensant du **budget d'attention** sur des outils que la tâche n'utilisera jamais.
+
+De nombreux harnais atténuent maintenant ça avec la recherche d'outils : au lieu des définitions complètes, le contexte contient un **pointeur de contexte** vers les outils disponibles — l'agent cherche un outil par nom ou par usage et ne charge sa définition que quand il en a besoin. Si votre harnais ne fait pas ça, le coût initial s'applique quand même, et il vaut la peine de n'activer que les serveurs dont un projet a réellement besoin.
+
+_En pratique :_
+
+« L'agent doit lire des tickets depuis Linear. »
+
+« Configure le harnais pour utiliser le serveur MCP Linear — il expose l'API Linear comme des outils que l'agent peut appeler. Ça t'évite d'écrire des wrappers d'outils sur mesure. »
+
+### Demande de permission
+
+Ce que le **harnais** montre à l'utilisateur avant d'exécuter un **appel d'outil** qui n'est pas pré-approuvé. Le **modèle** produit un appel d'outil ; au lieu de l'exécuter immédiatement, le harnais s'arrête et demande. Approuvez et ça s'exécute ; refusez et le harnais rapporte le refus au modèle comme un **résultat d'outil**. Le mécanisme par lequel un harnais met un humain dans la boucle pour les actions risquées ou sensibles.
+
+Le cycle de vie d'une demande de permission :
+
+| Étape | Qui | Ce qui se passe |
+| --- | --- | --- |
+| 1 | Modèle | Produit un appel d'outil |
+| 2 | Harnais | Le vérifie contre le **mode de permission** et les approbations déjà enregistrées |
+| 3 | Harnais | Pré-approuvé : exécute immédiatement. Sinon : s'arrête et montre la demande |
+| 4 | Utilisateur | Approuve une fois, approuve pour le reste de la **session**, ou refuse |
+| 5 | Harnais | Exécute l'appel, ou renvoie le refus comme résultat d'outil |
+
+Refuser une demande pilote l'agent. Le modèle lit le refus comme n'importe quel autre résultat d'outil et réagit — il essaie une autre approche, ou demande ce que vous préféreriez. La plupart des harnais permettent d'attacher un message au refus, ce qui transforme la demande en un point de pilotage : « pas comme ça, utilise plutôt le script de migration » arrive exactement au moment où le modèle décide quoi faire ensuite.
+
+Le coût, c'est que chaque demande est une attente synchrone sur vous. L'**agent** reste bloqué jusqu'à ce que vous répondiez, ce qui va bien tant que vous surveillez et pose problème quand vous ne le faites pas — un agent qui déclenche des demandes en permanence ne peut pas être laissé travailler en **AFK**. Le mode de permission est le curseur : quels appels tournent librement, lesquels demandent d'abord, idéalement avec un **bac à sable** rendant sûr d'élargir l'ensemble libre.
+
+_En pratique :_
+
+« Il est bloqué sur une demande de permission depuis dix minutes — j'étais en réunion. »
+
+« C'est le coût de l'humain dans la boucle. Pré-approuve les outils sûrs pour que la demande ne se déclenche que sur les appels réellement risqués. »
+
+### Mode de permission
+
+La tranche de contrôle des permissions d'un **mode agent** — quels **appels d'outils** déclenchent une **demande de permission** et lesquels s'exécutent automatiquement. L'objectif d'origine des systèmes de modes avant que les **harnais** ne commencent à empiler des instructions comportementales par-dessus.
+
+Les harnais livrent une échelle de ces modes :
+
+| Mode | Lectures | Écritures et shell | Usage typique |
+| --- | --- | --- | --- |
+| Lecture seule / plan | Auto | Bloqué | Recherche, planification, revue |
+| Par défaut | Auto | Demande | Travail supervisé au quotidien |
+| Auto-édition | Auto | Édits auto, shell demande | Dépôts de confiance, changements mécaniques |
+| « Yolo » / full-auto | Auto | Auto | Bacs à sable, exécutions AFK |
+
+Choisir un échelon est un compromis entre sécurité et interruption, et les deux modes de défaillance se font sentir. Trop strict, et vous devenez le goulot d'étranglement : l'**agent** s'arrête toutes les quelques secondes pour des lectures inoffensives, vous cliquez sur approuver en pilote automatique, et les approbations arrêtent de vouloir dire quoi que ce soit — le tamponnage automatique est le pire des deux mondes, toute l'interruption sans aucune protection. Trop laxiste, et l'agent édite des fichiers et exécute des commandes que vous auriez voulu voir avant.
+
+L'extrémité laxiste est la plus défendable à l'intérieur d'un bac à sable, où le rayon de dégât d'un mauvais appel d'**outil** est contenu. En dehors, la plupart des gens optent pour l'auto-approbation des lectures et gardent un **humain dans la boucle** pour tout ce qui est irréversible.
+
+_En pratique :_
+
+« Il s'est arrêté à chaque grep — ça a totalement tué l'exécution AFK. »
+
+« Assouplis le mode de permission pour les outils en lecture seule, garde les demandes sur les écritures et le shell. La plupart des demandes de permission sur une session de recherche, c'est du bruit. »
+
+### Mode agent
+
+Un préréglage qui façonne la façon dont l'**agent** opère au runtime — regroupe un **mode de permission** avec des instructions comportementales injectées dans le **prompt système**. Exemples : un défaut qui demande sur les appels risqués, un **mode plan** qui bloque les éditions et oriente l'agent vers la recherche, un mode **accepter les éditions** qui auto-approuve les éditions, un mode **contourner les permissions** (familièrement **mode YOLO**) qui auto-approuve tout. Peut basculer en cours de session.
+
+Ce qui distingue un mode d'un simple réglage de permission, c'est le regroupement. Un mode de permission n'est qu'une barrière : il décide quels **appels d'outils** passent. Une barrière seule produit un agent qui veut éditer mais ne peut pas — il propose l'écriture, se fait bloquer, et essaie une autre voie. Les instructions injectées suppriment l'envie : le mode plan ne bloque pas seulement les éditions, il dit à l'agent qu'il est dans une phase de planification, donc il lit, demande, et propose au lieu de forcer contre la barrière. La barrière et le pilotage pointent dans la même direction.
+
+En pratique, vous changez de mode à mesure que votre confiance évolue au cours d'une tâche. La même tâche peut traverser plusieurs modes : mode plan tant que l'approche se dessine encore, le défaut qui demande pour les premières éditions délicates, accepter les éditions une fois que l'agent a montré qu'il comprend le changement, contourner pour une exécution **AFK** à l'intérieur d'un **bac à sable**. Changer de mode ne coûte rien : la conversation continue exactement là où elle en était, avec de nouvelles permissions et de nouvelles instructions. Si vous vous retrouvez à approuver chaque demande sans la lire, le mode est réglé plus strict que votre confiance réelle ; si vous rejetez sans cesse des éditions, il est réglé plus laxiste.
+
+_Termes des éditeurs :_ Claude Code appelle ça des « modes de permission », Codex appelle ça des « modes d'approbation » — les deux précèdent le regroupement comportemental.
+
+_En pratique :_
+
+« Il n'arrête pas d'éditer des fichiers alors que je veux juste un plan. »
+
+« Passe en mode plan — ça va bloquer les écritures et rester en recherche. »
+
+« Et pour l'exécution AFK plus tard ? »
+
+« Mode contournement, mais seulement à l'intérieur du bac à sable. »
+
+### Bac à sable
+
+Un **environnement** isolé dans lequel l'**agent** s'exécute — un conteneur, une VM, un **système de fichiers** éphémère, ou un shell à permissions restreintes. Limite le rayon de dégât des actions de l'agent : même si l'agent exécute des commandes destructrices ou récupère quelque chose de malveillant, les dégâts sont contenus. Le socle de sécurité qui rend l'**AFK** praticable.
+
+Le bac à sable et le **mode de permission** résolvent le même problème depuis des angles opposés. Les permissions demandent avant qu'une action s'exécute ; un bac à sable limite ce que l'action peut atteindre si elle s'exécute. Les permissions ont besoin de vous dans la boucle — chaque demande est une interruption — et une session qui demande constamment est à peine autonome. Un bac à sable dépense de l'infrastructure plutôt que de l'attention : plus l'isolation est forte, moins il y a de questions à poser.
+
+L'isolation vient par degrés :
+
+| Degré | Ce que c'est | Ce qu'il contient |
+| --- | --- | --- |
+| Shell restreint | Confinement au niveau OS autour de chaque commande | Écritures en dehors du projet, accès réseau |
+| Conteneur | Système de fichiers neuf, aucun identifiant monté, jeté après usage | Tout ce que l'agent fait à sa propre machine |
+| VM / cloud | Une machine entièrement séparée, souvent fournie par le harnais | Tout, y compris les évasions au niveau du noyau |
+
+Ce qu'aucun bac à sable ne contient : les actions qui en sortent légitimement. Un agent avec vos identifiants git peut pousser du code ; un avec accès réseau peut appeler des API de production. Décidez ce qui traverse la frontière avant de décider de son épaisseur.
+
+_En pratique :_
+
+« Je veux le laisser tourner en mode contournement des permissions toute la nuit mais je ne suis pas prêt pour ça. »
+
+« Mets-le dans un bac à sable — conteneur neuf, aucun identifiant monté, pas de réseau sortant. Au pire il détruit son propre système de fichiers et tu jettes le conteneur. »
+
+<Separator/>
+
+## Section 4 — Modes de défaillance
+
+### Complaisance
+
+Une sortie de **modèle** qui approuve avec assurance. Causée par l'**entraînement** : le modèle a été façonné pour favoriser les réponses que les humains aiment, et les humains ont tendance à aimer l'approbation plus qu'être détrompés. Le modèle a donc appris que l'accord est récompensé — même quand l'accord est incorrect.
+
+_Se manifeste par :_
+
+- _Céder sous la pression_ — inverse une réponse correcte quand vous dites « t'es sûr ? ».
+- _Louer un mauvais input_ — juge votre plan bancal brillant avant même de l'analyser.
+- _Cadrage biaisé_ — la revue penche positive quand vous signalez que vous l'avez écrit ; négative quand vous signalez que quelqu'un d'autre l'a écrit. Même artefact, verdict différent.
+- _Mimétisme_ — vous répète vos propres erreurs comme une confirmation.
+
+_Test de diagnostic :_ le modèle aurait-il dit ça sans votre orientation ? Si la seule chose qui a changé est votre ton ou votre cadrage, c'est de la complaisance, pas un vrai changement d'analyse.
+
+_Solution :_ cachez vos préférences. Formulez les prompts de façon neutre — « revois ce code » plutôt que « ce code est bon, non ? ».
+
+_À éviter :_ utiliser « complaisance » pour toute mauvaise réponse qui se trouve vous plaire. Sans le test de diagnostic, le terme n'a pas plus de valeur que « faux ».
+
+_En pratique :_
+
+« Il a dit que mon plan de refactoring avait l'air super, puis je lui ai demandé “t'es sûr ?” et il a tout renié. »
+
+« Complaisance classique — il a d'abord approuvé parce que tu sonnais confiant, puis a cédé parce que tu sonnais dubitatif. La qualité du plan n'a pas changé, ton ton oui. Réinitialise et redemande sans signaler quoi que ce soit dans un sens ou l'autre. »
+
+### Hallucination
+
+Une sortie de **modèle** fausse avec assurance. Deux variantes, avec des causes et des solutions différentes :
+
+| Variante | Ce qui cloche | Cause | Solution |
+| --- | --- | --- | --- |
+| _Factualité_ | Faits inventés ou faux sur le monde — une fonction qui n'existe pas, une mauvaise signature d'API, une fausse citation | Trous de **connaissance paramétrique**, souvent après la **date de coupure des connaissances** | Charger la bonne **connaissance contextuelle** |
+| _Fidélité_ | La sortie dérive de la connaissance contextuelle chargée, des instructions de l'utilisateur, ou du raisonnement antérieur du modèle lui-même | **Dégradation de l'attention** ; s'aggrave dans la **dumb zone** | **Réinitialiser** ou **compacter** |
+
+La **prédiction du prochain token** produit une sortie fluide, que le fait sous-jacent soit réel ou non — le modèle n'a aucun signal interne lui indiquant qu'il ne sait pas quelque chose, donc une méthode inventée arrive avec le même registre assuré qu'une méthode correcte. Le code halluciné est plausible par construction : c'est ce à quoi l'API _ressemblerait_ si elle existait, ce qui est exactement ce qui lui permet de passer une revue superficielle et d'échouer seulement à l'exécution.
+
+Vous devez savoir quelle variante vous observez, parce que la solution de l'une aggrave l'autre. Factualité veut dire connaissance manquante : la solution consiste à ajouter du contexte — la doc, les définitions de type, le fichier. Fidélité veut dire que la connaissance est présente mais perd la compétition pour l'attention : la solution consiste à retirer du contexte. Diagnostiquez à tort de la fidélité comme de la factualité et vous collez plus de docs, ce qui fait grossir le contexte et aggrave la dérive. Quand l'agent se trompe, vérifiez si l'information correcte était déjà en contexte avant de décider quel problème vous avez.
+
+_À éviter :_ « hallucination » comme simple synonyme de « faux » — sans nommer la variante, le terme n'a aucune valeur diagnostique.
+
+_En pratique :_
+
+« Il a halluciné une méthode `parseAsync` sur le schéma. »
+
+« Factualité ou fidélité ? »
+
+« La méthode existe dans la doc que j'ai collée — il a juste arrêté de la lire après le tour quarante. »
+
+« Fidélité, alors. Compacte et recharge, ne t'embête pas à ajouter plus de docs. »
+
+### Connaissance paramétrique
+
+Ce que le **modèle** « sait » depuis l'**entraînement**, stocké dans ses **paramètres**. Figée au moment de l'entraînement — le modèle ne peut ni voir ni mettre à jour ses propres paramètres. Le détail se perd dans la compression : des milliards de faits s'entassent dans un nombre fixe de paramètres, et les faits rares s'estompent. Source de fluidité sur les sujets courants, et de fabrication sur les sujets rares. Contrepartie de la **connaissance contextuelle**.
+
+La connaissance paramétrique n'est pas stockée comme des faits. L'entraînement ne donne jamais au modèle une base de données où chercher des choses ; il ajuste les paramètres jusqu'à ce que le modèle prédise bien le texte, et un modèle qui prédit bien le texte sur un sujet se comporte comme s'il connaissait le sujet. La fiabilité de la connaissance suit la fréquence d'apparition dans les données d'entraînement : un sujet avec des millions d'exemples est reproduit avec précision, pour un sujet avec seulement une poignée d'exemples, le modèle devine à partir de ce à quoi ressemblent des sujets similaires. Reproduire et deviner sont le même processus pour le modèle, donc il ne peut pas distinguer lequel des deux il est en train de faire. Une réponse fabriquée arrive avec la même fluidité qu'une réponse correcte. L'**hallucination**, c'est le modèle qui devine mal.
+
+La connaissance paramétrique vieillit aussi. Les paramètres arrêtent de changer à la **date de coupure des connaissances**, donc une bibliothèque sortie ou renommée après cette date n'existe pas dans les paramètres, et une API qui a changé est mémorisée sous son ancienne forme.
+
+Pour les deux types de trous — trop rare et trop récent — le remède est le même : la connaissance ne peut pas être ajoutée aux paramètres, elle doit donc être fournie comme connaissance contextuelle à la place.
+
+_En pratique :_
+
+« Il écrit du React impeccable mais invente des méthodes sur notre SDK interne. »
+
+« React est dense en connaissance paramétrique — des millions d'exemples d'entraînement. Ton SDK ne l'est pas, donc le modèle comble avec des formes plausibles. Charge la doc du SDK en contexte. »
+
+### Date de coupure des connaissances
+
+La date au-delà de laquelle un **modèle** n'a plus de **connaissance paramétrique**. Les bibliothèques, API et événements postérieurs à la coupure sont des pièges à fabrication, sauf si leur doc est chargée comme **connaissance contextuelle**. Chaque sortie de modèle a sa propre coupure.
+
+La coupure existe à cause de la façon dont les modèles sont fabriqués : l'**entraînement** fige un instantané de texte dans les **paramètres** du modèle, et après ça les paramètres sont figés. Le modèle ne sait pas que sa connaissance a une limite — interrogé sur quelque chose après la coupure, il ne refuse pas, il extrapole à partir de ce qu'il connaît de plus proche. C'est ce qui rend le piège silencieux : du code écrit contre une ancienne version d'une bibliothèque a l'air plausible, compile souvent, et échoue sur les parties qui ont changé.
+
+La solution est toujours la même : faire entrer l'information à jour dans le **contexte**. Charger le changelog, pointer vers les définitions de type de la version installée, ou faire lire à l'agent la doc depuis le web. Tout ce qui est en contexte l'emporte sur ce qui n'est pas dans les paramètres.
+
+_En pratique :_
+
+« Il n'arrête pas d'écrire la syntaxe du SDK v3 — on est en v5. »
+
+« La v5 est sortie après la date de coupure des connaissances. Charge le changelog de la v5 comme connaissance contextuelle, sinon il continuera à fabriquer à partir de l'ancienne version paramétrique. »
+
+### Connaissance contextuelle
+
+Des faits que l'**agent** peut lire directement dans le **contexte** en ce moment — la tâche de l'utilisateur, des fichiers que l'agent a lus, des **résultats d'outils**, le contenu d'**AGENTS.md** chargé au début de la **session**. Contrepartie de la **connaissance paramétrique** : la paramétrique est _rappelée_ depuis les paramètres ; la contextuelle est _lue_ depuis la **fenêtre**. Les **hallucinations** sont bien moins fréquentes quand l'agent travaille à partir de connaissance contextuelle — la réponse est juste sous ses yeux, pas déterrée d'une mémoire floue.
+
+Des deux types de connaissance, seule la contextuelle est sous votre contrôle. Les paramètres sont figés, donc la seule façon de donner au **modèle** une connaissance qui lui manque — un SDK interne, une bibliothèque sortie après la **date de coupure des connaissances**, une décision prise hier — c'est de la mettre dans le contexte. Une bonne partie du travail pratique de codage IA se résume à ça : mettre les bons faits devant le modèle au moment où il en a besoin.
+
+Quand connaissance contextuelle et paramétrique entrent en conflit, la contextuelle gagne généralement. Collez la doc actuelle de l'API et le modèle la suit plutôt que sa mémoire périmée de l'ancienne API — même si l'ancienne version peut encore transparaître, surtout loin dans une longue session. Si l'agent revient sans cesse à un motif obsolète malgré la doc chargée, c'est de la connaissance paramétrique qui fuit au-delà de la contextuelle ; répéter la correction ou la rapprocher du travail aide.
+
+Contrairement à la connaissance paramétrique, la connaissance contextuelle coûte quelque chose à utiliser. Tout ce qui est chargé dans la fenêtre dépense des **tokens** et rivalise pour le **budget d'attention** du modèle, donc en charger plus n'est pas automatiquement mieux — le but, c'est les faits pertinents dans la fenêtre, pas tous les faits.
+
+_Réservez ce terme_ uniquement pour le contraster avec la connaissance paramétrique ; sinon, dites simplement **contexte**.
+
+_À éviter :_ « mémoire de travail » — la connaissance contextuelle, c'est ce qui est dans la fenêtre _maintenant_ ; un **système de mémoire** est ce qui fait entrer du contenu inter-sessions dedans. Échelles différentes, ne confondez pas.
+
+_En pratique :_
+
+« Pourquoi il excelle sur l'API quand je colle la doc et fabrique quand je ne le fais pas ? »
+
+« Avec la doc, c'est de la connaissance contextuelle — il lit directement. Sans, c'est paramétrique et les endpoints rares s'estompent. »
+
+### Relation d'attention
+
+En prédisant chaque **token**, le **modèle** prend en compte tous les autres tokens du **contexte** — certains fortement, d'autres à peine. L'appariement entre deux tokens est une **relation d'attention**, et les paires significatives (« elle » avec « Sarah », ou un appel `getUser()` avec sa définition `function getUser`) s'influencent mutuellement plus que les paires sans rapport. Un contexte de N tokens comporte de l'ordre de N² relations.
+
+Ces appariements sont là où vit la compréhension apparente du modèle. Quand il résout un pronom, c'est parce que la relation d'attention entre « elle » et « Sarah » est forte. Quand il appelle une fonction avec les bons arguments, c'est la relation entre le site d'appel et la définition lue plus tôt qui fait le travail. Rien de tout ça n'est consulté dans une table — c'est calculé à neuf à chaque **requête au fournisseur de modèle**, pour chaque paire.
+
+Le chiffre en N² mérite qu'on s'y attarde, parce qu'il croît plus vite que l'intuition ne le suggère :
+
+| Taille de contexte | Appariements (~N²) |
+| --- | --- |
+| 1 000 tokens | ~1 million |
+| 10 000 tokens | ~100 millions |
+| 100 000 tokens | ~10 milliards |
+
+Chaque appariement est aussi calculé plus d'une fois. Les modèles ont plusieurs têtes d'attention — les chiffres exacts pour les modèles de pointe ne sont pas publiés, mais cinquante à cent est une estimation raisonnable — et chaque tête calcule sa propre version de chaque relation. Donc chaque appariement du tableau ci-dessus est dupliqué sur chaque tête. Ça fait beaucoup d'appariements.
+
+Seul un petit nombre de ces relations compte pour une tâche donnée. L'appariement entre votre instruction et le code qu'elle régit est l'un des rares qui comptent vraiment ; presque tout le reste dans le lot est du bruit. Et les deux croissent à des rythmes différents : les relations qui comptent restent à peu près constantes, tandis que le lot total croît de façon quadratique avec la taille du contexte. À 1 000 tokens, l'appariement qui vous intéresse est un sur un million ; à 100 000 tokens, c'est un sur dix milliards. C'est l'arithmétique derrière le **budget d'attention**, et la **dégradation de l'attention** est ce que ça donne comme sensation quand les relations qui comptent n'obtiennent qu'une part trop maigre.
+
+_En pratique :_
+
+« Il confond sans cesse les deux symboles `user` dans le diff — on dirait qu'on est dans la **dumb zone**. »
+
+« Ouais, la relation d'attention entre chaque site d'appel et sa déclaration se bat contre l'autre — même forme de token, liaison différente. Renomme l'un des deux et les appariements se précisent. »
+
+### Budget d'attention
+
+Chaque **token** a une quantité finie d'influence à distribuer sur le reste du **contexte**. Une forte influence sur une **relation** laisse moins pour les autres. Le budget est par token et ne grandit pas quand le contexte grandit, ce qui explique pourquoi les longues **sessions** se diluent.
+
+Pensez-y comme signal et bruit. Votre instruction est un signal à volume fixe ; chaque autre token de la **fenêtre de contexte** est un son concurrent. L'instruction ne devient jamais plus silencieuse — elle est toujours là, caractère pour caractère — mais à mesure que le contexte grandit, la pièce devient plus bruyante autour d'elle, et le rapport signal-bruit chute. Une instruction qui était le son le plus fort à 10k tokens de contexte devient un bourdonnement de fond à 150k. C'est le mécanisme derrière la **dégradation de l'attention** : le modèle n'oublie pas ; le signal se perd dans le bruit.
+
+Le symptôme se lit comme de la désobéissance — l'agent a accepté une contrainte tôt puis en dérive, et recoller la contrainte n'aide que brièvement. La cause n'est pas l'instruction ; c'est tout le reste dans la fenêtre qui rivalise avec elle.
+
+Ce que vous pouvez contrôler, c'est ce qui entre dans le contexte. Le contenu qui ne sert pas la tâche n'est pas neutre — c'est du bruit par-dessus tout ce qui sert. Gardez la fenêtre petite, **réinitialisez** quand le contexte accumulé ne rapporte plus, et répétez les contraintes importantes au lieu de faire confiance à leur mention précoce pour tenir.
+
+_En pratique :_
+
+« Pourquoi continue-t-il d'ignorer le schéma que j'ai collé en haut ? »
+
+« On est bien avancés dans la **dumb zone** — le budget d'attention de chaque token est fixe, mais le contexte n'a cessé de grandir. Le signal sur le schéma est maintenant en concurrence avec des milliers de tokens plus récents. »
+
+### Dégradation de l'attention
+
+À mesure qu'une **session** grandit, le **budget d'attention** de chaque **token** se répartit sur davantage de concurrents. Le signal sur une **relation** significative rétrécit ; le bruit du **contexte** non pertinent s'accumule. Même **modèle**, mêmes **paramètres** — juste plus de bouches à nourrir depuis la même assiette. Cause de l'effet **smart zone / dumb zone**.
+
+Ça se présente comme le modèle qui devient pire en cours de session : des contraintes qu'il suivait depuis une heure commencent à glisser, il repose des questions déjà répondues, il écrit du code qui ignore un fichier lu plus tôt. Rien n'a changé chez le modèle — la seule variable, c'est la quantité de contexte sur laquelle il porte maintenant son attention.
+
+C'est graduel, ce qui rend ça difficile à repérer de l'intérieur de la session. Il n'y a ni erreur ni seuil ; chaque **tour** n'est que légèrement pire que le précédent, et le temps que les glissements deviennent évidents, vous êtes dans la dumb zone depuis un moment.
+
+On récupère en retirant du contexte, pas en en ajoutant. Recoller l'instruction ignorée ajoute un concurrent de plus dans la même fenêtre encombrée et n'aide que brièvement. Ce qui marche : **réinitialiser** et recharger seulement ce dont la tâche a besoin, ou **compacter**, ou faire une **passation** vers une session fraîche. Traitez le suivi d'instructions déclinant comme un signal sur la longueur du contexte, pas sur le modèle.
+
+_En pratique :_
+
+« Il est profondément dans la dumb zone — il invente des génériques qui ne sont pas dans le fichier de type. »
+
+« Dégradation de l'attention. Les définitions de type sont toujours en contexte, mais le signal dessus est enterré sous tout ce qu'on a ajouté depuis. Réinitialise et recharge. »
+
+### Smart zone
+
+Tôt dans une **session**, l'**agent** est dans une « smart zone » — affûté, concentré, la mémoire est bonne. À mesure que la session grandit, il dérive vers une « dumb zone » : plus bâclé, oublieux, plus d'erreurs — et plus d'**hallucinations** de fidélité. Même **modèle**, même **harnais** — juste plus de **contexte**. L'effet ressenti de la **dégradation de l'attention**. Sur les modèles de pointe, la dumb zone commence généralement autour de 125 000-150 000 **tokens** — bien que ce soit débattu. **Réinitialisez** ou **compactez** quand la session gonfle ; ne forcez pas le passage.
+
+Le déclin est graduel, ce qui le rend facile à manquer. Il n'y a ni message d'erreur ni frontière visible ; l'agent se met juste à performer un peu moins bien, puis nettement moins bien. Signes courants : il oublie une instruction donnée vingt tours plus tôt, répète une erreur déjà corrigée, ou affirme avec assurance quelque chose que le contexte contredit. Comme la glissade est douce, la réaction habituelle est de forcer le passage et de réexpliquer — ce qui ajoute du contexte et aggrave le problème.
+
+Les zones ne suivent pas la limite de la **fenêtre de contexte**. Une session peut être profondément dans la dumb zone alors que la majeure partie de la fenêtre est encore libre : la limite, c'est là où le harnais refuse de continuer, mais la qualité chute bien avant ça. Planifiez autour de la smart zone, pas de la fenêtre — le budget pratique pour une tâche, ce sont les tokens sur lesquels l'agent travaille bien, pas ceux qu'il peut techniquement contenir.
+
+La smart zone est un budget, et le travail sans rapport le dépense. Chaque tâche faite dans une session en consomme, donc démarrer une deuxième tâche dans la même session veut dire la démarrer plus près de la dumb zone. Faire une tâche par session donne à chaque tâche la partie la plus affûtée de la session. Quand une seule tâche est plus grande qu'une smart zone, découpez-la : **passation** ou compaction à une frontière naturelle, et laissez une session fraîche faire le morceau suivant.
+
+_En pratique :_
+
+« Il a réussi les trois premiers composants et a juste massacré le quatrième. »
+
+« Tu es sorti de la smart zone — même modèle, juste profondément dans la dumb zone maintenant. Compacte et recharge le plan, le prochain composant va passer. »
+
+<Separator/>
+
+## Section 5 — Passations
+
+### Réinitialisation
+
+Terminer la **session** en cours et en démarrer une nouvelle. Le prochain message commence avec une session vide et une **fenêtre de contexte** vide. Généralement à l'initiative de l'utilisateur.
+
+La réinitialisation est le remède à un contexte pollué. Une session accumule tout : tentatives ratées, mauvaises pistes, **résultats d'outils** périmés, plans abandonnés. Le **modèle** relit tout ça à chaque **tour**, et le mauvais historique tire vers le bas le nouveau travail. Loin dans une longue session, l'**agent** devient plus vague et moins obéissant — des instructions données clairement sont ignorées, la qualité glisse, et le harceler pour qu'il fasse mieux n'aide pas, parce que le bruit dans lequel il patauge est toujours dans son **contexte**. Réinitialiser retire le bruit.
+
+Réinitialiser n'efface pas la conversation. La plupart des **harnais** gardent l'historique de session sur votre ordinateur, donc la transcription est toujours là à lire ou à reprendre. Ce qui disparaît, c'est l'état de travail de l'agent : le modèle est **sans état**, donc la nouvelle session ne sait rien de ce que l'ancienne savait. Si la session contient des décisions ou des progrès dont la suivante aura besoin, faites d'abord écrire un **artefact de passation** à l'agent, puis démarrez la nouvelle session en pointant dessus.
+
+Comparez avec la **compaction**, qui résume la session dans le nouveau contexte au lieu de démarrer vide. Réinitialiser est l'outil le plus brutal : rien ne survit, y compris le rebut.
+
+_En pratique :_
+
+« Il est bloqué à boucler sur le test qui échoue. »
+
+« Réinitialise, tout simplement — démarre une session fraîche avec le doc de plan et le fichier de test. Ça ne sert à rien de se battre avec le contexte existant. »
+
+### Passation
+
+Transférer le **contexte** d'un **agent** d'une **session** à une autre. Le mécanisme de transport varie — un **artefact de passation** écrit, un résumé en mémoire (**compaction**), et d'autres. Distinct de la **réinitialisation** (aucun transfert du tout). Les raisons varient : changer de rôle (planificateur → implémenteur), lancer une exécution **AFK**, se répartir sur des sessions parallèles, ou libérer de la place dans la **fenêtre de contexte**.
+
+La session réceptrice démarre avec zéro contexte — le **modèle** est **sans état**, et rien de l'ancienne session n'est visible pour la nouvelle. Tout ce dont la session suivante a besoin doit être transporté explicitement ; tout le reste a disparu. « Pas de chemin de retour » est la contrainte qui façonne le transport : la nouvelle session ne peut pas demander à l'ancienne ce qu'elle voulait dire, donc la matière transportée doit tenir debout toute seule.
+
+| Mécanisme | Forme | Propriétés |
+| --- | --- | --- |
+| Artefact de passation | Fichier dans l'**environnement** | Vous pouvez le lire et le corriger avant que quoi que ce soit n'en dépende ; réutilisable sur de nombreuses sessions |
+| Compaction | Résumé dans la fenêtre de contexte | Automatique et bon marché ; plus difficile à inspecter ; alimente un seul successeur |
+
+L'échec visible d'une mauvaise passation, c'est la relitigation : la nouvelle session rouvre des décisions que l'ancienne avait tranchées, parce que le transport a enregistré ce qui a été décidé mais pas pourquoi. Jugez une passation par ce qu'une session à zéro contexte pourrait en faire.
+
+_En pratique :_
+
+« La session de planification devient lourde — je continue comme ça ? »
+
+« Fais une passation. Écris les décisions dans un doc, réinitialise, démarre l'implémentation dans une session fraîche qui le lit. »
+
+### Source primaire
+
+Une source de vérité sous sa forme originale — le code, la transcription de conversation, le log brut, la réponse API réelle. Pas un compte-rendu de la chose ; la chose elle-même. Contrepartie de la **source secondaire**.
+
+Si vous voulez savoir ce que fait votre codebase, le code est la source primaire. La doc, le diagramme d'architecture et le README sont tous des descriptions du code — exactes au moment où elles ont été écrites, chacune sur son propre calendrier depuis. Quand un **agent** affirme avec assurance quelque chose de faux sur votre projet, la question à poser, c'est à partir de quelle source il travaillait : un agent qui a lu une doc hérite du caractère périmé de la doc ; un agent qui a lu le code lit la vérité actuelle.
+
+Le coût est ce qui empêche les sources primaires d'être le choix par défaut. Charger une source primaire dans la **fenêtre de contexte** est coûteux — le fichier entier, la transcription entière, chaque **token** facturé comme **entrée** et en concurrence pour le **budget d'attention**. Ce que vous obtenez pour ce coût, c'est de l'exhaustivité : rien n'a été pré-filtré par le jugement de quelqu'un d'autre sur ce qui comptait. Un résumé écrit le mois dernier ne peut pas contenir le détail qui s'avère compter aujourd'hui ; la source primaire, si.
+
+Recherchez la source primaire quand la précision compte — la signature exacte, l'erreur réelle, la ligne qui lève l'exception. Une bonne partie de la gestion du **contexte** consiste à décider quand payer pour la source primaire et quand une source secondaire suffit.
+
+_En pratique :_
+
+« L'agent dit que la logique de retry recule exponentiellement, mais je le regarde marteler l'endpoint. »
+
+« Il a lu ça dans le document de conception. Pointe-le vers le vrai module de retry — travaille à partir de la source primaire quand le comportement compte. »
+
+### Source secondaire
+
+Un compte-rendu d'une **source primaire**, à un pas de distance — de la doc décrivant du code, un résumé décrivant une transcription, un rapport décrivant des résultats de recherche. Moins coûteux à charger dans la **fenêtre de contexte** que la source qu'il décrit, et intrinsèquement lossy : celui qui l'a écrit a décidé de ce qui comptait, et ce qu'il a laissé tomber est invisible pour un lecteur qui n'a que le résumé.
+
+Une bonne partie de l'ingénierie de **contexte** consiste à fabriquer des sources secondaires. La **compaction** transforme l'historique de la **session** en un résumé qui amorce la session suivante. Un **sous-agent** brûle son propre contexte sur une recherche bruyante et renvoie un court rapport. Un **artefact de passation** condense les décisions d'une session en un document que la session suivante lit. Les **systèmes de mémoire** distillent ce qu'une session a appris en notes. Chacun fait le même compromis : la fidélité contre la marge de manœuvre.
+
+Les sources secondaires échouent de deux façons. Elles sont lossy — le résumé de compaction qui a perdu la décision sur le schéma, le rapport qui n'a pas mentionné le cas limite. Et elles dérivent — la source primaire change et le compte-rendu ne suit pas, donc la doc décrit l'architecture du trimestre dernier avec l'assurance de ce trimestre. Quand un **agent** agit sur une source secondaire qui a échoué d'une façon ou d'une autre, il travaille avec assurance à partir d'une information fausse ; la solution consiste à le renvoyer vers la source primaire.
+
+Aucun des deux échecs ne fait des sources secondaires une erreur. La fenêtre de contexte est finie, et les sources primaires sont coûteuses ; sans résumés, rapports et documents de passation, rien de grand ne rentre. Le talent, c'est de savoir quels détails peuvent survivre à la perte — et de vérifier contre la source primaire quand ce n'est pas le cas. Une source secondaire bien faite porte un **pointeur de contexte** vers son original — le résumé qui nomme la transcription dont il vient, la doc qui nomme le fichier qu'elle décrit — donc quand le compte-rendu ne suffit pas, le lecteur peut suivre le pointeur plutôt que de travailler à partir de la perte.
+
+_En pratique :_
+
+« Le doc de passation dit que l'auth est fini, mais la nouvelle session trouve sans arrêt du rafraîchissement de token cassé. »
+
+« Le doc est une source secondaire — la dernière session a écrit ce qu'elle croyait, pas ce qui est vrai. Fais lancer les tests d'auth à la nouvelle session et fais confiance à la source primaire. »
+
+### Artefact de passation
+
+Un document utilisé comme mécanisme de transport pour une **passation** — écrit dans l'**environnement** par une **session** pour être lu par une autre. Les **specs**, les **tickets** et les documents de plan sont tous des artefacts de passation.
+
+La raison d'en écrire un : le **modèle** est **sans état**, donc rien dans une session ne survit à sa **réinitialisation**. Décisions, contraintes, plans à moitié terminés — tout disparaît avec le **contexte** qui les contenait. L'environnement persiste. Écrire l'état important dans un fichier le déplace quelque part où la session suivante peut le relire.
+
+L'artefact est une **source secondaire** — un compte-rendu du travail de la session, pas le travail lui-même. C'est ce qui le rend assez petit pour briefer une session fraîche, et aussi ce qui peut induire en erreur : il enregistre ce que la session qui a écrit croyait, et tout ce qu'elle a omis ou mal compris est invisible pour le lecteur. Là où une affirmation compte, la session suivante devrait la vérifier contre la **source primaire** — le code, les tests — plutôt que d'en hériter.
+
+Un bon artefact est écrit pour être lu par une session qui n'a aucun contexte. Des chemins de fichiers concrets plutôt que « le fichier dont on a parlé ». Ce qui a été décidé et pourquoi, pour que la session suivante ne relitige pas. Ce qui est fait et ce qui reste. Il est utile de dire à la session qui écrit vers où l'artefact se dirige : « écris un document de passation pour une session fraîche qui ne sait rien de ce travail ».
+
+Le mécanisme de transport alternatif est la **compaction**, qui résume en mémoire. L'artefact a deux avantages : il vit sur disque où vous pouvez le lire et le corriger avant que quoi que ce soit n'en dépende, et il peut être réutilisé — la même spec peut briefer cinq sessions parallèles.
+
+_En pratique :_
+
+« Comment je répartis ça entre l'**agent** de planification et celui d'implémentation ? »
+
+« Fais écrire un artefact de passation au planificateur — chemins de fichiers, décisions, contraintes. La session de l'implémenteur s'ouvre avec un pointeur vers l'artefact et travaille à partir de ça comme brief. »
+
+### Spec
+
+Un **artefact de passation** décrivant un travail sur plusieurs **sessions** — ce qui est construit, pas comment chaque session fait sa part. Évolue à mesure que le travail progresse. Composée de **tickets**.
+
+La spec existe parce que les sessions sont jetables et que le gros travail ne l'est pas. Tout ce qui prend plus d'une **fenêtre de contexte** d'effort a besoin d'un foyer en dehors du **contexte** — quelque part dans l'**environnement** de l'agent qui survit à la **réinitialisation**, que ce soit un fichier dans le repo, une issue GitHub, ou un tracker d'issues que l'agent peut atteindre. La spec est ce foyer : l'objectif, les contraintes, les décisions prises jusqu'ici, et la liste des tickets avec leur statut. N'importe quelle session fraîche peut la lire et savoir où en est le travail sans hériter du bruit accumulé par la session précédente.
+
+Les specs viennent dans des styles reconnaissables, hérités pour la plupart de la façon dont les équipes écrivent déjà les choses. Un _document de spécifications produit_ (PRD) penche vers le quoi et le pourquoi côté utilisateur — fonctionnalités, comportement, critères d'acceptation. Un _document de conception_ ou _RFC_ penche technique — l'approche choisie, les alternatives rejetées, les compromis. Côté minimaliste, un simple `plan.md` avec une checklist de tickets fait le même travail pour une fonctionnalité multi-sessions. Le style compte moins que le rôle : pour l'**agent**, chacun de ces formats est la même chose — l'énoncé durable d'intention qu'il lit au début de chaque session.
+
+_En pratique :_
+
+« Ça devrait tenir en une seule session ? »
+
+« Non, écris-le comme une spec — découpe-la en tickets, fais tourner chacun dans sa propre session. Essayer de tout faire dans un seul contexte va toucher la **dumb zone** avant d'être à mi-chemin. »
+
+### Ticket
+
+Un **artefact de passation** qui cadre une **session** de travail. Tient seul, ou dépend d'une **spec** comme l'un de ses enfants. Les tickets peuvent bloquer ou être bloqués par des tickets frères, donc l'ordre du travail découle de leur graphe de dépendances plutôt que d'un plan linéaire.
+
+La contrainte déterminante, c'est la taille : une session. Un ticket devrait être réalisable avant que la session ne dérive hors de la **smart zone** — et cette contrainte est testable. Si les sessions sur vos tickets se dégradent régulièrement avant que le travail soit fini, les tickets sont trop gros ; découpez-les. Si chaque session passe l'essentiel de son **contexte** en mise en place avant de faire cinq minutes de travail, ils sont trop petits ; fusionnez-les.
+
+Un bon ticket est écrit pour un lecteur sans autre contexte. L'objectif, les critères d'acceptation, et des **pointeurs de contexte** vers les fichiers et décisions pertinents — assez pour que la session puisse commencer à travailler sans redériver ce que la précédente savait.
+
+Le graphe de dépendances est aussi ce qui débloque le parallélisme. Les tickets indépendants — les feuilles du graphe — peuvent chacun tourner dans leur propre session en même temps. C'est une façon efficace de faire tourner plusieurs agents à la fois.
+
+_En pratique :_
+
+« Par où je commence sur la spec de migration ? »
+
+« Regarde le graphe de tickets — le changement de schéma bloque le backfill, le backfill bloque le changement d'API. Choisis une feuille et fais tourner une session dessus. »
+
+### Compaction
+
+Une **passation** faite en mémoire : l'historique de la **session** précédente est résumé, et le résumé amorce une session fraîche. Lossy par conception : la transcription est une **source primaire**, le résumé une **source secondaire** — du détail échangé contre de la marge de manœuvre. Déclenchée manuellement par l'utilisateur, ou automatiquement via la **compaction automatique**.
+
+Le mécanisme : la **fenêtre de contexte** est finie, et une longue session la remplit — chaque **résultat d'outil**, chaque fichier lu, chaque mauvaise piste reste dans l'historique. Quand ça devient lourd, le **harnais** demande au **modèle** de résumer la session, jette l'historique original, et amorce une session fraîche avec le résumé. Tout ce qui n'a pas fait le résumé disparaît du contexte. Certains harnais adoucissent ça en gardant l'ancienne transcription sur disque et en laissant un **pointeur de contexte** vers elle dans le résumé — la source secondaire renvoie vers sa source primaire, donc un détail perdu par le résumé peut être récupéré en relisant l'original.
+
+Le résumé est écrit par le modèle, donc on peut le guider par prompt. « Préserve les décisions de schéma » rend l'artefact généré plus délibéré. Le timing compte aussi — compactez à une frontière de phase, une fois le plan arrêté, pas en plein milieu d'une tâche.
+
+À contraster avec la **réinitialisation**, qui jette tout et repart à froid : la compaction essaie de transporter l'essentiel ; la réinitialisation parie que c'est déjà écrit quelque part de mieux.
+
+_En pratique :_
+
+« Le contexte devient lourd et j'ai encore la passe de test à faire. »
+
+« Compacte avant de commencer — écris ce qui doit survivre dans le prompt de résumé pour que la nouvelle session garde les décisions de schéma et laisse tomber l'exploration. »
+
+### Compaction automatique
+
+**Compaction** déclenchée automatiquement par le **harnais** quand la **fenêtre de contexte** approche du plein.
+
+Le harnais surveille à quel point la fenêtre de contexte est pleine. Quand elle franchit un seuil — souvent autour de 80 % — il s'arrête, demande au **modèle** de résumer la **session** jusqu'ici, et amorce une session fraîche avec le résumé. Le travail continue ensuite comme si de rien n'était.
+
+Sauf que quelque chose s'est passé. La compaction est lossy, et la compaction automatique est lossy à un moment que vous n'avez pas choisi. Une compaction manuelle se produit à une frontière de phase, quand vous pouvez dire au modèle quoi préserver. La compaction automatique se déclenche en plein milieu d'une tâche, dès que le seuil est atteint — peut-être à mi-chemin d'un refactoring, avec le résumé décidant lui-même lesquelles de vos décisions valaient la peine d'être gardées. Le symptôme classique : l'**agent** continue avec assurance mais a discrètement oublié une contrainte établie une heure plus tôt, et vous ne le remarquez que quand son travail commence à la contredire.
+
+La défense, c'est de ne pas la laisser se déclencher. Surveillez l'indicateur de contexte et compactez manuellement à une frontière naturelle, ou écrivez les décisions dans un document de plan ou un **artefact de passation** sur disque, où aucun résumé ne peut les perdre. La plupart des harnais permettent aussi de personnaliser la marge — déplacer le seuil plus tôt ou plus tard, ou désactiver complètement la compaction automatique — pour ajuster la marge de manœuvre gardée avant qu'elle ne se déclenche.
+
+_En pratique :_
+
+« Il ne semble pas se souvenir de ce qu'on a décidé sur le schéma plus tôt. »
+
+« La compaction automatique s'est déclenchée entre deux **tours** — les décisions précoces ont été résumées et on a dû perdre quelque chose. Recharge le doc de plan, ou compacte manuellement la prochaine fois pour contrôler ce qui est gardé. »
+
+<Separator/>
+
+## Section 6 — Mémoire et pilotage
+
+### Système de mémoire
+
+Un système qui tente de rendre un **agent** **avec état** à travers les **sessions**. Persiste l'information dans l'**environnement** pendant une session et la recharge dans la **fenêtre de contexte** au début des sessions futures, pour que l'agent transporte une continuité au-delà d'une **réinitialisation** par l'utilisateur.
+
+Un système de mémoire a deux moitiés. Le chemin d'écriture : pendant une session, l'agent enregistre ce qu'il a appris — une préférence que vous avez énoncée, un fait sur le projet — comme des fichiers dans l'environnement. Le chemin de lecture : au démarrage de la session, le **harnais** recharge ces fichiers, ou un index d'entre eux, dans la fenêtre de contexte. De nombreux harnais embarquent leur propre système de mémoire — le `/memory` de Claude Code en est un — mais vous pouvez aussi en construire un vous-même : un répertoire de notes plus une instruction dans **AGENTS.md** pour le consulter.
+
+Les mêmes compromis que pour tout contenu toujours chargé s'appliquent. Les mémoires s'accumulent, donc la plupart des systèmes chargent un index d'une ligne et laissent les corps derrière des **pointeurs de contexte** plutôt que de tout mettre en ligne. Et les mémoires sont des **sources secondaires**, donc elles dérivent : un fait enregistré en mars est chargé avec la même confiance en juin, une fois que le projet a avancé. Un système de mémoire a besoin d'être élagué, tout comme AGENTS.md.
+
+_En pratique :_
+
+« Je n'arrête pas de devoir lui redire que je suis sur Postgres, pas MySQL. »
+
+« Câble un système de mémoire — fais-lui écrire ce qu'il apprend dans le **système de fichiers** au premier **tour**, recharge-le au démarrage de session. Le **modèle** lui-même est **sans état** ; la couche de mémoire simule la continuité. »
+
+### AGENTS.md
+
+Un fichier dans l'**environnement** que le **harnais** charge dans la **fenêtre de contexte** au démarrage de la **session** — le mandat permanent du projet à l'**agent**. Convention inter-harnais ; certains harnais ont aussi leur propre variante (celle de Claude Code, c'est CLAUDE.md).
+
+Comme il se charge automatiquement, c'est une façon d'éviter de vous répéter d'une session à l'autre. Le **modèle** est **sans état** — une correction donnée dans une session a disparu dans la suivante, et vous finissez par dire à chaque session fraîche que le projet utilise pnpm, que les tests tournent avec un flag particulier, qu'un répertoire est généré et ne doit pas être touché. Quand vous avez corrigé l'agent deux fois pour la même chose, cette correction est candidate à une ligne dans AGENTS.md.
+
+Le contenu adapté est tout ce que l'agent ne peut pas dériver du code : commandes de build et de test, conventions que la codebase ne rend pas évidentes, contraintes dures (« ne jamais éditer le client généré »). Court et déclaratif — c'est un brief, pas de la documentation.
+
+Le compromis, c'est que tout ce qu'il contient est toujours chargé. Les instructions s'accumulent, la plupart sans rapport avec une tâche donnée, et un long AGENTS.md coûte à la fois des tokens et se dilue lui-même — plus il y a d'instructions en contexte, moins le modèle en suit fidèlement une seule.
+
+_À éviter :_ utiliser AGENTS.md pour du contenu qui devrait être en **divulgation progressive** — tout ce qu'il contient paie un coût en **tokens** à chaque **tour**, dans chaque session, que cette session en ait besoin ou non. Un guide de style peut aller derrière un **skill** ou un **pointeur de contexte** à la place ; gardez AGENTS.md pour les lignes qui s'appliquent partout.
+
+_En pratique :_
+
+« Pourquoi chaque session démarre-t-elle avec déjà 4k tokens brûlés ? »
+
+« Regarde AGENTS.md — quelqu'un a collé tout le guide de style dedans au lieu de le mettre derrière un skill. »
+
+### Divulgation progressive
+
+Ne charger que le **contexte** dont un **agent** a besoin maintenant, avec des **pointeurs de contexte** vers le reste. Emprunté au design d'interface, où ça veut dire ne montrer aux utilisateurs que les contrôles pertinents pour leur tâche actuelle et cacher le reste derrière un clic.
+
+La technique existe parce que le contexte coûte deux fois. Chaque **token** chargé d'avance est facturé comme **tokens d'entrée** à chaque **tour**, et chaque token dépense du **budget d'attention** que l'agent en ait besoin ou non. Un **AGENTS.md** bourré du guide de style complet, du runbook de déploiement et des conventions de base de données rend l'agent moins bon sur les trois — les instructions qui comptent pour la tâche en cours sont diluées par celles qui ne comptent pas. Le signe révélateur, c'est un agent qui ignore des règles dont vous savez qu'elles sont dans son contexte : elles y sont, mais enterrées.
+
+La divulgation progressive inverse ça. Gardez la couche toujours chargée petite — une phrase par sujet et un pointeur vers l'endroit où vit le détail. L'agent lit le guide de style quand il écrit un composant, le runbook de déploiement quand il déploie, et ni l'un ni l'autre quand il corrige un test. Les **skills** sont le pattern intégré au **harnais** : une courte description chargée à chaque **session**, les instructions complètes seulement quand déclenchées.
+
+_En pratique :_
+
+« Je devrais tout balancer le guide de style dans AGENTS.md ? »
+
+« Non — divulgation progressive. Référence le guide de style comme un skill que l'agent charge quand il a réellement besoin d'écrire un composant. AGENTS.md paie le coût en tokens à chaque tour. »
+
+### Pointeur de contexte
+
+Une mention dans un document qui pointe vers un autre, pour que l'**agent** puisse le faire entrer dans la **fenêtre de contexte** seulement quand la tâche l'exige. L'unité à partir de laquelle la **divulgation progressive** est construite.
+
+La raison d'utiliser un pointeur (plutôt que de mettre le contenu en ligne), c'est le coût. Un pointeur est une ligne dans la fenêtre de contexte. Le document derrière peut faire des milliers de **tokens**, mais ces tokens ne coûtent rien tant que l'agent ne suit pas réellement le pointeur. Mettez en ligne un runbook de 2 000 tokens dans **AGENTS.md** et chaque **session** le paie ; remplacez-le par « processus de déploiement : voir `internal/deploy.md` » et seules les sessions qui déploient le chargent un jour. L'agent suit le pointeur avec un **appel d'outil** quand la tâche correspond.
+
+Un pointeur a besoin de deux éléments pour fonctionner : un chemin stable, et assez de description pour que l'agent sache si ça vaut le coup de le suivre. Un chemin nu est un pointeur que l'agent n'a aucune raison de suivre ; « voir `internal/deploy.md` » sans indice sur le contenu se fait ignorer par une session qui en avait pourtant besoin. Écrivez la ligne pour qu'elle corresponde à la façon dont les tâches se présentent : « release, déploiement ou rollback — lisez d'abord `internal/deploy.md` ».
+
+Les pointeurs sont partout une fois qu'on les cherche : des lignes dans AGENTS.md, des descriptions de **skill** (le harnais charge la description ; le corps du skill attend derrière), des noms de fichiers dans un listing de répertoire, des liens entre docs.
+
+Un pointeur peut aussi relier une **source secondaire** à la **source primaire** dont elle est dérivée — le résumé de compaction qui nomme la transcription originale, la doc qui nomme le fichier source qu'elle décrit. Ça rend le caractère lossy de la source secondaire récupérable : quand le résumé s'avère insuffisant, l'agent suit le pointeur et lit l'original, au lieu de travailler à partir de ce que le résumé a gardé.
+
+_À éviter :_ « référence » — trop sec ; ne transmet pas que le suivre fait entrer plus de contexte. « Portail » — trop fleuri.
+
+_En pratique :_
+
+« AGENTS.md devient énorme. »
+
+« La majeure partie devrait être des pointeurs de contexte, pas du contenu. Garde les règles toujours actives en ligne ; transforme le runbook de déploiement et le guide de style en skills et laisse un pointeur de contexte derrière. »
+
+### Skill
+
+Une capacité enseignable regroupée en une unité — instructions et ressources pour bien faire une tâche, gardées dans l'**environnement** jusqu'à ce qu'un **pointeur de contexte** la fasse entrer dans la **fenêtre de contexte** pour la tâche en cours. L'unité de **divulgation progressive** dans un **harnais**.
+
+Les skills sont un standard ouvert, défini sur [agentskills.io](https://agentskills.io) — développé à l'origine par Anthropic et depuis adopté par la plupart des grands harnais, donc un skill écrit une fois fonctionne partout. Le format est un dossier contenant :
+
+- Un fichier `SKILL.md` — des métadonnées (un nom et une description, au minimum) plus les instructions elles-mêmes
+- Optionnellement, des scripts que l'**agent** peut exécuter
+- Optionnellement, des templates et du matériel de référence vers lesquels les instructions pointent
+
+Seuls le nom et la description sont en **contexte** par défaut. Quand la tâche de l'agent correspond, il charge le reste. Jusque-là, le skill n'occupe presque aucune place — une phrase ou deux de **tokens**, aussi volumineuses que soient ses instructions complètes.
+
+Ça distingue les skills d'**AGENTS.md**, qui est chargé dans chaque **session** quelle que soit la tâche. Un skill est lu quand un certain type de travail se présente — publier une release, créer un nouveau service, écrire une migration — et ignoré le reste du temps.
+
+_À éviter :_ « **outil** » — un outil est ce que l'agent _appelle_ ; un skill est des instructions qu'il _lit_.
+
+_En pratique :_
+
+« Où je devrais mettre le runbook de déploiement ? »
+
+« Comme un skill — l'agent le charge seulement quand la tâche implique un déploiement. Dans AGENTS.md ça brûlerait des tokens à chaque **tour** pour quelque chose qu'on utilise une fois par semaine. »
+
+### Sous-agent
+
+Un **agent** créé par un autre agent via un **appel d'outil**. Tourne dans sa propre **session** avec sa propre **fenêtre de contexte**, et rapporte un seul **résultat d'outil** en retour. Distinct d'une **passation** — le parent attend spécifiquement un retour ; une passation n'a pas de chemin de retour. **Ne peut pas créer d'autres sous-agents** — l'arbre n'a qu'un seul niveau de profondeur. Les sous-agents existent pour isoler le **contexte**, pas pour composer des hiérarchies.
+
+Le but, c'est de garder le travail bruyant hors du contexte du parent. Une recherche large ou une longue expédition de lecture de fichiers produit des pages de résultats d'outils, dont la plupart ne comptent que le temps de trouver la réponse. Exécutez ça dans le parent et tout reste dans le contexte du parent pour le reste de la session. Exécutez ça dans un sous-agent et le bruit remplit une fenêtre jetable à la place — seul le rapport final atterrit dans le contexte du parent. Le rapport est une **source secondaire** : le parent obtient le compte-rendu du sous-agent sur ce qu'il a trouvé, pas les résultats bruts, donc tout ce que le rapport omet est invisible pour le parent.
+
+Les sous-agents tournent aussi en parallèle — un parent peut en lancer plusieurs à la fois sur des morceaux de travail indépendants.
+
+_En pratique :_
+
+« Les résultats de grep font exploser mon contexte. »
+
+« Lance un sous-agent pour faire la recherche — il brûlera sa propre fenêtre de contexte sur le bruit et rapportera les deux chemins de fichiers dont tu as réellement besoin. »
+
+<Separator/>
+
+## Section 7 — Patterns de travail
+
+### Humain dans la boucle
+
+Un pattern de travail où un ou plusieurs humains collaborent avec l'**agent** pendant une **session** — en revoyant, redirigeant, ou co-construisant en temps réel. L'humain est présent et engagé, pas seulement en train de filtrer des actions individuelles.
+
+Le contraste se fait avec le travail **AFK**, où l'agent tourne sans supervision et vous jugez le résultat après coup. Humain dans la boucle veut dire attraper les problèmes pendant qu'ils sont encore bon marché : vous voyez l'agent viser le mauvais fichier, mal lire une exigence, ou partir dans une impasse, et vous le redirigez en une phrase — plutôt que de découvrir vingt minutes de travail assuré construit sur cette erreur. Les agents ne savent pas de façon fiable quand ils sont hors piste ; livrés à eux-mêmes, ils ont tendance à avancer plutôt qu'à s'arrêter pour demander.
+
+Le pattern qui convient dépend du travail. Les tâches bien spécifiées, à faible risque, faciles à vérifier conviennent à l'AFK. Les tâches ambiguës, irréversibles, ou où vous auriez du mal à revoir le résultat fini — une migration de schéma, une décision de conception délicate, tout ce qui touche à la production — conviennent à rester dans la boucle. Le jugement, c'est essentiellement : à quel point une mauvaise décision coûte-t-elle cher, et à quel moment la remarqueriez-vous ?
+
+Certains travaux sont dans la boucle par nature, parce que vos réactions sont l'entrée. L'**interrogatoire** ne fonctionne qu'avec vous là pour répondre aux questions ; le **prototypage** ne fonctionne qu'avec vous là pour réagir à l'artefact.
+
+Rester dans la boucle coûte votre attention, qui est la ressource rare. Une partie de la progression avec les agents consiste à sortir en sécurité plus de travail de la boucle — avec des plans, des **vérifications automatisées**, et une **revue humaine** à la fin plutôt qu'une supervision continue.
+
+_En pratique :_
+
+« Tu lances ça en AFK cette nuit ? »
+
+« Non, migration de schéma — je garde ça humain dans la boucle. Je veux voir chaque étape et pouvoir rediriger s'il choisit la mauvaise colonne pour le backfill. »
+
+### AFK
+
+Away from keyboard — loin du clavier. Un pattern de travail où l'utilisateur lance une **session** et laisse l'**agent** tourner sans surveillance. Le multiplicateur de débit du codage **IA** — de nombreuses sessions AFK peuvent tourner en parallèle pendant que vous dormez, mangez, ou travaillez sur autre chose. Nécessite généralement un **mode de permission** permissif plus un **bac à sable** pour être sûr.
+
+Quand vous n'êtes pas là, l'agent gère l'ambiguïté différemment. Pendant que vous regardez, une décision ambiguë remonte en question et vous y répondez ; une fois que vous êtes parti, l'agent choisit un défaut et continue, et chaque décision ultérieure se construit sur cette supposition. L'échec caractéristique, c'est de revenir à des heures de travail fini et assuré construit sur un mauvais choix fait dans les dix premières minutes. Le travail n'est pas bâclé — il est cohérent, juste cohérent sur la mauvaise chose.
+
+Puisque vous ne pouvez pas donner d'input pendant l'exécution, donnez-en avant et après à la place. Avant : résolvez l'ambiguïté en amont — une session d'**interrogatoire**, une **spec** écrite — pour qu'il reste moins de trous à combler seul pour l'agent. Pendant : les **vérifications automatisées** et la **revue automatisée** tiennent lieu de l'attention que vous ne donnez pas, échouant vite sur ce qui peut être attrapé mécaniquement. Après : l'exécution se termine par quelque chose de révisable — une PR, pas des changements déjà fusionnés. L'AFK ne supprime pas la **revue humaine** ; elle la reporte entièrement à la fin, ce qui explique pourquoi ce qui arrive à la fin doit valoir la peine d'être revu. C'est aussi pour ça que l'**AX** compte le plus dans les exécutions AFK — personne ne regardant, l'environnement est le seul soutien que l'agent reçoit.
+
+_À éviter :_ « agent en arrière-plan » — ça centre la machine (« tournant en arrière-plan ») plutôt que le pattern humain (« l'utilisateur est parti »). AFK nomme le fait qui compte : l'utilisateur ne regarde pas.
+
+_En pratique :_
+
+« Je lance ça en AFK — trois agents en bac à sable sur le refactoring, je relis les PR demain matin. »
+
+« Mode contournement des permissions ? »
+
+« Ouais, système de fichiers en lecture seule, pas de réseau. »
+
+### Vérification automatisée
+
+Une vérification déterministe qui tourne dans l'**environnement** — tests, vérification de types, linters, build, hooks de pré-commit. Passe/échoue, aucun jugement. Le signal à partir duquel un **agent** peut s'auto-corriger sans impliquer personne d'autre. Un test instable est une vérification cassée, pas une non-vérification ; les vérifications automatisées sont déterministes _par conception_.
+
+L'auto-correction fonctionne comme une boucle. L'agent fait un changement, lance la vérification comme un **appel d'outil**, et la sortie d'échec atterrit dans sa **fenêtre de contexte** — une erreur de type avec un fichier et une ligne, une assertion échouée avec les valeurs attendue et réelle. C'est suffisant pour que l'agent corrige le problème et relance la vérification, encore et encore jusqu'à ce que ça passe, sans humain dans la boucle. Le déterminisme est ce qui rend la boucle fiable : le même code produit toujours le même verdict, donc un succès veut dire quelque chose. Une vérification instable empoisonne ça — l'agent « corrige » du code qui allait bien, ou repasse par-dessus un vrai échec.
+
+C'est pour ça que de bonnes vérifications constituent une grande partie de l'**AX** d'une codebase. Un agent dans un repo avec des types stricts, une suite de tests rapide, et un linter attrape la plupart de ses propres erreurs avant que vous ne les voyiez ; un agent dans un repo sans rien de tout ça livre ce qu'il produit, tel quel. La différence compte le plus dans les exécutions **AFK**, où les vérifications sont la seule vérification qui se passe pendant l'exécution. Mais une vérification n'attrape que ce qu'elle affirme — des vérifications vertes veulent dire que les propriétés affirmées tiennent, pas que le code est juste. Les trous en forme de jugement sont ce à quoi servent la **revue automatisée** et la **revue humaine**.
+
+_À éviter :_ « boucle de rétroaction » / « backpressure » — les deux mélangent vérifications et revue. _À éviter :_ « test » — les tests sont des vérifications automatisées, mais toutes les vérifications automatisées ne sont pas des tests.
+
+_En pratique :_
+
+« L'agent n'arrête pas de livrer du code cassé dans les exécutions AFK. »
+
+« Quelles vérifications automatisées sont câblées dans le **bac à sable** ? »
+
+« Juste les tests unitaires. »
+
+« Ajoute le typecheck et le lint — il s'auto-corrigera à partir de ça avant même que la PR n'atterrisse. »
+
+### Revue automatisée
+
+Un **agent** qui revoit le travail d'un autre agent, souvent avec un **modèle** ou un **prompt système** différent. Non-déterministe : il forme un jugement. Tourne n'importe où — avant fusion sur une PR, après coup sur l'historique de commits, en cours de session comme un **sous-agent**. Un LLM-juge en CI, c'est de la revue automatisée, pas une **vérification automatisée** ; ce que l'assertion _fait_ détermine la catégorie, pas où ça tourne.
+
+La séparation d'avec l'agent qui travaille, c'est ce qui fait que ça marche. Demander à l'agent qui a écrit le code de revoir son propre travail donne très peu — la **session** qui a produit le bug contient aussi le raisonnement qui l'a produit, et l'agent relit ses propres conclusions comme une confirmation. Un revieweur avec une **fenêtre de contexte** fraîche n'a aucun de cet attachement : il voit le diff comme le verrait un inconnu, ce dont dépend la revue. Un modèle différent ou un prompt système spécifique à la revue affûte encore ça — des angles morts différents, et un prompt système cadré sur ce qui vous importe réellement (sécurité, contrats d'API, performance) plutôt qu'un vague « cherche des problèmes ».
+
+Ça s'insère entre les autres couches de revue. Les vérifications automatisées sont déterministes et attrapent ce qui peut être affirmé mécaniquement ; la **revue humaine** est coûteuse et passe le moins bien à l'échelle. La revue automatisée se place au milieu : elle attrape les problèmes en forme de jugement — un nom de fonction trompeur, un cas limite manqué — au coût d'une machine. Comme c'est non-déterministe, elle peut rater des choses et signaler des faux problèmes ; traitez-la comme un filtre qui relève le niveau avant qu'un humain ne regarde, pas comme une barrière qui en remplace un.
+
+_À éviter :_ « revue IA » / « revue par agent » — trop vague pour se distinguer de l'agent qui travaille lui-même.
+
+_En pratique :_
+
+« On reçoit trop de mauvaises PR venant des exécutions **AFK**. »
+
+« Ajoute une étape de revue automatisée avant la fusion — modèle différent, prompt système séparé, cadré sur la sécurité et les changements de contrat. »
+
+### Revue humaine
+
+L'utilisateur qui lit le code produit par l'**agent** et forme un jugement dessus. Lire le diff ou les fichiers modifiés compte ; lire la _description_ que l'agent fait de ce qu'il a fait ne compte pas — la narration n'est pas l'artefact. La description est une **source secondaire**, écrite par la partie en train d'être revue ; le diff est la **source primaire**, et revoir veut dire le lire.
+
+Les agents augmentent le volume de code produit, donc la revue devient le goulot d'étranglement. Une idée utile, c'est de superposer différentes stratégies de revue. Les **vérifications automatisées** attrapent les échecs mécaniques, la **revue automatisée** attrape ceux qui sont descriptibles, et la revue humaine est réservée à ce que seul vous pouvez juger — si le changement est le bon changement, si l'approche convient à la codebase, si ça devrait même exister.
+
+La revue est aussi moins chère plus tôt. Lire un plan avant que le travail commence, ou un petit diff en cours de route, prend des minutes ; exhumer une branche finie après une exécution **AFK** prend plus longtemps. Où vous placez le point de contrôle de la revue est une décision d'**humain dans la boucle**, pas une réflexion après coup.
+
+_À éviter :_ « revue de code » toute seule — ambigu entre humaine et automatisée.
+
+_En pratique :_
+
+« J'ai fait une revue humaine de la sortie AFK. »
+
+« Tu as lu le diff ou juste le résumé ? »
+
+« Le diff. Le résumé disait qu'il avait supprimé du code mort — il s'est avéré que la fonction était appelée depuis un fichier généré. »
+
+### Vibe coding
+
+Un pattern de travail où l'utilisateur accepte le code de l'**agent** sans **revue humaine**. Le diff est traité comme opaque — ce qui compte, c'est si le programme se comporte bien, pas ce qu'il y a dedans. La **revue automatisée** et les **vérifications automatisées** peuvent quand même tourner ; le vibe coding ne se prononce sur aucune des deux.
+
+Le terme vient d'Andrej Karpathy, qui [l'a inventé début 2025](https://x.com/karpathy/status/1886192184808149383) : vous « vous abandonnez complètement aux vibes » et « oubliez que le code existe même » — décrivez ce que vous voulez, acceptez ce qui revient, et jugez en l'exécutant.
+
+Le vibe coding échange l'inspection contre de la vitesse. Lire les diffs est généralement l'étape la plus lente du travail piloté par agent, donc l'abandonner retire le principal goulot d'étranglement. Pour du code dont les échecs sont bon marché — **prototypes**, scripts ponctuels, outils internes — c'est un compromis raisonnable. Le risque croît avec la durée de vie et les enjeux du code.
+
+Le coût arrive plus tard. Le code vibe-codé s'accumule dans une codebase que personne n'a lue, et seul le comportement a été vérifié — donc tout ce que le comportement ne révèle pas, comme un secret écrit dans des logs, un cas limite manquant, ou une gestion de données discrètement fausse, part sans être vu. La première fois que quelqu'un débogue le système est la première fois que quelqu'un lit le code. Sans revue humaine, quelle que soit la vérification automatisée qui tourne encore — tests, types, revue automatisée — c'est la seule barrière que le code traverse.
+
+_À éviter :_ « vibe coding » comme synonyme de « codage IA de mauvaise qualité » — le terme nomme la posture de revue, pas le code qui en résulte.
+
+_En pratique :_
+
+« Tu as lu ce qu'il a changé dans le flux d'auth ? »
+
+« Vibe-codé — le login marche toujours, c'est tout ce que j'ai vérifié. »
+
+« Lis le diff avant de pousser, vibe-coder sur l'auth c'est comme ça que des secrets fuient dans les logs. »
+
+### Concept de design
+
+La compréhension partagée de ce qui est en train d'être construit, tenue en commun entre l'utilisateur et l'**agent** mais séparée de tout artefact. Terme de Brooks (_The Design of Design_) : la conversation, les **artefacts de passation**, et le code sont tous des artefacts qui essaient de capturer ou d'atteindre le concept de design, mais aucun d'eux ne _l'est_. La qualité du concept de design se ressent à travers la qualité de la conversation qui l'a construit.
+
+Le terme nomme le trou derrière une frustration familière : l'agent écrit exactement ce que vous avez demandé et c'est quand même faux. La cause habituelle, c'est que vous n'aviez pas complètement compris ce que vous vouliez. Le concept de design n'était pas terminé dans votre propre tête — votre prompt a capturé les parties que vous aviez élaborées, et est resté silencieux sur celles que vous n'aviez pas élaborées. L'agent a comblé ces silences avec ses propres suppositions, parce qu'il n'y avait rien avec quoi s'aligner. Rien n'a mal fonctionné. Il n'y avait pas de concept de design partagé, parce qu'il n'y en avait pas encore un entier à partager.
+
+Vous pouvez dire qu'un concept de design est partagé de la même façon qu'avec un collègue : l'autre partie commence à répondre à des questions que vous n'avez pas encore posées de la façon dont vous l'auriez fait. Jusque-là, le travail, c'est de la conversation — l'**interrogatoire** en est la version délibérée — et écrire une **spec** trop tôt ne fait que capturer le désalignement dans un artefact plus durable. Le concept de design bouge aussi à mesure que vous apprenez ; les artefacts sont en retard sur lui, ce qui explique pourquoi une spec fidèle à la compréhension de la semaine dernière peut quand même induire en erreur la session de cette semaine.
+
+_En pratique :_
+
+« Il écrit exactement ce que j'ai demandé et c'est quand même faux. »
+
+« Vous ne partagez pas encore de concept de design — il comble les trous avec des suppositions. Continue à parler jusqu'à ce que l'annulation, les remboursements et l'exécution partielle s'alignent tous entre vous avant de le laisser écrire une spec. »
+
+### Interrogatoire
+
+Une technique pour développer un **concept de design** avec un **agent** : l'agent interroge l'utilisateur de façon socratique, une décision à la fois, en proposant une réponse recommandée pour chacune. Ralentit la précipitation vers un plan fini — aucun **artefact de passation** n'est écrit avant que le concept ne se stabilise.
+
+La technique existe parce que les agents comblent les trous silencieusement. Demandez à un agent d'écrire une **spec** à partir d'un prompt de deux lignes, il ne s'arrête pas aux décisions que vous n'avez pas prises — il choisit des défauts et les écrit. Le résultat a l'air complet, et les suppositions sont indiscernables des choix, donc vous les découvrez tard : à la revue, ou quand la fonctionnalité construite gère un cas limite d'une façon que vous n'avez jamais choisie. L'interrogatoire inverse ça — au lieu de deviner, l'agent doit demander.
+
+C'est une technique d'**humain dans la boucle** : vos réponses sont l'entrée. Quand une question ne peut pas trouver de réponse en conversation — il faudrait voir la chose — passez au **prototypage**.
+
+_En pratique :_
+
+« Il est parti directement écrire la spec et s'est trompé sur la logique d'annulation. »
+
+« Interroge-le d'abord — fais-lui demander les annulations partielles, les remboursements et le timing avant qu'il n'engage quoi que ce soit dans le doc. Moins cher à résoudre en conversation qu'en code. »
+
+### Prototypage
+
+Faire construire à l'**agent** une version rapide et grossière de quelque chose, pour les cas où la conversation est trop basse résolution et où vous avez besoin d'un vrai artefact pour en discuter.
+
+L'**interrogatoire** résout les décisions de design en conversation. La conversation est bon marché, mais basse résolution : certaines questions ne peuvent pas trouver de réponse en mots — comment une interaction se ressent, si la forme d'une API est ergonomique dans du vrai code appelant, si la mise en page fonctionne à des tailles de données réelles. L'interview bute sur une question et votre réponse honnête est « je ne sais pas, il faudrait que je voie ». Passé ce point, la discussion tourne en rond. À la place, faites construire la chose à l'agent, regardez-la, et revenez à la conversation avec une réponse.
+
+Les agents baissent le coût de construction, ce qui rend ça praticable. Une version grossière qui prenait autrefois une journée à maquetter prend maintenant des minutes, donc ça vaut la peine de le faire systématiquement. C'est une technique d'**humain dans la boucle** : le prototype est là pour que vous y réagissiez.
+
+Vous ne vous arrêtez généralement pas à un seul regard. Itérez avec le prototype — réagissez, demandez un changement, réagissez encore — pour que chaque tour résolve une décision de plus contre le vrai artefact, à une résolution plus haute que ne le permet la conversation.
+
+Un prototype n'a pas besoin d'être entièrement bâclé. Vous pouvez construire les morceaux que vous évaluez réellement à qualité de production, pour que quand la décision tombe, le composant ou l'API auquel vous avez réagi puisse passer dans la vraie codebase. Ça fait du prototypage une matière essentielle pour que la **spec** y fasse référence.
+
+_En pratique :_
+
+« On a passé une demi-heure à se disputer pour savoir si l'assistant devrait être une page ou trois étapes. »
+
+« Les mots ne régleront pas ça — fais prototyper les deux à l'agent. On cliquera dessus et on saura en cinq minutes. »
+
+### DX
+
+Expérience développeur — à quel point une codebase et sa chaîne d'outils facilitent le bon travail pour des humains. Une bonne DX, c'est des retours rapides, des messages d'erreur clairs, une documentation qui répond à la question qu'on se pose vraiment, et une installation qui marche du premier coup. Le terme précède largement le codage IA ; il est dans ce dictionnaire surtout comme contraste avec l'**AX**.
+
+La DX, c'est l'interaction entre l'humain et la codebase — rien de plus. La principale différence entre les deux audiences, c'est que les humains sont **avec état** et les agents sont **sans état**. Un humain apprend la codebase une fois et transporte cette connaissance chaque jour suivant, ce qui explique pourquoi une mauvaise DX est supportable : ils contournent une CI lente en groupant leurs push, une doc manquante en demandant une fois sur Slack, une structure confuse en se souvenant où sont les choses. Les contournements s'accumulent, et une équipe finit productive dans une codebase qui la combat.
+
+Les **agents** font face à la même codebase sans aucune de cette accumulation. Sans état d'une **session** à l'autre, un agent réapprend la codebase de zéro à chaque fois — il bénéficie de la suite de tests rapide et des messages d'erreur clairs, mais tout ce qu'il a compris hier a disparu à moins que ça n'ait été écrit dans l'**environnement**, que l'agent ne perçoit qu'à travers des **résultats d'outils**. C'est le trou que l'AX nomme : les parties de la DX qui survivent quand le développeur est un agent, plus des préoccupations que les humains n'ont pas, comme garder la **fenêtre de contexte** libre.
+
+Le recouvrement veut dire que l'investissement en DX améliore souvent l'AX gratuitement — types stricts, tests rapides et structure prévisible aident les deux. La divergence veut dire que ce n'est pas toujours le cas : un magnifique doc d'onboarding aide un humain pendant une semaine et un agent pas du tout, sauf s'il est accessible depuis **AGENTS.md**.
+
+_En pratique :_
+
+« Notre DX est bonne — les nouvelles recrues sont productives en une semaine. »
+
+« Productives parce que quelqu'un s'assoit avec elles pendant cette semaine. L'agent n'a pas cette semaine ; vérifie l'AX séparément. »
+
+### AX
+
+Expérience agent — à quel point l'**environnement** est bien configuré pour qu'un **agent** fasse du bon travail dans une codebase. La contrepartie côté agent de la **DX**. Quand le même agent performe bien dans un repo et mal dans un autre — même **modèle**, même **harnais** — la différence, c'est généralement l'AX. Le réflexe, c'est de blâmer le modèle ou de réécrire le prompt ; la solution est plus souvent dans le repo.
+
+Une bonne AX a trois dimensions principales :
+
+| Dimension | À quoi ressemble une bonne AX |
+| --- | --- |
+| Vérifications automatisées | Des **vérifications automatisées** rapides et déterministes — types, tests, linters — dont l'agent peut s'auto-corriger sans humain |
+| Architecture | Une codebase que l'agent peut naviguer sans tout lire : structure prévisible, beaucoup de comportement derrière de petites interfaces, des noms qui disent ce que les choses font |
+| Contexte libre | **AGENTS.md**, **skills**, et **outils** gardés minces, pour que la majeure partie de la **fenêtre de contexte** soit disponible pour la tâche et que l'agent reste dans la **smart zone** au lieu de se noyer |
+
+L'AX et la DX se recoupent — de bonnes vérifications et une architecture propre aident les deux audiences — mais elles divergent. Les humains tolèrent la connaissance tribale, une CI lente, et « demande à Sarah pour le module de facturation » ; les agents ne peuvent pas. Les agents ne bénéficient pas des info-bulles d'IDE ni des jolis tableaux de bord ; ils ont besoin d'échecs sous forme de texte dans un **résultat d'outil**. Une codebase peut avoir une bonne DX et une mauvaise AX.
+
+_À éviter :_ traiter l'AX comme un synonyme de la DX — les audiences ont besoin d'investissements différents.
+
+_En pratique :_
+
+« L'agent écrit du super code dans le repo API et des horreurs dans le frontend. »
+
+« Le repo API a des types stricts et une suite de tests rapide ; le frontend n'a ni l'un ni l'autre et quarante skills toujours chargés. C'est un trou d'AX, pas un problème de modèle. »
+
+<Separator/>
+
+## Comment on utilise ce vocabulaire chez FrenchTechLead
+
+Chez **FrenchTechLead**, on vit avec ces concepts au quotidien : c'est le vocabulaire qu'on utilise en interne pour cadrer les sessions d'agents, dimensionner l'AX d'une codebase, ou expliquer à un client pourquoi une facture d'API a explosé un mois donné.
+
+Si votre équipe adopte Claude Code, Cursor ou tout autre harnais et que les résultats sont inégaux — parfois brillants, parfois décevants sans raison apparente — c'est presque toujours une question de **contexte**, d'**AX**, ou de mauvais réglage du **mode agent**, rarement une question de modèle. On accompagne les équipes françaises sur :
+
+- **L'audit d'AX** d'une codebase : vérifications automatisées, architecture, contexte toujours chargé — les trois leviers qui déterminent si vos agents travaillent bien ou mal chez vous.
+- **La mise en place d'AGENTS.md, de skills et de systèmes de mémoire** adaptés à votre codebase, pour arrêter de répéter les mêmes corrections à chaque session.
+- **La formation de vos équipes** à ce vocabulaire et à ces patterns de travail — humain dans la boucle, AFK, grilling, prototypage — pour qu'elles adoptent le codage IA avec méthode plutôt qu'au petit bonheur la chance.
+
+**Envie d'aller plus loin sur le codage IA ?** Contactez [FrenchTechLead](https://frenchtechlead.com) pour un échange sans engagement, ou allez lire la version originale du dictionnaire sur [aihero.dev](https://www.aihero.dev/ai-coding-dictionary) et suivez le travail de Matt Pocock.
+
